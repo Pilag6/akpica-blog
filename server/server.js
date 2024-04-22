@@ -14,7 +14,7 @@ import connectDB from "./config/connectDB.js";
 await connectDB();
 
 // Importing the Router
-import Router from "./routes/Router.js";
+import postsRouter from "./routes/postsRouter.js";
 import AuthRouter from "./routes/AuthRouter.js";
 
 // Importing the Error Handler Middleware
@@ -39,7 +39,7 @@ app.use(morgan("dev"));
 app.use(cookieParser());
 
 // ROUTERS
-app.use("/api/models", Router)
+app.use("/posts", postsRouter)
 app.use("/", AuthRouter)
 
 // Error Handler Middleware
