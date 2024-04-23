@@ -48,11 +48,9 @@ const login = asyncHandler(async (req, res) => {
     // If the user is found
     if (isMatch) {
         // Create a token
-        const accessToken = jwt.sign(
-            { id: user._id }, 
-            process.env.JWT_SECRET, 
-            {expiresIn: "1h"}
-        );
+        const accessToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+            expiresIn: "1h"
+        });
 
         // Create a cookie and set the token
         res.cookie("token", accessToken, {
@@ -72,8 +70,6 @@ const login = asyncHandler(async (req, res) => {
 });
 
 const logout = asyncHandler(async (req, res) => {
-
-
     res.cookie("token", "", {
         expires: new Date(0)
     });
@@ -84,4 +80,29 @@ const logout = asyncHandler(async (req, res) => {
     });
 });
 
-export { register, login, logout };
+const admin = asyncHandler(async (req, res) => {
+    const user = await UserModel.find();
+
+    console.log(user);
+
+    if (!user) {
+        res.status(404);
+        throw new Error("User not found");
+    }
+
+    res.status(200).json({
+        message: "Welcome to the admin page",
+        // Hide the password
+        user: user.map((user) => {
+            return {
+                _id: user._id,
+                username: user.username,
+                email: user.email,
+                createdAt: user.createdAt,
+                updatedAt: user.updatedAt
+            };
+        })
+    });
+});
+
+export { register, login, logout, admin };
