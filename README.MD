@@ -1,6 +1,7 @@
 TODO :
 - Images (Model & Controller)
-- Validation & Sanitization (Model)
+<!-- - Validation & Sanitization (Model)
+- Why undefined? -->
 - Error Handling (Controller)
 - Connect to Database Atlas (Model)
 - Connect Backend to Frontend (React)
