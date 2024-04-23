@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { register, login, logout } from "../controllers/AuthController.js";
+import { register, login, logout, admin } from "../controllers/AuthController.js";
 
 import { userValitationRules, userValidate } from "../middlewares/userValidation.js";
 
@@ -14,10 +14,7 @@ authRouter.post("/login", login)
 
 authRouter.post("/logout", logout)
 
-
-authRouter.get("/me", (req, res) => {
-  res.send("Hello from me")
-})
+authRouter.get("/admin", admin)
 
 
 export default authRouter;
