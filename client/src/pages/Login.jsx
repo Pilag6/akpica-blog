@@ -35,7 +35,7 @@ const Login = () => {
             <div className="h-screen flex-1">
                 <img
                     className="h-screen object-cover object-center"
-                    src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    src="https://bit.ly/3xP8eom"
                     alt=""
                 />
             </div>
@@ -48,15 +48,16 @@ const Login = () => {
                     onSubmit={handleLogin}
                     className="mx-auto flex w-2/4 flex-col items-center justify-center"
                 >
-                    <div className="mb-2 flex w-full items-center gap-3 border-b-2 border-cyan-50/45 px-4 py-4 text-white">
+                    <div className="mb-2 flex w-full items-center gap-3 border-b-2 border-cyan-50/45 px-4 py-4 text-white relative">
                         <input
-                            className="w-full bg-transparent text-white outline-none "
+                            className="w-full bg-transparent text-white outline-none"
                             type="email"
                             id="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             placeholder="Email"
                         />
+
                     </div>
                     <div className="mb-2 flex w-full items-center gap-3 border-b-2 border-cyan-50/45 px-4 py-4 text-white">
                         <input
