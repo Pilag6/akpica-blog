@@ -58,7 +58,18 @@ const userValitationRules = () => {
             })
             .withMessage(
                 "Password must contain at least one lowercase letter, one uppercase letter, one number, and one special character and must be between 5 to 15 characters"
-            )
+            ),
+        body("fullname")
+            .optional()
+            .isString()
+            .withMessage("Fullname should be a string")
+            .trim()
+            .isLength({ min: 3, max: 30 })
+            .withMessage("Fullname must be between 3 to 30 characters")
+            .not()
+            .matches(/(<([^>]+)>)/gi)
+            .toLowerCase()
+            .escape(),
     ];
 };
 
