@@ -20,7 +20,7 @@ function App() {
                 <Route path="/dh-admin" element={<DHAdmin />} />
                 <Route path="/dh-admin/register" element={<Register />} />
                 <Route path="/dh-admin/login" element={<Login />} />
-                <Route path="/dh-amin/dashboard" element={<Dashboard />} />
+                <Route path="/dh-admin/dashboard" element={<Dashboard />} />
             </Routes>
         </>
     );

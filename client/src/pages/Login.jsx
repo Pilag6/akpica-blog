@@ -31,7 +31,7 @@ const Login = () => {
 
             // UseNavigate
             if (response.status === 200) {
-                navigate("/dh-amin/dashboard");
+                navigate("/dh-admin/dashboard");
             }
         } catch (error) {
             setError("Invalid email or password");
