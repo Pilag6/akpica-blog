@@ -10,6 +10,13 @@ const userValitationRules = () => {
             .withMessage("Your username is empty")
             .isString()
             .withMessage("Username should be a string")
+            .custom(async (value) => {
+                const user = await UserModel.findOne({ username: value });
+                if (user) {
+                    return Promise.reject("Username already in use");
+                }
+            })
+            .withMessage("Username already in use")
             .trim()
             .isLength({ min: 3, max: 15 })
             .withMessage("Username must be between 3 to 15 characters")
@@ -24,6 +31,13 @@ const userValitationRules = () => {
             .withMessage("Your email is empty")
             .isEmail()
             .withMessage("Enter a valid email")
+            .custom(async (value) => {
+                const user = await UserModel.findOne({ email: value });
+                if (user) {
+                    return Promise.reject("Email already in use");
+                }
+            })
+            .withMessage("Email already in use")
             .toLowerCase()
             .escape(),
         body("password")
