@@ -5,7 +5,7 @@ import bcrypt from "bcrypt";
 
 const register = asyncHandler(async (req, res) => {
     // Destructure the request body
-    const { username, email, password } = req.body;
+    const { username, email, password, fullname } = req.body;
 
     // Hash de password before saving in database
     const hashedPassword = await bcrypt.hash(password, 12);
@@ -14,6 +14,7 @@ const register = asyncHandler(async (req, res) => {
     const user = await UserModel.create({
         username,
         email,
+        fullname,
         password: hashedPassword
     });
 
@@ -31,10 +32,10 @@ const register = asyncHandler(async (req, res) => {
 
 const login = asyncHandler(async (req, res) => {
     // Destructure the request body
-    const { email, password } = req.body;
+    const { username, password } = req.body;
 
     // Find the user by email
-    const user = await UserModel.findOne({ email });
+    const user = await UserModel.findOne({ username });
 
     // Check if the user is found
     if (!user) {
@@ -98,6 +99,7 @@ const admin = asyncHandler(async (req, res) => {
                 _id: user._id,
                 username: user.username,
                 email: user.email,
+                fullname: user.fullname,
                 createdAt: user.createdAt,
                 updatedAt: user.updatedAt
             };

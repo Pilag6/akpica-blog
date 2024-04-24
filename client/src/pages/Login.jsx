@@ -8,11 +8,11 @@ import logoWhite from "../assets/logo-white.png";
 
 // Icons
 import { PiLockKey } from "react-icons/pi";
-import { MdAlternateEmail } from "react-icons/md";
+import { FaUserAstronaut } from "react-icons/fa6";
 import { MdError } from "react-icons/md";
 
 const Login = () => {
-    const [email, setEmail] = useState("");
+    const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     console.log(error);
@@ -22,7 +22,7 @@ const Login = () => {
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        const user = { email, password };
+        const user = { username, password };
         try {
             const response = await Axios.post(
                 "http://localhost:3300/login",
@@ -34,7 +34,7 @@ const Login = () => {
                 navigate("/dh-admin/dashboard");
             }
         } catch (error) {
-            setError("Invalid email or password");
+            setError("Invalid username or password");
         }
     };
 
@@ -63,14 +63,14 @@ const Login = () => {
                     className="mx-auto flex w-2/4 flex-col items-center justify-center"
                 >
                     <div className="mb-2 flex w-full items-center gap-3 border-b-2 border-cyan-50/45 px-4 py-4 text-white relative">
-                        <MdAlternateEmail />
+                        <FaUserAstronaut />
                         <input
                             className="w-full bg-transparent text-white outline-none"
-                            type="email"
-                            id="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            placeholder="Email"
+                            type="username"
+                            id="username"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                            placeholder="Username"
                         />
                     </div>
                     <div className="mb-2 flex w-full items-center gap-3 border-b-2 border-cyan-50/45 px-4 py-4 text-white">
