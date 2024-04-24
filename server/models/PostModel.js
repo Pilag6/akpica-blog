@@ -12,6 +12,10 @@ const postSchema = new Schema(
             type: String,
             required: true
         },
+        author: {
+            type: String,
+            default: "Akpica Team"
+        },
         image: {
             type: String,
         },
