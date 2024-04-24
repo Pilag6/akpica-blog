@@ -10,6 +10,7 @@ import logoWhite from "../assets/logo-white.png";
 import { FaUserAstronaut } from "react-icons/fa6";
 import { MdAlternateEmail } from "react-icons/md";
 import { PiLockKey } from "react-icons/pi";
+import { MdError } from "react-icons/md";
 
 const Register = () => {
     // UseNavigate
@@ -18,24 +19,24 @@ const Register = () => {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    // const [error, setError] = useState("");
+    const [error, setError] = useState(null);
+    console.log(error);
 
     const handleRegister = async (e) => {
         e.preventDefault();
         const user = { username, email, password };
-        console.log(user);
-        const response = await Axios.post(
-            "http://localhost:3300/register",
-            user
-        );
-        console.log(response);
+        try {
+            const response = await Axios.post(
+                "http://localhost:3300/register",
+                user
+            );
 
-        // UseNavigate
-        if (response.status === 201) {
-            navigate("/dh-admin/login");
-        } else if (response.status === 400) {
-            // setError(response.data.message)
-            console.log(response.data.message);
+            // UseNavigate
+            if (response.status === 201) {
+                navigate("/dh-admin/login");
+            }
+        } catch (error) {
+            setError(error.response.data.errors);
         }
     };
 
@@ -98,10 +99,21 @@ const Register = () => {
                     >
                         Register
                     </button>
+                    <ul className="w-full mt-6 outline-white flex flex-col gap-3">
+                        {error &&
+                            error.map((err) =>
+                                Object.values(err).map((val) => (
+                                    <li
+                                        className="bg-red-400 text-xl py-3 px-4 flex gap-1"
+                                        key={err.msg}
+                                    >
+                                        <div><MdError className=""/></div> <p>{val}</p>
+                                    </li>
+                                ))
+                            )}
+                    </ul>
                 </form>
             </div>
-
-            {/* {error && <p>{error}</p>} */}
         </div>
     );
 };

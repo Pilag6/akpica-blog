@@ -9,6 +9,7 @@ import logoWhite from "../assets/logo-white.png";
 // Icons
 import { PiLockKey } from "react-icons/pi";
 import { MdAlternateEmail } from "react-icons/md";
+import { MdError } from "react-icons/md";
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -22,7 +23,6 @@ const Login = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         const user = { email, password };
-        console.log(user);
         try {
             const response = await Axios.post(
                 "http://localhost:3300/login",
@@ -37,6 +37,7 @@ const Login = () => {
             setError("Invalid email or password");
         }
     };
+
     return (
         <div className="mx-auto flex h-screen bg-zinc-800">
             <div className="h-screen flex-1">
@@ -88,9 +89,9 @@ const Login = () => {
                     </button>
                     <div className="w-full outline-white">
                         {error && (
-                            <p className="mt-7 w-full py-4 px-6 text-2xl font-semibold text-white transition-all bg-red-400">
-                                {error}
-                            </p>
+                            <div className="mt-7 w-full py-4 px-6 text-2xl font-semibold text-white transition-all bg-red-400 flex items-center gap-1">
+                                <MdError /> {error}
+                            </div>
                         )}
                     </div>
                 </form>
