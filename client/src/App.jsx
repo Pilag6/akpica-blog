@@ -9,7 +9,8 @@ import Login from "@pages/Login.jsx";
 import Dashboard from "@pages/Dashboard.jsx";
 import PostDashboard from "@components/PostDashboard.jsx";
 import UserDashboard from "@components/UserDashboard.jsx";
-import DH from "@pages/DH.jsx";
+import DashboardOutlet from "@pages/DH.jsx";
+
 
 function App() {
   return (
@@ -19,15 +20,16 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="*" element={<h1>Not Found</h1>} />
 
-        {/* Protected Paths */}
         <Route path="/dh-admin" element={<DHAdmin />} />
-        <Route path="/dh-admin/register" element={<Register />} />
+
         <Route path="/dh-admin/login" element={<Login />} />
 
-        <Route path="/dh-admin/dashboard" element={<DH />}>
+        {/* Protected Paths */}
+        <Route path="/dh-admin/dashboard" element={<DashboardOutlet />}>
           <Route index element={<Dashboard />} />
           <Route path="usersDashboard" element={<UserDashboard />} />
           <Route path="postsDashboard" element={<PostDashboard />} />
+          <Route path="register" element={<Register />} />
         </Route>
       </Routes>
     </>
