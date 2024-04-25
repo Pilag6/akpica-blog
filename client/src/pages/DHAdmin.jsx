@@ -28,9 +28,9 @@ const DHAdmin = () => {
         </div>
         <div className="mb-20 text-2xl font-semibold">Welcome</div>
         <div className="flex justify-center items-center gap-8 w-3/4 mx-auto">
-          <NavLink to="/dh-admin/register" className={BtnClasses}>
+          {/* <NavLink to="/dh-admin/register" className={BtnClasses}>
             Register
-          </NavLink>
+          </NavLink> */}
           <NavLink to="/dh-admin/login" className={BtnClasses}>
             Login
           </NavLink>

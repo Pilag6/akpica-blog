@@ -1,7 +1,7 @@
 import DashboardLayout from "@layouts/DashboardLayout.jsx";
 import { Outlet } from "react-router-dom";
 
-const DH = () => {
+const DashboardOutlet = () => {
   return (
     <>
     <DashboardLayout>
@@ -11,4 +11,4 @@ const DH = () => {
   );
 };
 
-export default DH;
+export default DashboardOutlet;
