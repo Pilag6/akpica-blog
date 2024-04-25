@@ -20,7 +20,7 @@ const Register = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState(null);
-    console.log(error);
+    // console.log(error);
 
     const handleRegister = async (e) => {
         e.preventDefault();
