@@ -3,8 +3,14 @@ import { useState, useEffect } from "react";
 
 import DashboardLayout from "@layouts/DashboardLayout.jsx";
 
+// Icons
+
+import { FaPlus } from "react-icons/fa";
+
 const PostDashboard = () => {
     const [posts, setPosts] = useState(null);
+    const [quantity, setQuantity] = useState(0);
+    console.log(quantity);
 
     useEffect(() => {
         const fetchPosts = async () => {
@@ -19,11 +25,27 @@ const PostDashboard = () => {
         fetchPosts();
     }, []);
 
+    // Set quantity of posts
+
+    useEffect(() => {
+        if (posts) {
+            setQuantity(posts.length);
+        } else {
+            setQuantity(0);
+        }
+    }, [posts]);
+
     return (
         <div>
             <DashboardLayout>
-                <section className="flex justify-center gap-6">
-                    <div className="relative overflow-x-auto shadow-md">
+                <div className="flex items-center pt-6 pb-3 pl-8 gap-4">
+                    <button className="w-fit flex items-center gap-3 p-2 text-xl font-semibold text-akpica-white outline-none outline-white transition-all hover:bg-akpica-pastel hover:text-zinc-800 hover:outline-2">
+                    <FaPlus /> Add New Post
+                    </button>
+                </div>
+                <div className="pl-8">({quantity}) Posts</div>
+                <section className="flex justify-center gap-6 w-full p-4">
+                    <div className="relative overflow-x-auto shadow-md w-full">
                         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
@@ -41,7 +63,7 @@ const PostDashboard = () => {
                                     </th>
                                     <th
                                         colSpan={2}
-                                        className="px-6 py-3 text-center"
+                                        className="px-6 py-3 "
                                     >
                                         Action
                                     </th>
@@ -57,7 +79,7 @@ const PostDashboard = () => {
                                         >
                                             <th
                                                 scope="row"
-                                                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-akpica-white"
                                             >
                                                 {post.title}
                                             </th>
@@ -84,7 +106,7 @@ const PostDashboard = () => {
                                             <td className="px-6 py-4">
                                                 <a
                                                     href="#"
-                                                    className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                                                    className="font-medium text-akpica-marco dark:text-akpica-marco hover:underline"
                                                 >
                                                     Edit
                                                 </a>
@@ -92,7 +114,7 @@ const PostDashboard = () => {
                                             <td className="px-6 py-4">
                                                 <a
                                                     href="#"
-                                                    className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                                                    className="font-medium text-akpica-tomato dark:text-akpica-tomato hover:underline"
                                                 >
                                                     Delete
                                                 </a>

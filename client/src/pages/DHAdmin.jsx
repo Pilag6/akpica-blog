@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import logoWhite from "../assets/logo-white.png";
 
 const BtnClasses =
-  "mt-7 py-4 text-2xl w-80 font-semibold text-white outline-none outline-white transition-all hover:bg-[#B3C4A2] hover:text-zinc-800 hover:outline-2 text-center";
+  "mt-7 py-4 text-2xl w-80 font-semibold text-akpica-white outline-none outline-white transition-all hover:bg-akpica-pastel hover:text-zinc-800 hover:outline-2 text-center";
 
 const DHAdmin = () => {
   return (

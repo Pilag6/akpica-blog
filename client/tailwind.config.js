@@ -5,7 +5,18 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'akpica-tomato': '#E06A4E',
+        'akpica-pastel': '#E2D9A2',
+        'akpica-green': '#789F8A',
+        'akpica-marco': '#DEB853',
+        'akpica-carlo': '#0A373A',
+        'akpica-black': '#242424',
+        'akpica-white': '#ebebeb',
+      }
+    },
+    
   },
   plugins: [],
 }

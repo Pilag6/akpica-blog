@@ -5,13 +5,13 @@ import NavbarDashboard from "@components/DashboardStructure/NavbarDashboard.jsx"
 const DashboardLayout = ({ children }) => {
     return (
         <>
-            <header className="fixed top-0 left-0 w-full h-24 bg-yellow-300 ">
+            <header className="fixed top-0 left-0 w-full h-20 bg-akpica-green py-4 px-5 flex items-center">
                 <NavbarDashboard />
             </header>
-            <section className="fixed top-0 left-0 w-[300px] bg-green-500 h-screen ">
+            <aside className="fixed top-[80px] left-0 w-[300px] bg-akpica-carlo h-screen py-4 px-5 flex">
                 <AsideDashboard />
-            </section>
-            <main className="ml-[300px] mt-[6rem]">{children}</main>
+            </aside>
+            <main className="pl-[300px] mt-[5rem] w-full">{children}</main>
         </>
     );
 };

@@ -39,7 +39,7 @@ const Login = () => {
     };
 
     return (
-        <div className="mx-auto flex h-screen bg-zinc-800">
+        <div className="mx-auto flex h-screen bg-akpica-black">
             <div className="h-screen flex-1">
                 <img
                     className="h-screen object-cover object-center"
@@ -62,10 +62,10 @@ const Login = () => {
                     onSubmit={handleLogin}
                     className="mx-auto flex w-2/4 flex-col items-center justify-center"
                 >
-                    <div className="mb-2 flex w-full items-center gap-3 border-b-2 border-cyan-50/45 px-4 py-4 text-white relative">
+                    <div className="mb-2 flex w-full items-center gap-3 border-b-2 border-cyan-50/45 px-4 py-4 text-akpica-white relative">
                         <FaUserAstronaut />
                         <input
-                            className="w-full bg-transparent text-white outline-none"
+                            className="w-full bg-transparent text-akpica-white outline-none"
                             type="username"
                             id="username"
                             value={username}
@@ -73,23 +73,23 @@ const Login = () => {
                             placeholder="Username"
                         />
                     </div>
-                    <div className="mb-2 flex w-full items-center gap-3 border-b-2 border-cyan-50/45 px-4 py-4 text-white">
+                    <div className="mb-2 flex w-full items-center gap-3 border-b-2 border-cyan-50/45 px-4 py-4 text-akpica-white">
                         <PiLockKey />
                         <input
                             type="password"
                             id="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            className="w-full bg-transparent text-white outline-none "
+                            className="w-full bg-transparent text-akpica-white outline-none "
                             placeholder="Password"
                         />
                     </div>
-                    <button className="mt-7 w-full py-4 text-2xl font-semibold text-white outline-none outline-white transition-all hover:bg-[#B3C4A2] hover:text-zinc-800 hover:outline-2">
+                    <button className="mt-7 w-full py-4 text-2xl font-semibold text-akpica-white outline-none outline-white transition-all hover:bg-akpica-pastel hover:text-zinc-800 hover:outline-2">
                         Login
                     </button>
-                    <div className="w-full outline-white">
+                    <div className="w-full outline-akpica-white">
                         {error && (
-                            <div className="mt-7 w-full py-4 px-6 text-2xl font-semibold text-white transition-all bg-red-400 flex items-center gap-1">
+                            <div className="mt-7 w-full py-4 px-6 text-2xl font-semibold text-akpica-white transition-all bg-akpica-tomato flex items-center gap-1">
                                 <MdError /> {error}
                             </div>
                         )}
