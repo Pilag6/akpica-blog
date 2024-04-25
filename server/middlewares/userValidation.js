@@ -22,7 +22,7 @@ const userValitationRules = () => {
             .withMessage("Username must be between 3 to 15 characters")
             .not()
             .matches(/(<([^>]+)>)/gi)
-            .toLowerCase()
+            // .toLowerCase()
             .escape(),
         body("email")
             .exists()
@@ -58,7 +58,27 @@ const userValitationRules = () => {
             })
             .withMessage(
                 "Password must contain at least one lowercase letter, one uppercase letter, one number, and one special character and must be between 5 to 15 characters"
-            ),
+            )
+            .custom((value, req) => {
+                const { username, email } = req.req.body;
+                // console.log("REQUEST", email.substring(0, email.indexOf("@")));
+
+                const emailSubs = email.substring(0, email.indexOf("@"));
+
+                // Should not contain the username or parts of the user’s email.
+
+                if (
+                    value.toLowerCase().slice(0, username.length) !==
+                        username.toLowerCase() &&
+                    value.toLowerCase().slice(0, emailSubs.length) !== emailSubs
+                ) {
+                    // console.log(value.toLowerCase().slice(0, emailSubs.length -1));
+                    return true;
+                }
+                throw new Error(
+                    "Password should not contain the username or parts of the user’s email"
+                );
+            }),
         body("fullname")
             .optional()
             .isString()

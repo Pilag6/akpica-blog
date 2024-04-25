@@ -83,7 +83,6 @@ const Dashboard = () => {
                                         key={index}
                                         className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
                                     >
-                                        
                                         <th
                                             scope="row"
                                             className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
@@ -94,14 +93,16 @@ const Dashboard = () => {
                                             {post.author}
                                         </td>
                                         <td className="px-6 py-4 flex gap-3">
-                                            {post.tags.slice(0, 4).map((tag, index) => (
-                                                <span
-                                                    key={index}
-                                                    className="bg-gray-200 dark:bg-gray-700 dark:text-gray-400 px-2 py-1 rounded text-xs"
-                                                >
-                                                    {tag}
-                                                </span>
-                                            ))}
+                                            {post.tags
+                                                .slice(0, 4)
+                                                .map((tag, index) => (
+                                                    <span
+                                                        key={index}
+                                                        className="bg-gray-200 dark:bg-gray-700 dark:text-gray-400 px-2 py-1 rounded text-xs"
+                                                    >
+                                                        {tag}
+                                                    </span>
+                                                ))}
                                         </td>
                                         <td className="px-6 py-4">
                                             {new Date(post.date).toDateString()}
@@ -157,9 +158,21 @@ const Dashboard = () => {
                                         >
                                             <img
                                                 className="w-10 h-10 rounded-full"
-                                                src="/docs/images/people/profile-picture-1.jpg"
-                                                alt="Jese image"
+                                                // Change the src to the custom avatar
+                                                src={`https://avatar.iran.liara.run/public/${
+                                                    user.username === "Carlos"
+                                                        ? "14"
+                                                        : user.username ===
+                                                          "Pila"
+                                                        ? "15"
+                                                        : user.username ===
+                                                          "Akiko"
+                                                        ? "56"
+                                                        : "12" // Make this random
+                                                }`}
+                                                alt=""
                                             />
+
                                             <div className="ps-3">
                                                 <div className="text-base font-semibold">
                                                     {user.fullname}
