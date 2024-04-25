@@ -25,10 +25,12 @@ const app = express();
 const { PORT } = process.env;
 
 // Middleware that allows browsers to accept data from this server
-app.use(cors({
-  origin: "http://localhost:5173", // The port where the frontend is running. Change this to the port where your frontend is running
-  credentials: true
-}));
+app.use(
+    cors({
+        origin: "http://localhost:5173", // The port where the frontend is running. Change this to the port where your frontend is running
+        credentials: true
+    })
+);
 // Middlewares that accepts urlencoded from data request
 app.use(express.urlencoded({ extended: true }));
 // Middleware that accepts json format data request
@@ -39,13 +41,13 @@ app.use(morgan("dev"));
 app.use(cookieParser());
 
 // ROUTERS
-app.use("/posts", postsRouter)
-app.use("/", AuthRouter)
+app.use("/posts", postsRouter);
+app.use("/", AuthRouter);
 
 // Error Handler Middleware
 app.use(errorHandler);
 
 // Listen
 app.listen(PORT, () => {
-  console.log(`Server is running at http://localhost:${PORT}`.bgBlue.white);
+    console.log(`Server is running at http://localhost:${PORT}`.bgBlue.white);
 });

@@ -1,20 +1,36 @@
 import { Router } from "express";
 
-import { register, login, logout, admin } from "../controllers/AuthController.js";
+import {
+    register,
+    login,
+    logout,
+    admin,
+    userPhoto,
+    upload,
+    editUser,
+    deleteUser
+} from "../controllers/AuthController.js";
 
-import { userValitationRules, userValidate } from "../middlewares/userValidation.js";
-
+import {
+    userValitationRules,
+    userValidate
+} from "../middlewares/userValidation.js";
 
 const authRouter = Router();
 
 // AUTH -----------
-authRouter.post("/register", userValitationRules(), userValidate, register)
+authRouter.post("/register", userValitationRules(), userValidate, register);
 
-authRouter.post("/login", login)
+authRouter.post("/login", login);
 
-authRouter.post("/logout", logout)
+authRouter.post("/logout", logout);
 
-authRouter.get("/admin", admin)
+authRouter.get("/admin", admin);
 
+authRouter.get("/photo/:username", upload.single("userpicture"), userPhoto);
+
+authRouter.patch("/admin/edit/:id", upload.single("userpicture"), editUser);
+
+authRouter.delete("/admin/delete/:id", deleteUser);
 
 export default authRouter;
