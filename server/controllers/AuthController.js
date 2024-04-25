@@ -3,6 +3,34 @@ import asyncHandler from "../config/asyncHandler.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
+import path from "path";
+import { fileURLToPath } from "url";
+import multer from "multer";
+
+// Define the __dirname
+const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
+const __dirname = path.dirname(__filename);
+
+// Multer Middleware
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, "uploads/");
+    },
+    filename: (req, file, cb) => {
+        const splitFileName = file.originalname.split(".");
+        // console.log(splitFileName); // [ 'photo', 'jpg' ]
+        const extension = splitFileName[splitFileName.length - 1];
+        const filename = `${
+            splitFileName[0]
+        }-${crypto.randomUUID()}.${extension}`;
+        // console.log(filename); // photo-123456789.jpg
+        cb(null, filename);
+    }
+});
+
+const upload = multer({ storage: storage });
+
+// Register a new user
 const register = asyncHandler(async (req, res) => {
     // Destructure the request body
     const { username, email, password, fullname } = req.body;
@@ -81,6 +109,7 @@ const logout = asyncHandler(async (req, res) => {
     });
 });
 
+// Get all users
 const admin = asyncHandler(async (req, res) => {
     const user = await UserModel.find();
 
@@ -107,4 +136,80 @@ const admin = asyncHandler(async (req, res) => {
     });
 });
 
-export { register, login, logout, admin };
+// GET /users/:username/photo
+const userPhoto = asyncHandler(async (req, res) => {
+    const { username } = req.params;
+    const user = await UserModel.findOne({ username });
+    const picturePath = "uploads/" + user.userpicture;
+    const absolutePath = __dirname + "/" + picturePath;
+    res.sendFile(absolutePath);
+});
+
+// Edit user
+const editUser = asyncHandler(async (req, res) => {
+    const { username, email, password, userpicture, fullname } = req.body;
+
+    // Hash de password before saving in database
+    const hashedPassword = await bcrypt.hash(req.body.password, 12);
+
+    const user = await UserModel.findByIdAndUpdate(
+        req.params.id,
+        {
+            username,
+            email,
+            password: hashedPassword,
+            userpicture,
+            fullname
+        },
+        {
+            new: true
+        }
+    );
+
+    console.log(req.body);
+    console.log("Password", password);
+
+    if (!user) {
+        res.status(404);
+        throw new Error("User not found");
+    }
+
+    res.status(200).json({
+        message: "User updated successfully",
+        user: {
+            _id: user._id,
+            username: user.username,
+            email: user.email,
+            userpicture: user.userpicture,
+            fullname: user.fullname,
+            createdAt: user.createdAt,
+            updatedAt: user.updatedAt
+        }
+    });
+});
+
+// Delete user
+const deleteUser = asyncHandler(async (req, res) => {
+    const { username } = req.body;
+    const user = await UserModel.findByIdAndDelete(req.params.id);
+
+    if (!user) {
+        res.status(404);
+        throw new Error(`User ID:${req.params.id} not found`);
+    }
+
+    res.status(200).json({
+        message: `User deleted successfully`
+    });
+});
+
+export {
+    register,
+    login,
+    logout,
+    admin,
+    upload,
+    userPhoto,
+    editUser,
+    deleteUser
+};
