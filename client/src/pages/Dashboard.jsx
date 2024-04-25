@@ -7,8 +7,10 @@ const Dashboard = () => {
     return (
         <>
             <DashboardLayout>
-                <div>Dashboard</div>
-                <img src={Logo} alt="" />
+                <div className="flex flex-col justify-center gap-8 w-full">
+                    <h2 className="text-3xl">Dashboard</h2>
+                    <img className="w-48" src={Logo} alt="" />
+                </div>
             </DashboardLayout>
         </>
     );
