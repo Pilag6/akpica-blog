@@ -11,6 +11,8 @@ import { FaUserAstronaut } from "react-icons/fa6";
 import { MdAlternateEmail } from "react-icons/md";
 import { PiLockKey } from "react-icons/pi";
 import { MdError } from "react-icons/md";
+import { AiOutlineEye } from "react-icons/ai";
+import { AiOutlineEyeInvisible } from "react-icons/ai";
 
 const Register = () => {
     // UseNavigate
@@ -19,6 +21,7 @@ const Register = () => {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [visible, setVisible] = useState(false);
     const [error, setError] = useState(null);
     // console.log(error);
 
@@ -86,12 +89,15 @@ const Register = () => {
                         <PiLockKey />
                         <input
                             className="w-full bg-transparent text-akpica-white outline-none"
-                            type="password"
+                            type={visible ? "text" : "password"}
                             id="password"
                             placeholder="Password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
+                         <div className="p-2" onClick={() => setVisible(!visible)}>
+              {visible ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+            </div>
                     </div>
                     <button
                         type="submit"
