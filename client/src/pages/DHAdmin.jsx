@@ -31,7 +31,7 @@ const DHAdmin = () => {
           {/* <NavLink to="/dh-admin/register" className={BtnClasses}>
             Register
           </NavLink> */}
-          <NavLink to="/dh-admin/login" className={BtnClasses}>
+          <NavLink to="/admin/login" className={BtnClasses}>
             Login
           </NavLink>
         </div>

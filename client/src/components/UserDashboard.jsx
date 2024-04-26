@@ -15,7 +15,6 @@ const UserDashboard = () => {
             try {
                 const res = await Axios.get("http://localhost:3300/admin");
                 setAdmin(res.data.user);
-                console.log(res);
             } catch (error) {
                 console.log(error);
             }
@@ -35,7 +34,7 @@ const UserDashboard = () => {
     return (
         <div>
             <div className="flex items-center pt-6 pb-3 pl-8 gap-4">
-                <Link to="/dh-admin/dashboard/register" className="w-fit flex items-center gap-3 p-2 text-xl font-semibold text-akpica-white outline-none outline-white transition-all hover:bg-akpica-pastel hover:text-zinc-800 hover:outline-2">
+                <Link to="/dashboard/register" className="w-fit flex items-center gap-3 p-2 text-xl font-semibold text-akpica-white outline-none outline-white transition-all hover:bg-akpica-pastel hover:text-zinc-800 hover:outline-2">
                     <FaPlus /> Add New User
                 </Link>
             </div>
@@ -80,7 +79,8 @@ const UserDashboard = () => {
                                                         : user.username ===
                                                           "Akiko"
                                                         ? "56"
-                                                        : "12" // Make this random
+                                                         // Make this random between 1 and 100
+                                                         : Math.floor(Math.random() * 100) + 1
                                                 }`}
                                                 alt=""
                                             />

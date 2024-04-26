@@ -5,9 +5,9 @@ const AsideDashboard = () => {
     return (
         <>
             <div className="flex flex-col gap-4 w-full">
-                <NavLink className="text-akpica-marco hover:text-opacity-90 font-semibold border-b-2 border-cyan-50/45 pb-4" to={"/dh-admin/dashboard"}>Dashboard</NavLink>
-                <NavLink className={linksStyles} to={"/dh-admin/dashboard/postsDashboard"}>Post</NavLink>
-                <NavLink className={linksStyles} to={"/dh-admin/dashboard/usersDashboard"}>Users</NavLink>
+                <NavLink className="text-akpica-marco hover:text-opacity-90 font-semibold border-b-2 border-cyan-50/45 pb-4" to={"/dashboard"}>Dashboard</NavLink>
+                <NavLink className={linksStyles} to={"/dashboard/postsDashboard"}>Post</NavLink>
+                <NavLink className={linksStyles} to={"/dashboard/usersDashboard"}>Users</NavLink>
             </div>
         </>
     );

@@ -98,7 +98,8 @@ const login = asyncHandler(async (req, res) => {
 
         // Send the token to the client
         res.status(200).json({
-            message: "User logged in successfully"
+            message: "User logged in successfully",
+            token: accessToken
         });
     } else {
         // If the user is not found

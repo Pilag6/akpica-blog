@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 import Axios from "axios";
 // UseNavigate
@@ -13,7 +14,7 @@ import { MdError } from "react-icons/md";
 import { AiOutlineEye } from "react-icons/ai";
 import { AiOutlineEyeInvisible } from "react-icons/ai";
 
-const Login = () => {
+const Login = ({ onTokenChange }) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [visible, setVisible] = useState(false);
@@ -29,13 +30,18 @@ const Login = () => {
         try {
             const response = await Axios.post(
                 "http://localhost:3300/login",
-                user
+                user,
+                {withCredentials: true}
             );
-
+            
             // UseNavigate
-            if (response.status === 200) {
-                navigate("/dh-admin/dashboard");
-            }
+            if (response.status === 200 && response.data.token) {
+                // Save the token in the local storage
+                localStorage.setItem("token", response.data.token);
+                
+                onTokenChange(response.data.token);
+                navigate("/dashboard");
+            } 
             
         } catch (error) {
             setError("Invalid username or password");
