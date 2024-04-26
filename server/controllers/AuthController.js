@@ -30,7 +30,11 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-// Register a new user
+/*
+@desc    Register a new user
+@route   POST /register
+@access  Public
+*/
 const register = asyncHandler(async (req, res) => {
     // Destructure the request body
     const { username, email, password, fullname } = req.body;
@@ -58,6 +62,11 @@ const register = asyncHandler(async (req, res) => {
     }
 });
 
+/*
+@desc    Login a user
+@route   POST /login
+@access  Public
+*/
 const login = asyncHandler(async (req, res) => {
     // Destructure the request body
     const { username, password } = req.body;
@@ -98,6 +107,11 @@ const login = asyncHandler(async (req, res) => {
     }
 });
 
+/*
+@desc    Logout a user
+@route   POST /logout
+@access  Public
+ */
 const logout = asyncHandler(async (req, res) => {
     res.cookie("token", "", {
         expires: new Date(0)
@@ -109,7 +123,11 @@ const logout = asyncHandler(async (req, res) => {
     });
 });
 
-// Get all users
+/*
+@desc    Admin page - Get all users
+@route   GET /admin
+@access  Private
+*/
 const admin = asyncHandler(async (req, res) => {
     const user = await UserModel.find();
 
@@ -136,7 +154,11 @@ const admin = asyncHandler(async (req, res) => {
     });
 });
 
-// GET /users/:username/photo
+/*
+@desc    Get user photo
+@route   GET /photo/:username
+@access  Public
+*/
 const userPhoto = asyncHandler(async (req, res) => {
     const { username } = req.params;
     const user = await UserModel.findOne({ username });
@@ -145,7 +167,11 @@ const userPhoto = asyncHandler(async (req, res) => {
     res.sendFile(absolutePath);
 });
 
-// Edit user
+/*
+@desc    Edit user
+@route   PATCH /admin/edit/:id
+@access  Private
+*/
 const editUser = asyncHandler(async (req, res) => {
     const { username, email, password, userpicture, fullname } = req.body;
 
@@ -188,7 +214,11 @@ const editUser = asyncHandler(async (req, res) => {
     });
 });
 
-// Delete user
+/*
+@desc    Delete user
+@route   DELETE /admin/delete/:id
+@access  Private
+*/
 const deleteUser = asyncHandler(async (req, res) => {
     const { username } = req.body;
     const user = await UserModel.findByIdAndDelete(req.params.id);
