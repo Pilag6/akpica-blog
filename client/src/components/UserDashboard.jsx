@@ -15,7 +15,7 @@ const UserDashboard = () => {
             try {
                 const res = await Axios.get("http://localhost:3300/admin");
                 setAdmin(res.data.user);
-                console.log(res);
+                // console.log(res);
             } catch (error) {
                 console.log(error);
             }
@@ -32,10 +32,14 @@ const UserDashboard = () => {
             setQuantity(0);
         }
     }, [admin]);
+
     return (
         <div>
             <div className="flex items-center pt-6 pb-3 pl-8 gap-4">
-                <Link to="/dh-admin/dashboard/register" className="w-fit flex items-center gap-3 p-2 text-xl font-semibold text-akpica-white outline-none outline-white transition-all hover:bg-akpica-pastel hover:text-zinc-800 hover:outline-2">
+                <Link
+                    to="/dh-admin/dashboard/register"
+                    className="w-fit flex items-center gap-3 p-2 text-xl font-semibold text-akpica-white outline-none outline-white transition-all hover:bg-akpica-pastel hover:text-zinc-800 hover:outline-2"
+                >
                     <FaPlus /> Add New User
                 </Link>
             </div>
@@ -68,20 +72,12 @@ const UserDashboard = () => {
                                             scope="row"
                                             className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white"
                                         >
+                                            
                                             <img
                                                 className="w-10 h-10 rounded-full"
                                                 // Change the src to the custom avatar
-                                                src={`https://avatar.iran.liara.run/public/${
-                                                    user.username === "Carlos"
-                                                        ? "14"
-                                                        : user.username ===
-                                                          "Pila"
-                                                        ? "15"
-                                                        : user.username ===
-                                                          "Akiko"
-                                                        ? "56"
-                                                        : "12" // Make this random
-                                                }`}
+
+                                                src={`http://localhost:3300/photo/${user.username}`}
                                                 alt=""
                                             />
 

@@ -147,6 +147,7 @@ const admin = asyncHandler(async (req, res) => {
                 username: user.username,
                 email: user.email,
                 fullname: user.fullname,
+                userpicture: user.userpicture,
                 createdAt: user.createdAt,
                 updatedAt: user.updatedAt
             };
@@ -163,7 +164,8 @@ const userPhoto = asyncHandler(async (req, res) => {
     const { username } = req.params;
     const user = await UserModel.findOne({ username });
     const picturePath = "uploads/" + user.userpicture;
-    const absolutePath = __dirname + "/" + picturePath;
+    const absolutePath = path.join(__dirname, "../", picturePath);
+    console.log(absolutePath);
     res.sendFile(absolutePath);
 });
 
@@ -178,24 +180,24 @@ const editUser = asyncHandler(async (req, res) => {
     // Hash de password before saving in database
     let hashedPassword = password; // Use the existing password hash by default
     if (password) {
-      // Hash the new password
-      hashedPassword = await bcrypt.hash(password, 12);
+        // Hash the new password
+        hashedPassword = await bcrypt.hash(password, 12);
     }
-    
-    console.log(req.file);
-      const user = await UserModel.findByIdAndUpdate(
+
+    // console.log(req.file);
+    const user = await UserModel.findByIdAndUpdate(
         req.params.id,
         {
-          username,
-          email,
-          password: hashedPassword,
-          userpicture: req.file.filename,
-          fullname,
+            username,
+            email,
+            password: hashedPassword,
+            userpicture: req.file.filename,
+            fullname
         },
         {
-          new: true,
+            new: true
         }
-      );
+    );
 
     console.log(req.body);
     console.log("Password", password);

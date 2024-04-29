@@ -27,7 +27,7 @@ authRouter.post("/logout", logout);
 
 authRouter.get("/admin", admin);
 
-authRouter.get("/photo/:username", upload.single("userpicture"), userPhoto);
+authRouter.get("/photo/:username", userPhoto);
 
 authRouter.patch("/admin/edit/:id", upload.single("userpicture"), editUser);
 
