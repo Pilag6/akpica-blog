@@ -72,12 +72,21 @@ const UserDashboard = () => {
                                             scope="row"
                                             className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white"
                                         >
-                                            
                                             <img
                                                 className="w-10 h-10 rounded-full"
                                                 // Change the src to the custom avatar
 
-                                                src={`http://localhost:3300/photo/${user.username}`}
+                                                src={
+                                                    user.username === "Akiko"
+                                                        ? `http://localhost:3300/photo/${user.username}`
+                                                        : user.username ===
+                                                          "Carlos"
+                                                        ? `http://localhost:3300/photo/${user.username}`
+                                                        : user.username ===
+                                                          "Pila"
+                                                        ? `http://localhost:3300/photo/${user.username}`
+                                                        : `https://avatar.iran.liara.run/public/${Math.floor(Math.random() * 100 + 1)}`
+                                                }
                                                 alt=""
                                             />
 
@@ -95,12 +104,12 @@ const UserDashboard = () => {
                                         </td>
 
                                         <td className="px-6 py-4">
-                                            <a
-                                                href="#"
+                                            <Link
+                                                to={`/dh-admin/dashboard/usersDashboard/${user._id}`}
                                                 className="font-medium text-akpica-marco dark:text-akpica-marco  hover:underline"
                                             >
                                                 Edit user
-                                            </a>
+                                            </Link>
                                         </td>
                                     </tr>
                                 ))}

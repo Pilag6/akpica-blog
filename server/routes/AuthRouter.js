@@ -7,6 +7,7 @@ import {
     admin,
     userPhoto,
     upload,
+    getOneUser,
     editUser,
     deleteUser
 } from "../controllers/AuthController.js";
@@ -28,6 +29,8 @@ authRouter.post("/logout", logout);
 authRouter.get("/admin", admin);
 
 authRouter.get("/photo/:username", userPhoto);
+
+authRouter.get("/admin/edit/:id", getOneUser);
 
 authRouter.patch("/admin/edit/:id", upload.single("userpicture"), editUser);
 

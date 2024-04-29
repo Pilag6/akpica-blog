@@ -36,7 +36,7 @@ const Register = () => {
 
             // UseNavigate
             if (response.status === 201) {
-                navigate("/dh-admin/login");
+                navigate("/dh-admin/dashboard");
             }
         } catch (error) {
             setError(error.response.data.errors);
