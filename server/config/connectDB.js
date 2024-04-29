@@ -6,13 +6,13 @@ import colors from "colors";
 dotenv.config();
 
 // Get the MONGODB_URI from the .env file
-const { MONGODB_LOCAL } = process.env;
+const { MONGODB_URI } = process.env;
 
 // Connect to the MongoDB
 const connectDB = async () => {
     try {
         // Connect to the MongoDB
-        const conn = await mongoose.connect(MONGODB_LOCAL);
+        const conn = await mongoose.connect(MONGODB_URI);
         // Log the connection host if the connection is successful
         console.log(`<< MongoDB Connected: ${conn.connection.host} >>`.bgGreen.white);
     } catch (error) {
