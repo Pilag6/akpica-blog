@@ -176,21 +176,26 @@ const editUser = asyncHandler(async (req, res) => {
     const { username, email, password, userpicture, fullname } = req.body;
 
     // Hash de password before saving in database
-    const hashedPassword = await bcrypt.hash(req.body.password, 12);
-
-    const user = await UserModel.findByIdAndUpdate(
+    let hashedPassword = password; // Use the existing password hash by default
+    if (password) {
+      // Hash the new password
+      hashedPassword = await bcrypt.hash(password, 12);
+    }
+    
+    console.log(req.file);
+      const user = await UserModel.findByIdAndUpdate(
         req.params.id,
         {
-            username,
-            email,
-            password: hashedPassword,
-            userpicture,
-            fullname
+          username,
+          email,
+          password: hashedPassword,
+          userpicture: req.file.filename,
+          fullname,
         },
         {
-            new: true
+          new: true,
         }
-    );
+      );
 
     console.log(req.body);
     console.log("Password", password);
