@@ -10,6 +10,7 @@ import Dashboard from "@pages/Dashboard.jsx";
 import PostDashboard from "@components/PostDashboard.jsx";
 import UserDashboard from "@components/UserDashboard.jsx";
 import DashboardOutlet from "@pages/DH.jsx";
+import UserProfile from "@components/UserProfile.jsx";
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
         <Route path="/dh-admin/dashboard" element={<DashboardOutlet />}>
           <Route index element={<Dashboard />} />
           <Route path="usersDashboard" element={<UserDashboard />} />
+          <Route path="usersDashboard/:id" element={<UserProfile />} />
           <Route path="postsDashboard" element={<PostDashboard />} />
           <Route path="register" element={<Register />} />
         </Route>
