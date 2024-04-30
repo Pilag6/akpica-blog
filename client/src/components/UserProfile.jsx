@@ -1,15 +1,19 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Axios from "axios";
 // Icons
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 const UserProfile = () => {
     const { id } = useParams();
 
+    const navigate = useNavigate();
+
     const [admin, setAdmin] = useState(null);
 
     // MESSAGES
     const [updateMessage, setUpdateMessage] = useState("");
+    const [invalidEmail, setInvalidEmail] = useState("");
+
     // password
     const [newPassword, setNewPassword] = useState("");
     const [visibleNew, setVisibleNew] = useState(false);
@@ -83,10 +87,15 @@ const UserProfile = () => {
     };
 
     const handleSaveChanges = async (e) => {
+        // Validate EMail pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+
         e.preventDefault();
         const email = admin.email;
         const fullname = admin.fullname;
         const password = admin.password;
+
+        console.log(email, fullname, password);
+
         // if (newPassword !== confirmPassword) {
         //     alert("Password does not match");
         //     return;
@@ -100,20 +109,38 @@ const UserProfile = () => {
                     password
                 }
             );
+
             const res = await Axios.get(
                 `http://localhost:3300/admin/edit/${id}`
             );
+
             setAdmin({
                 ...admin,
                 email: res.data.user.email,
                 fullname: res.data.user.fullname
             });
-            
+
             setNewPassword(password);
+
+            // Navigate to the admin profile page
+            navigate(`/dh-admin/dashboard/usersDashboard`);
         } catch (error) {
-            console.log(error);
+            console.log("ERROR", error);
         }
     };
+
+    const handleChangeEmail = (e) => {
+      const email = e.target.value;
+      if (email === "" || !email.includes("@") || !email.includes(".")) {
+          setInvalidEmail("Invalid email address");
+      } else {
+          setInvalidEmail("");
+      }
+      setAdmin({
+          ...admin,
+          email: email
+      });
+  };
 
     return (
         <>
@@ -189,15 +216,15 @@ const UserProfile = () => {
                                 <input
                                     className="flex-1 bg-transparent text-akpica-white outline-none border-[1px] pl-2 py-1"
                                     type="email"
-                                    value={admin && admin.email}
+                                    value={admin ? admin.email : ""}
                                     placeholder={admin.email}
-                                    onChange={(e) => {
-                                        setAdmin({
-                                            ...admin,
-                                            email: e.target.value
-                                        });
-                                    }}
+                                    onChange={handleChangeEmail}
                                 />
+                                {invalidEmail && (
+                                    <p className="text-akpica-tomato">
+                                        {invalidEmail}
+                                    </p>
+                                )}
                             </div>
                             <div className="flex items-center gap-4">
                                 <label className="w-1/4">Full Name:</label>
