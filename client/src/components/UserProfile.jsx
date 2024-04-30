@@ -94,14 +94,14 @@ const handleSaveChanges = async (e) => {
 
   return (
     <>
-      <div className="flex flex-col items-center pt-8">
-        <h1 className="text-3xl font-semibold mb-8">
+      <div className="flex flex-col items-start pt-8 pl-20">
+        <h1 className="text-3xl font-semibold mb-8 text-center">
           {admin && admin.fullname}
         </h1>
 
         {admin && (
           <div className="flex flex-col">
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col ">
               <img
                 className="w-40 h-40 rounded-full mb-8"
                 src={`http://localhost:3300/photo/${admin.username}`}
@@ -119,7 +119,7 @@ const handleSaveChanges = async (e) => {
                 />
                 <button
                   type="submit"
-                  className="my-7 w-full py-2 text-xl font-semibold text-akpica-white outline-none outline-white transition-all hover:bg-akpica-pastel hover:text-zinc-800 hover:outline-2"
+                  className="my-7 py-2 text-xl font-semibold text-akpica-white outline-none outline-white transition-all hover:bg-akpica-pastel hover:text-zinc-800 hover:outline-2"
                 >
                   Update Picture
                 </button>
