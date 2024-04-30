@@ -221,6 +221,7 @@ const editUser = asyncHandler(async (req, res) => {
             email,
             password: hashedPassword,
             userpicture: req.file.filename,
+            // userpicture: userpicture,
             fullname
         },
         {

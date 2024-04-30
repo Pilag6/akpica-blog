@@ -32,6 +32,7 @@ authRouter.get("/photo/:username", userPhoto);
 
 authRouter.get("/admin/edit/:id", getOneUser);
 
+// authRouter.patch("/admin/edit/:id", editUser);
 authRouter.patch("/admin/edit/:id", upload.single("userpicture"), editUser);
 
 authRouter.delete("/admin/delete/:id", deleteUser);
