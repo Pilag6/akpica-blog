@@ -76,17 +76,7 @@ const UserDashboard = () => {
                                                 className="w-10 h-10 rounded-full object-cover object-center"
                                                 // Change the src to the custom avatar
 
-                                                src={
-                                                    user.username === "Akiko"
-                                                        ? `http://localhost:3300/photo/${user.username}`
-                                                        : user.username ===
-                                                          "Carlos"
-                                                        ? `http://localhost:3300/photo/${user.username}`
-                                                        : user.username ===
-                                                          "Pila"
-                                                        ? `http://localhost:3300/photo/${user.username}`
-                                                        : `https://avatar.iran.liara.run/public/${Math.floor(Math.random() * 100 + 1)}`
-                                                }
+                                                src={`http://localhost:3300/photo/${user.username}`}
                                                 alt=""
                                             />
 
