@@ -8,7 +8,8 @@ import {
     userPhoto,
     upload,
     getOneUser,
-    editUser,
+    editUserPicture,
+    editUserInfo,
     deleteUser
 } from "../controllers/AuthController.js";
 
@@ -33,7 +34,9 @@ authRouter.get("/photo/:username", userPhoto);
 authRouter.get("/admin/edit/:id", getOneUser);
 
 // authRouter.patch("/admin/edit/:id", editUser);
-authRouter.patch("/admin/edit/:id", upload.single("userpicture"), editUser);
+authRouter.patch("/admin/editPicture/:id", upload.single("userpicture"), editUserPicture);
+
+authRouter.patch("/admin/editUserInfo/:id", editUserInfo);
 
 authRouter.delete("/admin/delete/:id", deleteUser);
 

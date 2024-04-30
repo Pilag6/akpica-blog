@@ -7,8 +7,6 @@ const UserProfile = () => {
     const { id } = useParams();
 
     const [admin, setAdmin] = useState(null);
-    // const [newEmail, setNewEmail] = useState("");
-    // const [newFullname, setNewFullname] = useState("");
 
     // MESSAGES
     const [updateMessage, setUpdateMessage] = useState("");
@@ -37,7 +35,6 @@ const UserProfile = () => {
                     `http://localhost:3300/admin/edit/${id}`
                 );
                 setAdmin(res.data.user);
-                console.log("RES USER DATA", res.data.user);
             } catch (error) {
                 console.log(error);
             }
@@ -55,11 +52,15 @@ const UserProfile = () => {
         const data = new FormData(form);
 
         try {
-            await Axios.patch(`http://localhost:3300/admin/edit/${id}`, data, {
-                headers: {
-                    "Content-Type": "multipart/form-data"
+            await Axios.patch(
+                `http://localhost:3300/admin/editPicture/${id}`,
+                data,
+                {
+                    headers: {
+                        "Content-Type": "multipart/form-data"
+                    }
                 }
-            });
+            );
             // After successful update, fetch the updated admin data
             setUpdateMessage("Picture updated successfully");
             setTimeout(() => {
@@ -71,8 +72,6 @@ const UserProfile = () => {
             );
             setAdmin({
                 ...admin,
-                email: res.data.user.email,
-                fullname: res.data.user.fullname,
                 userpicture: res.data.user.userpicture
             });
             setUserPicture(null);
@@ -83,23 +82,24 @@ const UserProfile = () => {
         }
     };
 
-    console.log("ADMIN", admin);
-
     const handleSaveChanges = async (e) => {
         e.preventDefault();
         const email = admin.email;
         const fullname = admin.fullname;
         const password = admin.password;
-        if (newPassword !== confirmPassword) {
-            alert("Password does not match");
-            return;
-        }
+        // if (newPassword !== confirmPassword) {
+        //     alert("Password does not match");
+        //     return;
+        // }
         try {
-            await Axios.patch(`http://localhost:3300/admin/edit/${id}`, {
-                email,
-                fullname,
-                password
-            });
+            await Axios.patch(
+                `http://localhost:3300/admin/editUserInfo/${id}`,
+                {
+                    email,
+                    fullname,
+                    password
+                }
+            );
             const res = await Axios.get(
                 `http://localhost:3300/admin/edit/${id}`
             );
@@ -108,8 +108,7 @@ const UserProfile = () => {
                 email: res.data.user.email,
                 fullname: res.data.user.fullname
             });
-            // setNewEmail(email);
-            // setNewFullname(fullname);
+            
             setNewPassword(password);
         } catch (error) {
             console.log(error);
@@ -182,15 +181,16 @@ const UserProfile = () => {
                                     className="flex-1 bg-transparent text-akpica-white outline-none border-2 pl-2 py-1 opacity-40"
                                     readOnly
                                     type="text"
-                                    value={admin.username}
+                                    placeholder={admin.username}
                                 />
                             </div>
                             <div className="flex items-center gap-4">
                                 <label className="w-1/4">Email:</label>
                                 <input
                                     className="flex-1 bg-transparent text-akpica-white outline-none border-[1px] pl-2 py-1"
-                                    type="text"
-                                    value={admin.email}
+                                    type="email"
+                                    value={admin && admin.email}
+                                    placeholder={admin.email}
                                     onChange={(e) => {
                                         setAdmin({
                                             ...admin,
@@ -204,13 +204,15 @@ const UserProfile = () => {
                                 <input
                                     className="flex-1 bg-transparent text-akpica-white outline-none border-[1px] pl-2 py-1"
                                     type="text"
-                                    value={admin.fullname}
+                                    value={admin && admin.fullname}
+                                    placeholder={admin.fullname}
                                     onChange={(e) => {
                                         setAdmin({
                                             ...admin,
                                             fullname: e.target.value
                                         });
                                     }}
+                                    maxLength={30}
                                 />
                             </div>
                             <h1 className="mb-2 flex w-full items-center gap-3 border-b-2 border-cyan-50/45 p-4 text-akpica-white text-xl">
