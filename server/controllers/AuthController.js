@@ -180,9 +180,8 @@ const getOneUser = asyncHandler(async (req, res) => {
             createdAt: user.createdAt,
             updatedAt: user.updatedAt
         }
-    })
-}
-);
+    });
+});
 
 /*
 @desc    Get user photo
@@ -199,38 +198,62 @@ const userPhoto = asyncHandler(async (req, res) => {
 });
 
 /*
-@desc    Edit user
+@desc    Edit user Picture
 @route   PATCH /admin/edit/:id
 @access  Private
 */
-const editUser = asyncHandler(async (req, res) => {
-    const { username, email, password, userpicture, fullname } = req.body;
-
-    // Hash de password before saving in database
-    let hashedPassword = password; // Use the existing password hash by default
-    if (password) {
-        // Hash the new password
-        hashedPassword = await bcrypt.hash(password, 12);
-    }
+const editUserPicture = asyncHandler(async (req, res) => {
+    const { userpicture } = req.body;
 
     // console.log(req.file);
     const user = await UserModel.findByIdAndUpdate(
         req.params.id,
         {
-            username,
-            email,
-            password: hashedPassword,
-            userpicture: req.file.filename,
-            // userpicture: userpicture,
-            fullname
+            userpicture: req.file.filename
         },
         {
             new: true
         }
     );
 
-    console.log(req.body);
-    console.log("Password", password);
+    if (!user) {
+        res.status(404);
+        throw new Error("User not found");
+    }
+
+    res.status(200).json({
+        message: "User updated successfully",
+        user: {
+            _id: user._id,
+            username: user.username,
+            email: user.email,
+            userpicture: user.userpicture,
+            fullname: user.fullname,
+            createdAt: user.createdAt,
+            updatedAt: user.updatedAt
+        }
+    });
+});
+
+/* 
+@desc Edit User Info
+@route PATCH /admin/editUserInfo/:id
+@access Private 
+*/
+
+const editUserInfo = asyncHandler(async (req, res) => {
+    const { email, fullname } = req.body;
+
+    const user = await UserModel.findByIdAndUpdate(
+        req.params.id,
+        {
+            email,
+            fullname
+        },
+        {
+            new: true
+        }
+    );
 
     if (!user) {
         res.status(404);
@@ -278,6 +301,7 @@ export {
     upload,
     userPhoto,
     getOneUser,
-    editUser,
+    editUserPicture,
+    editUserInfo,
     deleteUser
 };
