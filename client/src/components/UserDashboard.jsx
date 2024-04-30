@@ -73,7 +73,7 @@ const UserDashboard = () => {
                                             className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white"
                                         >
                                             <img
-                                                className="w-10 h-10 rounded-full"
+                                                className="w-10 h-10 rounded-full object-cover object-center"
                                                 // Change the src to the custom avatar
 
                                                 src={
