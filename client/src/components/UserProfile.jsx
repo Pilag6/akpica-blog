@@ -73,9 +73,7 @@ const UserProfile = () => {
                 setUpdateMessage("");
             }, 3000); // 3 seconds
 
-            const res = await Axios.get(
-                `http://localhost:3300/admin/${id}`
-            );
+            const res = await Axios.get(`http://localhost:3300/admin/${id}`);
             setAdmin({
                 ...admin,
                 userpicture: res.data.user.userpicture
@@ -94,10 +92,10 @@ const UserProfile = () => {
         const fullname = admin.fullname;
         const password = admin.password;
 
-        // if (newPassword !== confirmPassword) {
-        //     alert("Password does not match");
-        //     return;
-        // }
+        if (newPassword !== confirmPassword) {
+            alert("Password does not match");
+            return;
+        }
         try {
             await Axios.patch(
                 `http://localhost:3300/admin/editUserInfo/${id}`,
@@ -108,14 +106,13 @@ const UserProfile = () => {
                 }
             );
 
-            const res = await Axios.get(
-                `http://localhost:3300/admin/${id}`
-            );
+            const res = await Axios.get(`http://localhost:3300/admin/${id}`);
 
             setAdmin({
                 ...admin,
                 email: res.data.user.email,
-                fullname: res.data.user.fullname
+                fullname: res.data.user.fullname,
+                password: res.data.user.password
             });
 
             setNewPassword(password);
@@ -136,6 +133,7 @@ const UserProfile = () => {
         } else {
             setInvalidEmail("");
         }
+
         setAdmin({
             ...admin,
             email: email
@@ -220,6 +218,7 @@ const UserProfile = () => {
                                     value={admin ? admin.email : ""}
                                     placeholder={admin.email}
                                     onChange={handleChangeEmail}
+                                    required
                                 />
                             </div>
                             {invalidEmail && (
