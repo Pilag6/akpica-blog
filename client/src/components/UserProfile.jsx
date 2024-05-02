@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Axios from "axios";
+
 // Icons
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 const UserProfile = () => {
@@ -36,7 +37,7 @@ const UserProfile = () => {
         const fetchAdmin = async () => {
             try {
                 const res = await Axios.get(
-                    `http://localhost:3300/admin/edit/${id}`
+                    `http://localhost:3300/admin/${id}`
                 );
                 setAdmin(res.data.user);
             } catch (error) {
@@ -44,7 +45,7 @@ const UserProfile = () => {
             }
         };
         fetchAdmin();
-    }, [id]);
+    }, [id]); // This works only when the component mounts
 
     const handleFileChange = (e) => {
         setUserPicture(URL.createObjectURL(e.target.files[0]));
@@ -65,6 +66,7 @@ const UserProfile = () => {
                     }
                 }
             );
+
             // After successful update, fetch the updated admin data
             setUpdateMessage("Picture updated successfully");
             setTimeout(() => {
@@ -72,7 +74,7 @@ const UserProfile = () => {
             }, 3000); // 3 seconds
 
             const res = await Axios.get(
-                `http://localhost:3300/admin/edit/${id}`
+                `http://localhost:3300/admin/${id}`
             );
             setAdmin({
                 ...admin,
@@ -80,21 +82,17 @@ const UserProfile = () => {
             });
             setUserPicture(null);
 
-            // setUserPicture(null); // Reset userPicture state after updating
+            console.log("DATA", data);
         } catch (error) {
             console.log(error);
         }
     };
 
     const handleSaveChanges = async (e) => {
-        // Validate EMail pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-
         e.preventDefault();
         const email = admin.email;
         const fullname = admin.fullname;
         const password = admin.password;
-
-        console.log(email, fullname, password);
 
         // if (newPassword !== confirmPassword) {
         //     alert("Password does not match");
@@ -111,7 +109,7 @@ const UserProfile = () => {
             );
 
             const res = await Axios.get(
-                `http://localhost:3300/admin/edit/${id}`
+                `http://localhost:3300/admin/${id}`
             );
 
             setAdmin({
@@ -122,6 +120,8 @@ const UserProfile = () => {
 
             setNewPassword(password);
 
+            console.log("ADMIN", admin);
+
             // Navigate to the admin profile page
             navigate(`/dh-admin/dashboard/usersDashboard`);
         } catch (error) {
@@ -130,29 +130,29 @@ const UserProfile = () => {
     };
 
     const handleChangeEmail = (e) => {
-      const email = e.target.value;
-      if (email === "" || !email.includes("@") || !email.includes(".")) {
-          setInvalidEmail("Invalid email address");
-      } else {
-          setInvalidEmail("");
-      }
-      setAdmin({
-          ...admin,
-          email: email
-      });
-  };
+        const email = e.target.value;
+        if (email === "" || !email.includes("@") || !email.includes(".")) {
+            setInvalidEmail("Invalid email address");
+        } else {
+            setInvalidEmail("");
+        }
+        setAdmin({
+            ...admin,
+            email: email
+        });
+    };
 
     return (
         <>
-            <div className="flex flex-col items-start pt-8 pl-20">
-                <h1 className="text-3xl font-semibold mb-8 text-center">
-                    {admin && admin.fullname}
-                </h1>
+            <div className="flex flex-col items-start pt-16 h-[calc(100vh-80px)]">
                 {admin && (
-                    <div className="flex flex-col">
-                        <div className="flex flex-col ">
+                    <div className="flex w-4/6">
+                        <div className="flex flex-col items-center w-2/5">
+                            <h1 className="text-3xl font-semibold mb-8">
+                                {admin && admin.fullname}
+                            </h1>
                             <img
-                                className="w-40 h-40 rounded-full mb-8  object-center"
+                                className="w-40 h-40 rounded-full mb-8  object-center border-4 border-akpica-white"
                                 src={
                                     userPicture
                                         ? userPicture
@@ -162,7 +162,7 @@ const UserProfile = () => {
                             />
                             <form
                                 onSubmit={handleChangePicture}
-                                className="flex flex-col"
+                                className="flex flex-col items-center"
                                 encType="multipart/form-data"
                             >
                                 <input
@@ -170,12 +170,13 @@ const UserProfile = () => {
                                     name="userpicture"
                                     onChange={handleFileChange}
                                     placeholder="Update Picture"
+                                    className="block text-xs text-gray-900 border border-gray-300 cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                                 />
-                                <div className="flex items-center justify-between gap-4 my-6">
+                                <div className="flex items-center justify-between gap-4">
                                     {userPicture && (
                                         <div className="flex items-center justify-between gap-4 my-6">
                                             <button
-                                                className="p-2 text-xl font-semibold bg-akpica-tomato text-akpica-white outline-none outline-white transition-all hover:bg-akpica-pastel hover:text-zinc-800 hover:outline-2"
+                                                className="p-2 font-semibold bg-akpica-tomato text-akpica-white outline-none outline-white transition-all hover:bg-akpica-pastel hover:text-zinc-800 hover:outline-2"
                                                 onClick={() =>
                                                     setUserPicture(null)
                                                 }
@@ -184,7 +185,7 @@ const UserProfile = () => {
                                             </button>
                                             <button
                                                 type="submit"
-                                                className="p-2 text-xl font-semibold text-akpica-white outline-none outline-white transition-all hover:bg-akpica-pastel hover:text-zinc-800 hover:outline-2"
+                                                className="p-2 font-semibold text-akpica-white outline-none outline-white transition-all hover:bg-akpica-pastel hover:text-zinc-800 hover:outline-2"
                                             >
                                                 Update Picture
                                             </button>
@@ -194,7 +195,7 @@ const UserProfile = () => {
 
                                 {/* Add a text after click in Update Picture button for 3 seconds and then disappear */}
                                 {updateMessage && (
-                                    <p className="text-akpica-white bg-akpica-carlo p-2 mb-6">
+                                    <p className="text-akpica-white bg-akpica-green p-2 mt-5">
                                         {updateMessage}
                                     </p>
                                 )}
@@ -220,12 +221,12 @@ const UserProfile = () => {
                                     placeholder={admin.email}
                                     onChange={handleChangeEmail}
                                 />
-                                {invalidEmail && (
-                                    <p className="text-akpica-tomato">
-                                        {invalidEmail}
-                                    </p>
-                                )}
                             </div>
+                            {invalidEmail && (
+                                <p className="text-akpica-tomato text-right">
+                                    {invalidEmail}
+                                </p>
+                            )}
                             <div className="flex items-center gap-4">
                                 <label className="w-1/4">Full Name:</label>
                                 <input

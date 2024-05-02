@@ -29,11 +29,10 @@ authRouter.post("/logout", logout);
 
 authRouter.get("/admin", admin);
 
+authRouter.get("/admin/:id", getOneUser);
+
 authRouter.get("/photo/:username", userPhoto);
 
-authRouter.get("/admin/edit/:id", getOneUser);
-
-// authRouter.patch("/admin/edit/:id", editUser);
 authRouter.patch("/admin/editPicture/:id", upload.single("userpicture"), editUserPicture);
 
 authRouter.patch("/admin/editUserInfo/:id", editUserInfo);
