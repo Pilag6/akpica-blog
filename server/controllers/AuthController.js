@@ -97,10 +97,13 @@ const login = asyncHandler(async (req, res) => {
         });
 
         // Create a cookie and set the token
-        res.cookie("token", accessToken, {
-            httpOnly: true,
-            secure: true
-        });
+        // res.cookie("token", accessToken, {
+        //     httpOnly: true,
+        //     secure: true
+        // });
+        res.cookie("token", accessToken);
+
+    
 
         // Send the token to the client
         res.status(200).json({
@@ -120,6 +123,7 @@ const login = asyncHandler(async (req, res) => {
  */
 const logout = asyncHandler(async (req, res) => {
     res.cookie("token", "", { expires: new Date(0) });
+    console.log(res.cookie("token", ""));
 
     // Send the response
     res.status(200).json({
