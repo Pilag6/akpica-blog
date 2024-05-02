@@ -29,7 +29,8 @@ const Login = () => {
         try {
             const response = await Axios.post(
                 "http://localhost:3300/login",
-                user
+                user,
+                {withCredentials: true}
             );
 
             // UseNavigate
