@@ -9,14 +9,12 @@ import { FaPlus } from "react-icons/fa";
 const PostDashboard = () => {
     const [posts, setPosts] = useState(null);
     const [quantity, setQuantity] = useState(0);
-    console.log(quantity);
 
     useEffect(() => {
         const fetchPosts = async () => {
             try {
                 const res = await Axios.get("http://localhost:3300/posts");
                 setPosts(res.data);
-                console.log(res);
             } catch (error) {
                 console.log(error);
             }

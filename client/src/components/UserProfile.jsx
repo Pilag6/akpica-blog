@@ -80,7 +80,6 @@ const UserProfile = () => {
             });
             setUserPicture(null);
 
-            console.log("DATA", data);
         } catch (error) {
             console.log(error);
         }
