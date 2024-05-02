@@ -119,7 +119,7 @@ const login = asyncHandler(async (req, res) => {
 @access  Public
  */
 const logout = asyncHandler(async (req, res) => {
-    res.cookie("token", "", {expires: new Date(0)});
+    res.cookie("token", "", { expires: new Date(0) });
 
     // Send the response
     res.status(200).json({
@@ -246,13 +246,16 @@ const editUserPicture = asyncHandler(async (req, res) => {
 */
 
 const editUserInfo = asyncHandler(async (req, res) => {
-    const { email, fullname } = req.body;
+    const { email, fullname, password } = req.body;
+
+    const hashedPassword = await bcrypt.hash(password, 12);
 
     const user = await UserModel.findByIdAndUpdate(
         req.params.id,
         {
             email,
-            fullname
+            fullname,
+            password: hashedPassword
         },
         {
             new: true
@@ -264,18 +267,41 @@ const editUserInfo = asyncHandler(async (req, res) => {
         throw new Error("User not found");
     }
 
-    res.status(200).json({
-        message: "User updated successfully",
-        user: {
-            _id: user._id,
-            username: user.username,
-            email: user.email,
-            userpicture: user.userpicture,
-            fullname: user.fullname,
-            createdAt: user.createdAt,
-            updatedAt: user.updatedAt
-        }
-    });
+    console.log(user);
+
+    // Compare the password
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    // If the user is found
+
+    if (isMatch) {
+        // Create a token
+        const accessToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+            expiresIn: "1h"
+        });
+
+        // Create a cookie and set the token
+
+        res.cookie("token", accessToken, {
+            httpOnly: true,
+            secure: true
+        });
+
+        // Send the token to the client
+
+        res.status(200).json({
+            message: "User updated successfully",
+            user: {
+                _id: user._id,
+                username: user.username,
+                email: user.email,
+                userpicture: user.userpicture,
+                fullname: user.fullname,
+                createdAt: user.createdAt,
+                updatedAt: user.updatedAt
+            }
+        });
+    }
 });
 
 /*
