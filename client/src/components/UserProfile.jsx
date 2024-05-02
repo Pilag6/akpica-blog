@@ -91,6 +91,7 @@ const UserProfile = () => {
         const email = admin.email;
         const fullname = admin.fullname;
         const password = admin.password;
+        
 
         if (newPassword !== confirmPassword) {
             alert("Password does not match");
@@ -102,7 +103,7 @@ const UserProfile = () => {
                 {
                     email,
                     fullname,
-                    password
+                    password: newPassword
                 }
             );
 
@@ -117,7 +118,8 @@ const UserProfile = () => {
 
             setNewPassword(password);
 
-            console.log("ADMIN", admin);
+            // console.log("ADMIN", admin);
+            // console.log("PASSWORD", newPassword);
 
             // Navigate to the admin profile page
             navigate(`/dh-admin/dashboard/usersDashboard`);
