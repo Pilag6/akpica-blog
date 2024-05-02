@@ -37,7 +37,7 @@ const UserProfile = () => {
         const fetchAdmin = async () => {
             try {
                 const res = await Axios.get(
-                    `http://localhost:3300/admin/edit/${id}`
+                    `http://localhost:3300/admin/${id}`
                 );
                 setAdmin(res.data.user);
             } catch (error) {
@@ -74,7 +74,7 @@ const UserProfile = () => {
             }, 3000); // 3 seconds
 
             const res = await Axios.get(
-                `http://localhost:3300/admin/edit/${id}`
+                `http://localhost:3300/admin/${id}`
             );
             setAdmin({
                 ...admin,
@@ -109,7 +109,7 @@ const UserProfile = () => {
             );
 
             const res = await Axios.get(
-                `http://localhost:3300/admin/edit/${id}`
+                `http://localhost:3300/admin/${id}`
             );
 
             setAdmin({

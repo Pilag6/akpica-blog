@@ -119,9 +119,7 @@ const login = asyncHandler(async (req, res) => {
 @access  Public
  */
 const logout = asyncHandler(async (req, res) => {
-    res.cookie("token", "", {
-        expires: new Date(0)
-    });
+    res.cookie("token", "", {expires: new Date(0)});
 
     // Send the response
     res.status(200).json({
@@ -163,7 +161,7 @@ const admin = asyncHandler(async (req, res) => {
 
 /* 
 @desc Admin page - Get individual users
-@route GET /admin/edit/:id
+@route GET /admin/:id
 @access Private
 */
 
@@ -205,7 +203,7 @@ const userPhoto = asyncHandler(async (req, res) => {
 
 /*
 @desc    Edit user Picture
-@route   PATCH /admin/edit/:id
+@route   PATCH /admin/editPicture/:id
 @access  Private
 */
 const editUserPicture = asyncHandler(async (req, res) => {
