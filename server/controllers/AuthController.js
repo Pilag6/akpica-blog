@@ -17,14 +17,20 @@ const storage = multer.diskStorage({
         cb(null, "uploads/");
     },
     filename: (req, file, cb) => {
-        const splitFileName = file.originalname.split(".");
-        // console.log(splitFileName); // [ 'photo', 'jpg' ]
-        const extension = splitFileName[splitFileName.length - 1];
-        const filename = `${
-            splitFileName[0]
-        }-${crypto.randomUUID()}.${extension}`;
-        // console.log(filename); // photo-123456789.jpg
-        cb(null, filename);
+        const ext = file.originalname.split(".").pop();
+        const basename = file.originalname.replace(`.${ext}`, "");
+
+        // Check if counts for basename exists, if not, initialize it to 0
+        global.fileCounts = global.fileCounts || {};
+        global.fileCounts[basename] = global.fileCounts[basename] || 0;
+
+        // Increment count and generate filename
+        global.fileCounts[basename]++;
+        const count = global.fileCounts[basename];
+        const newFilename =
+            count === 1 ? file.originalname : `${basename}-${count}.${ext}`;
+
+        cb(null, newFilename);
     }
 });
 
@@ -193,7 +199,7 @@ const userPhoto = asyncHandler(async (req, res) => {
     const user = await UserModel.findOne({ username });
     const picturePath = "uploads/" + user.userpicture;
     const absolutePath = path.join(__dirname, "../", picturePath);
-    console.log(absolutePath);
+    // console.log(absolutePath);
     res.sendFile(absolutePath);
 });
 
