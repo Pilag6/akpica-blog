@@ -112,7 +112,7 @@ const login = asyncHandler(async (req, res) => {
     } else {
         // If the user is not found
         res.status(401);
-        throw new Error("Invalid email or password");
+        throw new Error("Invalid username or password");
     }
 });
 
@@ -211,7 +211,7 @@ const userPhoto = asyncHandler(async (req, res) => {
 @access  Private
 */
 const editUserPicture = asyncHandler(async (req, res) => {
-    const { userpicture } = req.body;
+    // const { userpicture } = req.body;
 
     // console.log(req.file);
     const user = await UserModel.findByIdAndUpdate(
@@ -271,7 +271,7 @@ const editUserInfo = asyncHandler(async (req, res) => {
         throw new Error("User not found");
     }
 
-    console.log(user);
+    console.log("USER",user);
 
     // Compare the password
     const isMatch = await bcrypt.compare(password, user.password);
@@ -286,10 +286,12 @@ const editUserInfo = asyncHandler(async (req, res) => {
 
         // Create a cookie and set the token
 
-        res.cookie("token", accessToken, {
-            httpOnly: true,
-            secure: true
-        });
+        // res.cookie("token", accessToken, {
+        //     httpOnly: true,
+        //     secure: true
+        // });
+
+         res.cookie("token", accessToken);
 
         // Send the token to the client
 
