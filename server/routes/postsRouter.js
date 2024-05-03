@@ -1,11 +1,11 @@
 import { Router } from "express";
 
 import {
-    create,
-    getAll,
-    getById,
-    update,
-    deleteOne,
+    createPost,
+    getAllPosts,
+    getPostById,
+    updateOnePost,
+    deleteOnePost,
 } from "../controllers/postController.js";
 
 const postRouter = Router();
@@ -13,15 +13,15 @@ const postRouter = Router();
 // CRUD -----------
 
 // CREATE 
-postRouter.post("/", create);
+postRouter.post("/", createPost);
 // READ all 
-postRouter.get("/", getAll);
+postRouter.get("/", getAllPosts);
 // READ each 
-postRouter.get("/:id", getById);
+postRouter.get("/:id", getPostById);
 // UPDATE 
-postRouter.patch("/:id", update);
+postRouter.patch("/:id", updateOnePost);
 // DELETE one
-postRouter.delete("/:id", deleteOne)
+postRouter.delete("/:id", deleteOnePost)
 
 
 
