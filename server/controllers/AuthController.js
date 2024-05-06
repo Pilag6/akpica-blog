@@ -43,7 +43,7 @@ const upload = multer({ storage: storage });
 */
 const register = asyncHandler(async (req, res) => {
     // Destructure the request body
-    const { username, email, password, fullname } = req.body;
+    const { username, email, password, fullname, role } = req.body;
 
     // Hash de password before saving in database
     const hashedPassword = await bcrypt.hash(password, 12);
@@ -51,10 +51,13 @@ const register = asyncHandler(async (req, res) => {
     // Create a new user
     const user = await UserModel.create({
         username,
+        role,
         email,
         fullname,
         password: hashedPassword
     });
+
+    console.log("ROLE", role);
 
     // If the user is created successfully
     if (user) {
@@ -75,7 +78,7 @@ const register = asyncHandler(async (req, res) => {
 */
 const login = asyncHandler(async (req, res) => {
     // Destructure the request body
-    const { username, password } = req.body;
+    const { username, password, role } = req.body;
 
     // Find the user by email
     const user = await UserModel.findOne({ username });
@@ -90,9 +93,9 @@ const login = asyncHandler(async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
 
     // If the user is found
-    if (isMatch) {
+    if (user && isMatch) {
         // Create a token
-        const accessToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+        const accessToken = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, {
             expiresIn: "1h"
         });
 
@@ -137,8 +140,6 @@ const logout = asyncHandler(async (req, res) => {
 const admin = asyncHandler(async (req, res) => {
     const user = await UserModel.find();
 
-    console.log(user);
-
     if (!user) {
         res.status(404);
         throw new Error("User not found");
@@ -153,6 +154,7 @@ const admin = asyncHandler(async (req, res) => {
                 username: user.username,
                 email: user.email,
                 fullname: user.fullname,
+                role: user.role,
                 userpicture: user.userpicture,
                 createdAt: user.createdAt,
                 updatedAt: user.updatedAt
@@ -180,6 +182,7 @@ const getOneUser = asyncHandler(async (req, res) => {
         user: {
             _id: user._id,
             username: user.username,
+            role: user.role,
             email: user.email,
             fullname: user.fullname,
             userpicture: user.userpicture,
@@ -252,57 +255,55 @@ const editUserInfo = asyncHandler(async (req, res) => {
 
     let hashedPassword;
     if (password) {
-      hashedPassword = await bcrypt.hash(password, 12);
+        hashedPassword = await bcrypt.hash(password, 12);
     }
-    
+
     const userUpdate = { email, fullname };
     if (hashedPassword) {
-      userUpdate.password = hashedPassword;
+        userUpdate.password = hashedPassword;
     }
-    
-    const user = await UserModel.findByIdAndUpdate(
-      req.params.id,
-      userUpdate,
-      { new: true }
-    );
-    
+
+    const user = await UserModel.findByIdAndUpdate(req.params.id, userUpdate, {
+        new: true
+    });
+
     if (!user) {
-      res.status(404);
-      throw new Error("User not found");
+        res.status(404);
+        throw new Error("User not found");
     }
-    
+
     if (password) {
-      // Compare the password
-      const isMatch = await bcrypt.compare(password, user.password);
-    
-      if (!isMatch) {
-        res.status(401).json({ message: "Invalid password" });
-        return;
-      }
+        // Compare the password
+        const isMatch = await bcrypt.compare(password, user.password);
+
+        if (!isMatch) {
+            res.status(401).json({ message: "Invalid password" });
+            return;
+        }
     }
-    
+
     // Create a token
     const accessToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-      expiresIn: "1h"
+        expiresIn: "1h"
     });
-    
+
     // Create a cookie and set the token
     res.cookie("token", accessToken);
-    
+
     // Send the token to the client
     res.status(200).json({
-      message: "User updated successfully",
-      user: {
-        _id: user._id,
-        username: user.username,
-        email: user.email,
-        userpicture: user.userpicture,
-        fullname: user.fullname,
-        createdAt: user.createdAt,
-        updatedAt: user.updatedAt
-      }
+        message: "User updated successfully",
+        user: {
+            _id: user._id,
+            username: user.username,
+            email: user.email,
+            role: user.role,
+            userpicture: user.userpicture,
+            fullname: user.fullname,
+            createdAt: user.createdAt,
+            updatedAt: user.updatedAt
+        }
     });
-    
 });
 
 /*

@@ -18,6 +18,9 @@ import {
     userValidate
 } from "../middlewares/userValidation.js";
 
+import { isAdmin } from "../middlewares/isAdmin.js";
+import { isAuth } from "../middlewares/isAuth.js";
+
 const authRouter = Router();
 
 // AUTH -----------
@@ -35,7 +38,7 @@ authRouter.get("/photo/:username", userPhoto);
 
 authRouter.patch("/admin/editPicture/:id", upload.single("userpicture"), editUserPicture);
 
-authRouter.patch("/admin/editUserInfo/:id", editUserInfo);
+authRouter.patch("/admin/editUserInfo/:id", isAuth, isAdmin,  editUserInfo);
 
 authRouter.delete("/admin/delete/:id", deleteUser);
 
