@@ -103,8 +103,6 @@ const login = asyncHandler(async (req, res) => {
         // });
         res.cookie("token", accessToken);
 
-    
-
         // Send the token to the client
         res.status(200).json({
             message: "User logged in successfully"
@@ -252,62 +250,59 @@ const editUserPicture = asyncHandler(async (req, res) => {
 const editUserInfo = asyncHandler(async (req, res) => {
     const { email, fullname, password } = req.body;
 
-    const hashedPassword = await bcrypt.hash(password, 12);
-
+    let hashedPassword;
+    if (password) {
+      hashedPassword = await bcrypt.hash(password, 12);
+    }
+    
+    const userUpdate = { email, fullname };
+    if (hashedPassword) {
+      userUpdate.password = hashedPassword;
+    }
+    
     const user = await UserModel.findByIdAndUpdate(
-        req.params.id,
-        {
-            email,
-            fullname,
-            password: hashedPassword
-        },
-        {
-            new: true
-        }
+      req.params.id,
+      userUpdate,
+      { new: true }
     );
-
+    
     if (!user) {
-        res.status(404);
-        throw new Error("User not found");
+      res.status(404);
+      throw new Error("User not found");
     }
-
-    console.log("USER",user);
-
-    // Compare the password
-    const isMatch = await bcrypt.compare(password, user.password);
-
-    // If the user is found
-
-    if (isMatch) {
-        // Create a token
-        const accessToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-            expiresIn: "1h"
-        });
-
-        // Create a cookie and set the token
-
-        // res.cookie("token", accessToken, {
-        //     httpOnly: true,
-        //     secure: true
-        // });
-
-         res.cookie("token", accessToken);
-
-        // Send the token to the client
-
-        res.status(200).json({
-            message: "User updated successfully",
-            user: {
-                _id: user._id,
-                username: user.username,
-                email: user.email,
-                userpicture: user.userpicture,
-                fullname: user.fullname,
-                createdAt: user.createdAt,
-                updatedAt: user.updatedAt
-            }
-        });
+    
+    if (password) {
+      // Compare the password
+      const isMatch = await bcrypt.compare(password, user.password);
+    
+      if (!isMatch) {
+        res.status(401).json({ message: "Invalid password" });
+        return;
+      }
     }
+    
+    // Create a token
+    const accessToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "1h"
+    });
+    
+    // Create a cookie and set the token
+    res.cookie("token", accessToken);
+    
+    // Send the token to the client
+    res.status(200).json({
+      message: "User updated successfully",
+      user: {
+        _id: user._id,
+        username: user.username,
+        email: user.email,
+        userpicture: user.userpicture,
+        fullname: user.fullname,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt
+      }
+    });
+    
 });
 
 /*
