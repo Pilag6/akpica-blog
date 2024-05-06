@@ -18,6 +18,11 @@ const userSchema = new Schema(
         },
         fullname: {
             type: String
+        },
+        role: {
+            type: String,
+            enum: ["admin", "guest"],
+            default: "admin"
         }
     },
     {
