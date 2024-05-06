@@ -17,20 +17,12 @@ const UserProfile = () => {
 
     // password
     const [newPassword, setNewPassword] = useState("");
-    const [visibleNew, setVisibleNew] = useState(false);
+    const [isVisibleNew, setIsVisibleNew] = useState(false);
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [visibleConfirm, setVisibleConfirm] = useState(false);
+    const [isVisibleConfirm, setIsVisibleConfirm] = useState(false);
 
     // User picture
     const [userPicture, setUserPicture] = useState(null);
-
-    const handleShowNewPassword = () => {
-        setVisibleNew(!visibleNew);
-    };
-
-    const handleShowConfirmPassword = () => {
-        setVisibleConfirm(!visibleConfirm);
-    };
 
     // Fetch the admin data
     useEffect(() => {
@@ -250,7 +242,7 @@ const UserProfile = () => {
                                 <label className="w-1/2">New Password:</label>
                                 <input
                                     className="bg-transparent text-akpica-white outline-none border-[1px] pl-2 py-1"
-                                    type={visibleNew ? "text" : "password"}
+                                    type={isVisibleNew ? "text" : "password"}
                                     value={newPassword}
                                     onChange={(e) => {
                                         setNewPassword(e.target.value);
@@ -258,12 +250,13 @@ const UserProfile = () => {
                                 />
                                 <div
                                     className="p-2"
-                                    onClick={handleShowNewPassword}
+                                    onClick={() => setIsVisibleNew(!isVisibleNew)}
                                 >
-                                    {visibleNew ? (
-                                        <AiOutlineEye />
-                                    ) : (
+                                    {!isVisibleNew ? (
+                                        
                                         <AiOutlineEyeInvisible />
+                                    ) : (
+                                        <AiOutlineEye />
                                     )}
                                 </div>
                             </div>
@@ -273,7 +266,7 @@ const UserProfile = () => {
                                 </label>
                                 <input
                                     className="bg-transparent text-akpica-white outline-none border-[1px] pl-2 py-1"
-                                    type={visibleConfirm ? "text" : "password"}
+                                    type={isVisibleConfirm ? "text" : "password"}
                                     value={confirmPassword}
                                     onChange={(e) => {
                                         setConfirmPassword(e.target.value);
@@ -281,13 +274,13 @@ const UserProfile = () => {
                                 />
                                 <div
                                     className="p-2"
-                                    onClick={handleShowConfirmPassword}
+                                    onClick={() =>  setIsVisibleConfirm(!isVisibleConfirm)}
                                 >
-                                    {visibleConfirm ? (
-                                        <AiOutlineEye />
-                                    ) : (
-                                        <AiOutlineEyeInvisible />
-                                    )}
+                                    {!isVisibleConfirm ? (
+                                           <AiOutlineEyeInvisible />
+                                        ) : (
+                                            <AiOutlineEye />
+                                        )}
                                 </div>
                             </div>
                             <button

@@ -6,7 +6,7 @@ import PostModel from "../models/PostModel.js";
 @route   POST /posts
 @access  Public
 */
-const create = asyncHandler(async (req, res) => {
+const createPost = asyncHandler(async (req, res) => {
     const post = await PostModel.create(req.body);
     res.status(201).json(post);
 });
@@ -16,7 +16,7 @@ const create = asyncHandler(async (req, res) => {
 @route   GET /posts
 @access  Public
 */
-const getAll = asyncHandler(async (req, res) => {
+const getAllPosts = asyncHandler(async (req, res) => {
     const posts = await PostModel.find();
     // Handling error in case that there aren't posts in our DB
     if (!posts || posts.length === 0) {
@@ -31,7 +31,7 @@ const getAll = asyncHandler(async (req, res) => {
 @route   GET /posts/:id
 @access  Public
 */
-const getById = asyncHandler(async (req, res) => {
+const getPostById = asyncHandler(async (req, res) => {
     const post = await PostModel.findById(req.params.id);
     // Handling error in case that there isn't a post with the provided ID
     if (!post) {
@@ -46,7 +46,7 @@ const getById = asyncHandler(async (req, res) => {
 @route   PATCH /posts/:id
 @access  Public
 */
-const update = asyncHandler(async (req, res) => {
+const updateOnePost = asyncHandler(async (req, res) => {
     const postUpdated = await PostModel.findByIdAndUpdate(
         req.params.id,
         req.body,
@@ -70,7 +70,7 @@ const update = asyncHandler(async (req, res) => {
 @route   DELETE /posts/:id
 @access  Public
 */
-const deleteOne = asyncHandler(async (req, res) => {
+const deleteOnePost = asyncHandler(async (req, res) => {
     const { title } = req.body;
     const postDeleted = await PostModel.findByIdAndDelete(req.params.id);
     // Handling error in case that there isn't a post with the provided ID
@@ -81,4 +81,4 @@ const deleteOne = asyncHandler(async (req, res) => {
     res.status(200).json({ message: "Post is deleted.", title: title });
 });
 
-export { create, getAll, getById, update, deleteOne };
+export { createPost, getAllPosts, getPostById, updateOnePost, deleteOnePost };
