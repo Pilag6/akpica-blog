@@ -4,18 +4,11 @@ import jwt from "jsonwebtoken";
 
 const { JWT_SECRET } = process.env;
 const isAuth = asyncHandler(async (req, res, next) => {
-  // extract the token from the authorization header
-  const authHeader = req.headers.cookie;
-//   console.log("authHeader", req.headers);
-  
-  if (!authHeader) {
-    res.status(401);
-    throw new Error("Not Authenticated");
-    
-  }
 
-  const token = authHeader.split("=")[1];
-  //   console.log("token", token.red);
+  const { token } = res.cookies;
+
+
+    console.log(req.cookie);
   if (token) {
     try {
       // verify the token

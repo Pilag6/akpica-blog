@@ -38,7 +38,8 @@ authRouter.get("/photo/:username", userPhoto);
 
 authRouter.patch("/admin/editPicture/:id", upload.single("userpicture"), editUserPicture);
 
-authRouter.patch("/admin/editUserInfo/:id", isAuth, isAdmin,  editUserInfo);
+// authRouter.patch("/admin/editUserInfo/:id", isAuth, isAdmin, editUserInfo);
+authRouter.patch("/admin/editUserInfo/:id", editUserInfo);
 
 authRouter.delete("/admin/delete/:id", deleteUser);
 

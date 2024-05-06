@@ -124,7 +124,7 @@ const login = asyncHandler(async (req, res) => {
  */
 const logout = asyncHandler(async (req, res) => {
     res.cookie("token", "", { expires: new Date(0) });
-    console.log(res.cookie("token", ""));
+    // console.log(res.cookie("token", ""));
 
     // Send the response
     res.status(200).json({
