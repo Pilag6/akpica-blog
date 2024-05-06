@@ -66,12 +66,11 @@ const UserProfile = () => {
             }, 3000); // 3 seconds
 
             const res = await Axios.get(`http://localhost:3300/admin/${id}`);
-            setAdmin({
-                ...admin,
-                userpicture: res.data.user.userpicture
-            });
+            setAdmin((prevAdmin) => ({
+                ...prevAdmin,
+                picture: res.data.user.picture
+            }));
             setUserPicture(null);
-
         } catch (error) {
             console.log(error);
         }
@@ -82,7 +81,6 @@ const UserProfile = () => {
         const email = admin.email;
         const fullname = admin.fullname;
         const password = admin.password;
-        
 
         if (newPassword !== confirmPassword) {
             alert("Password does not match");
@@ -147,7 +145,7 @@ const UserProfile = () => {
                                 src={
                                     userPicture
                                         ? userPicture
-                                        : `http://localhost:3300/photo/${admin.username}`
+                                        : `http://localhost:3300/photo/${admin.username }?${new Date().getTime()}`
                                 }
                                 alt=""
                             />
@@ -250,10 +248,11 @@ const UserProfile = () => {
                                 />
                                 <div
                                     className="p-2"
-                                    onClick={() => setIsVisibleNew(!isVisibleNew)}
+                                    onClick={() =>
+                                        setIsVisibleNew(!isVisibleNew)
+                                    }
                                 >
                                     {!isVisibleNew ? (
-                                        
                                         <AiOutlineEyeInvisible />
                                     ) : (
                                         <AiOutlineEye />
@@ -266,7 +265,9 @@ const UserProfile = () => {
                                 </label>
                                 <input
                                     className="bg-transparent text-akpica-white outline-none border-[1px] pl-2 py-1"
-                                    type={isVisibleConfirm ? "text" : "password"}
+                                    type={
+                                        isVisibleConfirm ? "text" : "password"
+                                    }
                                     value={confirmPassword}
                                     onChange={(e) => {
                                         setConfirmPassword(e.target.value);
@@ -274,13 +275,15 @@ const UserProfile = () => {
                                 />
                                 <div
                                     className="p-2"
-                                    onClick={() =>  setIsVisibleConfirm(!isVisibleConfirm)}
+                                    onClick={() =>
+                                        setIsVisibleConfirm(!isVisibleConfirm)
+                                    }
                                 >
                                     {!isVisibleConfirm ? (
-                                           <AiOutlineEyeInvisible />
-                                        ) : (
-                                            <AiOutlineEye />
-                                        )}
+                                        <AiOutlineEyeInvisible />
+                                    ) : (
+                                        <AiOutlineEye />
+                                    )}
                                 </div>
                             </div>
                             <button

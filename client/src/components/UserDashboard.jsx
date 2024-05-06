@@ -76,7 +76,7 @@ const UserDashboard = () => {
                                                 className="w-10 h-10 rounded-full object-cover object-center"
                                                 // Change the src to the custom avatar
 
-                                                src={`http://localhost:3300/photo/${user.username}`}
+                                                src={`http://localhost:3300/photo/${user.username}?${new Date().getTime()}`}
                                                 alt=""
                                             />
 
