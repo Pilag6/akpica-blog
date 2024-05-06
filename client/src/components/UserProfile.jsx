@@ -78,6 +78,10 @@ const UserProfile = () => {
 
     const handleSaveChanges = async (e) => {
         e.preventDefault();
+        if (invalidEmail) {
+            alert("Cannot save changes: Invalid email address.");
+            return;  // Exit the function if the email is invalid
+        }
         const email = admin.email;
         const fullname = admin.fullname;
         const password = admin.password;
@@ -125,10 +129,10 @@ const UserProfile = () => {
             setInvalidEmail("");
         }
 
-        setAdmin({
-            ...admin,
+        setAdmin((prevAdmin) => ({
+            ...prevAdmin,
             email: email
-        });
+        }));
     };
 
     return (
