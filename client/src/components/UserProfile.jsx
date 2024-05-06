@@ -24,14 +24,6 @@ const UserProfile = () => {
     // User picture
     const [userPicture, setUserPicture] = useState(null);
 
-    // const handleShowNewPassword = () => {
-    //     setVisibleNew(!visibleNew);
-    // };
-
-    // const handleShowConfirmPassword = () => {
-    //     setVisibleConfirm(!visibleConfirm);
-    // };
-
     // Fetch the admin data
     useEffect(() => {
         const fetchAdmin = async () => {
