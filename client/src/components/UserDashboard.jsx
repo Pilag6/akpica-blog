@@ -62,6 +62,9 @@ const UserDashboard = () => {
                                     Role
                                 </th>
                                 <th scope="col" className="px-6 py-3">
+                                    Post
+                                </th>
+                                <th scope="col" className="px-6 py-3">
                                     Action
                                 </th>
                             </tr>
@@ -92,12 +95,12 @@ const UserDashboard = () => {
                                                     {user.fullname}
                                                 </div>
                                                 <div className="font-normal text-gray-500">
-                                                    {user.username}
+                                                    @{user.username}
                                                 </div>
                                             </div>
                                         </th>
                                         <td className="px-6 py-4">
-                                            {user.email}
+                                            {user.email.toLowerCase()}
                                         </td>
                                         <td className="px-6 py-4">
                                             {/* COnvert user rolo with the first letter Capitalize */}
@@ -105,10 +108,14 @@ const UserDashboard = () => {
                                                 user.role.slice(1)}
                                         </td>
 
+                                        <td className="px-6 py-4 cursor-pointer underline underline-offset-4 text-akpica-green hover:text-akpica-pastel text-center">
+                                            <Link>{Math.floor(Math.random() * 100)}</Link>
+                                        </td>
+
                                         <td className="px-6 py-4">
                                             <Link
                                                 to={`/dh-admin/dashboard/usersDashboard/${user._id}`}
-                                                className="font-medium text-akpica-marco dark:text-akpica-marco  hover:underline"
+                                                className="font-medium text-akpica-marco dark:text-akpica-marco hover:underline hover:underline-offset-4"
                                             >
                                                 Edit user
                                             </Link>
