@@ -248,22 +248,44 @@ const UserProfile = () => {
                             </div>
                             <div className="flex items-center gap-4">
                                 <label className="w-1/4">Role:</label>
-                                <select
-                                    className="flex-1 bg-transparent text-akpica-white outline-none border-[1px] pl-2 py-1"
-                                    value={admin && admin.role}
-                                    onChange={(e) => {
-                                        setAdmin({
-                                            ...admin,
-                                            role: e.target.value
-                                        });
-                                    }}
-                                >
-                                    <option className="bg-akpica-green" value="admin">
+                                <div className="flex flex-1 justify-around bg-transparent text-akpica-white outline-none border-[1px] px-2 py-1">
+                                    <label className="rounded-none outline-none cursor-pointer">
+                                        <input
+                                            type="radio"
+                                            name="role"
+                                            value="admin"
+                                            checked={
+                                                admin && admin.role === "admin"
+                                            }
+                                            onChange={(e) =>
+                                                setAdmin({
+                                                    ...admin,
+                                                    role: e.target.value
+                                                })
+                                            }
+                                            className="accent-akpica-pastel" 
+                                        />{" "}
                                         Admin
-                                    </option>
-                                    <option className="bg-akpica-green" value="guest">Guest</option>
-                                    
-                                </select>
+                                    </label>
+                                    <label className="rounded-none outline-none cursor-pointer">
+                                        <input
+                                            type="radio"
+                                            name="role"
+                                            value="guest"
+                                            checked={
+                                                admin && admin.role === "guest"
+                                            }
+                                            onChange={(e) =>
+                                                setAdmin({
+                                                    ...admin,
+                                                    role: e.target.value
+                                                })
+                                            }
+                                            className="accent-akpica-pastel py-1 px-4"
+                                        />{" "}
+                                        Guest
+                                    </label>
+                                </div>
                             </div>
 
                             <h1 className="mb-2 flex w-full items-center gap-3 border-b-2 border-cyan-50/45 p-4 text-akpica-white text-xl">
