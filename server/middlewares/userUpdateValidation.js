@@ -1,5 +1,5 @@
 import { body, validationResult } from "express-validator";
-import UserModel from "../models/userModel.js";
+import UserModel from "../models/UserModel.js";
 
 const userUpdateValidation = () => {
   return [

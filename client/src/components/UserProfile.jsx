@@ -259,9 +259,9 @@ const UserProfile = () => {
                                     }}
                                 >
                                     <option className="bg-akpica-green" value="admin">
-                                        admin
+                                        Admin
                                     </option>
-                                    <option className="bg-akpica-green" value="guest">guest</option>
+                                    <option className="bg-akpica-green" value="guest">Guest</option>
                                     
                                 </select>
                             </div>
