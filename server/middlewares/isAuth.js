@@ -5,17 +5,15 @@ import jwt from "jsonwebtoken";
 const { JWT_SECRET } = process.env;
 const isAuth = asyncHandler(async (req, res, next) => {
 
-  const { token } = res.cookies;
+  const { token } = req.cookies;
 
-
-    console.log(req.cookie);
   if (token) {
     try {
       // verify the token
       const payload = jwt.verify(token, JWT_SECRET);
-      console.log("payload", payload);
+      // console.log("payload", payload);
       // how to send the userId in the payload into the next middleware?
-      // next(payload.userId) is wrong...
+
       req.user = { userId: payload.userId, role: payload.role };
 
       // if successful we go to the next middleware

@@ -44,6 +44,12 @@ const upload = multer({ storage: storage });
 const register = asyncHandler(async (req, res) => {
     // Destructure the request body
     const { username, email, password, fullname, role } = req.body;
+    // console.log(req);
+
+    // if(role !== "admin") {
+    //     res.status(403);
+    //     throw new Error("Invalid role");
+    // }
 
     // Hash de password before saving in database
     const hashedPassword = await bcrypt.hash(password, 12);
@@ -57,7 +63,6 @@ const register = asyncHandler(async (req, res) => {
         password: hashedPassword
     });
 
-    console.log("ROLE", role);
 
     // If the user is created successfully
     if (user) {
@@ -251,14 +256,16 @@ const editUserPicture = asyncHandler(async (req, res) => {
 */
 
 const editUserInfo = asyncHandler(async (req, res) => {
-    const { email, fullname, password } = req.body;
+    const { email, fullname, password, role } = req.body;
+
+    // console.log("BODY", req.body);
 
     let hashedPassword;
     if (password) {
         hashedPassword = await bcrypt.hash(password, 12);
     }
 
-    const userUpdate = { email, fullname };
+    const userUpdate = { email, fullname, role };
     if (hashedPassword) {
         userUpdate.password = hashedPassword;
     }

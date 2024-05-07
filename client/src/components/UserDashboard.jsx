@@ -13,7 +13,9 @@ const UserDashboard = () => {
     useEffect(() => {
         const fetchAdmin = async () => {
             try {
-                const res = await Axios.get("http://localhost:3300/admin");
+                const res = await Axios.get("http://localhost:3300/admin", {
+                    withCredentials: true
+                });
                 setAdmin(res.data.user);
                 // console.log(res);
             } catch (error) {
@@ -76,7 +78,9 @@ const UserDashboard = () => {
                                                 className="w-10 h-10 rounded-full object-cover object-center"
                                                 // Change the src to the custom avatar
 
-                                                src={`http://localhost:3300/photo/${user.username}?${new Date().getTime()}`}
+                                                src={`http://localhost:3300/photo/${
+                                                    user.username
+                                                }?${new Date().getTime()}`}
                                                 alt=""
                                             />
 
