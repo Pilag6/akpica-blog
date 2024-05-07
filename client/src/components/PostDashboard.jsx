@@ -1,7 +1,6 @@
 import Axios from "axios";
 import { useState, useEffect } from "react";
 
-
 // Icons
 
 import { FaPlus } from "react-icons/fa";
@@ -13,7 +12,9 @@ const PostDashboard = () => {
     useEffect(() => {
         const fetchPosts = async () => {
             try {
-                const res = await Axios.get("http://localhost:3300/posts");
+                const res = await Axios.get("http://localhost:3300/posts", {
+                    withCredentials: true
+                });
                 setPosts(res.data);
             } catch (error) {
                 console.log(error);

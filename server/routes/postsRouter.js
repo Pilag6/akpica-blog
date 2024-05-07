@@ -8,20 +8,22 @@ import {
     deleteOnePost,
 } from "../controllers/postController.js";
 
+import { isAuth } from "../middlewares/isAuth.js";
+
 const postRouter = Router();
 
 // CRUD -----------
 
 // CREATE 
-postRouter.post("/", createPost);
+postRouter.post("/", isAuth, createPost);
 // READ all 
-postRouter.get("/", getAllPosts);
+postRouter.get("/", isAuth, getAllPosts);
 // READ each 
-postRouter.get("/:id", getPostById);
+postRouter.get("/:id", isAuth, getPostById);
 // UPDATE 
-postRouter.patch("/:id", updateOnePost);
+postRouter.patch("/:id", isAuth, updateOnePost);
 // DELETE one
-postRouter.delete("/:id", deleteOnePost)
+postRouter.delete("/:id", isAuth, deleteOnePost)
 
 
 
