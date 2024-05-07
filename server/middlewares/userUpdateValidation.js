@@ -2,23 +2,7 @@ import { body, validationResult } from "express-validator";
 import UserModel from "../models/UserModel.js";
 
 const userUpdateValidation = () => {
-  return [
-    body("email")
-            .exists()
-            .withMessage("You have to enter an email")
-            .notEmpty()
-            .withMessage("Your email is empty")
-            .isEmail()
-            .withMessage("Enter a valid email")
-            .custom(async (value) => {
-                const user = await UserModel.findOne({ email: value });
-                if (user) {
-                    return Promise.reject("Email already in use");
-                }
-            })
-            .withMessage("Email already in use")
-            .toLowerCase()
-            .escape(),
+    return [
         body("password")
             .exists()
             .withMessage("You have to enter a password")
@@ -37,27 +21,27 @@ const userUpdateValidation = () => {
             })
             .withMessage(
                 "Password must contain at least one lowercase letter, one uppercase letter, one number, and one special character and must be between 5 to 15 characters"
-            )
-            .custom((value, req) => {
-                const { username, email } = req.req.body;
-                // console.log("REQUEST", email.substring(0, email.indexOf("@")));
+            ),
+            // .custom((value, req) => {
+            //     const { username, email } = req.req.body;
+            //     // console.log("REQUEST", email.substring(0, email.indexOf("@")));
 
-                const emailSubs = email.substring(0, email.indexOf("@"));
+            //     const emailSubs = email.substring(0, email.indexOf("@"));
 
-                // Should not contain the username or parts of the user’s email.
+            //     // Should not contain the username or parts of the user’s email.
 
-                if (
-                    value.toLowerCase().slice(0, username.length) !==
-                        username.toLowerCase() &&
-                    value.toLowerCase().slice(0, emailSubs.length) !== emailSubs
-                ) {
-                    // console.log(value.toLowerCase().slice(0, emailSubs.length -1));
-                    return true;
-                }
-                throw new Error(
-                    "Password should not contain the username or parts of the user’s email"
-                );
-            }),
+            //     if (
+            //         value.toLowerCase().slice(0, username.length) !==
+            //             username.toLowerCase() &&
+            //         value.toLowerCase().slice(0, emailSubs.length) !== emailSubs
+            //     ) {
+            //         // console.log(value.toLowerCase().slice(0, emailSubs.length -1));
+            //         return true;
+            //     }
+            //     throw new Error(
+            //         "Password should not contain the username or parts of the user’s email"
+            //     );
+            // }),
         body("fullname")
             .optional()
             .isString()
@@ -68,30 +52,29 @@ const userUpdateValidation = () => {
             .not()
             .matches(/(<([^>]+)>)/gi)
             .toLowerCase()
-            .escape(),
+            .escape()
     ];
 };
 
 const userUpdateValidate = async (req, res, next) => {
-  const errors = validationResult(req);
-  if (errors.isEmpty()) {
-    const { email, password, fullname } = req.body;
-    const userUpdate = UserModel.updateOne(
-      { email, password, fullname })
-    if (userUpdate) {
-      return res.status(200).json({
-        message: "User updated",
-      });
+    const errors = validationResult(req);
+    if (errors.isEmpty()) {
+        const { email, password, fullname } = req.body;
+        const userUpdate = UserModel.updateOne({ email, password, fullname });
+        if (userUpdate) {
+            return res.status(200).json({
+                message: "User updated"
+            });
+        }
+        return next();
     }
-      return next();
-  }
 
-  const extractedErrors = [];
-  errors.array().map((err) => extractedErrors.push({ [err.path]: err.msg }));
+    const extractedErrors = [];
+    errors.array().map((err) => extractedErrors.push({ [err.path]: err.msg }));
 
-  return res.status(400).json({
-    errors: extractedErrors
-  })
-}
+    return res.status(400).json({
+        errors: extractedErrors
+    });
+};
 
-export { userUpdateValidation, userUpdateValidate}
+export { userUpdateValidation, userUpdateValidate };
