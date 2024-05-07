@@ -100,7 +100,9 @@ const UserDashboard = () => {
                                             {user.email}
                                         </td>
                                         <td className="px-6 py-4">
-                                            {user.role}
+                                            {/* COnvert user rolo with the first letter Capitalize */}
+                                            {user.role.charAt(0).toUpperCase() +
+                                                user.role.slice(1)}
                                         </td>
 
                                         <td className="px-6 py-4">

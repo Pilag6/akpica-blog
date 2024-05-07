@@ -28,7 +28,7 @@ authRouter.post("/register", isAuth, userValitationRules(), userValidate, regist
 
 authRouter.post("/login", login);
 
-authRouter.post("/logout", isAuth, logout);
+authRouter.post("/logout", logout);
 
 authRouter.get("/admin", isAuth, admin);
 
