@@ -29,7 +29,8 @@ const UserProfile = () => {
         const fetchAdmin = async () => {
             try {
                 const res = await Axios.get(
-                    `http://localhost:3300/admin/${id}`, { withCredentials: true }
+                    `http://localhost:3300/admin/${id}`,
+                    { withCredentials: true }
                 );
                 setAdmin(res.data.user);
             } catch (error) {
@@ -56,7 +57,8 @@ const UserProfile = () => {
                     headers: {
                         "Content-Type": "multipart/form-data"
                     }
-                }, { withCredentials: true }
+                },
+                { withCredentials: true }
             );
 
             // After successful update, fetch the updated admin data
@@ -65,7 +67,9 @@ const UserProfile = () => {
                 setUpdateMessage("");
             }, 3000); // 3 seconds
 
-            const res = await Axios.get(`http://localhost:3300/admin/${id}`, { withCredentials: true });
+            const res = await Axios.get(`http://localhost:3300/admin/${id}`, {
+                withCredentials: true
+            });
             setAdmin((prevAdmin) => ({
                 ...prevAdmin,
                 picture: res.data.user.picture
@@ -80,10 +84,11 @@ const UserProfile = () => {
         e.preventDefault();
         if (invalidEmail) {
             alert("Cannot save changes: Invalid email address.");
-            return;  // Exit the function if the email is invalid
+            return; // Exit the function if the email is invalid
         }
         const email = admin.email;
         const fullname = admin.fullname;
+        const role = admin.role;
         const password = admin.password;
 
         if (newPassword !== confirmPassword) {
@@ -96,23 +101,25 @@ const UserProfile = () => {
                 {
                     email,
                     fullname,
-                    password: newPassword
-                }, { withCredentials: true }
+                    password: newPassword,
+                    role
+                },
+                { withCredentials: true }
             );
 
-            const res = await Axios.get(`http://localhost:3300/admin/${id}`, { withCredentials: true });
+            const res = await Axios.get(`http://localhost:3300/admin/${id}`, {
+                withCredentials: true
+            });
 
             setAdmin({
                 ...admin,
                 email: res.data.user.email,
                 fullname: res.data.user.fullname,
-                password: res.data.user.password
+                password: res.data.user.password,
+                role: res.data.user.role
             });
 
             setNewPassword(password);
-
-            // console.log("ADMIN", admin);
-            // console.log("PASSWORD", newPassword);
 
             // Navigate to the admin profile page
             navigate(`/dh-admin/dashboard/usersDashboard`);
@@ -149,7 +156,9 @@ const UserProfile = () => {
                                 src={
                                     userPicture
                                         ? userPicture
-                                        : `http://localhost:3300/photo/${admin.username }?${new Date().getTime()}`
+                                        : `http://localhost:3300/photo/${
+                                              admin.username
+                                          }?${new Date().getTime()}`
                                 }
                                 alt=""
                             />
@@ -237,6 +246,26 @@ const UserProfile = () => {
                                     maxLength={30}
                                 />
                             </div>
+                            <div className="flex items-center gap-4">
+                                <label className="w-1/4">Role:</label>
+                                <select
+                                    className="flex-1 bg-transparent text-akpica-white outline-none border-[1px] pl-2 py-1"
+                                    value={admin && admin.role}
+                                    onChange={(e) => {
+                                        setAdmin({
+                                            ...admin,
+                                            role: e.target.value
+                                        });
+                                    }}
+                                >
+                                    <option className="bg-akpica-green" value="admin">
+                                        admin
+                                    </option>
+                                    <option className="bg-akpica-green" value="guest">guest</option>
+                                    
+                                </select>
+                            </div>
+
                             <h1 className="mb-2 flex w-full items-center gap-3 border-b-2 border-cyan-50/45 p-4 text-akpica-white text-xl">
                                 Change Password
                             </h1>
