@@ -13,7 +13,7 @@ const UserDashboard = () => {
     useEffect(() => {
         const fetchAdmin = async () => {
             try {
-                const res = await Axios.get("http://localhost:3300/admin");
+                const res = await Axios.get("http://localhost:3300/admin", { withCredentials: true });
                 setAdmin(res.data.user);
                 // console.log(res);
             } catch (error) {
