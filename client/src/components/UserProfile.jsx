@@ -14,6 +14,7 @@ const UserProfile = () => {
     // MESSAGES
     const [updateMessage, setUpdateMessage] = useState("");
     const [invalidEmail, setInvalidEmail] = useState("");
+    const [invalidPassword, setInvalidPassword] = useState("");
 
     // password
     const [newPassword, setNewPassword] = useState("");
@@ -83,7 +84,7 @@ const UserProfile = () => {
     const handleSaveChanges = async (e) => {
         e.preventDefault();
         if (invalidEmail) {
-            alert("Cannot save changes: Invalid email address.");
+            setInvalidEmail("Can't save changes: Invalid email address");
             return; // Exit the function if the email is invalid
         }
         const email = admin.email;
@@ -92,7 +93,7 @@ const UserProfile = () => {
         const password = admin.password;
 
         if (newPassword !== confirmPassword) {
-            alert("Password does not match");
+            setInvalidPassword("Password does not match");
             return;
         }
         try {
@@ -263,7 +264,7 @@ const UserProfile = () => {
                                                     role: e.target.value
                                                 })
                                             }
-                                            className="accent-akpica-pastel" 
+                                            className="accent-akpica-pastel"
                                         />{" "}
                                         Admin
                                     </label>
@@ -341,6 +342,12 @@ const UserProfile = () => {
                                     )}
                                 </div>
                             </div>
+                            {invalidPassword && (
+                                <p className="text-akpica-tomato text-right">
+                                    {invalidPassword}
+                                </p>
+                            )}
+
                             <button
                                 className="my-7 w-full py-2 text-xl font-semibold text-akpica-white outline-none outline-white transition-all hover:bg-akpica-pastel hover:text-zinc-800 hover:outline-2"
                                 onClick={handleSaveChanges}
