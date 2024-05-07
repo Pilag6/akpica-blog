@@ -59,6 +59,9 @@ const UserDashboard = () => {
                                 </th>
 
                                 <th scope="col" className="px-6 py-3">
+                                    Role
+                                </th>
+                                <th scope="col" className="px-6 py-3">
                                     Action
                                 </th>
                             </tr>
@@ -95,6 +98,9 @@ const UserDashboard = () => {
                                         </th>
                                         <td className="px-6 py-4">
                                             {user.email}
+                                        </td>
+                                        <td className="px-6 py-4">
+                                            {user.role}
                                         </td>
 
                                         <td className="px-6 py-4">
