@@ -29,7 +29,7 @@ const UserProfile = () => {
         const fetchAdmin = async () => {
             try {
                 const res = await Axios.get(
-                    `http://localhost:3300/admin/${id}`
+                    `http://localhost:3300/admin/${id}`, { withCredentials: true }
                 );
                 setAdmin(res.data.user);
             } catch (error) {
@@ -56,7 +56,7 @@ const UserProfile = () => {
                     headers: {
                         "Content-Type": "multipart/form-data"
                     }
-                }
+                }, { withCredentials: true }
             );
 
             // After successful update, fetch the updated admin data
@@ -65,7 +65,7 @@ const UserProfile = () => {
                 setUpdateMessage("");
             }, 3000); // 3 seconds
 
-            const res = await Axios.get(`http://localhost:3300/admin/${id}`);
+            const res = await Axios.get(`http://localhost:3300/admin/${id}`, { withCredentials: true });
             setAdmin((prevAdmin) => ({
                 ...prevAdmin,
                 picture: res.data.user.picture
@@ -97,10 +97,10 @@ const UserProfile = () => {
                     email,
                     fullname,
                     password: newPassword
-                }
+                }, { withCredentials: true }
             );
 
-            const res = await Axios.get(`http://localhost:3300/admin/${id}`);
+            const res = await Axios.get(`http://localhost:3300/admin/${id}`, { withCredentials: true });
 
             setAdmin({
                 ...admin,

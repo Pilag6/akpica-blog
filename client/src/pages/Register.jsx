@@ -31,7 +31,8 @@ const Register = () => {
         try {
             const response = await Axios.post(
                 "http://localhost:3300/register",
-                user
+                user,
+                { withCredentials: true }
             );
 
             // UseNavigate
