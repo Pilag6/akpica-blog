@@ -96,6 +96,17 @@ const UserProfile = () => {
             setInvalidPassword("Password does not match");
             return;
         }
+
+        if (
+            newPassword.toLowerCase().includes(admin.username) ||
+            newPassword.toLowerCase().includes(email.toLowerCase().substring(0, email.indexOf("@")))
+        ) {
+            setInvalidPassword(
+                "Password should not contain the username or your email"
+            );
+            return;
+        }
+
         try {
             await Axios.patch(
                 `http://localhost:3300/admin/editUserInfo/${id}`,
