@@ -91,14 +91,15 @@ const AsideDashboard = () => {
                     Settings
                 </NavLink>
                 <NavLink
-                    className={`mt-auto flex items-center justify-end gap-3 pb-5`}
+                    className={`mt-auto flex items-center justify-center gap-3`}
                     to={"/dh-admin/"}
                     onClick={handleLogout}
                 >
-                    <div className="w-10 h-10">
+                    <div className="w-10 h-10 border-1">
                         <img
-                            src={"https://avatar.iran.liara.run/public/1"}
+                            src={"/favicon.png"}
                             alt=""
+                            className="border-2 border-cyan-50/45 rounded-full p-1 object-cover"
                         />
                     </div>
                     <b className="">Logout</b>
@@ -106,17 +107,6 @@ const AsideDashboard = () => {
                         <IoMdLogOut className="text-2xl" />
                     </span>
                 </NavLink>
-                {/* {
-                    user && (
-                        <div className="flex flex-col items-center">
-                            <img
-                                className="w-10 h-10 rounded-full"
-                                src={`http://localhost:3300/photo/${user.username}`}
-                                alt=""
-                            />
-                        </div>
-                    )
-                } */}
             </div>
         </>
     );

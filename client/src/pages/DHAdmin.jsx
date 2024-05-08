@@ -23,10 +23,10 @@ const DHAdmin = () => {
             className="flex justify-center items-center mx-auto"
             src={logoWhite}
             alt=""
-            width={180}
+            width={300}
           />
         </div>
-        <div className="mb-20 text-2xl font-semibold">Welcome</div>
+        <div className="mb-12 -mt-10 text-2xl font-semibold">Welcome to the Dashboard</div>
         <div className="flex justify-center items-center gap-8 w-3/4 mx-auto">
           {/* <NavLink to="/dh-admin/register" className={BtnClasses}>
             Register
