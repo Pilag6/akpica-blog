@@ -7,7 +7,16 @@ import PostModel from "../models/PostModel.js";
 @access  Public
 */
 const createPost = asyncHandler(async (req, res) => {
-    const post = await PostModel.create(req.body);
+    const { title, content, date, image, tags } = req.body;
+
+    const post = await PostModel.create({
+        title,
+        content,
+        date,
+        author: req.user.id,
+        image,
+        tags
+    });
     res.status(201).json(post);
 });
 
@@ -17,7 +26,7 @@ const createPost = asyncHandler(async (req, res) => {
 @access  Public
 */
 const getAllPosts = asyncHandler(async (req, res) => {
-    const posts = await PostModel.find();
+    const posts = await PostModel.find().populate("author");
     // Handling error in case that there aren't posts in our DB
     if (!posts || posts.length === 0) {
         res.status(404);
@@ -32,7 +41,7 @@ const getAllPosts = asyncHandler(async (req, res) => {
 @access  Public
 */
 const getPostById = asyncHandler(async (req, res) => {
-    const post = await PostModel.findById(req.params.id);
+    const post = await PostModel.findById(req.params.id).populate("author");
     // Handling error in case that there isn't a post with the provided ID
     if (!post) {
         res.status(404);

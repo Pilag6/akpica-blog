@@ -30,7 +30,7 @@ const Home = () => {
                         <div className="text-2xl font-semibold">
                             {post.title}
                         </div>
-                        <div>{post.author}</div>
+                        <div>{post.author.username}</div>
                         <div className="text-xl">{post.content}</div>
                     </div>
                 ))}

@@ -14,8 +14,7 @@ const postSchema = new Schema(
         },
         author: {
             type: Schema.Types.ObjectId,
-            ref: "User",
-            default: "Akpica Team"
+            ref: "User"
         },
         image: {
             type: String

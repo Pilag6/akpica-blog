@@ -1,4 +1,6 @@
+import { PostContext } from "@contexts/PostContext.jsx";
 import Axios from "axios";
+import { useContext } from "react";
 import { useState, useEffect } from "react";
 
 // Icons
@@ -9,6 +11,8 @@ import { Link } from "react-router-dom";
 const UserDashboard = () => {
     const [admin, setAdmin] = useState(null);
     const [quantity, setQuantity] = useState(0);
+
+    const {quantity: postQuantity} = useContext(PostContext);
 
     useEffect(() => {
         const fetchAdmin = async () => {
@@ -109,7 +113,7 @@ const UserDashboard = () => {
                                         </td>
 
                                         <td className="px-6 py-4 cursor-pointer underline underline-offset-4 text-akpica-green hover:text-akpica-pastel text-center">
-                                            <Link>{Math.floor(Math.random() * 100)}</Link>
+                                            <Link to={`/dh-admin/dashboard/postsDashboard`}>{postQuantity}</Link>
                                         </td>
 
                                         <td className="px-6 py-4">
