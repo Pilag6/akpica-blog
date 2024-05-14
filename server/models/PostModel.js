@@ -4,7 +4,7 @@ import { Schema, model } from "mongoose";
 
 const postSchema = new Schema(
     {
-        title : {
+        title: {
             type: String,
             required: true
         },
@@ -13,16 +13,17 @@ const postSchema = new Schema(
             required: true
         },
         author: {
-            type: String,
+            type: Schema.Types.ObjectId,
+            ref: "User",
             default: "Akpica Team"
         },
         image: {
-            type: String,
+            type: String
         },
-        tags : {
-            type: [String],
+        tags: {
+            type: [String]
         },
-        date : {
+        date: {
             type: Date,
             default: Date.now
         }

@@ -5,7 +5,7 @@ import {
     getAllPosts,
     getPostById,
     updateOnePost,
-    deleteOnePost,
+    deleteOnePost
 } from "../controllers/postController.js";
 
 import { isAuth } from "../middlewares/isAuth.js";
@@ -14,17 +14,15 @@ const postRouter = Router();
 
 // CRUD -----------
 
-// CREATE 
+// CREATE
 postRouter.post("/", isAuth, createPost);
-// READ all 
-postRouter.get("/", isAuth, getAllPosts);
-// READ each 
-postRouter.get("/:id", isAuth, getPostById);
-// UPDATE 
+// READ all
+postRouter.get("/", getAllPosts);
+// READ each
+postRouter.get("/:id", getPostById);
+// UPDATE
 postRouter.patch("/:id", isAuth, updateOnePost);
 // DELETE one
-postRouter.delete("/:id", isAuth, deleteOnePost)
-
-
+postRouter.delete("/:id", isAuth, deleteOnePost);
 
 export default postRouter;
