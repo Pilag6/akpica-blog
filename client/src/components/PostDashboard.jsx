@@ -1,5 +1,6 @@
 import { PostContext } from "@contexts/PostContext.jsx";
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 
 // Icons
 
@@ -51,7 +52,7 @@ const PostDashboard = () => {
                                             scope="row"
                                             className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-akpica-white"
                                         >
-                                            {post.title}
+                                            <Link to={`${post._id}`}>{post.title}</Link>
                                         </th>
                                         <td className="px-6 py-4">
                                             {post.author.username}
