@@ -1,37 +1,14 @@
-import Axios from "axios";
-import { useState, useEffect } from "react";
+import { PostContext } from "@contexts/PostContext.jsx";
+import { useContext } from "react";
+import { Link } from "react-router-dom";
 
 // Icons
 
 import { FaPlus } from "react-icons/fa";
 
 const PostDashboard = () => {
-    const [posts, setPosts] = useState(null);
-    const [quantity, setQuantity] = useState(0);
 
-    useEffect(() => {
-        const fetchPosts = async () => {
-            try {
-                const res = await Axios.get("http://localhost:3300/posts", {
-                    withCredentials: true
-                });
-                setPosts(res.data);
-            } catch (error) {
-                console.log(error);
-            }
-        };
-        fetchPosts();
-    }, []);
-
-    // Set quantity of posts
-
-    useEffect(() => {
-        if (posts) {
-            setQuantity(posts.length);
-        } else {
-            setQuantity(0);
-        }
-    }, [posts]);
+    const { posts, quantity } = useContext(PostContext);
 
     return (
         <div>
@@ -75,10 +52,10 @@ const PostDashboard = () => {
                                             scope="row"
                                             className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-akpica-white"
                                         >
-                                            {post.title}
+                                            <Link to={`${post._id}`}>{post.title}</Link>
                                         </th>
                                         <td className="px-6 py-4">
-                                            {post.author}
+                                            {post.author.username}
                                         </td>
                                         <td className="px-6 py-4 flex gap-3">
                                             {post.tags

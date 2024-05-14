@@ -14,7 +14,7 @@ const isAuth = asyncHandler(async (req, res, next) => {
       // console.log("payload", payload);
       // how to send the userId in the payload into the next middleware?
 
-      req.user = { userId: payload.userId, role: payload.role };
+      req.user = payload;
 
       // if successful we go to the next middleware
       next();
