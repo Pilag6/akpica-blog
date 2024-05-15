@@ -14,7 +14,11 @@ export default {
         'akpica-carlo': '#0A373A',
         'akpica-black': '#242424',
         'akpica-white': '#ebebeb',
-      }
+      },
+      fontFamily: {
+        'akpica-base': ['"Roboto"', 'sans-serif'],
+        'akpica-heading': ['"Rajdhani"', 'sans-serif'],
+      },
     },
     
   },

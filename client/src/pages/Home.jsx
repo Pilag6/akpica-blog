@@ -3,7 +3,7 @@
 // import { useContext } from "react";
 // import { PostContext } from "@contexts/PostContext.jsx";
 
-import CardsHero from "@components/CardsHero.jsx";
+import CardsHero from "@components/CardsHero/CardsHeroContainer.jsx";
 import Hero from "@components/Hero.jsx";
 import Navbar from "@components/Navbar.jsx";
 
