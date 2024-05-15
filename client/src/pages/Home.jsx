@@ -5,7 +5,7 @@
 
 import CardsHero from "@components/CardsHero/CardsHeroContainer.jsx";
 import Hero from "@components/Hero.jsx";
-import Navbar from "@components/Navbar.jsx";
+import Navbar from "@components/Header/Navbar.jsx";
 
 const Home = () => {
     // const { posts } = useContext(PostContext);
