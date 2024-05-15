@@ -12,7 +12,7 @@ const UserDashboard = () => {
     const [admin, setAdmin] = useState(null);
     const [quantity, setQuantity] = useState(0);
 
-    const {quantity: postQuantity} = useContext(PostContext);
+    const {postQuantity} = useContext(PostContext);
 
     useEffect(() => {
         const fetchAdmin = async () => {
@@ -30,7 +30,6 @@ const UserDashboard = () => {
     }, []);
 
     // Set quantity of posts
-
     useEffect(() => {
         if (admin) {
             setQuantity(admin.length);

@@ -6,7 +6,7 @@ export const PostContext = createContext();
 
 const PostContextProvider = ({ children }) => {
     const [posts, setPosts] = useState([]);
-    const [quantity, setQuantity] = useState(0);
+    const [postQuantity, setPostQuantity] = useState(0);
 
     const MAIN_URL = 'http://localhost:3300/posts';
     
@@ -29,14 +29,16 @@ const PostContextProvider = ({ children }) => {
 
     useEffect(() => {
         if (posts) {
-            setQuantity(posts.length);
+            console.log("postsss", posts);
+            console.log("author", posts.author);
+            setPostQuantity(posts.length);
         } else {
-            setQuantity(0);
+            setPostQuantity(0);
         }
     }, [posts]);
     
     return (
-        <PostContext.Provider value={{ posts, quantity }}>
+        <PostContext.Provider value={{ posts, postQuantity }}>
         {children}
         </PostContext.Provider>
     );
