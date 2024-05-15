@@ -5,7 +5,7 @@
 
 import CardsHero from "@components/CardsHero/CardsHeroContainer.jsx";
 import Hero from "@components/Hero.jsx";
-import Navbar from "@components/Header/Navbar.jsx";
+import Header from "@components/Header/Header.jsx";
 
 const Home = () => {
     // const { posts } = useContext(PostContext);
@@ -13,7 +13,7 @@ const Home = () => {
     return (
         <>
             <div className="bg-akpica-white min-h-screen">
-                <Navbar />
+                <Header />
                 <Hero />
                 <CardsHero />
             </div>
