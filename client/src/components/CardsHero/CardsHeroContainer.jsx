@@ -12,7 +12,7 @@ import pila from "../../../../server/uploads/Pila.jpg";
 const CardsHero = () => {
     return (
         <div className="w-full">
-            <div className="max-w-[1200px] mx-auto flex justify-center items-center flex-wrap gap-6">
+            <div className="max-w-[1200px] mx-auto flex justify-center items-center flex-wrap gap-6 -mt-16">
                 
 
                 <CardHero bgImg={bunReact} tag={"REACT"} title={"Getting Started with Bun for React Developers"} author={"Carlos"} avatar={carlos} date={"May 23, 2024"}/>
