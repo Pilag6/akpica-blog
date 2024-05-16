@@ -7,11 +7,11 @@ import DHAdmin from "@pages/DHAdmin.jsx";
 import Register from "@pages/Register.jsx";
 import Login from "@pages/Login.jsx";
 import Dashboard from "@pages/Dashboard.jsx";
-import PostDashboard from "@components/PostDashboard.jsx";
-import UserDashboard from "@components/UserDashboard.jsx";
+import PostDashboard from "@components/DashboardStructure/PostDashboard.jsx";
+import UserDashboard from "@components/DashboardStructure/UserDashboard.jsx";
 import DashboardOutlet from "@pages/DH.jsx";
-import UserProfile from "@components/UserProfile.jsx";
-import PostInfo from "@components/PostInfo.jsx";
+import UserProfile from "@components/DashboardStructure/UserProfile.jsx";
+import PostInfo from "@components/DashboardStructure/PostInfo.jsx";
 
 
 function App() {

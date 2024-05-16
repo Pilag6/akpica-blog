@@ -6,6 +6,9 @@
 import CardsHero from "@components/CardsHero/CardsHeroContainer.jsx";
 import Hero from "@components/Hero.jsx";
 import Header from "@components/Header/Header.jsx";
+import CategoriesImg from "@components/banners/CategoriesImg.jsx";
+import MoreFromUs from "@components/banners/MoreFromUs.jsx";
+import FourCardsBanner from "@components/banners/FourCardsBanner.jsx";
 
 const Home = () => {
     // const { posts } = useContext(PostContext);
@@ -16,6 +19,12 @@ const Home = () => {
                 <Header />
                 <Hero />
                 <CardsHero />
+
+                <main>
+                    <CategoriesImg />
+                    <MoreFromUs />
+                    <FourCardsBanner />
+                </main>
             </div>
         </>
     );
