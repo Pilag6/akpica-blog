@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 
 const UserDashboard = () => {
     const [admin, setAdmin] = useState(null);
-    const [quantity, setQuantity] = useState(0);
+    const [userQuantity, setUserQuantity] = useState(0);
 
     const {postQuantity} = useContext(PostContext);
 
@@ -29,12 +29,12 @@ const UserDashboard = () => {
         fetchAdmin();
     }, []);
 
-    // Set quantity of posts
+    // Set quantity of users
     useEffect(() => {
         if (admin) {
-            setQuantity(admin.length);
+            setUserQuantity(admin.length);
         } else {
-            setQuantity(0);
+            setUserQuantity(0);
         }
     }, [admin]);
 
@@ -48,7 +48,7 @@ const UserDashboard = () => {
                     <FaPlus /> Add New User
                 </Link>
             </div>
-            <div className="pl-8">({quantity}) Users</div>
+            <div className="pl-8">({userQuantity}) Users</div>
             <section className="flex gap-6 w-full p-4">
                 <div className="relative overflow-x-auto shadow-md">
                     <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
