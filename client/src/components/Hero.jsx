@@ -1,6 +1,6 @@
 import hero from "../assets/hero.avif";
 
-import CardTag from "@components/miniComponents/cardTag.jsx";
+import CardTag from "@components/miniComponents/CardTag.jsx";
 import AvatarDate from "@components/miniComponents/AuthorDate.jsx";
 
 const Hero = () => {
