@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 
-import CardTag from "../miniComponents/cardTag.jsx";
+import CardTag from "../miniComponents/CardTag.jsx";
 import AuthorDate from "@components/miniComponents/AuthorDate.jsx";
 
 const CardHero = ({
