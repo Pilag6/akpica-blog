@@ -8,8 +8,8 @@ const Navbar = () => {
     "pl-4 text-akpica-white hover:underline-offset-8 hover:underline transition transform font-semibold";
 
   return (
-    <div className="flex items-center justify-between px-5 w-[30rem]">
-      <nav className="flex items-center justify-center gap-5 text-lg">
+    <div className="flex items-center justify-between px-5">
+      <nav className="md:flex items-center justify-center gap-5 text-lg hidden">
         <NavLink className={linkStyles} to={"/"}>Home</NavLink>
         <NavLink className={linkStyles}>Features</NavLink>
         <NavLink className={linkStyles}>Blogs</NavLink>
