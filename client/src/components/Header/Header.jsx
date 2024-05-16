@@ -27,7 +27,7 @@ const Header = () => {
     }, []);
 
     return (
-        <div
+        <header
             className={`fixed w-full z-10 transition-colors duration-300`}
             style={{ backgroundColor: scrolling ? "#242424" : "transparent"}}
         >
@@ -43,7 +43,7 @@ const Header = () => {
                 {/* navbar */}
                 <Navbar />
             </div>
-        </div>
+        </header>
     );
 };
 
