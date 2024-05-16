@@ -8,7 +8,7 @@ import Hero from "@components/Hero.jsx";
 import Header from "@components/Header/Header.jsx";
 import CategoriesImg from "@components/banners/CategoriesImg.jsx";
 import MoreFromUs from "@components/banners/MoreFromUs.jsx";
-import FourCardsBanner from "@components/banners/FourCardsBanner.jsx";
+import FourCardsContainer from "@components/banners/BannerFourCards/FourCardsContainer.jsx";
 
 const Home = () => {
     // const { posts } = useContext(PostContext);
@@ -23,7 +23,8 @@ const Home = () => {
                 <main>
                     <CategoriesImg />
                     <MoreFromUs />
-                    <FourCardsBanner />
+                    <FourCardsContainer />
+                
                 </main>
             </div>
         </>
