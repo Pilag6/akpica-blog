@@ -32,9 +32,9 @@ const Header = () => {
             style={{ backgroundColor: scrolling ? "#242424" : "transparent"}}
         >
             <div className="max-w-[1200px] mx-auto flex items-center justify-between px-8">
-                <Link to={"/"} className="w-[200px] ">
+                <Link to={"/"} className="w-40 block ">
                     <img
-                        className="w-[130px] cursor-pointer transition-colors duration-300 filter invert saturate-0 hue-rotate-0 brightness-0 contrast-75"
+                        className="cursor-pointer transition-colors duration-300 filter invert saturate-0 hue-rotate-0 brightness-0 contrast-75"
                         src={logo}
                         alt="akpica-logo"
                     />

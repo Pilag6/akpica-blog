@@ -7,8 +7,9 @@ import CardsHero from "@components/CardsHero/CardsHeroContainer.jsx";
 import Hero from "@components/Hero.jsx";
 import Header from "@components/Header/Header.jsx";
 import CategoriesImg from "@components/banners/CategoriesImg.jsx";
-import MoreFromUs from "@components/banners/MoreFromUs.jsx";
 import FourCardsContainer from "@components/banners/BannerFourCards/FourCardsContainer.jsx";
+import MoreFromUs from "@components/banners/MoreFromUs/MoreFromUsContainer.jsx";
+
 
 const Home = () => {
     // const { posts } = useContext(PostContext);
