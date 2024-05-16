@@ -12,16 +12,39 @@ import pila from "../../../../server/uploads/Pila.jpg";
 const CardsHero = () => {
     return (
         <div className="w-full">
-            <div className="max-w-[1200px] mx-auto flex justify-center items-center flex-wrap gap-6 -mt-16">
-                
+            <div className="max-w-[1200px] mx-auto flex justify-center items-center flex-wrap gap-6 md:-mt-20 mt-12">
+                <CardHero
+                    bgImg={bunReact}
+                    tagName={"REACT"}
+                    title={"Getting Started with Bun for React Developers"}
+                    author={"Carlos"}
+                    avatar={carlos}
+                    date={"May 23, 2024"}
+                    colorTag={"bg-akpica-tomato"}
+                    sizeTag={"text-sm"}
+                />
 
-                <CardHero bgImg={bunReact} tag={"REACT"} title={"Getting Started with Bun for React Developers"} author={"Carlos"} avatar={carlos} date={"May 23, 2024"}/>
+                <CardHero
+                    bgImg={tailwindImg}
+                    tagName={"TAILWIND"}
+                    title={"Build a Blog App Project Using Tailwind CSS"}
+                    author={"Akiko"}
+                    avatar={akiko}
+                    date={"May 13, 2024"}
+                    colorTag={"bg-akpica-tomato"}
+                    sizeTag={"text-sm"}
+                />
 
-                <CardHero bgImg={tailwindImg} tag={"TAILWIND"} title={"Build a Blog App Project Using Tailwind CSS"} author={"Akiko"} avatar={akiko} date={"May 13, 2024"}/>
-
-                <CardHero bgImg={astroImg} tag={"ASTRO"} title={"Building a simple but scalable blog using Astro"} author={"Pila"} avatar={pila} date={"May 16, 2024"}/>
-
-                
+                <CardHero
+                    bgImg={astroImg}
+                    tagName={"ASTRO"}
+                    title={"Building a simple but scalable blog using Astro"}
+                    author={"Pila"}
+                    avatar={pila}
+                    date={"May 16, 2024"}
+                    colorTag={"bg-akpica-tomato"}
+                    sizeTag={"text-sm"}
+                />
             </div>
         </div>
     );
