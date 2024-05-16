@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import CardTag from "@components/miniComponents/cardTag.jsx";
+import CardTag from "@components/miniComponents/CardTag.jsx";
 import { CiCalendarDate } from "react-icons/ci";
 const CardMoreFromUs = ({ img, title, tag, avatar, author, date }) => {
     return (
