@@ -28,8 +28,8 @@ const Header = () => {
 
     return (
         <div
-            className={`fixed w-full z-10 transition-colors duration-300 text-white `}
-            style={{ backgroundColor: scrolling ? "#242424" : "transparent" }}
+            className={`fixed w-full z-10 transition-colors duration-300`}
+            style={{ backgroundColor: scrolling ? "#242424" : "transparent"}}
         >
             <div className="max-w-[1200px] mx-auto flex items-center justify-between px-8">
                 <Link to={"/"} className="w-[200px] ">
