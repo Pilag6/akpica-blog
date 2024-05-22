@@ -33,6 +33,7 @@ const GridCardsSection = () => {
             {posts && posts.map((card, index) => (
                 <div key={card._id} className={cardData[index].gridClasses}>
                     <CardHero
+                    key={card._id}
                         bgImg={`http://localhost:3300/posts/photo/${encodeURIComponent(
                             card.title
                         )}?${new Date().getTime()})`}
@@ -42,7 +43,7 @@ const GridCardsSection = () => {
                         avatar={`http://localhost:3300/photo/${
                             card.author.username
                         }?${new Date().getTime()}`}
-                        date={card.date}
+                        date={new Date(card.date).toDateString()}
                         colorTag="bg-akpica-marco text-akpica-black"
                         sizeTag="text-md"
                     />

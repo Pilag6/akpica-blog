@@ -178,7 +178,7 @@ const MoreFromUsContainer = () => {
                             article.author.username
                         }?${new Date().getTime()}`}
                             author={article.author.username}
-                            date={article.date}
+                            date={new Date(article.date).toDateString()}
                             authorColors="text-akpica-black"
                             bottom="mt-auto"
                         />
