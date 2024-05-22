@@ -48,7 +48,7 @@ const UserDashboard = () => {
                     <FaPlus /> Add New User
                 </Link>
             </div>
-            <div className="pl-8">({userQuantity}) Users</div>
+            <div className="pl-8 text-akpica-white">({userQuantity}) Users</div>
             <section className="flex gap-6 w-full p-4">
                 <div className="relative overflow-x-auto shadow-md">
                     <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">

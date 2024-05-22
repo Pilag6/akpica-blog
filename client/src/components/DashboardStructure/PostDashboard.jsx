@@ -8,7 +8,7 @@ import { FaPlus } from "react-icons/fa";
 
 const PostDashboard = () => {
 
-    const { posts, quantity } = useContext(PostContext);
+    const { posts, postQuantity } = useContext(PostContext);
 
     return (
         <div>
@@ -17,12 +17,15 @@ const PostDashboard = () => {
                     <FaPlus /> Add New Post
                 </button>
             </div>
-            <div className="pl-8">({quantity}) Posts</div>
+            <div className="pl-8 text-akpica-white">({postQuantity}) Posts</div>
             <section className="flex justify-center gap-6 w-full p-4">
                 <div className="relative overflow-x-auto shadow-md w-full">
                     <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
+                                <th scope="col" className="px-6 py-3">
+                                    Image
+                                </th>
                                 <th scope="col" className="px-6 py-3">
                                     Post Title
                                 </th>
@@ -48,12 +51,19 @@ const PostDashboard = () => {
                                         key={index}
                                         className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
                                     >
-                                        <th
+                                        <td className="px-6">
+                                            <img
+                                                src={`http://localhost:3300/posts/photo/${post.title}?${new Date().getTime()}`}
+                                                alt="post image"
+                                                className="w-10 h-10 object-cover"
+                                            />
+                                        </td>
+                                        <td
                                             scope="row"
                                             className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-akpica-white"
                                         >
                                             <Link to={`${post._id}`}>{post.title}</Link>
-                                        </th>
+                                        </td>
                                         <td className="px-6 py-4">
                                             {post.author.username}
                                         </td>

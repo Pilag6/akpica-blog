@@ -29,8 +29,6 @@ const PostContextProvider = ({ children }) => {
 
     useEffect(() => {
         if (posts) {
-            console.log("postsss", posts);
-            console.log("author", posts.author);
             setPostQuantity(posts.length);
         } else {
             setPostQuantity(0);
