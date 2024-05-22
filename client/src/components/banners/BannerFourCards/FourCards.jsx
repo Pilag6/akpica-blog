@@ -2,7 +2,7 @@
 import AuthorDate from "@components/miniComponents/AuthorDate.jsx";
 import CardTag from "../../miniComponents/CardTag.jsx";
 //icons
-import { CiCalendarDate } from "react-icons/ci";
+
 
 const FourCards = ({ bgImage, category, title, author, avatar, date }) => {
     return (
