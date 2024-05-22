@@ -9,6 +9,7 @@ import Header from "@components/Header/Header.jsx";
 import CategoriesImg from "@components/banners/CategoriesImg.jsx";
 import FourCardsContainer from "@components/banners/BannerFourCards/FourCardsContainer.jsx";
 import MoreFromUs from "@components/banners/MoreFromUs/MoreFromUsContainer.jsx";
+import GridCardsSection from "@components/banners/GridCardsSection.jsx";
 
 
 const Home = () => {
@@ -23,6 +24,7 @@ const Home = () => {
 
                 <main>
                     <CategoriesImg />
+                    <GridCardsSection />
                     <MoreFromUs />
                     <FourCardsContainer />
                 
