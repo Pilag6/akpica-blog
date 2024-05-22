@@ -11,12 +11,13 @@ const CardHero = ({
     avatar,
     date,
     colorTag,
-    sizeTag
+    sizeTag,
+    width
 }) => {
     return (
         <>
             <article
-                className="w-96 overflow-hidden border-t-8 border-akpica-white"
+                className={`overflow-hidden border-t-8 border-akpica-white h-full ${width}`}
                 style={{
                     backgroundImage: `url(${bgImg})`,
                     backgroundPosition: "center",
@@ -24,7 +25,7 @@ const CardHero = ({
                     backgroundSize: "cover"
                 }}
             >
-                <div className="text-white p-4 flex flex-col justify-between min-h-64 bg-gradient-to-t from-akpica-black/90 to-akpica-white/5">
+                <div className="text-white p-4 flex flex-col justify-between min-h-64 bg-gradient-to-t from-akpica-black/90 to-akpica-white/5 h-full">
 
                     <CardTag tag={tagName} color={colorTag} size={sizeTag} />
                     

@@ -28,7 +28,7 @@ const Header = () => {
 
     return (
         <header
-            className={`fixed w-full z-10 transition-colors duration-300`}
+            className={`fixed w-full z-50 transition-colors duration-300`}
             style={{ backgroundColor: scrolling ? "#242424" : "transparent"}}
         >
             <div className="max-w-[1200px] mx-auto flex items-center justify-between px-8">

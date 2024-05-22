@@ -1,7 +1,9 @@
 /* eslint-disable react/prop-types */
+import AuthorDate from "@components/miniComponents/AuthorDate.jsx";
 import CardTag from "@components/miniComponents/CardTag.jsx";
-import { CiCalendarDate } from "react-icons/ci";
-const CardMoreFromUs = ({ img, title, tag, avatar, author, date }) => {
+
+
+const CardMoreFromUs = ({ img, title, tag, author, avatar, date, authorColors, bottom }) => {
     return (
         <>
             <article className="flex gap-4 w-96">
@@ -21,21 +23,9 @@ const CardMoreFromUs = ({ img, title, tag, avatar, author, date }) => {
                     <h2 className="text-2xl font-bold my-2 mb-2 font-akpica-heading leading-6  shadow-akpica-carlo">
                         {title}
                     </h2>
-                    <div className="flex items-center gap-2 mt-auto">
-                        <img
-                            src={avatar}
-                            alt={author}
-                            className="w-5 h-5 rounded-full object-cover"
-                        />
-                        <p>{author}</p>
-                        <div className="flex items-center gap-1">
-                            <CiCalendarDate />
 
-                            <p className="font-akpica-heading font-[500]">
-                                {date || new Date().toLocaleDateString()}
-                            </p>
-                        </div>
-                    </div>
+                    <AuthorDate avatar={avatar} author={author} date={date} colors={authorColors} bottom={bottom} />
+                    
                 </div>
             </article>
         </>
