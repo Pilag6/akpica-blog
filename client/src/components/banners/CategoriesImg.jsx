@@ -1,94 +1,102 @@
 // import "./categoriesImg.css";
-import { MdHeight } from "react-icons/md";
+
 import hero from "../../assets/hero.avif";
+import activity from "../../assets/activity.jpg";
+import oceanside from "../../assets/oceanside.jpeg";
+import funfacts from "../../assets/fun-facts.jpeg";
+import gaming from "../../assets/gaming.jpg";
+import health from "../../assets/health.jpg";
+import science from "../../assets/science.jpg";
+import sports from "../../assets/sports.jpg";
+import technology from "../../assets/technology.jpg";
 
 const CategoriesImg = () => {
   return (
     <div className="w-full h-[65vh] flex items-center">
       <div className="w-[1200px] mx-auto flex flex-wrap">
-        <div className="w-full h-full flex flex-col items-center mb-10 font-semibold ">
-          <h2 className="w-full mt-auto mb-auto text-2x1 font-rajdhani">CATEGORY</h2>
+        <div className="w-full h-full flex flex-col items-center mb-5 font-semibold ">
+          <h2 className="w-full mt-auto mb-auto text-3xl font-[700] font-akpica-heading">CATEGORY</h2>
         </div>
         <div className="flex flex-wrap justify-between gap-3">
-          <article className="flex justify-center items-center text-center w-[270px] h-[100px]" style={{
-                backgroundImage: `url(${hero})`,
+          <article className="flex justify-center items-center text-center w-[290px] h-[130px]" style={{
+                backgroundImage: `url(${activity})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
               
                 
             }}  >
-            <h3 className="text-white font-rajdhani text-4x1 font-bold tracking wide">ACTIVITY</h3>
+            <h3 className="text-white text-xl font-[700] font-akpica-heading tracking wide">ACTIVITY</h3>
           </article>
-          <article className="flex justify-center items-center text-center w-[270px] h-[100px]" style={{
-                backgroundImage: `url(${hero})`,
+          <article className="flex justify-center items-center text-center w-[290px] h-[130px]" style={{
+                backgroundImage: `url(${oceanside})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
               
                 
             }} >
-            <h3 className="text-white font-rajdhani text-4x1 font-bold tracking wide">BUSINESS</h3>
+            <h3 className="text-white text-xl font-[700] font-akpica-heading tracking wide">BUSINESS</h3>
           </article>
-          <article className="flex justify-center items-center text-center w-[270px] h-[100px]" style={{
-                backgroundImage: `url(${hero})`,
+          <article className="flex justify-center items-center text-center w-[290px] h-[130px]" style={{
+                backgroundImage: `url(${funfacts})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
               
                 
             }}>
-            <h3 className="text-white font-rajdhani text-4x1 font-bold tracking wide">FUN FACTS</h3>
+            <h3 className="text-white text-xl font-[700] font-akpica-heading tracking wide">FUN FACTS</h3>
           </article>
-          <article className="flex justify-center items-center text-center w-[270px] h-[100px]" style={{
-                backgroundImage: `url(${hero})`,
+          <article className="flex justify-center items-center text-center w-[290px] h-[130px]" style={{
+                backgroundImage: `url(${gaming})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
               
                 
             }}>
-            <h3 className="text-white font-rajdhani text-4x1 font-bold tracking wide">GAMING</h3>
+            <h3 className="text-white text-xl font-[700] font-akpica-heading tracking wide">GAMING</h3>
           </article>
-          <article className="flex justify-center items-center text-center w-[270px] h-[100px]" style={{
-                backgroundImage: `url(${hero})`,
+          <article className="flex justify-center items-center text-center w-[290px] h-[130px]" style={{
+                backgroundImage: `url(${health})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
               
                 
             }}>
-            <h3 className="text-white font-rajdhani text-4x1 font-bold tracking wide">HEALTH</h3>
+            <h3 className="text-white text-xl font-[700] font-akpica-heading tracking wide">HEALTH</h3>
           </article>
-          <article className="flex justify-center items-center text-center w-[270px] h-[100px]" style={{
-                backgroundImage: `url(${hero})`,
+          <article className="flex justify-center items-center text-center w-[290px] h-[130px]" style={{
+                backgroundImage: `url(${science})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
               
                 
             }}>
-            <h3 className="text-white font-rajdhani text-4x1 font-bold tracking wide">SCIENCE</h3>
+            <h3 className="text-white text-xl font-[700] font-akpica-heading tracking wide">SCIENCE</h3>
           </article>
-          <article className="flex justify-center items-center text-center w-[270px] h-[100px]" style={{
-                backgroundImage: `url(${hero})`,
+          <article className="flex justify-center items-center text-center w-[290px] h-[130px]" style={{
+                backgroundImage: `url(${sports})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
               
                 
             }}>
-            <h3 className="text-white font-rajdhani text-4x1 font-bold tracking wide">SPORTS</h3>
+            <h3 className="text-white text-xl font-[700] font-akpica-heading tracking wide">SPORTS</h3>
           </article>
-          <article className="flex justify-center items-center text-center w-[270px] h-[100px]" style={{
-                backgroundImage: `url(${hero})`,
+          <article className="flex justify-center items-center text-center w-[290px] h-[130px]" style={{
+                backgroundImage: `url(${technology})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
               
                 
             }}>
-            <h3 className="text-white font-rajdhani text-4x1 font-bold tracking wide">TECHNOLOGY</h3>
+            <h3 className="text-white text-xl font-[700] font-akpica-heading tracking wide">TECHNOLOGY</h3>
           </article>
         </div>
       </div>
