@@ -6,12 +6,13 @@ import {
     logout,
     admin,
     userPhoto,
-    upload,
     getOneUser,
     editUserPicture,
     editUserInfo,
     deleteUser
 } from "../controllers/AuthController.js";
+
+import { upload } from "../utils/multerStorage.js";
 
 import {
     userValitationRules,
