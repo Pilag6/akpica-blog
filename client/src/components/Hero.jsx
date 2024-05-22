@@ -7,6 +7,8 @@ import carlos from "../../../server/uploads/carlos.jpg";
 import pila from "../../../server/uploads/Pila.jpg";
 
 import { FaChevronRight, FaChevronLeft } from "react-icons/fa";
+import { useContext } from "react";
+import { PostContext } from "@contexts/PostContext.jsx";
 
 const images = [
     {
@@ -44,6 +46,10 @@ const images = [
 ];
 
 const Hero = () => {
+
+    const {posts} = useContext(PostContext);
+
+    // console.log(posts);
     const [currentIndex, setCurrentIndex] = useState(0);
 
     const prevSlide = () => {
@@ -70,14 +76,14 @@ const Hero = () => {
 
     return (
         <div className="relative w-full h-[65vh] z-10 group">
-            {images.map((image, index) => (
+            {posts.map((image, index) => (
                 <div
                     key={index}
                     className={`absolute w-full h-full transition-opacity duration-[3000ms] ${
                         index === currentIndex ? "opacity-100" : "opacity-0"
                     }`}
                     style={{
-                        backgroundImage: `url(${image.url})`,
+                        backgroundImage: `url(http://localhost:3300/posts/photo/${encodeURIComponent(image.title)}?${new Date().getTime()})`,
                         backgroundSize: "cover",
                         backgroundPosition: "center",
                         backgroundRepeat: "no-repeat"
@@ -85,7 +91,7 @@ const Hero = () => {
                 >
                     <div className="flex flex-col justify-center h-full max-w-[1200px] mx-auto p-6 gap-2">
                         <CardTag
-                            tag={image.tag}
+                            tag={image.tags}
                             color="bg-akpica-marco text-akpica-white"
                             size="text-md"
                         />
@@ -95,9 +101,11 @@ const Hero = () => {
                             </h1>
                         </div>
                         <AvatarDate
-                            avatar={image.avatar}
-                            author={image.author}
-                            date={image.date}
+                            avatar={`http://localhost:3300/photo/${
+                                image.author.username
+                            }?${new Date().getTime()}`}
+                            author={image.author.username}
+                            date={new Date(image.date).toDateString()}
                             colors="text-akpica-white"
                         />
                     </div>

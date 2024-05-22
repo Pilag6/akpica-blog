@@ -102,9 +102,9 @@ const AsideDashboard = () => {
                             className="border-2 border-cyan-50/45 rounded-full p-1 object-cover"
                         />
                     </div>
-                    <b className="">Logout</b>
+                    <b className="text-akpica-white">Logout</b>
                     <span>
-                        <IoMdLogOut className="text-2xl" />
+                        <IoMdLogOut className="text-2xl text-akpica-white" />
                     </span>
                 </NavLink>
             </div>
