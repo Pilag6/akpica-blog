@@ -29,6 +29,7 @@ const FourCardsContainer = () => {
   return (
     // <div className="w-full mx-auto flex my-11 group relative">
     <div className="w-full mx-auto flex my-11 relative">
+      
       <div className="absolute p-5 top-1/2 -translate-y-1/2 z-10 text-5xl w-full flex justify-between opacity-0 hover:opacity-100 transition-opacity duration-300">
         <button
           className="bg-akpica-black/70 to-akpica-white/5  text-akpica-white"
