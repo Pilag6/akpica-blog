@@ -122,13 +122,13 @@ const Hero = () => {
                     </div>
                 ))}
             <button
-                className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-akpica-marco text-akpica-carlo px-2 py-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                className="absolute top-1/2 left-0 md:m-5 transform -translate-y-1/2 bg-akpica-marco text-akpica-carlo px-2 py-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                 onClick={prevSlide}
             >
                 <FaChevronLeft />
             </button>
             <button
-                className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-akpica-marco text-akpica-carlo px-2 py-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                className="absolute top-1/2 right-0 md:m-5 transform -translate-y-1/2 bg-akpica-marco text-akpica-carlo px-2 py-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                 onClick={nextSlide}
             >
                 <FaChevronRight />
