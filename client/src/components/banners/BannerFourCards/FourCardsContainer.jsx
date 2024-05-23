@@ -1,16 +1,9 @@
+import { useState, useContext } from "react";
+import { PostContext } from "@contexts/PostContext.jsx";
 import FourCards from "./FourCards.jsx";
 
 //icons
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-
-// images imports
-import akiko from "../../../../../server/uploads/akiko.jpg";
-import carlos from "../../../../../server/uploads/carlos.jpg";
-import pila from "../../../../../server/uploads/Pila.jpg";
-import { useState, useContext } from "react";
-import { PostContext } from "@contexts/PostContext.jsx";
-
-// ({ bgImage, category, title, author, avatar, date }) => {
 
 const FourCardsContainer = () => {
   let { posts } = useContext(PostContext);
@@ -35,20 +28,21 @@ const FourCardsContainer = () => {
       
       <div className="absolute p-5 top-1/2 -translate-y-1/2 z-10 text-5xl w-full flex justify-between opacity-0 hover:opacity-100 transition-opacity duration-300">
         <button
-          className="bg-akpica-black/70 to-akpica-white/5  text-akpica-white"
+          className="bg-akpica-black/70 to-akpica-white/5  text-akpica-white hover:bg-akpica-black"
           onClick={handlePrevSlide}
         >
           <IoIosArrowBack />
         </button>
         <button
-          className="bg-akpica-black/70 to-akpica-white/5  text-akpica-white"
+          className="bg-akpica-black/70 to-akpica-white/5  text-akpica-white hover:bg-akpica-black"
           onClick={handleNextSlide}
         >
           <IoIosArrowForward />
         </button>
       </div>
-
-      {posts && posts.slice(0, 4).map((card) => (
+      
+      {/*  {posts && posts.slice(0,4).map((card) => ( */}
+      {posts && posts.map((card) => (
         <FourCards key={card._id}
         bgImage={`http://localhost:3300/posts/photo/${encodeURIComponent(
           card.title
@@ -58,7 +52,7 @@ const FourCardsContainer = () => {
       avatar={`http://localhost:3300/photo/${
         card.author.username
     }?${new Date().getTime()}`}
-    author={card.author.username} 
+    author={card.author.username[0].toUpperCase() + card.author.username.slice(1)} 
     date={new Date(card.date).toDateString()}/>
       ))}
 

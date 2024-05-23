@@ -65,7 +65,7 @@ const PostDashboard = () => {
                                             <Link to={`${post._id}`}>{post.title}</Link>
                                         </td>
                                         <td className="px-6 py-4">
-                                            {post.author.username}
+                                            @{post.author.username}
                                         </td>
                                         <td className="px-6 py-4 flex gap-3">
                                             {post.tags

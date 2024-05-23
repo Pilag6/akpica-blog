@@ -11,7 +11,7 @@ const FourCards = ({ bgImage, category, title, author, avatar, date }) => {
                 <img
                     src={bgImage}
                     alt=""
-                    className="group-hover:scale-110 transition-transform transform duration-300"
+                    className="group-hover:scale-110 transition-transform transform duration-300 h-full object-cover"
                 />
 
                 <div className="flex flex-col h-full w-full absolute top-[75%] group-hover:top-[65%] gap-4 text-akpica-white p-4 bg-akpica-black/70 to-akpica-white/5 group-hover:bg-akpica-black/90 transition-all">

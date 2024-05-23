@@ -36,7 +36,7 @@ const GridCardsSection = () => {
                     key={card._id}
                         bgImg={`http://localhost:3300/posts/photo/${encodeURIComponent(
                             card.title
-                        )}?${new Date().getTime()})`}
+                        )}?${new Date().getTime()}`}
                         tagName={card.tags}
                         title={card.title}
                         author={card.author.username}
