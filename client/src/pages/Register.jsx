@@ -15,6 +15,9 @@ import { AiOutlineEye } from "react-icons/ai";
 import { AiOutlineEyeInvisible } from "react-icons/ai";
 import { FaUserCog } from "react-icons/fa";
 
+//Backend URL
+import BACKEND_URL from "@utils/backendUrl.js";
+
 const Register = () => {
     // UseNavigate
     const navigate = useNavigate();
@@ -32,7 +35,7 @@ const Register = () => {
         const user = { username, email, password, role };
         try {
             const response = await Axios.post(
-                "http://localhost:3300/register",
+                `${BACKEND_URL}/register`,
                 user,
                 { withCredentials: true }
             );

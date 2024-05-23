@@ -2,6 +2,9 @@ import { useState, useContext } from "react";
 import { PostContext } from "@contexts/PostContext.jsx";
 import FourCards from "./FourCards.jsx";
 
+//Backend URL
+import BACKEND_URL from "@utils/backendUrl.js";
+
 //icons
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
@@ -44,16 +47,17 @@ const FourCardsContainer = () => {
       {/*  {posts && posts.slice(0,4).map((card) => ( */}
       {posts && posts.map((card) => (
         <FourCards key={card._id}
-        bgImage={`http://localhost:3300/posts/photo/${encodeURIComponent(
+        bgImage={`${BACKEND_URL}/posts/photo/${encodeURIComponent(
           card.title
       )}?${new Date().getTime()}`}
       category={card.tags}
       title={card.title}
-      avatar={`http://localhost:3300/photo/${
+      avatar={`${BACKEND_URL}/photo/${
         card.author.username
     }?${new Date().getTime()}`}
     author={card.author.username[0].toUpperCase() + card.author.username.slice(1)} 
-    date={new Date(card.date).toDateString()}/>
+    date={new Date(card.date).toDateString()}
+    link={`/${card._id}`}/>
       ))}
 
       {/* <FourCards
