@@ -27,6 +27,7 @@ const CardsHero = () => {
                         colorTag="bg-akpica-tomato"
                         sizeTag="text-sm"
                         width="w-96"
+                        link={`/${card._id}`}
                     />
                 ))}
             </div>

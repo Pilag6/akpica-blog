@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 
+import { Link } from "react-router-dom";
 import CardTag from "../miniComponents/CardTag.jsx";
 import AuthorDate from "@components/miniComponents/AuthorDate.jsx";
 
@@ -12,7 +13,8 @@ const CardHero = ({
     date,
     colorTag,
     sizeTag,
-    width
+    width,
+    link
 }) => {
     return (
         <>
@@ -29,13 +31,13 @@ const CardHero = ({
 
                     <CardTag tag={tagName} color={colorTag} size={sizeTag} />
                     
-                    <div className="pr-6">
+                    <Link to={link} className="pr-6">
                         <h2 className="text-2xl font-bold mt-auto mb-2 font-akpica-heading leading-6 [text-shadow:1px_1px_2px_var(--tw-shadow-color)] shadow-akpica-carlo">
                             {title}
                         </h2>
                         <AuthorDate avatar={avatar} author={author} date={date}
                         />
-                    </div>
+                    </Link>
                 </div>
             </article>
         </>
