@@ -13,6 +13,7 @@ import DashboardOutlet from "@pages/DH.jsx";
 import UserProfile from "@components/DashboardStructure/UserProfile.jsx";
 import PostInfo from "@components/DashboardStructure/PostInfo.jsx";
 import PostDetails from "@pages/PostDetails.jsx";
+import TagPage from "@pages/TagPage.jsx";
 
 
 function App() {
@@ -23,6 +24,8 @@ function App() {
         <Route path="/" element={<Home />} />
         
         <Route path="/:id" element={<PostDetails />} />
+
+        <Route path="/tags/:tags" element={<TagPage />} />
 
         <Route path="*" element={<h1>Not Found</h1>} />
 

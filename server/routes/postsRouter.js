@@ -7,6 +7,7 @@ import {
     getPostById,
     updateOnePost,
     deleteOnePost,
+    getPostsByTags
 } from "../controllers/postController.js";
 
 import { upload } from "../utils/multerStorage.js";
@@ -25,6 +26,8 @@ postRouter.get("/photo/:title", postPhoto)
 postRouter.get("/", getAllPosts);
 // READ each
 postRouter.get("/:id", getPostById);
+// Read by tags
+postRouter.get("/tags/:tags", getPostsByTags);
 // UPDATE
 postRouter.patch("/:id", isAuth, updateOnePost);
 // DELETE one

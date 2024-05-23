@@ -32,7 +32,7 @@ const Header = ({ darkBackground }) => {
 
     return (
         <header
-            className={`fixed w-full z-50 transition-colors duration-300`}
+            className={`fixed w-full z-50 transition-colors duration-300 top-0`}
             style={{ backgroundColor }}
         >
             <div className="max-w-[1200px] mx-auto flex items-center justify-between px-8">

@@ -20,9 +20,6 @@ const PostDetails = () => {
     useEffect(() => {
         const fetchPost = async () => {
             try {
-
-
-
                 const response = await Axios.get(`${BACKEND_URL}/posts/${id}`);
 
                 setPost(response.data);

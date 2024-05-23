@@ -50,6 +50,7 @@ const GridCardsSection = () => {
                         colorTag="bg-akpica-marco text-akpica-black"
                         sizeTag="text-md"
                         link={`/${card._id}`}
+                        linkTag={`/tags/${card.tags}`}
                         
                     />
                 </div>
