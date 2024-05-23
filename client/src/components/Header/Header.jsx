@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+// Header.jsx
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
@@ -7,7 +9,7 @@ import Navbar from "./Navbar.jsx";
 // logo
 import logo from "../../assets/logo-black-h.png";
 
-const Header = () => {
+const Header = ({ darkBackground }) => {
     const [scrolling, setScrolling] = useState(false);
 
     useEffect(() => {
@@ -26,10 +28,12 @@ const Header = () => {
         };
     }, []);
 
+    const backgroundColor = darkBackground ? "#242424d1" : (scrolling ? "#242424" : "transparent");
+
     return (
         <header
             className={`fixed w-full z-50 transition-colors duration-300`}
-            style={{ backgroundColor: scrolling ? "#242424" : "transparent"}}
+            style={{ backgroundColor }}
         >
             <div className="max-w-[1200px] mx-auto flex items-center justify-between px-8">
                 <Link to={"/"} className="w-40 block ">
