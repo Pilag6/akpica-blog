@@ -1,4 +1,5 @@
-import { NavLink } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import Axios from "axios";
 
 // Icons
@@ -10,29 +11,52 @@ import { RiDashboardFill } from "react-icons/ri";
 import { FaComments } from "react-icons/fa6";
 import { IoMdLogOut } from "react-icons/io";
 
-//baceknd URL
+// Backend URL
 import BACKEND_URL from "@utils/backendUrl.js";
 
 const linksStyles =
     "pl-4 text-akpica-white hover:underline-offset-8 hover:underline transition transform hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:transform-none flex items-center gap-2 text-lg font-semibold";
 
 const AsideDashboard = () => {
-    const handleLogout = () => {
-        const logout = async () => {
-            try {
-                const res = await Axios.post(`${BACKEND_URL}/logout`, {
-                    withCredentials: true
-                });
-                console.log("RES", res);
+    const [profilePicture, setProfilePicture] = useState(null);
+    const [username, setUsername] = useState(null);
+    const [role, setRole] = useState(null);
+    const [userId, setUserId] = useState(null);
+    const navigate = useNavigate();
 
-                // Clear the token cookie
-                document.cookie =
-                    "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                const res = await Axios.get(`${BACKEND_URL}/me`, {
+                    withCredentials: true,
+                });
+                const user = res.data.user;
+                setProfilePicture(`${BACKEND_URL}/photo/${user.username}`);
+                setUsername(user.username);
+                setRole(user.role);
+                setUserId(user._id);
             } catch (error) {
                 console.log(error);
             }
         };
-        logout();
+        fetchUserData();
+    }, []);
+
+    const handleLogout = async () => {
+        try {
+            await Axios.post(`${BACKEND_URL}/logout`, {}, {
+                withCredentials: true,
+            });
+
+            // Clear the token cookie
+            document.cookie =
+                "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            
+            // Redirect to login page
+            navigate("/dh-admin/login");
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     return (
@@ -58,7 +82,7 @@ const AsideDashboard = () => {
                 </NavLink>
                 <NavLink
                     className={linksStyles}
-                    to={"/dh-admin/dashboard/usersDashboard"}
+                    to={"/dh-admin/dashboard/mediaDashboard"}
                 >
                     <span>
                         <IoImages />
@@ -67,7 +91,7 @@ const AsideDashboard = () => {
                 </NavLink>
                 <NavLink
                     className={linksStyles}
-                    to={"/dh-admin/dashboard/usersDashboard"}
+                    to={"/dh-admin/dashboard/commentsDashboard"}
                 >
                     <span>
                         <FaComments />
@@ -83,33 +107,38 @@ const AsideDashboard = () => {
                     </span>
                     Users
                 </NavLink>
-                <hr className=" border-[1px] border-cyan-50/45" />
+                <hr className="border-[1px] border-cyan-50/45" />
                 <NavLink
                     className={linksStyles}
-                    to={"/dh-admin/dashboard/usersDashboard"}
+                    to={"/dh-admin/dashboard/settingsDashboard"}
                 >
                     <span>
                         <MdSettingsInputComponent />
                     </span>
                     Settings
                 </NavLink>
-                <NavLink
-                    className={`mt-auto flex items-center justify-center gap-3`}
-                    to={"/dh-admin/"}
-                    onClick={handleLogout}
-                >
-                    <div className="w-10 h-10 border-1">
-                        <img
-                            src={"/favicon.png"}
-                            alt=""
-                            className="border-2 border-cyan-50/45 rounded-full p-1 object-cover"
-                        />
-                    </div>
-                    <b className="text-akpica-white">Logout</b>
-                    <span>
+                <div className="mt-auto pb-6 flex items-center justify-center gap-3">
+                    <Link to={`/dh-admin/dashboard/usersDashboard/${userId}`} className="flex gap-3 items-center">
+                        <div className="w-12 h-12 border-1 flex items-center">
+                            <img
+                                src={profilePicture || "/favicon.png"}
+                                alt="Profile"
+                                className="border-2 border-cyan-50/45 rounded-full p-1 object-cover"
+                            />
+                        </div>
+                        <div className="text-akpica-white">
+                            <p className="uppercase font-bold">{username}</p>
+                            <p className="text-xs">{role}</p>
+                        </div>
+                    </Link>
+                    <button
+                        title="Log Out"
+                        onClick={handleLogout}
+                        className="flex items-center justify-center"
+                    >
                         <IoMdLogOut className="text-2xl text-akpica-white" />
-                    </span>
-                </NavLink>
+                    </button>
+                </div>
             </div>
         </>
     );
