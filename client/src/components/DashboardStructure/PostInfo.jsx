@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Axios from "axios";
 
+//Backend URL
+import BACKEND_URL from "@utils/backendUrl.js";
+
 const PostInfo = () => {
     const { id } = useParams();
     const [singlePost, setSinglePost] = useState([]);
@@ -10,7 +13,7 @@ const PostInfo = () => {
         const fetchSinglePost = async () => {
             try {
                 const response = await Axios.get(
-                    `http://localhost:3300/posts/${id}`
+                    `${BACKEND_URL}/posts/${id}`
                 );
                 setSinglePost(response.data);
             } catch (error) {

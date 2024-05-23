@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
-const CategoryImgCard = ({ Bgimage, title }) => {
+import { Link } from "react-router-dom";
+const CategoryImgCard = ({ Bgimage, title, link }) => {
     return (
         <>
             <article
@@ -11,11 +12,11 @@ const CategoryImgCard = ({ Bgimage, title }) => {
                     backgroundRepeat: "no-repeat"
                 }}
             >
-                <div className="bg-gradient-to-t from-akpica-black/90 to-akpica-black/10 w-full h-full flex justify-center items-center">
+                <Link to={link} className="bg-gradient-to-t from-akpica-black/90 to-akpica-black/10 w-full h-full flex justify-center items-center">
                     <h3 className="text-white text-xl font-[700] font-akpica-heading tracking-wide">
                         {title}
                     </h3>
-                </div>
+                </Link>
             </article>
         </>
     );

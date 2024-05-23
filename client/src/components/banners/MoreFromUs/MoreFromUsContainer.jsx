@@ -6,6 +6,8 @@ import { ImSpinner9 } from "react-icons/im";
 
 import { useContext } from "react";
 import { PostContext } from "@contexts/PostContext.jsx";
+//backend URL
+import BACKEND_URL from "@utils/backendUrl.js";
 
 // const articles = [
 //     {
@@ -169,19 +171,20 @@ const MoreFromUsContainer = () => {
                     {posts && posts.slice(0, visiblePosts).map((article) => (
                         <CardMoreFromUs
                             key={article._id}
-                            img={`http://localhost:3300/posts/photo/${encodeURIComponent(
+                            img={`${BACKEND_URL}/posts/photo/${encodeURIComponent(
                                 article.title
                             )}?${new Date().getTime()}`}
                             title={article.title}
                             tag={article.tags}
-                            avatar={`http://localhost:3300/photo/${
+                            avatar={`${BACKEND_URL}/photo/${
                             article.author.username
                         }?${new Date().getTime()}`}
                             author={article.author.username}
                             date={new Date(article.date).toDateString()}
                             authorColors="text-akpica-black"
                             bottom="mt-auto"
-                        />
+                            link={`/${article._id}`}
+                            />
                     ))}
                 </div>
                 {visiblePosts < posts.length && (
