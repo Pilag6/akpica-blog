@@ -12,14 +12,18 @@ import UserDashboard from "@components/DashboardStructure/UserDashboard.jsx";
 import DashboardOutlet from "@pages/DH.jsx";
 import UserProfile from "@components/DashboardStructure/UserProfile.jsx";
 import PostInfo from "@components/DashboardStructure/PostInfo.jsx";
+import PostDetails from "@pages/PostDetails.jsx";
 
 
 function App() {
   return (
     <>
       <Routes>
-        {/* No Portected Paths */}
+        {/* No Protected Paths */}
         <Route path="/" element={<Home />} />
+        
+        <Route path="/:id" element={<PostDetails />} />
+
         <Route path="*" element={<h1>Not Found</h1>} />
 
         <Route path="/dh-admin" element={<DHAdmin />} />
