@@ -6,6 +6,9 @@ import { Link } from "react-router-dom";
 
 import { FaPlus } from "react-icons/fa";
 
+//Backend URL
+import BACKEND_URL from "@utils/backendUrl.js";
+
 const PostDashboard = () => {
 
     const { posts, postQuantity } = useContext(PostContext);
@@ -53,7 +56,7 @@ const PostDashboard = () => {
                                     >
                                         <td className="px-6">
                                             <img
-                                                src={`http://localhost:3300/posts/photo/${post.title}?${new Date().getTime()}`}
+                                                src={`${BACKEND_URL}/posts/photo/${post.title}?${new Date().getTime()}`}
                                                 alt="post image"
                                                 className="w-10 h-10 object-cover"
                                             />

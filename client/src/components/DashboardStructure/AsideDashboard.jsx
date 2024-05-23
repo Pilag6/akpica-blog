@@ -10,6 +10,9 @@ import { RiDashboardFill } from "react-icons/ri";
 import { FaComments } from "react-icons/fa6";
 import { IoMdLogOut } from "react-icons/io";
 
+//baceknd URL
+import BACKEND_URL from "@utils/backendUrl.js";
+
 const linksStyles =
     "pl-4 text-akpica-white hover:underline-offset-8 hover:underline transition transform hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:transform-none flex items-center gap-2 text-lg font-semibold";
 
@@ -17,7 +20,7 @@ const AsideDashboard = () => {
     const handleLogout = () => {
         const logout = async () => {
             try {
-                const res = await Axios.post("http://localhost:3300/logout", {
+                const res = await Axios.post(`${BACKEND_URL}/logout`, {
                     withCredentials: true
                 });
                 console.log("RES", res);

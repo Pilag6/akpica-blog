@@ -2,6 +2,10 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Axios from "axios";
 
+//Backend URL
+import BACKEND_URL from "@utils/backendUrl.js";
+
+
 // Icons
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 const UserProfile = () => {
@@ -30,7 +34,7 @@ const UserProfile = () => {
         const fetchAdmin = async () => {
             try {
                 const res = await Axios.get(
-                    `http://localhost:3300/admin/${id}`,
+                    `${BACKEND_URL}/admin/${id}`,
                     { withCredentials: true }
                 );
                 setAdmin(res.data.user);
@@ -52,7 +56,7 @@ const UserProfile = () => {
 
         try {
             await Axios.patch(
-                `http://localhost:3300/admin/editPicture/${id}`,
+                `${BACKEND_URL}/admin/editPicture/${id}`,
                 data,
                 {
                     headers: {
@@ -68,7 +72,7 @@ const UserProfile = () => {
                 setUpdateMessage("");
             }, 3000); // 3 seconds
 
-            const res = await Axios.get(`http://localhost:3300/admin/${id}`, {
+            const res = await Axios.get(`${BACKEND_URL}/admin/${id}`, {
                 withCredentials: true
             });
             setAdmin((prevAdmin) => ({
@@ -109,7 +113,7 @@ const UserProfile = () => {
 
         try {
             await Axios.patch(
-                `http://localhost:3300/admin/editUserInfo/${id}`,
+                `${BACKEND_URL}/admin/editUserInfo/${id}`,
                 {
                     email,
                     fullname,
@@ -119,7 +123,7 @@ const UserProfile = () => {
                 { withCredentials: true }
             );
 
-            const res = await Axios.get(`http://localhost:3300/admin/${id}`, {
+            const res = await Axios.get(`${BACKEND_URL}/admin/${id}`, {
                 withCredentials: true
             });
 
@@ -168,7 +172,7 @@ const UserProfile = () => {
                                 src={
                                     userPicture
                                         ? userPicture
-                                        : `http://localhost:3300/photo/${
+                                        : `${BACKEND_URL}/photo/${
                                               admin.username
                                           }?${new Date().getTime()}`
                                 }

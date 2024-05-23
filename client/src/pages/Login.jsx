@@ -13,6 +13,9 @@ import { MdError } from "react-icons/md";
 import { AiOutlineEye } from "react-icons/ai";
 import { AiOutlineEyeInvisible } from "react-icons/ai";
 
+//Baceknd URL
+import BACKEND_URL from "@utils/backendUrl.js";
+
 const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -28,7 +31,7 @@ const Login = () => {
         const user = { username, password };
         try {
             const response = await Axios.post(
-                "http://localhost:3300/login",
+                `${BACKEND_URL}/login`,
                 user,
                 {withCredentials: true}
             );

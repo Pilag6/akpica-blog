@@ -8,6 +8,9 @@ import { useState, useEffect } from "react";
 import { FaPlus } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
+//Backend URL
+import BACKEND_URL from "@utils/backendUrl.js";
+
 const UserDashboard = () => {
     const [admin, setAdmin] = useState(null);
     const [userQuantity, setUserQuantity] = useState(0);
@@ -17,7 +20,7 @@ const UserDashboard = () => {
     useEffect(() => {
         const fetchAdmin = async () => {
             try {
-                const res = await Axios.get("http://localhost:3300/admin", {
+                const res = await Axios.get(`${BACKEND_URL}/admin`, {
                     withCredentials: true
                 });
                 setAdmin(res.data.user);
@@ -87,7 +90,7 @@ const UserDashboard = () => {
                                                 className="w-10 h-10 rounded-full object-cover object-center"
                                                 // Change the src to the custom avatar
 
-                                                src={`http://localhost:3300/photo/${
+                                                src={`${BACKEND_URL}/photo/${
                                                     user.username
                                                 }?${new Date().getTime()}`}
                                                 alt=""

@@ -2,13 +2,16 @@
 import { createContext, useEffect, useState } from 'react';
 import Axios from 'axios';
 
+//Backend URL
+import BACKEND_URL from '@utils/backendUrl.js';
+
 export const PostContext = createContext();
 
 const PostContextProvider = ({ children }) => {
     const [posts, setPosts] = useState([]);
     const [postQuantity, setPostQuantity] = useState(0);
 
-    const MAIN_URL = 'http://localhost:3300/posts';
+    const MAIN_URL = `${BACKEND_URL}/posts`;
     
     
     useEffect(() => {
