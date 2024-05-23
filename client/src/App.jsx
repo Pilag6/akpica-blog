@@ -13,6 +13,7 @@ import DashboardOutlet from "@pages/DH.jsx";
 import UserProfile from "@components/DashboardStructure/UserProfile.jsx";
 import PostInfo from "@components/DashboardStructure/PostInfo.jsx";
 import PostDetails from "@pages/PostDetails.jsx";
+import MediaDashboard from "@components/DashboardStructure/MediaDashboard.jsx";
 
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
           <Route path="usersDashboard/:id" element={<UserProfile />} />
           <Route path="postsDashboard" element={<PostDashboard />} />
           <Route path="postsDashboard/:id" element={<PostInfo />} />
+          <Route path="mediaDashboard" element={<MediaDashboard />} />
           <Route path="register" element={<Register />} />
         </Route>
       </Routes>
