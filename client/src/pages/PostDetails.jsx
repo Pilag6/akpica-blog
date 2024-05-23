@@ -44,7 +44,7 @@ const PostDetails = () => {
             <header
                 className="h-[60vh]"
                 style={{
-                    backgroundImage: `url(http://localhost:3300/posts/photo/${encodeURIComponent(
+                    backgroundImage: `url(${BACKEND_URL}/posts/photo/${encodeURIComponent(
                         post.title
                     )}?${new Date().getTime()})`,
                     backgroundSize: "cover",
@@ -66,7 +66,7 @@ const PostDetails = () => {
 
                     <div className="flex items-center gap-5">
                         <AuthorDate
-                            avatar={`http://localhost:3300/photo/${
+                            avatar={`${BACKEND_URL}/photo/${
                                 post.author.username
                             }?${new Date().getTime()}`}
                             author={post.author.fullname}
@@ -93,12 +93,12 @@ const PostDetails = () => {
                                     .map((article) => (
                                         <CardMoreFromUs
                                             key={article._id}
-                                            img={`http://localhost:3300/posts/photo/${encodeURIComponent(
+                                            img={`${BACKEND_URL}/posts/photo/${encodeURIComponent(
                                                 article.title
                                             )}?${new Date().getTime()}`}
                                             title={article.title}
                                             tag={article.tags}
-                                            avatar={`http://localhost:3300/photo/${
+                                            avatar={`${BACKEND_URL}/photo/${
                                                 article.author.username
                                             }?${new Date().getTime()}`}
                                             author={article.author.username}
@@ -107,6 +107,7 @@ const PostDetails = () => {
                                             ).toDateString()}
                                             authorColors="text-akpica-black"
                                             bottom="mt-auto"
+                                            link={`/${article._id}`}
                                         />
                                     ))}
                         </div>

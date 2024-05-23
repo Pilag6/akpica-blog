@@ -164,7 +164,7 @@ const UserProfile = () => {
                 {admin && (
                     <div className="flex w-4/6">
                         <div className="flex flex-col items-center w-2/5">
-                            <h1 className="text-3xl font-semibold mb-8">
+                            <h1 className="text-3xl font-semibold mb-8 text-akpica-white">
                                 {admin && admin.fullname}
                             </h1>
                             <img
@@ -220,8 +220,8 @@ const UserProfile = () => {
                             </form>
                         </div>
 
-                        <div className="flex flex-col gap-4">
-                            <div className="flex items-center gap-4">
+                        <div className="flex flex-col gap-4 text-akpica-white">
+                            <div className="flex items-center gap-4 ">
                                 <label className="w-1/4">Username:</label>
                                 <input
                                     className="flex-1 bg-transparent text-akpica-white outline-none border-2 pl-2 py-1 opacity-40"
