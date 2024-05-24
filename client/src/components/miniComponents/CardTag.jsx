@@ -1,9 +1,11 @@
-const cardTag = ({ tag, color, size }) => {
+import { Link } from "react-router-dom";
+
+const cardTag = ({ tag, color, size, link }) => {
     return (
         <>
-            <p className={`${color} ${size} w-fit px-2 py-[2px] font-semibold tracking-wider uppercase`}>
+            <Link to={link} className={`${color} ${size} w-fit px-2 py-[2px] font-semibold tracking-wider uppercase`}>
                 {tag}
-            </p>
+            </Link>
         </>
     );
 };

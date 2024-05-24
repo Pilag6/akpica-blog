@@ -3,7 +3,7 @@ import AuthorDate from "@components/miniComponents/AuthorDate.jsx";
 import CardTag from "@components/miniComponents/CardTag.jsx";
 import { Link } from "react-router-dom";
 
-const CardMoreFromUs = ({ img, title, tag, author, avatar, date, authorColors, bottom, link }) => {
+const CardMoreFromUs = ({ img, title, tag, author, avatar, date, authorColors, bottom, link, linkTag }) => {
     return (
         <>
             <article className="flex gap-4 w-96">
@@ -19,6 +19,7 @@ const CardMoreFromUs = ({ img, title, tag, author, avatar, date, authorColors, b
                         tag={tag}
                         color="bg-akpica-green text-akpica-white"
                         size="text-sm"
+                        link={linkTag}
                     />
                     <Link to={link}>
                     <h2 className="text-2xl font-bold my-2 mb-2 font-akpica-heading leading-6  shadow-akpica-carlo">

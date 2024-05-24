@@ -15,6 +15,7 @@ const CardHero = ({
   sizeTag,
   width,
   link,
+  linkTag
 }) => {
   return (
     <>
@@ -28,7 +29,7 @@ const CardHero = ({
         }}
       >
         <div className="text-white p-4 flex flex-col justify-between min-h-64 bg-gradient-to-t from-akpica-black/90 to-akpica-white/5 h-full">
-          <CardTag tag={tagName} color={colorTag} size={sizeTag} />
+          <CardTag tag={tagName} color={colorTag} size={sizeTag} link={linkTag} />
 
           <div>
             <Link to={link} className="pr-6">
