@@ -5,6 +5,9 @@ import AvatarDate from "@components/miniComponents/AuthorDate.jsx";
 import { FaChevronRight, FaChevronLeft } from "react-icons/fa";
 import { PostContext } from "@contexts/PostContext.jsx";
 
+//BACKEND URL
+import BACKEND_URL from "@utils/backendUrl.js";
+
 const Hero = () => {
     const { posts } = useContext(PostContext);
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -45,7 +48,7 @@ const Hero = () => {
                         index === currentIndex ? "opacity-100 z-50" : "opacity-0"
                     }`}
                     style={{
-                        backgroundImage: `url(http://localhost:3300/posts/photo/${encodeURIComponent(post.title)}?${new Date().getTime()})`,
+                        backgroundImage: `url(${BACKEND_URL}/posts/photo/${encodeURIComponent(post.title)}?${new Date().getTime()})`,
                         backgroundSize: "cover",
                         backgroundPosition: "center",
                         backgroundRepeat: "no-repeat"
@@ -63,7 +66,7 @@ const Hero = () => {
                             </h1>
                         </Link>
                         <AvatarDate
-                            avatar={`http://localhost:3300/photo/${post.author.username}?${new Date().getTime()}`}
+                            avatar={`${BACKEND_URL}/photo/${post.author.username}?${new Date().getTime()}`}
                             author={post.author.username}
                             date={new Date(post.date).toDateString()}
                             colors="text-akpica-white"
