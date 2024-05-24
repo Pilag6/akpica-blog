@@ -4,6 +4,9 @@ import CardHero from "@components/CardsHero/CardHero.jsx";
 import { useContext } from "react";
 import { PostContext } from "@contexts/PostContext.jsx";
 
+//backend URL
+import BACKEND_URL from "@utils/backendUrl.js";
+
 const cardData = [
     {
         
@@ -34,18 +37,21 @@ const GridCardsSection = () => {
                 <div key={card._id} className={cardData[index].gridClasses}>
                     <CardHero
                     key={card._id}
-                        bgImg={`http://localhost:3300/posts/photo/${encodeURIComponent(
+                        bgImg={`${BACKEND_URL}/posts/photo/${encodeURIComponent(
                             card.title
                         )}?${new Date().getTime()}`}
                         tagName={card.tags}
                         title={card.title}
                         author={card.author.username}
-                        avatar={`http://localhost:3300/photo/${
+                        avatar={`${BACKEND_URL}/photo/${
                             card.author.username
                         }?${new Date().getTime()}`}
                         date={new Date(card.date).toDateString()}
                         colorTag="bg-akpica-marco text-akpica-black"
                         sizeTag="text-md"
+                        link={`/${card._id}`}
+                        linkTag={`/tags/${card.tags}`}
+                        
                     />
                 </div>
             ))}

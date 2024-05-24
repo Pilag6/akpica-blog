@@ -9,7 +9,8 @@ import {
     getOneUser,
     editUserPicture,
     editUserInfo,
-    deleteUser
+    deleteUser,
+    getMe
 } from "../controllers/AuthController.js";
 
 import { upload } from "../utils/multerStorage.js";
@@ -30,6 +31,8 @@ authRouter.post("/register", isAuth, userValitationRules(), userValidate, regist
 authRouter.post("/login", login);
 
 authRouter.post("/logout", logout);
+
+authRouter.get('/me', isAuth, getMe);
 
 authRouter.get("/admin", isAuth, admin);
 

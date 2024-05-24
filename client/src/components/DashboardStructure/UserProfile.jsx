@@ -2,6 +2,10 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Axios from "axios";
 
+//Backend URL
+import BACKEND_URL from "@utils/backendUrl.js";
+
+
 // Icons
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 const UserProfile = () => {
@@ -30,7 +34,7 @@ const UserProfile = () => {
         const fetchAdmin = async () => {
             try {
                 const res = await Axios.get(
-                    `http://localhost:3300/admin/${id}`,
+                    `${BACKEND_URL}/admin/${id}`,
                     { withCredentials: true }
                 );
                 setAdmin(res.data.user);
@@ -52,7 +56,7 @@ const UserProfile = () => {
 
         try {
             await Axios.patch(
-                `http://localhost:3300/admin/editPicture/${id}`,
+                `${BACKEND_URL}/admin/editPicture/${id}`,
                 data,
                 {
                     headers: {
@@ -68,7 +72,7 @@ const UserProfile = () => {
                 setUpdateMessage("");
             }, 3000); // 3 seconds
 
-            const res = await Axios.get(`http://localhost:3300/admin/${id}`, {
+            const res = await Axios.get(`${BACKEND_URL}/admin/${id}`, {
                 withCredentials: true
             });
             setAdmin((prevAdmin) => ({
@@ -109,7 +113,7 @@ const UserProfile = () => {
 
         try {
             await Axios.patch(
-                `http://localhost:3300/admin/editUserInfo/${id}`,
+                `${BACKEND_URL}/admin/editUserInfo/${id}`,
                 {
                     email,
                     fullname,
@@ -119,7 +123,7 @@ const UserProfile = () => {
                 { withCredentials: true }
             );
 
-            const res = await Axios.get(`http://localhost:3300/admin/${id}`, {
+            const res = await Axios.get(`${BACKEND_URL}/admin/${id}`, {
                 withCredentials: true
             });
 
@@ -160,7 +164,7 @@ const UserProfile = () => {
                 {admin && (
                     <div className="flex w-4/6">
                         <div className="flex flex-col items-center w-2/5">
-                            <h1 className="text-3xl font-semibold mb-8">
+                            <h1 className="text-3xl font-semibold mb-8 text-akpica-white">
                                 {admin && admin.fullname}
                             </h1>
                             <img
@@ -168,7 +172,7 @@ const UserProfile = () => {
                                 src={
                                     userPicture
                                         ? userPicture
-                                        : `http://localhost:3300/photo/${
+                                        : `${BACKEND_URL}/photo/${
                                               admin.username
                                           }?${new Date().getTime()}`
                                 }
@@ -216,8 +220,8 @@ const UserProfile = () => {
                             </form>
                         </div>
 
-                        <div className="flex flex-col gap-4">
-                            <div className="flex items-center gap-4">
+                        <div className="flex flex-col gap-4 text-akpica-white">
+                            <div className="flex items-center gap-4 ">
                                 <label className="w-1/4">Username:</label>
                                 <input
                                     className="flex-1 bg-transparent text-akpica-white outline-none border-2 pl-2 py-1 opacity-40"
