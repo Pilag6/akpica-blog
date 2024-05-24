@@ -4,11 +4,14 @@ import "./index.css";
 // Start Router
 import { BrowserRouter } from "react-router-dom";
 import PostContextProvider from "@contexts/PostContext.jsx";
+import ToggleContextProvider from "@contexts/ToggleContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
+  <ToggleContextProvider>
     <PostContextProvider>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </PostContextProvider>
+  </ToggleContextProvider>
 );

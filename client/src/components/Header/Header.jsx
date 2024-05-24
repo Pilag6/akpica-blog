@@ -28,7 +28,12 @@ const Header = ({ darkBackground }) => {
         };
     }, []);
 
+
+    
+    const logoStyle = `w-[130px] cursor-pointer transition-colors duration-300 ${scrolling ? 'filter invert saturate-0 hue-rotate-0 brightness-0 contrast-75' : ''}`
+
     const backgroundColor = darkBackground ? "#242424d1" : (scrolling ? "#242424" : "transparent");
+
 
     return (
         <header
@@ -38,14 +43,14 @@ const Header = ({ darkBackground }) => {
             <div className="max-w-[1200px] mx-auto flex items-center justify-between px-8">
                 <Link to={"/"} className="w-40 block ">
                     <img
-                        className="cursor-pointer transition-colors duration-300 filter invert saturate-0 hue-rotate-0 brightness-0 contrast-75"
+                        className={logoStyle}
                         src={logo}
                         alt="akpica-logo"
                     />
                 </Link>
 
                 {/* navbar */}
-                <Navbar />
+                <Navbar scrolling={scrolling}/>
             </div>
         </header>
     );
