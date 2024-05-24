@@ -27,7 +27,7 @@ const { PORT } = process.env;
 // Middleware that allows browsers to accept data from this server
 app.use(
     cors({
-        origin: "http://localhost:5173", // The port where the frontend is running. Change this to the port where your frontend is running
+        origin: "https://akpica-blog.netlify.app", // The port where the frontend is running. Change this to the port where your frontend is running
         credentials: true
     })
 );
