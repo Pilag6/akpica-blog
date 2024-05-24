@@ -58,7 +58,7 @@ const AsideDashboard = () => {
                 </NavLink>
                 <NavLink
                     className={linksStyles}
-                    to={"/dh-admin/dashboard/usersDashboard"}
+                    to={"/dh-admin/dashboard/mediaDashboard"}
                 >
                     <span>
                         <IoImages />
