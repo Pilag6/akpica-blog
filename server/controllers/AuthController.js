@@ -79,11 +79,11 @@ const login = asyncHandler(async (req, res) => {
         });
 
         // Create a cookie and set the token
-        // res.cookie("token", accessToken, {
-        //     httpOnly: true,
-        //     secure: true
-        // });
-        res.cookie("token", accessToken);
+        res.cookie("token", accessToken, {
+            httpOnly: true,
+            secure: true
+        });
+        // res.cookie("token", accessToken);
 
         // Send the token to the client
         res.status(200).json({
