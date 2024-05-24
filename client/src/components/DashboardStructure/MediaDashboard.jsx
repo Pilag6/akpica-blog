@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { PostContext } from "@contexts/PostContext.jsx";
 // import { UserContext } from "@contexts/UserContext.jsx";
+import BACKEND_URL from "@utils/backendUrl.js";
 
 // icons
 import {
@@ -81,7 +82,7 @@ const MediaDashboard = () => {
             posts.map((post) => (
               <img
                 key={post._id}
-                src={`http://localhost:3300/posts/photo/${
+                src={`${BACKEND_URL}/posts/photo/${
                   post.title
                 }?${new Date().getTime()}`}
                 alt="post image"
@@ -123,7 +124,7 @@ const MediaDashboard = () => {
                     >
                       <td className="px-6">
                         <img
-                          src={`http://localhost:3300/posts/photo/${
+                          src={`${BACKEND_URL}/posts/photo/${
                             post.title
                           }?${new Date().getTime()}`}
                           alt="post image"
