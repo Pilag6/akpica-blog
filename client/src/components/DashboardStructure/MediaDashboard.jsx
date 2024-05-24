@@ -30,7 +30,7 @@ const MediaDashboard = () => {
 
   return (
     <>
-      <div className="bg-akpica-white flex flex-col pt-6 pb-3 pl-8">
+      <div className="bg-akpica-white min-h-[calc(100vh-80px)] flex flex-col pt-6 pb-3 pl-8">
         <div className="flex items-center mb-4 border border-red-700">
           <h1 className="text-xl font-extrabold border border-red-700">
             Media Library
@@ -170,20 +170,6 @@ const MediaDashboard = () => {
                   ))}
               </tbody>
             </table>
-
-            // <ul className="flex flex-wrap flex-col">
-            //   {posts &&
-            //     posts.map((post) => (
-            //       <li key={post._id} className="mb-4">
-            //         <img
-            //           src={`http://localhost:3300/posts/photo/${post.title}?${new Date().getTime()}`}
-            //           alt="post image"
-            //           className="object-cover mr-2 h-16 w-16"
-            //         />
-            //         <span>{post.title}</span>
-            //       </li>
-            //     ))}
-            // </ul>
           )}
         </div>
       </div>
