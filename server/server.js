@@ -29,7 +29,8 @@ app.use(
     cors({
         // add many options here
         origin: ["http://localhost:3300", "https://akpicablog.netlify.app", "https://akpica-blog.netlify.app"],
-        credentials: true
+        credentials: true,
+        exposedHeaders: ["set-cookie"],
     })
 );
 // Middlewares that accepts urlencoded from data request
