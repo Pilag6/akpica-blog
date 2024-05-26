@@ -2,100 +2,71 @@ import { useState, useContext } from "react";
 import { PostContext } from "@contexts/PostContext.jsx";
 import FourCards from "./FourCards.jsx";
 
-//Backend URL
+// Backend URL
 import BACKEND_URL from "@utils/backendUrl.js";
 
-//icons
+// Icons
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 const FourCardsContainer = () => {
-  let { posts } = useContext(PostContext);
-  const [arrow, setArrow] = useState(0);
+  const { posts } = useContext(PostContext);
+  const [slide, setSlide] = useState(0);
 
-  // START arrow
+  const totalSlides = Math.ceil(posts.length / 4);
+
+  // START slider handlers
   const handlePrevSlide = () => {
-    setArrow((prevArrow) =>
-      prevArrow === 0 ? imageSlider.length - 1 : prevArrow - 1
+    setSlide((prevSlide) =>
+      prevSlide === 0 ? totalSlides - 1 : prevSlide - 1
     );
   };
   const handleNextSlide = () => {
-    setArrow((prevArrow) =>
-      prevArrow === imageSlider.length - 1 ? 0 : prevArrow + 1
+    setSlide((prevSlide) =>
+      prevSlide === totalSlides - 1 ? 0 : prevSlide + 1
     );
   };
-  // END arrow
+  // END slider handlers
 
   return (
-    // <div className="w-full mx-auto flex my-11 group relative">
-    <div className="w-full mx-auto flex my-11 relative">
-      
+    <div className="mx-auto flex my-11 relative border border-red-600 overflow-hidden">
       <div className="absolute p-5 top-1/2 -translate-y-1/2 z-10 text-5xl w-full flex justify-between opacity-0 hover:opacity-100 transition-opacity duration-300">
         <button
-          className="bg-akpica-black/70 to-akpica-white/5  text-akpica-white hover:bg-akpica-black"
+          className="bg-akpica-black/70 to-akpica-white/5 text-akpica-white hover:bg-akpica-black"
           onClick={handlePrevSlide}
         >
           <IoIosArrowBack />
         </button>
         <button
-          className="bg-akpica-black/70 to-akpica-white/5  text-akpica-white hover:bg-akpica-black"
+          className="bg-akpica-black/70 to-akpica-white/5 text-akpica-white hover:bg-akpica-black"
           onClick={handleNextSlide}
         >
           <IoIosArrowForward />
         </button>
       </div>
-      
-      {/*  {posts && posts.slice(0,4).map((card) => ( */}
-      {posts && posts.map((card) => (
-        <FourCards key={card._id}
-        bgImage={`${BACKEND_URL}/posts/photo/${encodeURIComponent(
-          card.title
-      )}?${new Date().getTime()}`}
-      category={card.tags}
-      title={card.title}
-      avatar={`${BACKEND_URL}/photo/${
-        card.author.username
-    }?${new Date().getTime()}`}
-    author={card.author.username[0].toUpperCase() + card.author.username.slice(1)} 
-    date={new Date(card.date).toDateString()}
-    link={`/${card._id}`}/>
-      ))}
 
-      {/* <FourCards
-        bgImage={"https://bit.ly/3QLDXNI"}
-        category={"REACT"}
-        title={"React Starter Blog"}
-        avatar={carlos}
-        author={"Carlos"}
-        date={"May 16, 2024"}
-      />
-
-      <FourCards
-        bgImage={"https://bit.ly/3UZFpyD"}
-        category={"TAILWIND"}
-        title={"Tailwind Starter Blog"}
-        avatar={akiko}
-        author={"Akiko"}
-        date={"May 16, 2024"}
-      />
-
-      <FourCards
-        bgImage={"https://bit.ly/3ymKhoz"}
-        category={"ASTRO"}
-        title={"Astro Starter Blog"}
-        avatar={pila}
-        author={"Pila"}
-        date={"May 16, 2024"}
-      />
-
-      <FourCards
-        bgImage={"https://bit.ly/3wAUhKu"}
-        category={"CSS"}
-        title={"CSS Starter Blog"}
-        avatar={pila}
-        author={"Pila"}
-        date={"May 16, 2024"}
-      /> */}
+      <div className="flex">
+        {posts.slice(slide * 4, slide * 4 + 4).map((card) => (
+          <FourCards
+            key={card._id}
+            bgImage={`${BACKEND_URL}/posts/photo/${encodeURIComponent(
+              card.title
+            )}?${new Date().getTime()}`}
+            category={card.tags}
+            title={card.title}
+            avatar={`${BACKEND_URL}/photo/${
+              card.author.username
+            }?${new Date().getTime()}`}
+            author={
+              card.author.username[0].toUpperCase() +
+              card.author.username.slice(1)
+            }
+            date={new Date(card.date).toDateString()}
+            link={`/${card._id}`}
+          />
+        ))}
+      </div>
     </div>
   );
 };
+
 export default FourCardsContainer;
