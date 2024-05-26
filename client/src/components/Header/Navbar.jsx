@@ -8,12 +8,8 @@ import { ToggleContext } from "@contexts/ToggleContext.jsx";
 const Navbar = ({ scrolling }) => {
   const { isToggle, handleToggle } = useContext(ToggleContext);
 
-  const linkStyles = `pl-4 hover:underline-offset-8 hover:underline transition transform active:text-akpica-pastel font-semibold ${
-    scrolling ? "text-akpica-white" : "text-akpica-black"
-  }`;
-  const mobileLinkStyles = `flex flex-col items-center p-4 hover:underline-offset-8 hover:underline transition transform active:text-akpica-pastel font-semibold ${
-    scrolling ? "text-akpica-white" : "text-akpica-black"
-  }`;
+  const linkStyles = `pl-4 hover:underline-offset-8 hover:underline transition transform active:text-akpica-pastel font-semibold text-akpica-white`;
+  const mobileLinkStyles = `flex flex-col items-center p-4 hover:underline-offset-8 hover:underline transition transform active:text-akpica-pastel font-semibold text-akpica-white`;
 
   return (
     <div className="flex items-center justify-between px-5">
@@ -36,17 +32,15 @@ const Navbar = ({ scrolling }) => {
       </nav>
 
       <div
-        className={`md:hidden flex gap-6 text-lg pl-5 ${
-          scrolling ? "text-akpica-white" : "text-akpica-black"
-        }`}
+        className={`md:hidden flex gap-6 text-lg pl-5 text-akpica-white`}
       >
         <FaBars onClick={handleToggle} />
       </div>
 
       {isToggle && (
         <nav
-          className={`absolute md:hidden flex flex-col items-center gap-4 text-lg z-10 top-[62px] px-8 ${
-            scrolling ? "bg-akpica-black" : "bg-akpica-white"
+          className={`absolute md:hidden flex flex-col items-center gap-4 text-lg z-10 top-[62px] right-0 w-96 h-96 ${
+            scrolling ? "bg-akpica-black" : "bg-[#242424b1]"
           }`}
         >
           <div onClick={isToggle}>
@@ -70,9 +64,7 @@ const Navbar = ({ scrolling }) => {
       )}
 
       <div
-        className={`flex gap-6 text-lg pl-5 cursor-pointer active:text-akpica-pastel ${
-          scrolling ? "text-akpica-white" : "text-akpica-black"
-        }`}
+        className={`flex gap-6 text-lg pl-5 cursor-pointer active:text-akpica-pastel text-akpica-white`}
       >
         <FaMagnifyingGlass />
       </div>
