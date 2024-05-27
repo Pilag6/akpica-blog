@@ -12,6 +12,7 @@ const FourCards = ({
   avatar,
   date,
   link,
+  linkTag
 }) => {
   return (
     <>
@@ -32,6 +33,7 @@ const FourCards = ({
             tag={category}
             color="bg-akpica-pastel text-akpica-black"
             size="text-xs"
+            link={linkTag}
           />
 
           <div className="">

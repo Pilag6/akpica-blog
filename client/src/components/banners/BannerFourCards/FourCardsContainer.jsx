@@ -88,7 +88,7 @@ const FourCardsContainer = () => {
             author={card.author.username[0].toUpperCase() + card.author.username.slice(1)}
             date={new Date(card.date).toDateString()}
             link={`/${card._id}`}
-            lingTag={`/tags/${card.tags}`}
+            linkTag={`/tags/${card.tags}`}
           />
         ))}
       </div>
