@@ -32,23 +32,21 @@ const MediaDashboard = () => {
   return (
     <>
       <div className="bg-akpica-white min-h-[calc(100vh-80px)] flex flex-col pt-6 pb-3 pl-8">
-        <div className="flex items-center mb-4 border border-red-700">
-          <h1 className="text-xl font-extrabold border border-red-700">
-            Media Library
-          </h1>
+        <div className="flex items-center mb-4">
+          <h1 className="text-3xl font-extrabold">Media Library</h1>
           <div className="flex items-center pt-6 pb-3 pl-8 gap-4">
-            <button className="w-fit flex items-center gap-3 p-2 text-xl font-semibold text-akpica-black outline-none outline-akpica-black transition-all hover:bg-akpica-pastel hover:text-zinc-800 hover:outline-2">
+            <button className="w-fit flex items-center gap-3 p-2 text-xl font-semibold text-akpica-black outline-none outline-akpica-black transition-all hover:bg-akpica-pastel hover:text-zinc-800 hover:outline-2 focus:bg-akpica-pastel/95 active:bg-akpica-pastel/80">
               <FaPlus /> Add New Post
             </button>
           </div>
         </div>
 
         {/* Toggle buttons */}
-        <div className="flex gap-2 text-2xl border border-akpica-black mb-3 mr-8 p-2">
-          <button onClick={gridView}>
+        <div className="flex gap-4 text-2xl border border-akpica-black mb-3 mr-8 p-2">
+          <button onClick={gridView} title="Grid View" className="hover:text-akpica-black/70 focus:text-akpica-black/50 active:text-akpica-carlo">
             <MdGridView />
           </button>
-          <button onClick={listView}>
+          <button onClick={listView} title="List View" className="hover:text-akpica-black/70 focus:text-akpica-black/50 active:text-akpica-carlo">
             <MdOutlineViewList />
           </button>
           <div className="relative">
@@ -58,20 +56,20 @@ const MediaDashboard = () => {
             >
               All dates <MdOutlineKeyboardArrowDown />
             </button>
-        {/* toggle dropdown */}
-        {isOpen && (
-          <div className="absolute bg-akpica-white border border-akpica-black p-2 text-base">
-            <ul>
-              <li className="p-2 hover:bg-akpica-pastel">All dates</li>
-              <li className="p-2 hover:bg-akpica-pastel">Today</li>
-              <li className="p-2 hover:bg-akpica-pastel">Yesterday</li>
-              <li className="p-2 hover:bg-akpica-pastel">This week</li>
-              <li className="p-2 hover:bg-akpica-pastel">This month</li>
-              <li className="p-2 hover:bg-akpica-pastel">This year</li>
-            </ul>
+            {/* toggle dropdown */}
+            {isOpen && (
+              <div className="absolute bg-akpica-white border border-akpica-black p-2 text-base">
+                <ul>
+                  <li className="p-2 hover:bg-akpica-pastel">All dates</li>
+                  <li className="p-2 hover:bg-akpica-pastel">Today</li>
+                  <li className="p-2 hover:bg-akpica-pastel">Yesterday</li>
+                  <li className="p-2 hover:bg-akpica-pastel">This week</li>
+                  <li className="p-2 hover:bg-akpica-pastel">This month</li>
+                  <li className="p-2 hover:bg-akpica-pastel">This year</li>
+                </ul>
+              </div>
+            )}
           </div>
-        )}
-        </div>
         </div>
 
         {/* views */}
@@ -91,7 +89,7 @@ const MediaDashboard = () => {
             ))
           ) : (
             // List view
-            <table className="w-[1645px] text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <table className="w-[1407px] text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
               <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                   <th scope="col" className="px-6 py-3">
@@ -133,7 +131,7 @@ const MediaDashboard = () => {
                       </td>
                       <td
                         scope="row"
-                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-akpica-white"
+                        className="px-1 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-akpica-white"
                       >
                         <Link to={`${post._id}`}>{post.title}</Link>
                       </td>
@@ -142,7 +140,7 @@ const MediaDashboard = () => {
                         {post.tags.slice(0, 4).map((tag, index) => (
                           <span
                             key={index}
-                            className="bg-gray-200 dark:bg-gray-700 dark:text-gray-400 px-2 py-1 rounded text-xs"
+                            className="bg-gray-200 dark:bg-gray-700 dark:text-gray-400 px-2 py-1 rounded text-xs gap-1 my-12"
                           >
                             {tag}
                           </span>
