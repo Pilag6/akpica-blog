@@ -8,15 +8,15 @@ import { Link } from "react-router-dom";
 const FourCards = ({ bgImage, category, title, author, avatar, date, link }) => {
     return (
         <>
-            <article className="h-[500px] cursor-pointer group relative overflow-hidden w-1/4">
+            <article className="h-[500px] cursor-pointer group relative min-w-[243px] md:min-w-[480px]">
                 <Link to={link}>
                 <img
                     src={bgImage}
                     alt=""
-                    className="group-hover:scale-110 transition-transform transform duration-300 h-full object-cover"
+                    className="group-hover:scale-110 transition-transform transform duration-300 h-full object-cover w-full"
                 />
                 </Link>
-                <div className="flex flex-col h-full w-full absolute top-[75%] group-hover:top-[65%] gap-4 text-akpica-white p-4 bg-akpica-black/70 to-akpica-white/5 group-hover:bg-akpica-black/90 transition-all">
+                <div className="flex flex-col h-full w-full absolute top-[75%] left-0 group-hover:top-[65%] gap-4 text-akpica-white p-4 bg-akpica-black/70 to-akpica-white/5 group-hover:bg-akpica-black/90 transition-all">
                  
                     <CardTag
                         tag={category}
