@@ -18,8 +18,11 @@ const Footer = () => {
       <footer className="w-full bg-akpica-black relative">
         <div className=" font-akpica-heading max-w-[1200px] mx-auto flex flex-col justify-center h-full ">
           <div>
-            <div className="absolute start-16 bottom-64 2x1:block">
-              <img src={akpicaLogo} className="h-48 opacity-35" />
+            {/* <div className="absolute start-16 bottom-64 mb-4 lg:block lg:start-16 lg:bottom-64 lg:mb-4 lg:opacity-35 sm:static sm:flex sm:justify-center sm:mt-6 sm:h-24 sm:opacity-35">
+              <img src={akpicaLogo} className="h-48 lg:h-48 sm:h-24 opacity-35" />
+            </div> */}
+            <div className="static flex justify-center mt-6 opacity-45 start-16 bottom-64 mb-4 lg:absolute lg:block lg:start-16 lg:bottom-64 lg:mb-4 lg:opacity-45 sm:static sm:flex sm:justify-center sm:mt-6 sm:h-24 sm:opacity-45">
+              <img src={akpicaLogo} className="h-48 opacity-45" />
             </div>
           </div>
 
