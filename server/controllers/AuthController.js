@@ -56,36 +56,28 @@ const register = asyncHandler(async (req, res) => {
 @access  Public
 */
 const login = asyncHandler(async (req, res) => {
-    // Destructure the request body
-    const { username, password, role } = req.body;
+    const { username, password } = req.body;
 
-    // Find the user by email
     const user = await UserModel.findOne({ username });
 
-    // Check if the user is found
     if (!user) {
         res.status(404);
         throw new Error("User not found");
     }
 
-    // Compare the password
     const isMatch = await bcrypt.compare(password, user.password);
 
-    // If the user is found
     if (user && isMatch) {
-        // Create a token
         const accessToken = jwt.sign({ id: user._id, role: user.role, username: user.username }, process.env.JWT_SECRET, {
             expiresIn: "1h"
         });
 
-        // Create a cookie and set the token
-        // res.cookie("token", accessToken, {
-        //     httpOnly: true,
-        //     secure: true
-        // });
-        res.cookie("token", accessToken);
+        res.cookie("token", accessToken, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "strict",
+        });
 
-        // Send the token to the client
         res.status(200).json({
             message: "User logged in successfully",
             user: {
@@ -100,7 +92,6 @@ const login = asyncHandler(async (req, res) => {
             }
         });
     } else {
-        // If the user is not found
         res.status(401);
         throw new Error("Invalid username or password");
     }

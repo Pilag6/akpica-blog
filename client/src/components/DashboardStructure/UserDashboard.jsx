@@ -1,31 +1,31 @@
-import { useContext, useState, useEffect } from "react";
-import { PostContext } from "@contexts/PostContext.jsx";
-import Axios from "axios";
-import { FaPlus } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import BACKEND_URL from "@utils/backendUrl.js";
+import { useContext, useState, useEffect } from 'react';
+import { PostContext } from '@contexts/PostContext.jsx';
+import { AuthContext } from '@contexts/AuthContext.jsx';
+import axiosInstance from '@utils/axiosInstance';
+import { FaPlus } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import BACKEND_URL from '@utils/backendUrl.js';
 
 const UserDashboard = () => {
     const [admin, setAdmin] = useState(null);
     const [userQuantity, setUserQuantity] = useState(0);
     const [showModal, setShowModal] = useState(false);
     const [userToDelete, setUserToDelete] = useState(null);
-    
+
     const { posts } = useContext(PostContext);
+    const { user, token } = useContext(AuthContext);
 
     useEffect(() => {
         const fetchAdmin = async () => {
             try {
-                const res = await Axios.get(`${BACKEND_URL}/admin`, {
-                    withCredentials: true
-                });
+                const res = await axiosInstance.get(`/admin`);
                 setAdmin(res.data.user);
             } catch (error) {
                 console.log(error);
             }
         };
-        fetchAdmin();
-    }, []);
+        if (token) fetchAdmin();
+    }, [token]);
 
     useEffect(() => {
         if (admin) {
@@ -42,9 +42,7 @@ const UserDashboard = () => {
 
     const deleteUser = async () => {
         try {
-            await Axios.delete(`${BACKEND_URL}/admin/delete/${userToDelete}`, {
-                withCredentials: true
-            });
+            await axiosInstance.delete(`/admin/delete/${userToDelete}`);
             setAdmin(admin.filter(user => user._id !== userToDelete));
             setShowModal(false);
             setUserToDelete(null);
