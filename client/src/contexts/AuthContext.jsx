@@ -1,12 +1,9 @@
-/* eslint-disable react/prop-types */
-// src/contexts/AuthContext.jsx
-import { createContext, useState, useEffect } from 'react';
-import Axios from 'axios';
-import BACKEND_URL from '@utils/backendUrl.js';
+import { useEffect} from 'react';
+import axiosInstance from '@utils/axiosInstance';
+import { AuthContext } from '@contexts/AuthContext.jsx';
+import { useState } from 'react';
 
-export const AuthContext = createContext();
-
-export const AuthProvider = ({ children }) => {
+const AuthProvider = ({ children }) => {
     const [authState, setAuthState] = useState({
         user: null,
         token: null,
@@ -15,12 +12,10 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         const fetchToken = async () => {
             try {
-                const res = await Axios.get(`${BACKEND_URL}/auth/token`, {
-                    withCredentials: true,
-                });
+                const res = await axiosInstance.get('/auth/token');
                 setAuthState({
                     user: res.data.user,
-                    token: res.data.token,
+                    token: document.cookie.split('; ').find(row => row.startsWith('token=')).split('=')[1],
                 });
             } catch (error) {
                 console.log(error);
@@ -35,3 +30,5 @@ export const AuthProvider = ({ children }) => {
         </AuthContext.Provider>
     );
 };
+
+export default AuthProvider;

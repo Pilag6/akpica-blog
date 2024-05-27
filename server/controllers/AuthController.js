@@ -334,6 +334,32 @@ const deleteUser = asyncHandler(async (req, res) => {
     });
 });
 
+/*
+@desc    Verify the current token
+@route   GET /auth/token
+@access  Private
+*/
+const verifyToken = asyncHandler(async (req, res) => {
+    const token = req.cookies.token || req.headers.authorization?.split(' ')[1];
+
+    if (!token) {
+        return res.status(401).json({ message: "No token provided" });
+    }
+
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const user = await UserModel.findById(decoded.id).select('-password');
+
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        res.status(200).json({ user });
+    } catch (error) {
+        res.status(401).json({ message: "Invalid token" });
+    }
+});
+
 export {
     register,
     login,
@@ -344,5 +370,6 @@ export {
     editUserPicture,
     editUserInfo,
     deleteUser,
-    getMe
+    getMe,
+    verifyToken
 };
