@@ -11,7 +11,7 @@ import FourCardsContainer from "@components/banners/BannerFourCards/FourCardsCon
 import MoreFromUs from "@components/banners/MoreFromUs/MoreFromUsContainer.jsx";
 import GridCardsSection from "@components/banners/GridCardsSection.jsx";
 import Footer from "@components/Footer.jsx";
-
+import { Slogan } from "@components/banners/Slogan.jsx";
 
 const Home = () => {
     // const { posts } = useContext(PostContext);
@@ -22,13 +22,13 @@ const Home = () => {
                 <Header />
                 <Hero />
                 <CardsHero />
+                <Slogan />
 
                 <main>
                     <CategoriesImg />
                     <GridCardsSection />
                     <MoreFromUs />
                     <FourCardsContainer />
-                
                 </main>
                 <Footer />
             </div>
