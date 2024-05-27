@@ -30,6 +30,7 @@ const CardsHero = () => {
                         sizeTag="text-sm"
                         width="w-96"
                         link={`/${card._id}`}
+                        linkTag={`/tags/${card.tags}`}
                     />
                 ))}
             </div>

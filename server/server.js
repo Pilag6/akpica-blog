@@ -32,7 +32,7 @@ app.use(
        // credentials: true
 
         // add many options here
-        origin: ["http://localhost:3300", "https://akpicablog.netlify.app", "https://akpica-blog.netlify.app"],
+        origin: ["http://localhost:5173", "https://akpicablog.netlify.app", "https://akpica-blog.netlify.app"],
         credentials: true,
        // exposedHeaders: ["set-cookie"],
 

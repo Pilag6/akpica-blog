@@ -60,6 +60,7 @@ const Hero = () => {
                             color="bg-akpica-marco text-akpica-white"
                             size="text-md"
                             link={`/tags/${post.tags}`}
+                            linkTag={`/tags/${post.tags}`}
                         />
                         <Link to={`${post._id}`} className="md:w-1/2 p-2">
                             <h1 className="w-fit decoration-clone text-5xl bg-akpica-white px-5 leading-snug inline uppercase font-[700] font-akpica-heading text-akpica-black">
