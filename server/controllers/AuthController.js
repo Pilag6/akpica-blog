@@ -97,6 +97,7 @@ const login = asyncHandler(async (req, res) => {
     }
 });
 
+
 /*
 @desc    Logout a user
 @route   POST /logout

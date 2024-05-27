@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Axios from "axios";
-// UseNavigate
 import { useNavigate } from "react-router-dom";
 
 // Assets
@@ -10,10 +9,9 @@ import logoWhite from "../assets/logo-white.png";
 import { PiLockKey } from "react-icons/pi";
 import { FaUserAstronaut } from "react-icons/fa6";
 import { MdError } from "react-icons/md";
-import { AiOutlineEye } from "react-icons/ai";
-import { AiOutlineEyeInvisible } from "react-icons/ai";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
-//Baceknd URL
+// Backend URL
 import BACKEND_URL from "@utils/backendUrl.js";
 
 const Login = () => {
@@ -21,26 +19,18 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const [visible, setVisible] = useState(false);
     const [error, setError] = useState("");
-    console.log(error);
 
-    // UseNavigate
     const navigate = useNavigate();
 
     const handleLogin = async (e) => {
         e.preventDefault();
         const user = { username, password };
         try {
-            const response = await Axios.post(
-                `${BACKEND_URL}/login`,
-                user,
-                {withCredentials: true}
-            );
+            const response = await Axios.post(`${BACKEND_URL}/login`, user, { withCredentials: true });
 
-            // UseNavigate
             if (response.status === 200) {
                 navigate("/dh-admin/dashboard");
             }
-            
         } catch (error) {
             setError("Invalid username or password");
         }
@@ -57,9 +47,6 @@ const Login = () => {
             </div>
 
             <div className="flex h-screen flex-1 flex-col justify-center">
-                {/* <h2 className="text-center text-4xl font-semibold mb-10">
-                    Login
-                </h2> */}
                 <img
                     className="flex justify-center items-center mx-auto "
                     src={logoWhite}
@@ -74,7 +61,7 @@ const Login = () => {
                         <FaUserAstronaut />
                         <input
                             className="w-full bg-transparent text-akpica-white outline-none"
-                            type="username"
+                            type="text"
                             id="username"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
@@ -91,7 +78,7 @@ const Login = () => {
                             className="w-full bg-transparent text-akpica-white outline-none "
                             placeholder="Password"
                         />
-                            <div className="p-2" onClick={() => setVisible(!visible)}>
+                        <div className="p-2" onClick={() => setVisible(!visible)}>
                             {visible ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
                         </div>
                     </div>
@@ -110,4 +97,5 @@ const Login = () => {
         </div>
     );
 };
+
 export default Login;

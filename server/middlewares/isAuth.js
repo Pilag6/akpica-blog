@@ -5,7 +5,7 @@ const { JWT_SECRET } = process.env;
 const isAuth = asyncHandler(async (req, res, next) => {
   const token = req.cookies.token || req.headers.authorization?.split(' ')[1];
 
-  console.log('Token:', token);  // Add this log to check if the token is received
+  console.log('Token:', token);  // Log the token for debugging
 
   if (token) {
     try {
@@ -13,13 +13,13 @@ const isAuth = asyncHandler(async (req, res, next) => {
       req.user = payload;
       next();
     } catch (error) {
-      res.status(401);
       console.error("Token verification failed:", error);  // Log verification errors
+      res.status(401);
       throw new Error("Not Authorized, invalid token");
     }
   } else {
-    res.status(401);
     console.error("No token provided");  // Log missing token errors
+    res.status(401);
     throw new Error("Not Authorized, no token");
   }
 });
