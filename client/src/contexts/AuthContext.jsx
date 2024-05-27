@@ -1,7 +1,6 @@
-import { useEffect} from 'react';
+/* eslint-disable react/prop-types */
+import { useEffect, useState, createContext } from 'react';
 import axiosInstance from '@utils/axiosInstance';
-import { useState } from 'react';
-import { createContext } from 'react';
 
 export const AuthContext = createContext();
 
@@ -15,12 +14,19 @@ const AuthProvider = ({ children }) => {
         const fetchToken = async () => {
             try {
                 const res = await axiosInstance.get('/auth/token');
-                setAuthState({
-                    user: res.data.user,
-                    token: document.cookie.split('; ').find(row => row.startsWith('token=')).split('=')[1],
-                });
+                const token = document.cookie.split('; ').find(row => row.startsWith('token='))
+                                ?.split('=')[1];
+
+                if (token) {
+                    setAuthState({
+                        user: res.data.user,
+                        token: token,
+                    });
+                } else {
+                    console.error("No token found in cookies");
+                }
             } catch (error) {
-                console.log(error);
+                console.error("Failed to fetch token:", error.response ? error.response.data : error.message);
             }
         };
         fetchToken();
