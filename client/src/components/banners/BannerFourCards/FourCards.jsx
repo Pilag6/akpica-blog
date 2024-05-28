@@ -21,7 +21,7 @@ const FourCards = ({
           <img
             src={bgImage}
             alt=""
-            className="cursor-grab group-hover:scale-110 transition-transform transform duration-300 ease-in-out h-full object-cover w-full min-w-[243px] md:min-w-[420px]"
+            className="cursor-pointer group-hover:scale-110 transition-transform transform duration-300 ease-in-out h-full object-cover w-full min-w-[243px] md:min-w-[420px]"
           />
         </Link>
 

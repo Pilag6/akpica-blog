@@ -134,7 +134,7 @@ const UserDashboard = () => {
                         </tbody>
                     </table>
                 </div>
-                <div className="flex flex-col flex-1 bg-akpica-white p-4">
+                <div className="flex flex-col flex-1 bg-gray-800 p-4 text-akpica-white">
 
                 <NoteDashboard />
                 </div>
