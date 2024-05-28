@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { PostContext } from "@contexts/PostContext.jsx";
 // import { UserContext } from "@contexts/UserContext.jsx";
@@ -13,8 +13,8 @@ import {
 import { FaPlus } from "react-icons/fa";
 
 const MediaDashboard = () => {
-  const { posts } = useContext(PostContext);
   // const { users } = useContext(UserContext);
+  const { posts } = useContext(PostContext);
   const [isGridView, setIsGridView] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -28,6 +28,7 @@ const MediaDashboard = () => {
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
+  const buttonStyles ="font-bold hover:text-akpica-black/70 focus:text-akpica-black/50 active:text-akpica-tomato/70";
 
   return (
     <>
@@ -43,10 +44,10 @@ const MediaDashboard = () => {
 
         {/* Toggle buttons */}
         <div className="flex gap-4 text-2xl border border-akpica-black mb-3 mr-8 p-2">
-          <button onClick={gridView} title="Grid View" className="hover:text-akpica-black/70 focus:text-akpica-black/50 active:text-akpica-carlo">
+          <button onClick={gridView} title="Grid View" className={buttonStyles}>
             <MdGridView />
           </button>
-          <button onClick={listView} title="List View" className="hover:text-akpica-black/70 focus:text-akpica-black/50 active:text-akpica-carlo">
+          <button onClick={listView} title="List View" className={buttonStyles}>
             <MdOutlineViewList />
           </button>
           <div className="relative">

@@ -4,6 +4,7 @@ import Axios from "axios";
 import { FaPlus } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import BACKEND_URL from "@utils/backendUrl.js";
+import NoteDashboard from "./NoteDashboard.jsx";
 
 const UserDashboard = () => {
     const [admin, setAdmin] = useState(null);
@@ -133,6 +134,10 @@ const UserDashboard = () => {
                         </tbody>
                     </table>
                 </div>
+                <div className="flex flex-col flex-1 bg-akpica-white p-4">
+
+                <NoteDashboard />
+                </div>
             </section>
 
             {showModal && (
@@ -158,6 +163,7 @@ const UserDashboard = () => {
                     </div>
                 </div>
             )}
+            
         </div>
     );
 };

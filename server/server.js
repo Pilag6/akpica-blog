@@ -16,6 +16,7 @@ await connectDB();
 // Importing the Router
 import postsRouter from "./routes/postsRouter.js";
 import AuthRouter from "./routes/AuthRouter.js";
+import noteRouter from "./routes/noteRouter.js";
 
 // Importing the Error Handler Middleware
 import { errorHandler } from "./middlewares/errorHandler.js";
@@ -50,6 +51,7 @@ app.use(cookieParser());
 // ROUTERS
 app.use("/posts", postsRouter);
 app.use("/", AuthRouter);
+app.use("/notes", noteRouter);
 
 // Error Handler Middleware
 app.use(errorHandler);
