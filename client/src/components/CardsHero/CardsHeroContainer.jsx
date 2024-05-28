@@ -19,7 +19,7 @@ const CardsHero = () => {
                         bgImg={`${BACKEND_URL}/posts/photo/${encodeURIComponent(
                             card.title
                         )}?${new Date().getTime()}`}
-                        tagName={card.tags}
+                        tagName={card.tags[0]}
                         title={card.title}
                         author={card.author.username}
                         avatar={`${BACKEND_URL}/photo/${
@@ -30,7 +30,7 @@ const CardsHero = () => {
                         sizeTag="text-sm"
                         width="w-96"
                         link={`/${card._id}`}
-                        linkTag={`/tags/${card.tags}`}
+                        linkTag={`/tags/${card.tags[0]}`}
                     />
                 ))}
             </div>

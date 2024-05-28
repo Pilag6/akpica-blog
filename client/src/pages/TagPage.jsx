@@ -54,7 +54,7 @@ const TagPage = () => {
                         Posts tagged with{" "}
                         <span className="uppercase">{tags}</span>
                     </h1>
-                    <div className="flex flex-wrap justify-between md:gap-3 gap-1 gap-y-5">
+                    <div className="flex flex-wrap md:gap-6 gap-1 gap-y-5">
                         {postsTags &&
                             postsTags.map((post) => (
                                 <div

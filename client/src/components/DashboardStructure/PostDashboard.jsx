@@ -1,5 +1,6 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import Axios from "axios";
 
 // Post Context
 import { PostContext } from "@contexts/PostContext.jsx";
@@ -11,9 +12,12 @@ import { FaPlus } from "react-icons/fa";
 import BACKEND_URL from "@utils/backendUrl.js";
 
 const PostDashboard = () => {
-    const { posts, postQuantity } = useContext(PostContext);
+    const { posts, postQuantity, setPosts } = useContext(PostContext);
     const location = useLocation();
     const navigate = useNavigate();
+
+    const [showModal, setShowModal] = useState(false);
+    const [postToDelete, setPostToDelete] = useState(null);
 
     const queryParams = new URLSearchParams(location.search);
     const authorId = queryParams.get("authorId");
@@ -34,6 +38,24 @@ const PostDashboard = () => {
     const handleFilterByAuthor = (authorId) => {
         queryParams.set("authorId", authorId);
         navigate({ search: queryParams.toString() });
+    };
+
+    const confirmDeletePost = (postId) => {
+        setPostToDelete(postId);
+        setShowModal(true);
+    };
+
+    const deletePost = async () => {
+        try {
+            await Axios.delete(`${BACKEND_URL}/posts/${postToDelete}`, {
+                withCredentials: true,
+            });
+            setPosts(posts.filter((post) => post._id !== postToDelete));
+            setShowModal(false);
+            setPostToDelete(null);
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     return (
@@ -103,7 +125,7 @@ const PostDashboard = () => {
                                         scope="row"
                                         className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-akpica-white"
                                     >
-                                        <Link to={`${post._id}`}>{post.title}</Link>
+                                        <Link to={`http://localhost:5173/${post._id}`}>{post.title}</Link>
                                     </td>
                                     <td
                                         className="px-6 py-4 cursor-pointer"
@@ -127,20 +149,20 @@ const PostDashboard = () => {
                                         {new Date(post.date).toDateString()}
                                     </td>
                                     <td className="px-6 py-4">
-                                        <a
-                                            href="#"
+                                        <Link
+                                            to={`/posts/edit/${post._id}`}
                                             className="font-medium text-akpica-marco dark:text-akpica-marco hover:underline"
                                         >
                                             Edit
-                                        </a>
+                                        </Link>
                                     </td>
                                     <td className="px-6 py-4">
-                                        <a
-                                            href="#"
+                                        <button
+                                            onClick={() => confirmDeletePost(post._id)}
                                             className="font-medium text-akpica-tomato dark:text-akpica-tomato hover:underline"
                                         >
                                             Delete
-                                        </a>
+                                        </button>
                                     </td>
                                 </tr>
                             ))}
@@ -148,6 +170,30 @@ const PostDashboard = () => {
                     </table>
                 </div>
             </section>
+
+            {showModal && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+                    <div className="bg-white p-6 shadow-lg">
+                        <h2 className="text-lg font-semibold mb-4">Confirm Deletion</h2>
+                        <p>Are you sure you want to delete this post?</p>
+                        <p className="text-xs mt-2 text-red-600">This action is irreversible.</p>
+                        <div className="mt-6 flex justify-end gap-4">
+                            <button
+                                onClick={() => setShowModal(false)}
+                                className="px-4 py-2 bg-gray-300 text-black hover:bg-gray-400"
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                onClick={deletePost}
+                                className="px-4 py-2 bg-akpica-tomato text-white hover:bg-red-600"
+                            >
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

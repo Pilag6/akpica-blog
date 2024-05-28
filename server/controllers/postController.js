@@ -16,13 +16,26 @@ const __dirname = path.dirname(__filename);
 const createPost = asyncHandler(async (req, res) => {
     const { title, content, date, tags } = req.body;
 
+    if (!title || !content ) {
+        res.status(400);
+        throw new Error("Title and Content are required");
+    }
+
+    let imageFilename;
+
+        if (req.file) {
+            imageFilename = req.file.filename;
+        } else {
+            imageFilename = 'default-image.jpg';
+        }
+
     const post = await PostModel.create({
         title,
         content,
         date,
         author: req.user.id,
         image: req.file.filename,
-        tags
+        tags: tags.split(",")
     });
     res.status(201).json(post);
 });
