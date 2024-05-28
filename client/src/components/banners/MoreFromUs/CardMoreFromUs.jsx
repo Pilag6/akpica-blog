@@ -7,7 +7,7 @@ const CardMoreFromUs = ({ img, title, tag, author, avatar, date, authorColors, b
     return (
         <>
             <article className="flex gap-4 w-96">
-                <Link to={link} className="w-36 h-40 aspect-square">
+                <Link to={link} className="max-w-32 h-40 aspect-square">
                     <img
                         src={img}
                         alt={title}

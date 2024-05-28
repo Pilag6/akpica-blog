@@ -40,7 +40,7 @@ const GridCardsSection = () => {
                         bgImg={`${BACKEND_URL}/posts/photo/${encodeURIComponent(
                             card.title
                         )}?${new Date().getTime()}`}
-                        tagName={card.tags}
+                        tagName={card.tags[0]}
                         title={card.title}
                         author={card.author.username}
                         avatar={`${BACKEND_URL}/photo/${
@@ -50,7 +50,7 @@ const GridCardsSection = () => {
                         colorTag="bg-akpica-marco text-akpica-black"
                         sizeTag="text-md"
                         link={`/${card._id}`}
-                        linkTag={`/tags/${card.tags}`}
+                        linkTag={`/tags/${card.tags[0]}`}
                         
                     />
                 </div>

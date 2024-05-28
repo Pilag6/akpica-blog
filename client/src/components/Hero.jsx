@@ -12,8 +12,9 @@ const Hero = () => {
     const { posts } = useContext(PostContext);
     const [currentIndex, setCurrentIndex] = useState(0);
 
-    // Limit to first 4 posts
-    const limitedPosts = posts.slice(0, 4);
+    // Sort posts by date (newest first) and limit to last 4 posts
+    const sortedPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+    const limitedPosts = sortedPosts.slice(0, 5);
 
     const prevSlide = () => {
         setCurrentIndex((prevIndex) =>
@@ -56,11 +57,11 @@ const Hero = () => {
                 >
                     <div className="flex flex-col justify-center h-full max-w-[1200px] mx-auto p-6 gap-2">
                         <CardTag
-                            tag={post.tags}
+                            tag={post.tags[0]}
                             color="bg-akpica-marco text-akpica-white"
                             size="text-md"
                             link={`/tags/${post.tags}`}
-                            linkTag={`/tags/${post.tags}`}
+                            linkTag={`/tags/${post.tags[0]}`}
                         />
                         <Link to={`${post._id}`} className="md:w-1/2 p-2">
                             <h1 className="w-fit decoration-clone text-5xl bg-akpica-white px-5 leading-snug inline uppercase font-[700] font-akpica-heading text-akpica-black">

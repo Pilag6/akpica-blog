@@ -53,9 +53,10 @@ const PostDetails = () => {
             <main className="bg-akpica-white max-w-[1200px] mx-auto z-30 -mt-40 min-h-96 pl-16 pr-9 py-12 flex flex-col relative">
                 <div className="flex flex-col w-3/4 gap-5 mb-12">
                     <CardTag
-                        tag={post.tags}
+                        tag={post.tags[0]}
                         size={"text-sm"}
                         color={"bg-akpica-green text-akpica-white"}
+                        linkTag={`/tags/${post.tags[0]}`}
                     />
                     <h1 className="text-5xl pr-12 bg-akpica-white font-[700] font-akpica-heading text-akpica-black">
                         {post.title}
@@ -79,11 +80,11 @@ const PostDetails = () => {
                         dangerouslySetInnerHTML={{ __html: post.content }}
                     />
 
-                    <aside className="flex-1 pl-4 sticky top-24 h-[calc(100vh-32px)] overflow-auto">
+                    <aside className="flex-1 pl-4 sticky top-24 h-[calc(100vh-32px)] overflow-hidden-4/12">
                         <h2 className="font-bold font-akpica-heading text-2xl mb-4">
                             RECENT POSTS
                         </h2>
-                        <div className="flex flex-col gap-8 w-4/12">
+                        <div className="flex flex-col gap-8 ">
                             {posts &&
                                 posts
                                     .slice(0, 4)
@@ -94,7 +95,7 @@ const PostDetails = () => {
                                                 article.title
                                             )}?${new Date().getTime()}`}
                                             title={article.title}
-                                            tag={article.tags}
+                                            tag={article.tags[0]}
                                             avatar={`${BACKEND_URL}/photo/${
                                                 article.author.username
                                             }?${new Date().getTime()}`}
@@ -105,6 +106,7 @@ const PostDetails = () => {
                                             authorColors="text-akpica-black"
                                             bottom="mt-auto"
                                             link={`/${article._id}`}
+                                            linkTag={`/tags/${article.tags[0]}`}
                                         />
                                     ))}
                         </div>
