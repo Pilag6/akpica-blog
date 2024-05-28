@@ -14,7 +14,7 @@ const __dirname = path.dirname(__filename);
 @access  Public
 */
 const createPost = asyncHandler(async (req, res) => {
-    const { title, content, date, image, tags } = req.body;
+    const { title, content, date, tags } = req.body;
 
     const post = await PostModel.create({
         title,
