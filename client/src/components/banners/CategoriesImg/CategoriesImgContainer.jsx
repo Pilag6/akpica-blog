@@ -20,6 +20,7 @@ const CategoriesImgContainer = () => {
         );
     };
 
+    const uniqueTags = new Set();
     const categories = [
         { image: activity, tag: getTag(0) },
         { image: oceanside, tag: getTag(1) },
@@ -29,7 +30,13 @@ const CategoriesImgContainer = () => {
         { image: science, tag: getTag(5) },
         { image: sports, tag: getTag(6) },
         { image: technology, tag: getTag(7) }
-    ];
+    ].filter(category => {
+        if (category.tag && !uniqueTags.has(category.tag)) {
+            uniqueTags.add(category.tag);
+            return true;
+        }
+        return false;
+    });
 
     return (
         <div className="w-full flex items-center my-11 px-4">

@@ -67,8 +67,8 @@ const FourCardsContainer = () => {
   const extendedPosts = [...posts, ...posts];
 
   return (
-    <div ref={containerRef} className="mx-auto flex my-11 relative overflow-hidden w-full left-0">
-      <div className="absolute p-5 top-1/2 -translate-y-1/2 z-10 text-5xl w-full flex justify-between opacity-0 hover:opacity-100 transition-opacity duration-300">
+    <div ref={containerRef} className="cursor-grab mx-auto flex my-11 relative overflow-hidden w-full left-0">
+      <div className="absolute p-5 top-1/2 -translate-y-1/2 z-10 text-5xl w-full flex justify-between opacity-0 hover:opacity-100 transition-opacity duration-300 ease-in-out active:cursor-grabbing">
         <button className="bg-akpica-black/70 to-akpica-white/5 text-akpica-white hover:bg-akpica-black" onClick={handlePrevSlide}>
           <IoIosArrowBack />
         </button>
@@ -88,7 +88,7 @@ const FourCardsContainer = () => {
             author={card.author.username[0].toUpperCase() + card.author.username.slice(1)}
             date={new Date(card.date).toDateString()}
             link={`/${card._id}`}
-            lingTag={`/tags/${card.tags}`}
+            linkTag={`/tags/${card.tags}`}
           />
         ))}
       </div>

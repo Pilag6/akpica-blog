@@ -12,15 +12,16 @@ const FourCards = ({
   avatar,
   date,
   link,
+  linkTag
 }) => {
   return (
     <>
-      <article className="h-[500px] cursor-pointer group relative w-full">
+      <article className="h-[500px] cursor-grab group relative w-full">
         <Link to={link}>
           <img
             src={bgImage}
             alt=""
-            className="group-hover:scale-110 transition-transform transform duration-300 h-full object-cover w-full min-w-[243px] md:min-w-[420px]"
+            className="cursor-pointer group-hover:scale-110 transition-transform transform duration-300 ease-in-out h-full object-cover w-full min-w-[243px] md:min-w-[420px]"
           />
         </Link>
 
@@ -32,6 +33,7 @@ const FourCards = ({
             tag={category}
             color="bg-akpica-pastel text-akpica-black"
             size="text-xs"
+            link={linkTag}
           />
 
           <div className="">

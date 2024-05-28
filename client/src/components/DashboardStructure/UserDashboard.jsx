@@ -1,10 +1,10 @@
-import { useContext, useState, useEffect } from 'react';
-import { PostContext } from '@contexts/PostContext.jsx';
-import { AuthContext } from '@contexts/AuthContext.jsx';
-import axiosInstance from '@utils/axiosInstance';
-import { FaPlus } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
-import BACKEND_URL from '@utils/backendUrl.js';
+import { useContext, useState, useEffect } from "react";
+import { PostContext } from "@contexts/PostContext.jsx";
+import Axios from "axios";
+import { FaPlus } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import BACKEND_URL from "@utils/backendUrl.js";
+import NoteDashboard from "./NoteDashboard.jsx";
 
 const UserDashboard = () => {
     const [admin, setAdmin] = useState(null);
@@ -131,6 +131,10 @@ const UserDashboard = () => {
                         </tbody>
                     </table>
                 </div>
+                <div className="flex flex-col flex-1 bg-gray-800 p-4 text-akpica-white">
+
+                <NoteDashboard />
+                </div>
             </section>
 
             {showModal && (
@@ -156,6 +160,7 @@ const UserDashboard = () => {
                     </div>
                 </div>
             )}
+            
         </div>
     );
 };
