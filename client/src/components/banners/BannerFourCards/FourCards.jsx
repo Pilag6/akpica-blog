@@ -16,12 +16,12 @@ const FourCards = ({
 }) => {
   return (
     <>
-      <article className="h-[500px] cursor-pointer group relative w-full">
+      <article className="h-[500px] cursor-grab group relative w-full">
         <Link to={link}>
           <img
             src={bgImage}
             alt=""
-            className="group-hover:scale-110 transition-transform transform duration-300 h-full object-cover w-full min-w-[243px] md:min-w-[420px]"
+            className="cursor-grab group-hover:scale-110 transition-transform transform duration-300 ease-in-out h-full object-cover w-full min-w-[243px] md:min-w-[420px]"
           />
         </Link>
 
