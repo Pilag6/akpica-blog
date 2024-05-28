@@ -160,12 +160,12 @@ const NoteDashboard = () => {
         </form>
       </div>
 
-      <div className="my-4 w-full h-96 flex flex-row flex-wrap gap-4 overflow-y-scroll ml-4">
+      <div className="my-4 w-full flex flex-row flex-wrap gap-4 overflow-y-auto">
         {displayNotes &&
           displayNotes.map((note) => (
             <div
               key={note._id}
-              className="p-2 mb-2 w-40 h-40 shadow-2xl flex flex-col bg-akpica-white text-akpica-black"
+              className="p-2 mb-2 w-40 h-40 shadow-2xl flex flex-col bg-akpica-white text-akpica-black "
             >
               <div className="font-bold border border-b-akpica-black pb-1 mb-1 flex flex-row items-center justify-between">
                 <h2>{note.title}</h2>
@@ -178,7 +178,7 @@ const NoteDashboard = () => {
               </div>
 
               <div className="flex flex-col justify-between h-28">
-                <p className="overflow-y-scroll overflow-x-hidden">
+                <p className="overflow-y-auto overflow-x-hidden">
                   {note.content}
                 </p>
                 <div className="flex flex-row justify-between items-center">
