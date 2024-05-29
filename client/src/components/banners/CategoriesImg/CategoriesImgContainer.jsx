@@ -14,9 +14,12 @@ import { PostContext } from "@contexts/PostContext.jsx";
 const CategoriesImgContainer = () => {
     const { posts } = useContext(PostContext);
 
+    // Sort posts by date from oldest to newest
+    const sortedPosts = posts.sort((a, b) => new Date(a.date) - new Date(b.date));
+
     const getTag = (index) => {
         return (
-            posts && posts[index] && posts[index].tags && posts[index].tags[0]
+            sortedPosts && sortedPosts[index] && sortedPosts[index].tags && sortedPosts[index].tags[0]
         );
     };
 
@@ -25,11 +28,11 @@ const CategoriesImgContainer = () => {
         { image: category1, tag: getTag(0) },
         { image: category2, tag: getTag(1) },
         { image: category3, tag: getTag(2) },
-        { image: category4, tag: getTag(3) },
+        { image: category6, tag: getTag(3) },
         { image: category5, tag: getTag(4) },
-        { image: category6, tag: getTag(5) },
-        { image: category7, tag: getTag(6) },
-        { image: category8, tag: getTag(7) }
+        { image: category4, tag: getTag(5) },
+        { image: category7, tag: getTag(7) },
+        { image: category8, tag: getTag(10) }
     ].filter(category => {
         if (category.tag && !uniqueTags.has(category.tag)) {
             uniqueTags.add(category.tag);
