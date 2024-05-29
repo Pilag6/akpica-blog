@@ -18,6 +18,7 @@ import TagPage from "@pages/TagPage.jsx";
 
 import MediaDashboard from "@components/DashboardStructure/MediaDashboard.jsx";
 import CreatePosts from "@components/DashboardStructure/CreatePosts.jsx";
+import AboutUs from "@pages/AboutUs";
 
 
 
@@ -29,6 +30,8 @@ function App() {
         <Route path="/" element={<Home />} />
         
         <Route path="/:id" element={<PostDetails />} />
+
+        <Route path="/about" element={<AboutUs/>} />
 
         <Route path="/tags/:tags" element={<TagPage />} />
 
