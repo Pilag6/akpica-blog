@@ -82,13 +82,13 @@ const FourCardsContainer = () => {
           <FourCards
             key={`${card._id}-${index}`}
             bgImage={`${BACKEND_URL}/posts/photo/${encodeURIComponent(card.title)}?${new Date().getTime()}`}
-            category={card.tags}
+            category={card.tags[0]}
             title={card.title}
             avatar={`${BACKEND_URL}/photo/${card.author.username}?${new Date().getTime()}`}
             author={card.author.username[0].toUpperCase() + card.author.username.slice(1)}
             date={new Date(card.date).toDateString()}
             link={`/${card._id}`}
-            linkTag={`/tags/${card.tags}`}
+            linkTag={`/tags/${card.tags[0]}`}
           />
         ))}
       </div>

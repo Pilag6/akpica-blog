@@ -164,7 +164,7 @@ const Footer = () => {
                         img={`${BACKEND_URL}/posts/photo/${encodeURIComponent(
                           post.title
                         )}?${new Date().getTime()}`}
-                        tag={post.tags}
+                        tag={post.tags[0]}
                         author={post.author.username}
                         avatar={`${BACKEND_URL}/photo/${
                           post.author.username
@@ -173,7 +173,7 @@ const Footer = () => {
                         bottom="mt-auto"
                         authorColors={"text-akpica-white"}
                         link={`/${post._id}`}
-                        linkTag={`/tags/${post.tags}`}
+                        linkTag={`/tags/${post.tags[0]}`}
                       />
                     ))}
               </div>
