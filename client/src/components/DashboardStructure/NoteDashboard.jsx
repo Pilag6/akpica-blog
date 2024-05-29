@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Axios from "axios";
+import BACKEND_URL from "@utils/backendUrl.js";
+
+// icons
 import { GrNotes } from "react-icons/gr";
 import { TiDelete, TiEdit } from "react-icons/ti";
-import BACKEND_URL from "@utils/backendUrl.js";
+import { FaPlus } from "react-icons/fa";
 
 const NoteDashboard = () => {
   const navigate = useNavigate();
@@ -12,7 +15,7 @@ const NoteDashboard = () => {
   const [title, setTitle] = useState("");
   const [displayNotes, setDisplayNotes] = useState([]);
   const [error, setError] = useState(null);
-  const [username, setUsername] = useState(null);
+  // const [username, setUsername] = useState(null);
   // delete note
   const [showModal, setShowModal] = useState(false);
   const [noteToDelete, setNoteToDelete] = useState(null);
@@ -51,16 +54,16 @@ const NoteDashboard = () => {
         withCredentials: true,
       });
       if (response.status === 201) {
-        setDisplayNotes([...displayNotes, response.data]); // Add the response data
+        setDisplayNotes([...displayNotes, response.data]);
         setContent("");
         setTitle("");
         navigate("/dh-admin/dashboard/usersDashboard");
       }
-    //   const res = await Axios.get(`${BACKEND_URL}/me`, {
-    //     withCredentials: true,
-    // });
-    // const user = res.data.user;
-    // setUsername(user.username);
+      //   const res = await Axios.get(`${BACKEND_URL}/me`, {
+      //     withCredentials: true,
+      // });
+      // const user = res.data.user;
+      // setUsername(user.username);
     } catch (error) {
       setError(error.response.data.errors);
     }
@@ -88,15 +91,15 @@ const NoteDashboard = () => {
   // edit note
   const confirmEditNote = (noteId) => {
     const note = displayNotes.find((note) => note._id === noteId);
-    setEditTitle(note.title); // use setEditTitle here
-    setEditContent(note.content); // use setEditContent here
+    setEditTitle(note.title);
+    setEditContent(note.content); 
     setNoteToEdit(noteId);
     setShowEditModal(true);
   };
 
   const editNote = async (e) => {
     e.preventDefault();
-    const updatedNote = { title: editTitle, content: editContent }; // use editTitle and editContent here
+    const updatedNote = { title: editTitle, content: editContent };
     try {
       const response = await Axios.patch(
         `${BACKEND_URL}/notes/${noteToEdit}`,
@@ -108,7 +111,9 @@ const NoteDashboard = () => {
       if (response.status === 200) {
         setDisplayNotes(
           displayNotes.map((note) =>
-            note._id === noteToEdit ? { ...note, title: editTitle, content: editContent } : note
+            note._id === noteToEdit
+              ? { ...note, title: editTitle, content: editContent }
+              : note
           )
         );
         setEditTitle("");
@@ -123,70 +128,72 @@ const NoteDashboard = () => {
 
   return (
     <>
-      <div className="flex items-baseline gap-2">
+      <div className="flex items-baseline gap-2 text-akpica-white">
         <span className="text-xl">
           <GrNotes />
         </span>
         <h1 className="font-bold text-3xl">Notes</h1>
       </div>
+      <p className="text-lg my-4 text-akpica-white">A place for random notes</p>
 
-      <p className="text-lg mb-4">A place for random notes</p>
-
-      <div className="w-2/4 text-left text-akpica-black">
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          <input
-            type="text"
-            className="bg-akpica-white border border-akpica-black pl-1"
-            id="title"
-            name="title"
-            placeholder="Title"
-            onChange={(e) => setTitle(e.target.value)}
-            value={title}
-          />
-          <textarea
-            name="note"
-            id="note"
-            placeholder="Enter a note here . . ."
-            className="bg-akpica-white border border-akpica-black pl-1"
-            onChange={(e) => setContent(e.target.value)}
-            value={content}
-          ></textarea>
-          <button
-            type="submit"
-            className="border border-akpica-black bg-akpica-marco p-2 w-20 hover:bg-yellow-600 active:bg-akpica-pastel/50"
-          >
-            Submit
-          </button>
+      <div className="mb-4">
+        <form onSubmit={handleSubmit} className="flex gap-4 h-32">
+          
+            <div className="flex flex-col gap-4 w-2/4 h-full text-akpica-white">
+              <input
+                type="text"
+                className="border border-gray-700 bg-gray-800 p-2"
+                id="title"
+                name="title"
+                placeholder="Note title"
+                onChange={(e) => setTitle(e.target.value)}
+                value={title} />
+              <textarea
+                name="note"
+                id="note"
+                placeholder="Enter a note here . . ."
+                className="border border-gray-700 bg-gray-800 p-2 resize-none"
+                onChange={(e) => setContent(e.target.value)}
+                value={content}>
+                </textarea>
+            </div>
+            <button
+            title="Add Note"
+              type="submit"
+              className="p-2 text-4xl flex items-center justify-center border border-gray-700 hover:bg-gray-600 active:bg-gray-500 text-akpica-white w-32 h-full">
+              <FaPlus />
+            </button>
+          
         </form>
       </div>
-
-      <div className="my-4 w-full flex flex-row flex-wrap gap-4 overflow-y-auto">
+      {/* each note */}
+      <div className="my-4 w-full h-[405px] flex flex-row flex-wrap gap-4 overflow-y-auto">
         {displayNotes &&
           displayNotes.map((note) => (
             <div
               key={note._id}
-              className="p-2 mb-2 w-40 h-40 shadow-2xl flex flex-col bg-akpica-white text-akpica-black "
-            >
-              <div className="font-bold border border-b-akpica-black pb-1 mb-1 flex flex-row items-center justify-between">
-                <h2>{note.title}</h2>
+              // p-2 mb-2 w-40 h-40 border border-gray-700  flex flex-col text-akpica-white
+              className="p-2 mb-2 w-40 h-40 border border-gray-700 flex flex-col text-akpica-white">
+              <div className="font-bold border-b border-gray-700 pb-1 mb-1 flex flex-row items-center justify-between">
+                <h2 className="pl-1">{note.title}</h2>
                 <button
                   onClick={() => confirmDeleteNote(note._id)}
-                  className="text-akpica-tomato text-xl hover:text-red-600"
-                >
+                  title="Delete"
+                  className="text-akpica-tomato text-xl hover:text-red-600 active:text-red-800">
                   <TiDelete />
                 </button>
               </div>
 
-              <div className="flex flex-col justify-between h-28">
+              <div className="flex flex-col justify-between h-28 pl-1">
                 <p className="overflow-y-auto overflow-x-hidden">
                   {note.content}
                 </p>
                 <div className="flex flex-row justify-between items-center">
-                  <p>@{note.author.username}</p>
+                  <p>By: @{note.author.username}</p>
                   <button
+                  title="Edit"
                     onClick={() => confirmEditNote(note._id)}
-                    className="text-akpica-green text-xl hover:text-green-600"
-                  >
+                    className="text-akpica-green text-xl hover:text-green-600 active:text-green-800">
                     <TiEdit />
                   </button>
                 </div>
@@ -207,14 +214,12 @@ const NoteDashboard = () => {
             <div className="mt-6 flex justify-end gap-4">
               <button
                 onClick={deleteNote}
-                className="bg-akpica-tomato text-white hover:bg-red-600 p-2"
-              >
+                className="bg-akpica-tomato text-white hover:bg-red-600 active:bg-red-800 p-2">
                 Yes
               </button>
               <button
                 onClick={() => setShowModal(false)}
-                className="text-black bg-gray-300 hover:bg-gray-400 p-2"
-              >
+                className="text-black bg-gray-300 hover:bg-gray-400 active:bg-gray-600 p-2">
                 No
               </button>
             </div>
@@ -229,33 +234,28 @@ const NoteDashboard = () => {
               <input
                 type="text"
                 className="bg-akpica-white border border-akpica-black pl-1"
-                id="editTitle" // Change the id to be unique
-                name="editTitle" // Change the name to be unique
+                id="editTitle"
+                name="editTitle"
                 placeholder="Title"
                 onChange={(e) => setEditTitle(e.target.value)}
-                value={editTitle}
-              />
-
+                value={editTitle} />
               <textarea
-                name="editNote" // Change the name to be unique
-                id="editNote" // Change the id to be unique
+                name="editNote"
+                id="editNote"
                 placeholder="Enter a note here . . ."
-                className="bg-akpica-white border border-akpica-black pl-1"
+                className="bg-akpica-white border border-akpica-black pl-1 resize-none"
                 onChange={(e) => setEditContent(e.target.value)}
-                value={editContent}
-              ></textarea>
+                value={editContent}></textarea>
               <div className="mt-6 flex justify-end gap-4">
                 <button
                   onClick={editNote}
                   type="button" // Change this to button type="button" to prevent form submission
-                  className="bg-akpica-carlo/80 hover:bg-akpica-green text-white p-2"
-                >
+                  className="bg-akpica-carlo/80 hover:bg-akpica-green active:bg-green-800 text-white p-2">
                   Edit Note
                 </button>
                 <button
                   onClick={() => setShowEditModal(false)}
-                  className="bg-akpica-marco hover:bg-yellow-600 text-white p-2"
-                >
+                  className="bg-akpica-marco hover:bg-yellow-600 active:bg-yellow-800 text-white p-2">
                   Cancel
                 </button>
               </div>
