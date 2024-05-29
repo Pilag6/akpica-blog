@@ -2,30 +2,36 @@ import { NavLink } from "react-router-dom";
 import { useContext } from "react";
 
 // icons
-import { FaMagnifyingGlass, FaBars } from "react-icons/fa6";
+import { FaBars } from "react-icons/fa6";
+
+import SearchBar from "@components/SearchBar.jsx";
 import { ToggleContext } from "@contexts/ToggleContext.jsx";
+import { PostContext } from "@contexts/PostContext.jsx";
+
 
 const Navbar = ({ scrolling }) => {
   const { isToggle, handleToggle } = useContext(ToggleContext);
+  const { posts } = useContext(PostContext);
 
   const linkStyles = `pl-4 hover:underline-offset-8 hover:underline transition transform active:text-akpica-pastel font-semibold text-akpica-white`;
-  const mobileLinkStyles = `flex flex-col items-center p-4 hover:underline-offset-8 hover:underline transition transform active:text-akpica-pastel font-semibold text-akpica-white`;
+  const mobileLinkStyles = `p-4 hover:underline-offset-8 hover:underline transition transform active:text-akpica-pastel font-semibold text-akpica-white`;
 
   return (
     <div className="flex items-center justify-between px-5">
       <nav className="md:flex items-center justify-center gap-5 text-lg hidden">
+        <NavLink className={linkStyles} to={"/tags/frontend"}>
+          Frontend
+        </NavLink>
+        <NavLink className={linkStyles} to={"/tags/backend"}>
+          Backend
+        </NavLink>
+        <NavLink className={linkStyles} to={"/tags/uiux"}>
+          UI/UX
+        </NavLink>
         <NavLink className={linkStyles} to={"/"}>
-          Home
+          About Us
         </NavLink>
-        <NavLink className={linkStyles} to={"/features"}>
-          Features
-        </NavLink>
-        <NavLink className={linkStyles} to={"/blogs"}>
-          Blogs
-        </NavLink>
-        <NavLink className={linkStyles} to={"/services"}>
-          Services
-        </NavLink>
+        {/* LOGIN - to remove later */}
         <NavLink className={linkStyles} to={"/dh-admin/login"}>
           Login
         </NavLink>
@@ -43,31 +49,32 @@ const Navbar = ({ scrolling }) => {
             scrolling ? "bg-akpica-black" : "bg-[#242424b1]"
           }`}
         >
-          <div onClick={isToggle}>
-            <NavLink className={mobileLinkStyles} to={"/"}>
-              Home
-            </NavLink>
-            <NavLink className={mobileLinkStyles} to={"/features"}>
-              Features
-            </NavLink>
-            <NavLink className={mobileLinkStyles} to={"/blogs"}>
-              Blogs
-            </NavLink>
-            <NavLink className={mobileLinkStyles} to={"/services"}>
-              Services
-            </NavLink>
-            <NavLink className={mobileLinkStyles} to={"/dh-admin/login"}>
-              Login
-            </NavLink>
+          <div onClick={isToggle} className="flex flex-col items-center ">
+          <NavLink className={mobileLinkStyles} to={"/tags/frontend"}>
+          Front-end
+        </NavLink>
+        <NavLink className={mobileLinkStyles} to={"/tags/backend"}>
+          Back-end
+        </NavLink>
+        <NavLink className={mobileLinkStyles} to={"/tags/uiux"}>
+          UI/UX
+        </NavLink>
+        <NavLink className={mobileLinkStyles} to={"/"}>
+          About us
+        </NavLink>
+        {/* LOGIN - to remove later */}
+        <NavLink className={mobileLinkStyles} to={"/dh-admin/login"}>
+          Login
+        </NavLink>
           </div>
         </nav>
       )}
 
-      <div
-        className={`flex gap-6 text-lg pl-5 cursor-pointer active:text-akpica-pastel text-akpica-white`}
-      >
-        <FaMagnifyingGlass />
-      </div>
+      {/* search bar */}
+      <SearchBar placeholder="Search . . ."
+      data={posts}
+      />
+
     </div>
   );
 };
