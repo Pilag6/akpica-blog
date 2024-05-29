@@ -1,11 +1,11 @@
-import activity from "@assets/activity.jpg";
-import oceanside from "@assets/oceanside.jpeg";
-import funfacts from "@assets/fun-facts.jpeg";
-import gaming from "@assets/gaming.jpg";
-import health from "@assets/health.jpg";
-import science from "@assets/science.jpg";
-import sports from "@assets/sports.jpg";
-import technology from "@assets/technology.jpg";
+import category1 from "@assets/category-1.webp"; // Node
+import category2 from "@assets/category-2.webp"; // css
+import category3 from "@assets/category-3.webp";
+import category4 from "@assets/category-4.webp";
+import category5 from "@assets/category-5.webp";
+import category6 from "@assets/category-6.webp";
+import category7 from "@assets/category-7.webp";
+import category8 from "@assets/category-8.webp";
 import TitleSections from "@components/miniComponents/TitleSections.jsx";
 import CategoryImgCard from "./CategoryImgCard.jsx";
 import { useContext } from "react";
@@ -22,14 +22,14 @@ const CategoriesImgContainer = () => {
 
     const uniqueTags = new Set();
     const categories = [
-        { image: activity, tag: getTag(0) },
-        { image: oceanside, tag: getTag(1) },
-        { image: funfacts, tag: getTag(2) },
-        { image: gaming, tag: getTag(3) },
-        { image: health, tag: getTag(4) },
-        { image: science, tag: getTag(5) },
-        { image: sports, tag: getTag(6) },
-        { image: technology, tag: getTag(7) }
+        { image: category1, tag: getTag(0) },
+        { image: category2, tag: getTag(1) },
+        { image: category3, tag: getTag(2) },
+        { image: category4, tag: getTag(3) },
+        { image: category5, tag: getTag(4) },
+        { image: category6, tag: getTag(5) },
+        { image: category7, tag: getTag(6) },
+        { image: category8, tag: getTag(7) }
     ].filter(category => {
         if (category.tag && !uniqueTags.has(category.tag)) {
             uniqueTags.add(category.tag);
