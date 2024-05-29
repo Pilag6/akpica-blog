@@ -7,6 +7,7 @@ import { PostContext } from "@contexts/PostContext.jsx";
 
 // Icons
 import { FaPlus } from "react-icons/fa";
+import { MdOutlineChevronRight } from "react-icons/md";
 
 // Backend URL
 import BACKEND_URL from "@utils/backendUrl.js";
@@ -18,6 +19,7 @@ const PostDashboard = () => {
 
     const [showModal, setShowModal] = useState(false);
     const [postToDelete, setPostToDelete] = useState(null);
+    const [sortCriteria, setSortCriteria] = useState({ field: "date", order: "desc" });
 
     const queryParams = new URLSearchParams(location.search);
     const authorId = queryParams.get("authorId");
@@ -25,6 +27,28 @@ const PostDashboard = () => {
     const filteredPosts = authorId
         ? posts.filter((post) => post.author._id === authorId)
         : posts;
+
+    // Function to sort posts based on the selected criteria
+    const sortPosts = (posts) => {
+        return posts.sort((a, b) => {
+            if (sortCriteria.field === "date") {
+                return sortCriteria.order === "asc"
+                    ? new Date(a.date) - new Date(b.date)
+                    : new Date(b.date) - new Date(a.date);
+            } else if (sortCriteria.field === "title") {
+                return sortCriteria.order === "asc"
+                    ? a.title.localeCompare(b.title)
+                    : b.title.localeCompare(a.title);
+            } else if (sortCriteria.field === "author") {
+                return sortCriteria.order === "asc"
+                    ? a.author.username.localeCompare(b.author.username)
+                    : b.author.username.localeCompare(a.author.username);
+            }
+            return 0;
+        });
+    };
+
+    const sortedPosts = sortPosts(filteredPosts);
 
     const currentAuthor = authorId
         ? posts.find((post) => post.author._id === authorId)?.author.username
@@ -40,6 +64,13 @@ const PostDashboard = () => {
         navigate({ search: queryParams.toString() });
     };
 
+    const handleSortChange = (field) => {
+        setSortCriteria((prevCriteria) => ({
+            field,
+            order: prevCriteria.order === "asc" ? "desc" : "asc"
+        }));
+    };
+
     const confirmDeletePost = (postId) => {
         setPostToDelete(postId);
         setShowModal(true);
@@ -48,7 +79,7 @@ const PostDashboard = () => {
     const deletePost = async () => {
         try {
             await Axios.delete(`${BACKEND_URL}/posts/${postToDelete}`, {
-                withCredentials: true,
+                withCredentials: true
             });
             setPosts(posts.filter((post) => post._id !== postToDelete));
             setShowModal(false);
@@ -68,16 +99,16 @@ const PostDashboard = () => {
                     <FaPlus /> Add New Post
                 </button>
             </div>
-            <div className="flex">
+            <div className="flex m-2 items-center gap-4 pl-8">
                 <div
-                    className="pl-8 text-akpica-white cursor-pointer underline underline-offset-4"
+                    className="text-akpica-white cursor-pointer underline underline-offset-4"
                     onClick={handleShowAllPosts}
                 >
                     All Posts ({postQuantity})
                 </div>
                 {currentAuthor && (
                     <div className="pl-4 text-akpica-white">
-                        {currentAuthor} ({filteredPosts.length})
+                        {currentAuthor} ({sortedPosts.length})
                     </div>
                 )}
             </div>
@@ -90,17 +121,20 @@ const PostDashboard = () => {
                                 <th scope="col" className="px-6 py-3">
                                     Image
                                 </th>
-                                <th scope="col" className="px-6 py-3">
+                                <th scope="col" className="px-6 py-3 cursor-pointer rota" onClick={() => handleSortChange("title")}>
                                     Post Title
+                                    <MdOutlineChevronRight className={`rotate-90 ml-1 inline-block transform ${sortCriteria.field === "title" && sortCriteria.order === "asc" ? "-rotate-90" : "rotate-90"}`} />
                                 </th>
-                                <th scope="col" className="px-6 py-3">
+                                <th scope="col" className="px-6 py-3 cursor-pointer" onClick={() => handleSortChange("author")}>
                                     Author
+                                    <MdOutlineChevronRight className={`rotate-90 ml-1 inline-block transform ${sortCriteria.field === "author" && sortCriteria.order === "asc" ? "-rotate-90" : "rotate-90"}`} />
                                 </th>
                                 <th scope="col" className="px-6 py-3">
                                     Tags
                                 </th>
-                                <th scope="col" className="px-6 py-3">
+                                <th scope="col" className="px-6 py-3 cursor-pointer" onClick={() => handleSortChange("date")}>
                                     Date
+                                    <MdOutlineChevronRight className={`rotate-90 ml-1 inline-block transform ${sortCriteria.field === "date" && sortCriteria.order === "asc" ? "-rotate-90" : "rotate-90"}`} />
                                 </th>
                                 <th colSpan={2} className="px-6 py-3">
                                     Action
@@ -109,7 +143,7 @@ const PostDashboard = () => {
                         </thead>
 
                         <tbody>
-                            {filteredPosts.map((post, index) => (
+                            {sortedPosts.map((post, index) => (
                                 <tr
                                     key={index}
                                     className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
@@ -134,16 +168,14 @@ const PostDashboard = () => {
                                         @{post.author.username}
                                     </td>
                                     <td className="px-6 py-4 flex gap-3">
-                                        {post.tags
-                                            .slice(0, 4)
-                                            .map((tag, index) => (
-                                                <span
-                                                    key={index}
-                                                    className="bg-gray-200 dark:bg-gray-700 dark:text-gray-400 px-2 py-1 rounded text-xs"
-                                                >
-                                                    {tag}
-                                                </span>
-                                            ))}
+                                        {post.tags.slice(0, 4).map((tag, index) => (
+                                            <span
+                                                key={index}
+                                                className="bg-gray-200 dark:bg-gray-700 dark:text-gray-400 px-2 py-1 rounded text-xs"
+                                            >
+                                                {tag}
+                                            </span>
+                                        ))}
                                     </td>
                                     <td className="px-6 py-4">
                                         {new Date(post.date).toDateString()}

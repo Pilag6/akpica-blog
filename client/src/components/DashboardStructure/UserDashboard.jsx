@@ -2,6 +2,7 @@ import { useContext, useState, useEffect } from "react";
 import { PostContext } from "@contexts/PostContext.jsx";
 import Axios from "axios";
 import { FaPlus } from "react-icons/fa";
+import { MdOutlineChevronRight } from "react-icons/md";
 import { Link } from "react-router-dom";
 import BACKEND_URL from "@utils/backendUrl.js";
 import NoteDashboard from "./NoteDashboard.jsx";
@@ -11,7 +12,8 @@ const UserDashboard = () => {
     const [userQuantity, setUserQuantity] = useState(0);
     const [showModal, setShowModal] = useState(false);
     const [userToDelete, setUserToDelete] = useState(null);
-    
+    const [sortCriteria, setSortCriteria] = useState({ field: "name", order: "asc" });
+
     const { posts } = useContext(PostContext);
 
     useEffect(() => {
@@ -58,6 +60,38 @@ const UserDashboard = () => {
         return posts.filter(post => post.author._id === userId).length;
     };
 
+    const handleSortChange = (field) => {
+        setSortCriteria((prevCriteria) => ({
+            field,
+            order: prevCriteria.field === field && prevCriteria.order === "asc" ? "desc" : "asc"
+        }));
+    };
+
+    const sortUsers = (users) => {
+        return users.sort((a, b) => {
+            if (sortCriteria.field === "name") {
+                return sortCriteria.order === "asc"
+                    ? a.fullname.localeCompare(b.fullname)
+                    : b.fullname.localeCompare(a.fullname);
+            } else if (sortCriteria.field === "email") {
+                return sortCriteria.order === "asc"
+                    ? a.email.localeCompare(b.email)
+                    : b.email.localeCompare(a.email);
+            } else if (sortCriteria.field === "role") {
+                return sortCriteria.order === "asc"
+                    ? a.role.localeCompare(b.role)
+                    : b.role.localeCompare(a.role);
+            } else if (sortCriteria.field === "posts") {
+                return sortCriteria.order === "asc"
+                    ? getUserPostCount(a._id) - getUserPostCount(b._id)
+                    : getUserPostCount(b._id) - getUserPostCount(a._id);
+            }
+            return 0;
+        });
+    };
+
+    const sortedAdmin = admin ? sortUsers([...admin]) : [];
+
     return (
         <div>
             <div className="flex items-center pt-6 pb-3 pl-8 gap-4">
@@ -68,21 +102,33 @@ const UserDashboard = () => {
                     <FaPlus /> Add New User
                 </Link>
             </div>
-            <div className="pl-8 text-akpica-white">({userQuantity}) Users</div>
-            <section className="flex gap-6 w-full p-4">
+            <div className="m-2 pl-8 text-akpica-white">({userQuantity}) Users</div>
+            <section className="flex flex-col md:flex-row gap-6 w-full p-4">
                 <div className="relative overflow-x-auto shadow-md">
                     <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
-                                <th scope="col" className="px-6 py-3">Name</th>
-                                <th scope="col" className="px-6 py-3">Email Address</th>
-                                <th scope="col" className="px-6 py-3">Role</th>
-                                <th scope="col" className="px-6 py-3">Posts</th>
+                                <th scope="col" className="px-6 py-3 cursor-pointer" onClick={() => handleSortChange("name")}>
+                                    Name
+                                    <MdOutlineChevronRight className={`rotate-90 ml-1 inline-block transform ${sortCriteria.field === "name" && sortCriteria.order === "asc" ? "-rotate-90" : "rotate-90"}`} />
+                                </th>
+                                <th scope="col" className="px-6 py-3 cursor-pointer" onClick={() => handleSortChange("email")}>
+                                    Email Address
+                                    <MdOutlineChevronRight className={`rotate-90 ml-1 inline-block transform ${sortCriteria.field === "email" && sortCriteria.order === "asc" ? "-rotate-90" : "rotate-90"}`} />
+                                </th>
+                                <th scope="col" className="px-6 py-3 cursor-pointer" onClick={() => handleSortChange("role")}>
+                                    Role
+                                    <MdOutlineChevronRight className={`rotate-90 ml-1 inline-block transform ${sortCriteria.field === "role" && sortCriteria.order === "asc" ? "-rotate-90" : "rotate-90"}`} />
+                                </th>
+                                <th scope="col" className="px-6 py-3 cursor-pointer" onClick={() => handleSortChange("posts")}>
+                                    Posts
+                                    <MdOutlineChevronRight className={`rotate-90 ml-1 inline-block transform ${sortCriteria.field === "posts" && sortCriteria.order === "asc" ? "-rotate-90" : "rotate-90"}`} />
+                                </th>
                                 <th colSpan={2} className="px-6 py-3">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {admin && admin.map((user, index) => (
+                            {sortedAdmin.map((user, index) => (
                                 <tr
                                     key={index}
                                     className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
@@ -106,8 +152,8 @@ const UserDashboard = () => {
                                         {user.role.charAt(0).toUpperCase() + user.role.slice(1)}
                                     </td>
                                     <td className="px-6 py-4 text-center">
-                                        <Link 
-                                            className="underline-offset-4 underline" 
+                                        <Link
+                                            className="underline-offset-4 underline"
                                             to={`/dh-admin/dashboard/postsDashboard?authorId=${user._id}`}
                                         >
                                             {getUserPostCount(user._id)}
@@ -135,7 +181,7 @@ const UserDashboard = () => {
                     </table>
                 </div>
                 <div className="flex flex-col flex-1 bg-gray-800 p-4">
-                <NoteDashboard />
+                    <NoteDashboard />
                 </div>
             </section>
 
@@ -162,7 +208,6 @@ const UserDashboard = () => {
                     </div>
                 </div>
             )}
-            
         </div>
     );
 };
