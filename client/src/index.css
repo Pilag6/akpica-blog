@@ -29,7 +29,13 @@ a {
 }
 
 ul {
-    list-style: none;
+    list-style:circle;
+    padding-left: 30px ;
+}
+
+ol {
+    list-style:decimal;
+    padding-left: 30px ;
 }
 
 img {
