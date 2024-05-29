@@ -17,7 +17,9 @@ const postSchema = new Schema(
             ref: "User"
         },
         image: {
-            type: String
+            type: String,
+            // public_id: String,
+            // url: String
         },
         tags: {
             type: [String]

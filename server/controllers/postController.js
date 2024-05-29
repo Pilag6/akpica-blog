@@ -1,5 +1,6 @@
 import asyncHandler from "../config/asyncHandler.js";
 import PostModel from "../models/PostModel.js";
+import  cloudinary  from "../utils/cloudinary.js";
 
 import path from "path";
 import { fileURLToPath } from "url";
@@ -14,27 +15,30 @@ const __dirname = path.dirname(__filename);
 @access  Public
 */
 const createPost = asyncHandler(async (req, res) => {
-    const { title, content, date, tags } = req.body;
+    console.log("try", req.file);
+    const { title, content, image, date, tags } = req.body;
 
     if (!title || !content ) {
         res.status(400);
         throw new Error("Title and Content are required");
     }
+    const b64 = Buffer.from(req.file.buffer).toString("base64");
+	let dataURI = "data:" + req.file.mimetype + ";base64," + b64;
+	// const cloudinaryRes = await cloudinary.uploader.upload(dataURI)
 
-    let imageFilename;
-
-        if (req.file) {
-            imageFilename = req.file.filename;
-        } else {
-            imageFilename = 'default-image.jpg';
-        }
-
+    const result = await cloudinary.uploader.upload(dataURI, {
+        folder: "akpica-blog",
+        width: 300,
+        height: 300,
+        crop: "fill"
+    });
+    console.log("result...", result);
     const post = await PostModel.create({
         title,
         content,
         date,
         author: req.user.id,
-        image: req.file.filename,
+        image: result.public_id,
         tags: tags.split(",")
     });
     res.status(201).json(post);
