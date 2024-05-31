@@ -16,7 +16,7 @@ const FourCards = ({
 }) => {
   return (
     <>
-      <article className="h-[500px] cursor-grab group relative w-full">
+      <article className="h-[500px] cursor-grab group relative w-full overflow-hidden">
         <Link to={link}>
           <img
             src={bgImage}
@@ -26,7 +26,7 @@ const FourCards = ({
         </Link>
 
         {/* text banner */}
-        <div className="flex flex-col h-full w-full absolute top-[75%] group-hover:top-[65%] group-hover:scale-110 group-hover:px-6 gap-4 text-akpica-white p-4 bg-akpica-black/70 to-akpica-white/5 group-hover:bg-akpica-black/90 transition-all duration-300 ease-in-out">
+        <div className="flex flex-col h-full w-full absolute top-[70%] group-hover:top-[60%] gap-4 text-akpica-white p-4 bg-akpica-black/70 to-akpica-white/5 group-hover:bg-akpica-black/90 transition-all duration-300 ease-in-out px-5">
           {/* flex flex-col h-full w-full absolute top-[75%] left-0 group-hover:top-[65%]  gap-4 text-akpica-white p-4 bg-akpica-black/70 to-akpica-white/5 group-hover:bg-akpica-black/90 transition-all */}
 
           <CardTag
@@ -44,7 +44,7 @@ const FourCards = ({
             </Link>
             <AuthorDate avatar={avatar} author={author} date={date} />
 
-            <button className="text-white mt-20 px-3 py-1 bg-akpica-carlo hover:bg-akpica-green group-hover:mt-4 transition-all delay-100 duration-200 ease-in-out">
+            <button className="text-white border mt-20 px-3 py-1 bg-akpica-carlo hover:bg-akpica-green group-hover:mt-4 transition-all delay-100 duration-200 ease-in-out">
               <Link to={link}>See more</Link>
             </button>
           </div>

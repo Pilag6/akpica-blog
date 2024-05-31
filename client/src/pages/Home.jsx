@@ -12,6 +12,7 @@ import MoreFromUs from "@components/banners/MoreFromUs/MoreFromUsContainer.jsx";
 import GridCardsSection from "@components/banners/GridCardsSection.jsx";
 import Footer from "@components/Footer.jsx";
 import { Slogan } from "@components/banners/Slogan.jsx";
+import FrontBackUxContainer from "@components/banners/FrontBackUXContainer/FrontBackUxContainer.jsx";
 
 const Home = () => {
     // const { posts } = useContext(PostContext);
@@ -29,6 +30,7 @@ const Home = () => {
                     <GridCardsSection />
                     <MoreFromUs />
                     <FourCardsContainer />
+                    <FrontBackUxContainer />
                 </main>
                 <Footer />
             </div>
