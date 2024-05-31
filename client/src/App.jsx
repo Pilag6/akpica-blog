@@ -18,6 +18,7 @@ import TagPage from "@pages/TagPage.jsx";
 
 import MediaDashboard from "@components/DashboardStructure/MediaDashboard.jsx";
 import CreatePosts from "@components/DashboardStructure/CreatePosts.jsx";
+import EditPost from "@components/DashboardStructure/EditPost.jsx";
 
 
 
@@ -46,6 +47,7 @@ function App() {
           <Route path="postsDashboard" element={<PostDashboard />} />
           <Route path="postsDashboard/:id" element={<PostInfo />} />
           <Route path="postsDashboard/create" element={<CreatePosts />} />
+          <Route path="postsDashboard/edit/:id" element={<EditPost />} />
           <Route path="mediaDashboard" element={<MediaDashboard />} />
           <Route path="register" element={<Register />} />
         </Route>

@@ -107,23 +107,34 @@ const getPostsByTags = asyncHandler(async (req, res) => {
 @access  Public
 */
 const updateOnePost = asyncHandler(async (req, res) => {
+    const updateData = {
+        ...req.body
+    };
+
+    if (req.file) {
+        updateData.image = req.file.filename;
+    }
+
+    if (updateData.tags) {
+        updateData.tags = updateData.tags.split(",");
+    }
+
+    console.log("Update Data:", updateData); // Debug log
+
     const postUpdated = await PostModel.findByIdAndUpdate(
         req.params.id,
-        req.body,
+        updateData,
         { new: true }
-
-        // What is {new: true}?
-        // By default, findByIdAndUpdate() returns the original document.
-        // To return the document after update you have to pass an option: new: true.
     );
 
-    // Handling error in case that there isn't a post with the provided ID
     if (!postUpdated) {
-        res.status(404);
-        throw new Error(`Post ID:${req.params.id} not found.`);
+        res.status(404).throw(new Error(`Post ID:${req.params.id} not found.`));
     }
     res.status(200).json(postUpdated);
 });
+
+
+
 
 /* 
 @desc    Delete an post

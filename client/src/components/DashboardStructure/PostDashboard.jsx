@@ -181,12 +181,12 @@ const PostDashboard = () => {
                                         {new Date(post.date).toDateString()}
                                     </td>
                                     <td className="px-6 py-4">
-                                        <Link
-                                            to={`/posts/edit/${post._id}`}
+                                        <button
+                                            onClick={() => navigate(`edit/${post._id}`)}
                                             className="font-medium text-akpica-marco dark:text-akpica-marco hover:underline"
                                         >
                                             Edit
-                                        </Link>
+                                        </button>
                                     </td>
                                     <td className="px-6 py-4">
                                         <button

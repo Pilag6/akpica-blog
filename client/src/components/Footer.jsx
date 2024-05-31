@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import akpicaLogo from "@assets/logo-white.png";
 
 import { FaGithubSquare } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
@@ -99,7 +98,7 @@ const Footer = () => {
                                         to={"/tags/uxui%20design"}
                                         className="text-lg cursor: pointer hover:underline-offset-8 hover:underline transition transform active:text-akpica-pastel font-semibold text-akpica-white"
                                     >
-                                        UX/UI DESIGN
+                                        UX/UI Design
                                     </Link>
                                 </div>
                                 <div>
@@ -107,7 +106,7 @@ const Footer = () => {
                                         to={"/tags/react"}
                                         className="text-lg cursor: pointer hover:underline-offset-8 hover:underline transition transform active:text-akpica-pastel font-semibold text-akpica-white"
                                     >
-                                        REACT
+                                        React
                                     </Link>
                                 </div>
                                 <div>
@@ -115,7 +114,15 @@ const Footer = () => {
                                         to={"/tags/node"}
                                         className="text-lg cursor: pointer hover:underline-offset-8 hover:underline transition transform active:text-akpica-pastel font-semibold text-akpica-white"
                                     >
-                                        NODE
+                                        Node
+                                    </Link>
+                                </div>
+                                <div>
+                                    <Link
+                                        to={"/tags/astro"}
+                                        className="text-lg cursor: pointer hover:underline-offset-8 hover:underline transition transform active:text-akpica-pastel font-semibold text-akpica-white"
+                                    >
+                                        Astro
                                     </Link>
                                 </div>
                             </div>
