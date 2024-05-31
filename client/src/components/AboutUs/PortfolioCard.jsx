@@ -10,7 +10,7 @@ const PortfolioCard = ({ imageUrl, image, altTitle, title, description, demoUrl,
           <img
             src={image}
             alt={altTitle}
-            className="w-44 h-28 rounded-t-lg object-cover object-center mb-5 hover:cursor-pointer hover:filter hover:contrast-50 transition ease-in-out duration-200"
+            className="w-44 h-28 object-cover object-center mb-5 hover:cursor-pointer hover:filter hover:contrast-50 transition ease-in-out duration-200"
           />
           {/* <h3 className="text-center text-gray-900 text-lg font-semibold uppercase mb-2 hover:underline hover:underline-offset-2 transition ease-in-out duration-200">
             {title}
