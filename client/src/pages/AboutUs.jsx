@@ -8,7 +8,6 @@ import carlosportfolio from "@assets/carlosportfolio.png";
 import akpicaus from "@assets/akpicaDefault.jpg";
 
 import Header from "@components/Header/Header";
-
 import Footer from "@components/Footer";
 import AboutUsCard from "@components/AboutUs/AboutUsCard";
 
@@ -29,9 +28,10 @@ const AboutUs = () => {
           <span className="bg-akpica-marco/85 p-4">About Akpica Team</span>
         </header>
         <div className="flex flex-wrap justify-center my-11">
+
           <AboutUsCard
+          
             profilepicture={profileakiko}
-            alTitle={"profilepicture"}
             name={"Akiko Luka"}
             text={
               "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptas, quaerat. Nostrum doloremque doloribus debitis dolores soluta, corrupti asperiores corporis quam? Ex repudiandae quasi nemo optio nihil pariatur quisquam atque officiis commodi animi, inventore doloribus delectus eos laudantium ipsa reprehenderit. Earum quasi porro excepturi vel unde quas saepe provident quidem totam?"
@@ -41,6 +41,7 @@ const AboutUs = () => {
             github={"https://github.com/akiko-luka"}
             linkedin={"https://www.linkedin.com/in/akiko-luka/"}
           />
+
           <AboutUsCard
             profilepicture={profilepila}
             name={"Pila Gonzalez"}
