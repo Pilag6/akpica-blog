@@ -38,7 +38,10 @@ const createPost = asyncHandler(async (req, res) => {
         content,
         date,
         author: req.user.id,
-        image: result.public_id,
+        image: {
+            public_id: result.public_id,
+            url: result.secure_url
+        },
         tags: tags.split(",")
     });
     res.status(201).json(post);
