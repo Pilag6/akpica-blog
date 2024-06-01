@@ -3,10 +3,17 @@ import axios from "axios";
 import { Editor } from "@tinymce/tinymce-react";
 import BACKEND_URL from "@utils/backendUrl";
 import akpicaDefaultImage from "@assets/akpicaDefault.jpg";
+import { Cloudinary } from "cloudinary-core";
+import {CLOUDINARY_CLOUD_NAME, CLOUDINARY_UPLOAD_PRESET} from "@utils/cloudinary";
 
 import { PiPlusSquareBold } from "react-icons/pi";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { AiFillCloseCircle } from "react-icons/ai";
+
+const cl = new Cloudinary({
+    cloud_name: CLOUDINARY_CLOUD_NAME,
+    secure: true
+});
 
 const CreatePosts = () => {
     const [title, setTitle] = useState("");
@@ -65,7 +72,7 @@ const CreatePosts = () => {
 
         try {
             const response = await axios.post(
-                `${BACKEND_URL}/posts`,
+                `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`,
                 formData,
                 {
                     headers: {

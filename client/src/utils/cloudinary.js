@@ -1,0 +1,4 @@
+const CLOUDINARY_CLOUD_NAME = "dejcduvnj";
+const CLOUDINARY_UPLOAD_PRESET = "akpica-blog";
+
+export { CLOUDINARY_CLOUD_NAME, CLOUDINARY_UPLOAD_PRESET };
