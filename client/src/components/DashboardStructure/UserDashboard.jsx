@@ -70,17 +70,23 @@ const UserDashboard = () => {
     const sortUsers = (users) => {
         return users.sort((a, b) => {
             if (sortCriteria.field === "name") {
+                const nameA = a.fullname || '';
+                const nameB = b.fullname || '';
                 return sortCriteria.order === "asc"
-                    ? a.fullname.localeCompare(b.fullname)
-                    : b.fullname.localeCompare(a.fullname);
+                    ? nameA.localeCompare(nameB)
+                    : nameB.localeCompare(nameA);
             } else if (sortCriteria.field === "email") {
+                const emailA = a.email || '';
+                const emailB = b.email || '';
                 return sortCriteria.order === "asc"
-                    ? a.email.localeCompare(b.email)
-                    : b.email.localeCompare(a.email);
+                    ? emailA.localeCompare(emailB)
+                    : emailB.localeCompare(emailA);
             } else if (sortCriteria.field === "role") {
+                const roleA = a.role || '';
+                const roleB = b.role || '';
                 return sortCriteria.order === "asc"
-                    ? a.role.localeCompare(b.role)
-                    : b.role.localeCompare(a.role);
+                    ? roleA.localeCompare(roleB)
+                    : roleB.localeCompare(roleA);
             } else if (sortCriteria.field === "posts") {
                 return sortCriteria.order === "asc"
                     ? getUserPostCount(a._id) - getUserPostCount(b._id)
@@ -89,6 +95,7 @@ const UserDashboard = () => {
             return 0;
         });
     };
+    
 
     const sortedAdmin = admin ? sortUsers([...admin]) : [];
 
@@ -180,7 +187,7 @@ const UserDashboard = () => {
                         </tbody>
                     </table>
                 </div>
-                <div className="flex flex-col flex-1 bg-gray-800 p-4">
+                <div className="flex flex-col flex-1 bg-gray-800">
                     <NoteDashboard />
                 </div>
             </section>
