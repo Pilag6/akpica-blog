@@ -15,9 +15,15 @@ import PostDetails from "@pages/PostDetails.jsx";
 import TagPage from "@pages/TagPage.jsx";
 import MediaDashboard from "@components/DashboardStructure/MediaDashboard.jsx";
 import CreatePosts from "@components/DashboardStructure/CreatePosts.jsx";
+
+import AboutUs from "@pages/AboutUs";
+
+
+
 import EditPost from "@components/DashboardStructure/EditPost.jsx";
 import { AuthProvider } from '../src/contexts/AuthContext.jsx';
 import ProtectedRoute from '../src/components/DashboardStructure/ProtectedRoute.jsx';
+
 
 function App() {
   return (
@@ -26,6 +32,10 @@ function App() {
         {/* No Protected Paths */}
         <Route path="/" element={<Home />} />
         <Route path="/:id" element={<PostDetails />} />
+
+        <Route path="/about" element={<AboutUs/>} />
+
+
         <Route path="/tags/:tags" element={<TagPage />} />
         <Route path="*" element={<h1>Not Found</h1>} />
         <Route path="/dh-admin" element={<DHAdmin />} />
