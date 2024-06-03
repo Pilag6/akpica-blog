@@ -82,8 +82,8 @@ const MediaDashboard = () => {
 
   return (
     <>
-      <div className="bg-black min-h-[calc(100vh-80px)] flex flex-col pt-6 pb-3 pl-8 text-akpica-white">
-        <div className="flex items-center mb-4">
+      <div className="bg-black min-h-[calc(100vh-80px)] flex flex-col pt-6 pb-3 text-akpica-white">
+        <div className="flex items-center mb-4 pl-8">
           <div className="flex items-center pb-3 gap-4">
             <button className="w-fit flex items-center gap-3 p-2 text-xl font-semibold text-akpica-white outline-none outline-akpica-white transition-all hover:bg-akpica-marco hover:text-zinc-800 hover:outline-2 focus:bg-akpica-pastel/95 active:bg-akpica-pastel/80">
               <FaPlus /> Add New Media
@@ -93,7 +93,7 @@ const MediaDashboard = () => {
         </div>
 
         {/* Toggle buttons */}
-        <div className="flex gap-4 text-2xl border border-akpica-white mb-3 mr-8 p-2">
+        <div className="flex gap-4 text-2xl border border-akpica-white mb-3 mr-8 p-2 ml-4">
 
           <button onClick={gridView} title="Grid View" className={buttonStyles}>
             <MdGridView />
@@ -158,7 +158,7 @@ const MediaDashboard = () => {
 
         {/* views */}
 
-        <div className="flex flex-wrap gap-2 md:mr-8">
+        <div className="flex flex-wrap gap-2 md:mr-8 pl-4">
           {filteredPosts.length > 0 ? (isGridView ? (
             // Grid view
             posts &&
