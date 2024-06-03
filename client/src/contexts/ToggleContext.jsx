@@ -8,8 +8,8 @@ const ToggleContextProvider = ({ children }) => {
   const [isToggle, setIsToggle] = useState(false);
   const [isSearch, setIsSearch] = useState(false);
 
-  const handleClose = () => {
-    setIsOpen(false);
+  const handleOpen = () => {
+    setIsOpen(!isOpen);
   }
 
   const handleToggle = () => {
@@ -21,7 +21,7 @@ const ToggleContextProvider = ({ children }) => {
   }
 
   return (
-    <ToggleContext.Provider value={{ isOpen, isToggle, handleClose, handleToggle, isSearch, handleOpenSearch }}>
+    <ToggleContext.Provider value={{ isOpen, isToggle, handleOpen, handleToggle, isSearch, handleOpenSearch }}>
       {children}
     </ToggleContext.Provider>
   );

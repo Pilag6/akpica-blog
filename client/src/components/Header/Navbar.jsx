@@ -4,7 +4,7 @@ import { useContext } from "react";
 // icons
 import { FaBars } from "react-icons/fa6";
 
-import SearchBar from "@components/SearchBar.jsx";
+import SearchBar from "@components/Header/SearchBar.jsx";
 import { ToggleContext } from "@contexts/ToggleContext.jsx";
 import { PostContext } from "@contexts/PostContext.jsx";
 import useAuth from "@utils/useAuth.js";
