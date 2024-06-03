@@ -10,7 +10,7 @@ import { IoImages } from "react-icons/io5";
 import { MdSettingsInputComponent } from "react-icons/md";
 import { RiDashboardFill } from "react-icons/ri";
 import { FaComments } from "react-icons/fa6";
-import { IoMdLogOut } from "react-icons/io";
+import { GiExitDoor } from "react-icons/gi";
 
 // Backend URL
 import BACKEND_URL from "@utils/backendUrl.js";
@@ -143,7 +143,7 @@ const AsideDashboard = () => {
                     onClick={handleLogout}
                     className="flex items-center justify-center"
                 >
-                    <IoMdLogOut className="text-2xl text-akpica-white" />
+                    <GiExitDoor className="text-2xl text-akpica-white" />
                 </button>
             </div>
         </div>

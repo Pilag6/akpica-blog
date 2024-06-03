@@ -54,12 +54,12 @@ const TagPage = () => {
                         Posts tagged with{" "}
                         <span className="uppercase">{tags}</span>
                     </h1>
-                    <div className="flex flex-wrap md:gap-6 gap-1 gap-y-5">
+                    <div className="flex flex-wrap md:gap-5 gap-1 gap-y-5">
                         {postsTags &&
                             postsTags.map((post) => (
                                 <div
                                     key={post._id}
-                                    className="w-full md:w-[290px]  bg-white shadow-md"
+                                    className="w-full md:w-[280px]  bg-white shadow-md"
                                 >
                                     <img
                                         src={`${BACKEND_URL}/posts/photo/${post.title}`}

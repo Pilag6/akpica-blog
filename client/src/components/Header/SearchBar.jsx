@@ -1,6 +1,6 @@
-import { useState, useContext, useEffect } from "react";
+/* eslint-disable react/prop-types */
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import Axios from "axios";
 
 // icons
 import { FaMagnifyingGlass } from "react-icons/fa6";

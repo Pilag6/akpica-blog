@@ -8,11 +8,11 @@ import { TbLayoutSidebarLeftCollapse } from "react-icons/tb";
 
 const NavbarDashboard = () => {
   const {isOpen, handleOpen} = useContext(ToggleContext);
-  console.log("open", handleOpen);
+
   return (
     <div className="flex items-center w-full">
       <div className="text-white">
-        <button className={`text-akpica-black text-3xl w-20 flex justify-center p-4 ${!isOpen ? "rotate-180" : "rotate-0"}`} onClick={handleOpen}>
+        <button title={`${!isOpen ? "Open Sidebar" : "Close Sidebar"}`} className={`text-akpica-black text-3xl w-20 flex justify-center p-4 ${!isOpen ? "rotate-180" : "rotate-0"}`} onClick={handleOpen}>
           <TbLayoutSidebarLeftCollapse />
         </button>
       </div>
