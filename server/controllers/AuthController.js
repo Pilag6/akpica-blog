@@ -75,7 +75,7 @@ const login = asyncHandler(async (req, res) => {
     if (user && isMatch) {
         // Create a token
         const accessToken = jwt.sign({ id: user._id, role: user.role, username: user.username }, process.env.JWT_SECRET, {
-            expiresIn: "1h"
+            expiresIn: "1d"
         });
 
         // Create a cookie and set the token
