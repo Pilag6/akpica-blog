@@ -1,14 +1,16 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useContext } from "react";
 import axios from "axios";
 import { Editor } from "@tinymce/tinymce-react";
 import BACKEND_URL from "@utils/backendUrl";
 import akpicaDefaultImage from "@assets/akpicaDefault.jpg";
+import { PostContext } from "@contexts/PostContext";
 
 import { PiPlusSquareBold } from "react-icons/pi";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { AiFillCloseCircle } from "react-icons/ai";
 
 const CreatePosts = () => {
+    const { addPost } = useContext(PostContext);
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [tags, setTags] = useState([]);
@@ -29,7 +31,7 @@ const CreatePosts = () => {
                 });
                 if (response.status === 200) {
                     const user = response.data.user;
-                    setAuthor(user.fullname);
+                    setAuthor(user);
                 }
             } catch (error) {
                 console.error("Failed to fetch user data:", error);
@@ -53,7 +55,7 @@ const CreatePosts = () => {
         formData.append("content", content);
         formData.append("tags", postTags.join(","));
         formData.append("date", postDate);
-        formData.append("author", author);
+        formData.append("author", author._id);
 
         if (image) {
             formData.append("image", image);
@@ -83,6 +85,11 @@ const CreatePosts = () => {
                 setDate("");
                 setAuthor("");
                 setImage(null);
+
+                // Add author details to the new post
+                const newPost = { ...response.data, author };
+                addPost(newPost);
+
                 removeNotification(4000);
             }
         } catch (error) {
@@ -164,7 +171,7 @@ const CreatePosts = () => {
                                 tinycomments_mode: "embedded",
                                 tinycomments_author: "Author name",
                                 toolbar:
-                                    "undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight checklist numlist bullist indent outdent | emoticons charmap | addcomment showcomments | spellcheckdialog a11ycheck typography | removeformat | anchor | code preview | fullscreen | help | wordcount | insertdatetime"
+                                    "undo redo | blocks fontsize | bold italic underline strikethrough | link image media table code preview | align lineheight checklist numlist bullist indent outdent | emoticons charmap | addcomment showcomments | spellcheckdialog a11ycheck typography | removeformat | anchor |  fullscreen | help | wordcount | insertdatetime"
                             }}
                             onEditorChange={(newContent) =>
                                 setContent(newContent)
@@ -252,7 +259,7 @@ const CreatePosts = () => {
                         <input
                             id="author"
                             type="text"
-                            value={author}
+                            value={author.fullname || ""}
                             readOnly
                             className="appearance-none border w-full py-2 px-3 text-akpica-black bg-gray-100 leading-tight focus:outline-none focus:shadow-outline"
                         />

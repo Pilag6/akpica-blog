@@ -7,7 +7,7 @@ import BACKEND_URL from "@utils/backendUrl.js";
 
 const MoreFromUsContainer = () => {
     let { posts } = useContext(PostContext);
-    const [visiblePosts, setVisiblePosts] = useState(6);
+    const [visiblePosts, setVisiblePosts] = useState(9);
     const [loading, setLoading] = useState(false);
     const [shuffledPosts, setShuffledPosts] = useState([]);
 

@@ -2,7 +2,7 @@
 import { createContext, useEffect, useState } from 'react';
 import Axios from 'axios';
 
-//Backend URL
+// Backend URL
 import BACKEND_URL from '@utils/backendUrl.js';
 
 export const PostContext = createContext();
@@ -10,8 +10,7 @@ export const PostContext = createContext();
 const PostContextProvider = ({ children }) => {
     const [posts, setPosts] = useState([]);
     const [postQuantity, setPostQuantity] = useState(0);
-    
-    
+
     useEffect(() => {
         const fetchPosts = async () => {
             try {
@@ -23,10 +22,7 @@ const PostContextProvider = ({ children }) => {
         };
 
         fetchPosts();
-        
     }, []);
-
-    // Set quantity of posts
 
     useEffect(() => {
         if (posts) {
@@ -35,12 +31,17 @@ const PostContextProvider = ({ children }) => {
             setPostQuantity(0);
         }
     }, [posts]);
-    
+
+    const addPost = (newPost) => {
+        setPosts((prevPosts) => [newPost, ...prevPosts]);
+        setPostQuantity((prevQuantity) => prevQuantity + 1);
+    };
+
     return (
-        <PostContext.Provider value={{ posts, setPosts, postQuantity }}>
-        {children}
+        <PostContext.Provider value={{ posts, setPosts, postQuantity, addPost }}>
+            {children}
         </PostContext.Provider>
     );
-    };
+};
 
 export default PostContextProvider;

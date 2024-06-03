@@ -66,4 +66,20 @@ img {
     background: #DEB853;
 }
 
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+    background: #161B22;
+    padding: 0.4em 1rem;
+    line-height: 1.8;
+    color: white;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    display: block;
+    overflow: auto;
+
+    &::-webkit-scrollbar {
+        height: 10px;
+    }
+}
+
 

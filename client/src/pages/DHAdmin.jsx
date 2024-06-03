@@ -26,7 +26,7 @@ const DHAdmin = () => {
             width={300}
           />
         </div>
-        <div className="mb-12 -mt-10 text-2xl font-semibold">Welcome to the Dashboard</div>
+        <div className="mb-12 -mt-10 text-2xl font-semibold text-white">Welcome to the Dashboard</div>
         <div className="flex justify-center items-center gap-8 w-3/4 mx-auto">
           {/* <NavLink to="/dh-admin/register" className={BtnClasses}>
             Register
