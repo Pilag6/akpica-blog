@@ -11,6 +11,7 @@ import {
   MdOutlineKeyboardArrowDown,
 } from "react-icons/md";
 import { FaPlus } from "react-icons/fa";
+import AuthorDate from "@components/miniComponents/AuthorDate.jsx";
 
 const MediaDashboard = () => {
   // const { users } = useContext(UserContext);
@@ -28,22 +29,22 @@ const MediaDashboard = () => {
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
-  const buttonStyles ="font-bold hover:text-akpica-black/70 focus:text-akpica-black/50 active:text-akpica-tomato/70";
+  const buttonStyles =
+    "font-bold hover:text-akpica-white focus:text-akpica-white active:text-akpica-tomato/70";
 
   return (
     <>
-      <div className="bg-akpica-white min-h-[calc(100vh-80px)] flex flex-col pt-6 pb-3 pl-8">
+      <div className="bg-black min-h-[calc(100vh-80px)] flex flex-col pt-6 pb-3 pl-8 text-akpica-white">
         <div className="flex items-center mb-4">
-          <h1 className="text-3xl font-extrabold">Media Library</h1>
-          <div className="flex items-center pt-6 pb-3 pl-8 gap-4">
-            <button className="w-fit flex items-center gap-3 p-2 text-xl font-semibold text-akpica-black outline-none outline-akpica-black transition-all hover:bg-akpica-pastel hover:text-zinc-800 hover:outline-2 focus:bg-akpica-pastel/95 active:bg-akpica-pastel/80">
+          <div className="flex items-center pb-3 gap-4">
+            <button className="w-fit flex items-center gap-3 p-2 text-xl font-semibold text-akpica-white outline-none outline-akpica-white transition-all hover:bg-akpica-pastel hover:text-zinc-800 hover:outline-2 focus:bg-akpica-pastel/95 active:bg-akpica-pastel/80">
               <FaPlus /> Add New Post
             </button>
           </div>
         </div>
 
         {/* Toggle buttons */}
-        <div className="flex gap-4 text-2xl border border-akpica-black mb-3 mr-8 p-2">
+        <div className="flex gap-4 text-2xl border border-akpica-white mb-3 mr-8 p-2">
           <button onClick={gridView} title="Grid View" className={buttonStyles}>
             <MdGridView />
           </button>
@@ -52,14 +53,14 @@ const MediaDashboard = () => {
           </button>
           <div className="relative">
             <button
-              className="flex items-center gap-1 text-base border border-akpica-black p-1"
+              className="flex items-center gap-1 text-base border border-akpica-white p-1"
               onClick={toggleDropdown}
             >
               All dates <MdOutlineKeyboardArrowDown />
             </button>
             {/* toggle dropdown */}
             {isOpen && (
-              <div className="absolute bg-akpica-white border border-akpica-black p-2 text-base">
+              <div className="absolute bg-akpica-black border border-akpica-black p-2 text-base">
                 <ul>
                   <li className="p-2 hover:bg-akpica-pastel">All dates</li>
                   <li className="p-2 hover:bg-akpica-pastel">Today</li>
@@ -74,19 +75,33 @@ const MediaDashboard = () => {
         </div>
 
         {/* views */}
-        <div className="grid md:grid-cols-3 md:gap-4 lg:grid-cols-4 pr-8">
+        <div className="flex flex-wrap gap-2 md:mr-8">
           {isGridView ? (
             // Grid view
             posts &&
             posts.map((post) => (
-              <img
-                key={post._id}
-                src={`${BACKEND_URL}/posts/photo/${
-                  post.title
-                }?${new Date().getTime()}`}
-                alt="post image"
-                className="object-cover mb-8 h-full"
-              />
+              <div
+                style={{
+                  backgroundImage: `url(${BACKEND_URL}/posts/photo/${encodeURIComponent(
+                    post.title
+                  )}?${new Date().getTime()})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                  backgroundRepeat: "no-repeat",
+                }}
+                className="object-cover w-80 h-44 flex items-end">
+                  <div className="bg-akpica-black hover:bg-gray-700 p-2 w-full">
+
+                <AuthorDate
+                colors={"text-akpica-white"}
+                  avatar={`${BACKEND_URL}/photo/${
+                    post.author.username
+                  }?${new Date().getTime()}`}
+                  author={post.author.username}
+                  date={new Date(post.date).toDateString()}
+                  />
+                  </div>
+              </div>
             ))
           ) : (
             // List view
