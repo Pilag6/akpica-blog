@@ -12,6 +12,7 @@ import Footer from "@components/Footer";
 import AboutUsCard from "@components/AboutUs/AboutUsCard";
 
 const AboutUs = () => {
+
   return (
     <>
       <div className="flex flex-col items-center border border-gray-700 justify-center w-full min-h-screen  bg-gray-800  text-akpica-white font-akpica-heading">
@@ -30,7 +31,7 @@ const AboutUs = () => {
         <div className="flex flex-wrap justify-center my-11">
 
           <AboutUsCard
-          
+
             profilepicture={profileakiko}
             name={"Akiko Luka"}
             text={

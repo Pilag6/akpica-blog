@@ -13,7 +13,7 @@ const AboutUsCard = ({
   linkedin,
 }) => {
   return (
-    <div className="w-96 m-4 flex flex-col items-center bg-gray-800 border border-akpica-green card transform transition-transform duration-300 ease-in-out hover:scale-110">
+    <div className="w-96 m-4 flex flex-col items-center bg-gray-800 border border-akpica-green card transform transition-transform duration-300 ease-in-out hover:scale-110 hover:bg-gray-700">
       <div className="mb-8 mt-4 w-32 h-32">
         <img
           src={profilepicture}
