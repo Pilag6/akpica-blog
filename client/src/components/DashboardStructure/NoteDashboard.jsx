@@ -54,20 +54,31 @@ const NoteDashboard = () => {
                 withCredentials: true
             });
             if (response.status === 201) {
-                setDisplayNotes([...displayNotes, response.data]);
+                const newNote = response.data;
+    
+                // Fetch user data (author) for the new note
+                const userResponse = await Axios.get(`${BACKEND_URL}/me`, {
+                    withCredentials: true,
+                });
+    
+                const user = userResponse.data.user;
+    
+                // Add author information to the new note
+                newNote.author = {
+                    username: user.username,
+                    // Add any other necessary fields from the user object
+                };
+    
+                setDisplayNotes([...displayNotes, newNote]);
                 setContent("");
                 setTitle("");
                 navigate("/dh-admin/dashboard/usersDashboard");
             }
-            //   const res = await Axios.get(`${BACKEND_URL}/me`, {
-            //     withCredentials: true,
-            // });
-            // const user = res.data.user;
-            // setUsername(user.username);
         } catch (error) {
             setError(error.response.data.errors);
         }
     };
+    
 
     // delete note
     const confirmDeleteNote = (noteId) => {
@@ -184,7 +195,7 @@ const NoteDashboard = () => {
                             className="mb-2 w-80 h-60 border border-gray-700 flex flex-col text-akpica-white hover:bg-gray-700 group"
                         >
                             <div className="px-2 py-4 font-bold border-b border-gray-700 group-hover:border-gray-800 flex items-center justify-between h-20">
-                                <h2 className="pl-1 text-gray-400">{note.title}</h2>
+                                <h2 className="pl-1 text-gray-400" onClick={() => confirmEditNote(note._id)}>{note.title}</h2>
                                 <button
                                     onClick={() => confirmDeleteNote(note._id)}
                                     title="Delete"
@@ -195,7 +206,7 @@ const NoteDashboard = () => {
                             </div>
 
                             <div className="flex flex-col justify-between h-full w-full overflow-y-auto">
-                                <p className="p-3 text-gray-400">
+                                <p className="p-3 text-gray-400" onClick={() => confirmEditNote(note._id)}>
                                     {note.content}
                                 </p>
                             </div>
@@ -248,7 +259,7 @@ const NoteDashboard = () => {
 
             {showEditModal && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-                    <div className="bg-gray-800 h-80 w-80 p-6 border border-gray-700">
+                    <div className="bg-gray-800 md:w-[500px] w-96 p-6 border border-gray-700">
                         <form className="flex flex-col gap-4 text-akpica-black">
                             <input
                                 type="text"
@@ -263,7 +274,7 @@ const NoteDashboard = () => {
                                 name="editNote"
                                 id="editNote"
                                 placeholder="Enter a note here . . ."
-                                className="border border-gray-700 p-2 text-akpica-white bg-gray-800 resize-none h-32"
+                                className="border border-gray-700 p-2 text-akpica-white bg-gray-800 resize-none h-48"
                                 onChange={(e) => setEditContent(e.target.value)}
                                 value={editContent}
                             ></textarea>

@@ -50,6 +50,7 @@ const MediaDashboard = () => {
             postDate.getFullYear() === now.getFullYear()
           );
         case "Yesterday":
+          // eslint-disable-next-line no-case-declarations
           const yesterday = new Date(now);
           yesterday.setDate(yesterday.getDate() - 1);
           return (
@@ -58,6 +59,7 @@ const MediaDashboard = () => {
             postDate.getFullYear() === yesterday.getFullYear()
           );
         case "This week":
+          // eslint-disable-next-line no-case-declarations
           const startOfWeek = new Date(now);
           startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay());
           startOfWeek.setHours(0, 0, 0, 0);
@@ -101,7 +103,7 @@ const MediaDashboard = () => {
           </button>
           <div className="relative">
             <button
-              className="flex items-center gap-1 text-base border border-akpica-white p-1"
+              className="flex items-center gap-1 text-base border border-akpica-white p-1 px-2"
               onClick={toggleDropdown}>
               {selectedDateRange} <MdOutlineKeyboardArrowDown />
             </button>
@@ -162,6 +164,7 @@ const MediaDashboard = () => {
             posts &&
             posts.map((post) => (
               <div
+                key={post._id}
                 style={{
                   backgroundImage: `url(${BACKEND_URL}/posts/photo/${encodeURIComponent(
                     post.title
@@ -170,7 +173,7 @@ const MediaDashboard = () => {
                   backgroundPosition: "center",
                   backgroundRepeat: "no-repeat",
                 }}
-                className="object-cover w-80 h-44 flex items-end">
+                className="object-cover w-80 h-44 flex items-end border border-gray-400">
                   <div className="bg-akpica-black hover:bg-gray-700 p-2 w-full">
 
                 <AuthorDate

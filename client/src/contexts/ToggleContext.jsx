@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useState, createContext } from "react";
 
 export const ToggleContext = createContext();
@@ -5,7 +6,7 @@ export const ToggleContext = createContext();
 const ToggleContextProvider = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isToggle, setIsToggle] = useState(false);
-  const [isSearch, setIsSearch] = useState(false);;
+  const [isSearch, setIsSearch] = useState(false);
 
   const handleClose = () => {
     setIsOpen(false);
