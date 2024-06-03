@@ -134,22 +134,22 @@ const NoteDashboard = () => {
 
     return (
         <>
-            <div className="flex items-baseline gap-2 text-akpica-white">
-                <span className="text-xl">
+            <div className="flex items-center gap-2 text-akpica-white bg-gray-700 py-2 px-6">
+                <span className="text-md text-gray-400">
                     <GrNotes />
                 </span>
-                <h1 className="font-bold text-3xl">Notes</h1>
+                <h1 className="font-semibold text-gray-400 uppercase">Notes</h1>
             </div>
-            <p className="text-lg my-4 text-akpica-white">
+            <p className="text-lg my-6 text-gray-400 px-6 uppercase font-semibold">
                 A place for random notes
             </p>
 
-            <div className="mb-4 border-b border-gray-700 pb-8">
+            <div className="mb-4 border-b border-gray-700 pb-8 px-6">
                 <form onSubmit={handleSubmit} className="flex gap-4 h-32">
                     <div className="flex flex-col gap-4 w-2/4 h-full text-akpica-white">
                         <input
                             type="text"
-                            className="border border-gray-700 bg-gray-800 p-2"
+                            className="border border-gray-700 bg-gray-800 p-2 hover:bg-gray-700"
                             id="title"
                             name="title"
                             placeholder="Note title"
@@ -160,7 +160,7 @@ const NoteDashboard = () => {
                             name="note"
                             id="note"
                             placeholder="Enter a note here . . ."
-                            className="border border-gray-700 bg-gray-800 p-2 resize-none"
+                            className="border border-gray-700 bg-gray-800 p-2 resize-none hover:bg-gray-700"
                             onChange={(e) => setContent(e.target.value)}
                             value={content}
                         ></textarea>
@@ -175,39 +175,39 @@ const NoteDashboard = () => {
                 </form>
             </div>
             {/* each note */}
-            <div className="my-4 w-full h-[405px] flex flex-row flex-wrap gap-4 overflow-y-auto">
+            <div className="my-4 w-full h-[405px] flex flex-row flex-wrap gap-4 overflow-y-auto px-6">
                 {displayNotes &&
                     displayNotes.map((note) => (
                         <div
                             key={note._id}
                             // p-2 mb-2 w-40 h-40 border border-gray-700  flex flex-col text-akpica-white
-                            className="mb-2 w-80 h-60 border border-gray-700 flex flex-col text-akpica-white"
+                            className="mb-2 w-80 h-60 border border-gray-700 flex flex-col text-akpica-white hover:bg-gray-700 group"
                         >
-                            <div className="px-2 py-4 font-bold border-b border-gray-700 flex items-center justify-between h-20">
-                                <h2 className="pl-1">{note.title}</h2>
+                            <div className="px-2 py-4 font-bold border-b border-gray-700 group-hover:border-gray-800 flex items-center justify-between h-20">
+                                <h2 className="pl-1 text-gray-400">{note.title}</h2>
                                 <button
                                     onClick={() => confirmDeleteNote(note._id)}
                                     title="Delete"
-                                    className="text-akpica-tomato text-2xl hover:text-red-600 active:text-red-800"
+                                    className="text-akpica-tomato text-2xl hover:text-red-400 active:text-red-800"
                                 >
                                     <TiDelete />
                                 </button>
                             </div>
 
                             <div className="flex flex-col justify-between h-full w-full overflow-y-auto">
-                                <p className="p-3">
+                                <p className="p-3 text-gray-400">
                                     {note.content}
                                 </p>
                             </div>
 
-                            <div className="flex justify-between items-center mt-auto border-t border-gray-700">
+                            <div className="flex justify-between items-center mt-auto border-t border-gray-700 group-hover:border-gray-800">
                                 <p className="text-gray-500 p-2">
                                     By: @{note.author.username}
                                 </p>
                                 <button
                                     title="Edit"
                                     onClick={() => confirmEditNote(note._id)}
-                                    className="text-akpica-white/80 text-xl p-2"
+                                    className="text-akpica-white/60 text-xl p-2 hover:text-akpica-white"
                                 >
                                     <TiEdit />
                                 </button>

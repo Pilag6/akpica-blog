@@ -1,29 +1,47 @@
-import { useState, useRef, useEffect, useContext } from "react";
+import { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import { Editor } from "@tinymce/tinymce-react";
 import BACKEND_URL from "@utils/backendUrl";
-import akpicaDefaultImage from "@assets/akpicaDefault.jpg";
-import { PostContext } from "@contexts/PostContext";
 
 import { PiPlusSquareBold } from "react-icons/pi";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { AiFillCloseCircle } from "react-icons/ai";
+import { useParams } from "react-router-dom";
 
-const CreatePosts = () => {
-    const { addPost } = useContext(PostContext);
+const EditPost = () => {
+    const { id } = useParams();
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [tags, setTags] = useState([]);
     const [date, setDate] = useState("");
-    const [author, setAuthor] = useState("");
     const [image, setImage] = useState(null);
     const [message, setMessage] = useState("");
     const [error, setError] = useState("");
+    const [authorId, setAuthorId] = useState("");
 
     const dateInputRef = useRef(null);
-    const defaultImageUrl = akpicaDefaultImage; // URL to the default image
 
     useEffect(() => {
+        const fetchPostData = async () => {
+            try {
+                const response = await axios.get(`${BACKEND_URL}/posts/${id}`);
+                if (response.status === 200) {
+                    const post = response.data;
+                    setTitle(post.title);
+                    setContent(post.content);
+                    setTags(post.tags);
+                    setDate(post.date.split('T')[0]);
+                    setAuthorId(post.author.fullname || post.author); // Store author ID
+                    setImage(post.image); // Assuming post.image is a URL
+                } else {
+                    setError("Failed to load post data.");
+                }
+            } catch (error) {
+                console.error("Failed to fetch post data:", error);
+                setError("Failed to load post data.");
+            }
+        };
+
         const fetchUserData = async () => {
             try {
                 const response = await axios.get(`${BACKEND_URL}/me`, {
@@ -31,23 +49,21 @@ const CreatePosts = () => {
                 });
                 if (response.status === 200) {
                     const user = response.data.user;
-                    setAuthor(user);
+                    setAuthorId(user._id); // Store user ID
                 }
             } catch (error) {
                 console.error("Failed to fetch user data:", error);
             }
         };
 
+        fetchPostData();
         fetchUserData();
-    }, []);
+    }, [id]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Set current date if date is empty
         const postDate = date || new Date().toISOString().split("T")[0];
-
-        // Add default tag "akpica" if no tags are provided
         const postTags = tags.length > 0 ? tags : ["akpica"];
 
         const formData = new FormData();
@@ -55,19 +71,14 @@ const CreatePosts = () => {
         formData.append("content", content);
         formData.append("tags", postTags.join(","));
         formData.append("date", postDate);
-        formData.append("author", author._id);
 
-        if (image) {
+        if (image && typeof image !== "string") {
             formData.append("image", image);
-        } else {
-            const response = await fetch(defaultImageUrl);
-            const blob = await response.blob();
-            formData.append("image", blob, "default-image.jpg");
         }
 
         try {
-            const response = await axios.post(
-                `${BACKEND_URL}/posts`,
+            const response = await axios.patch(
+                `${BACKEND_URL}/posts/${id}`,
                 formData,
                 {
                     headers: {
@@ -77,26 +88,25 @@ const CreatePosts = () => {
                 }
             );
 
-            if (response.status === 201) {
-                setMessage("Post created successfully.");
-                setTitle("");
-                setContent("");
-                setTags([]);
-                setDate("");
-                setAuthor("");
-                setImage(null);
-
-                // Add author details to the new post
-                const newPost = { ...response.data, author };
-                addPost(newPost);
-
+            if (response.status === 200) {
+                setMessage("Post updated successfully.");
                 removeNotification(4000);
+            } else {
+                setError("Failed to update post.");
             }
         } catch (error) {
-            console.error(error);
+            console.error("Error updating post:", error);
             setError(error.response?.data?.message || "Something went wrong.");
             removeNotification(6000);
         }
+
+        console.log("FormData before PATCH:", {
+            title,
+            content,
+            tags: postTags.join(","),
+            date: postDate,
+            image
+        });
     };
 
     const handleIconClick = () => {
@@ -128,7 +138,7 @@ const CreatePosts = () => {
     return (
         <div className="bg-white min-h-screen py-6 px-10">
             <h2 className="font-akpica-heading w-fit flex items-center gap-3 py-2 px-4 text-3xl font-semibold text-akpica-carlo border-2 border-akpica-carlo mb-5">
-                Create a New Post
+                Edit Post
             </h2>
             <form
                 onSubmit={handleSubmit}
@@ -176,7 +186,6 @@ const CreatePosts = () => {
                             onEditorChange={(newContent) =>
                                 setContent(newContent)
                             }
-                            initialValue="Welcome to Akpica Blog!"
                         />
                     </div>
                 </section>
@@ -259,7 +268,7 @@ const CreatePosts = () => {
                         <input
                             id="author"
                             type="text"
-                            value={author.fullname || ""}
+                            value={authorId}
                             readOnly
                             className="appearance-none border w-full py-2 px-3 text-akpica-black bg-gray-100 leading-tight focus:outline-none focus:shadow-outline"
                         />
@@ -268,7 +277,7 @@ const CreatePosts = () => {
                         type="submit"
                         className="flex justify-center items-center gap-3 uppercase font-akpica-heading text-2xl mt-auto mb-4 bg-akpica-carlo hover:bg-akpica-green text-white font-[600] p-4 w-full focus:outline-none focus:shadow-outline"
                     >
-                        create post <PiPlusSquareBold />
+                        update post <PiPlusSquareBold />
                     </button>
                 </aside>
             </form>
@@ -286,4 +295,4 @@ const CreatePosts = () => {
     );
 };
 
-export default CreatePosts;
+export default EditPost;

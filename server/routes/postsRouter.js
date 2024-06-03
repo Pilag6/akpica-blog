@@ -29,8 +29,8 @@ postRouter.get("/:id", getPostById);
 // Read by tags
 postRouter.get("/tags/:tags", getPostsByTags);
 // UPDATE
-postRouter.patch("/:id", isAuth, updateOnePost);
+postRouter.patch("/:id", isAuth, upload.single("image"), updateOnePost);
 // DELETE one
-postRouter.delete("/:id", isAuth, deleteOnePost);
+postRouter.delete("/:id", isAuth,  deleteOnePost);
 
 export default postRouter;
