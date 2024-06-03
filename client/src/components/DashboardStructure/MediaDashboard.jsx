@@ -32,14 +32,6 @@ const MediaDashboard = () => {
   const buttonStyles =
     "font-bold hover:text-akpica-white focus:text-akpica-white active:text-akpica-tomato/70";
 
-  return (
-    <>
-      <div className="bg-black min-h-[calc(100vh-80px)] flex flex-col pt-6 pb-3 pl-8 text-akpica-white">
-        <div className="flex items-center mb-4">
-          <div className="flex items-center pb-3 gap-4">
-            <button className="w-fit flex items-center gap-3 p-2 text-xl font-semibold text-akpica-white outline-none outline-akpica-white transition-all hover:bg-akpica-pastel hover:text-zinc-800 hover:outline-2 focus:bg-akpica-pastel/95 active:bg-akpica-pastel/80">
-              <FaPlus /> Add New Post
-
 
   const handleDateRangeChange = (range) => {
     setSelectedDateRange(range);
@@ -88,13 +80,10 @@ const MediaDashboard = () => {
 
   return (
     <>
-      <div className="bg-akpica-white min-h-[calc(100vh-80px)] flex flex-col pt-6 pb-3 pl-8">
-        <div className="flex items-center mb-8">
-          <h1 className="text-4xl font-[700] font-akpica-heading">
-            Media Library
-          </h1>
-          <div className="flex items-center pt-6 pb-3 pl-8 gap-4">
-            <button className="w-fit flex items-center gap-3 p-2 text-xl font-semibold text-akpica-black outline-none outline-akpica-black transition-all hover:bg-akpica-marco hover:text-zinc-800 hover:outline-2 focus:bg-akpica-pastel/95 active:bg-akpica-pastel/80">
+      <div className="bg-black min-h-[calc(100vh-80px)] flex flex-col pt-6 pb-3 pl-8 text-akpica-white">
+        <div className="flex items-center mb-4">
+          <div className="flex items-center pb-3 gap-4">
+            <button className="w-fit flex items-center gap-3 p-2 text-xl font-semibold text-akpica-white outline-none outline-akpica-white transition-all hover:bg-akpica-marco hover:text-zinc-800 hover:outline-2 focus:bg-akpica-pastel/95 active:bg-akpica-pastel/80">
               <FaPlus /> Add New Media
 
             </button>
@@ -102,10 +91,7 @@ const MediaDashboard = () => {
         </div>
 
         {/* Toggle buttons */}
-
         <div className="flex gap-4 text-2xl border border-akpica-white mb-3 mr-8 p-2">
-
-      
 
           <button onClick={gridView} title="Grid View" className={buttonStyles}>
             <MdGridView />
@@ -115,13 +101,8 @@ const MediaDashboard = () => {
           </button>
           <div className="relative">
             <button
-
               className="flex items-center gap-1 text-base border border-akpica-white p-1"
-
-        
-
-              onClick={toggleDropdown}
-            >
+              onClick={toggleDropdown}>
               {selectedDateRange} <MdOutlineKeyboardArrowDown />
             </button>
             {/* toggle dropdown */}
@@ -137,31 +118,31 @@ const MediaDashboard = () => {
                     All dates
                   </li>
                   <li
-                    className="p-2 hover:border-b border-akpica-carlo"
+                    className="p-2 hover:border-b border-akpica-carlo hover:bg-gray-700"
                     onClick={() => handleDateRangeChange("Today")}
                   >
                     Today
                   </li>
                   <li
-                    className="p-2 hover:border-b border-akpica-carlo"
+                    className="p-2 hover:border-b border-akpica-carlo hover:bg-gray-700"
                     onClick={() => handleDateRangeChange("Yesterday")}
                   >
                     Yesterday
                   </li>
                   <li
-                    className="p-2 hover:border-b border-akpica-carlo"
+                    className="p-2 hover:border-b border-akpica-carlo hover:bg-gray-700"
                     onClick={() => handleDateRangeChange("This week")}
                   >
                     This week
                   </li>
                   <li
-                    className="p-2 hover:border-b border-akpica-carlo"
+                    className="p-2 hover:border-b border-akpica-carlo hover:bg-gray-700"
                     onClick={() => handleDateRangeChange("This month")}
                   >
                     This month
                   </li>
                   <li
-                    className="p-2 hover:border-b border-akpica-carlo"
+                    className="p-2 hover:border-b border-akpica-carlo hover:bg-gray-700"
                     onClick={() => handleDateRangeChange("This year")}
                   >
                     This year
@@ -176,7 +157,7 @@ const MediaDashboard = () => {
         {/* views */}
 
         <div className="flex flex-wrap gap-2 md:mr-8">
-          {isGridView ? (
+          {filteredPosts.length > 0 ? (isGridView ? (
             // Grid view
             posts &&
             posts.map((post) => (
