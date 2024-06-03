@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { NavLink } from "react-router-dom";
 import { useContext } from "react";
 
@@ -26,10 +27,10 @@ const Navbar = ({ scrolling }) => {
                 <NavLink className={linkStyles} to={"/tags/backend"}>
                     Backend
                 </NavLink>
-                <NavLink className={linkStyles} to={"/tags/uiux"}>
+                <NavLink className={linkStyles} to={"/tags/uxui%20design"}>
                     UI/UX
                 </NavLink>
-                <NavLink className={linkStyles} to={"/"}>
+                <NavLink className={linkStyles} to={"/about"}>
                     About Us
                 </NavLink>
                 {/* LOGIN - to remove later */}
@@ -71,10 +72,10 @@ const Navbar = ({ scrolling }) => {
                         >
                             Back-end
                         </NavLink>
-                        <NavLink className={mobileLinkStyles} to={"/tags/uiux"}>
+                        <NavLink className={mobileLinkStyles} to={"/tags/uxui%20design"}>
                             UI/UX
                         </NavLink>
-                        <NavLink className={mobileLinkStyles} to={"/"}>
+                        <NavLink className={mobileLinkStyles} to={"/about"}>
                             About us
                         </NavLink>
                         {/* LOGIN - to remove later */}
