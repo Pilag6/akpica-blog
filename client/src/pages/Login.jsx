@@ -1,7 +1,6 @@
 import { useState } from "react";
-import Axios from "axios";
-// UseNavigate
-import { useNavigate } from "react-router-dom";
+
+import useAuth from "@utils/useAuth.js";
 
 // Assets
 import logoWhite from "../assets/logo-white.png";
@@ -13,34 +12,17 @@ import { MdError } from "react-icons/md";
 import { AiOutlineEye } from "react-icons/ai";
 import { AiOutlineEyeInvisible } from "react-icons/ai";
 
-//Baceknd URL
-import BACKEND_URL from "@utils/backendUrl.js";
-
 const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [visible, setVisible] = useState(false);
     const [error, setError] = useState("");
-    console.log(error);
-
-    // UseNavigate
-    const navigate = useNavigate();
+    const { login } = useAuth();
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        const user = { username, password };
         try {
-            const response = await Axios.post(
-                `${BACKEND_URL}/login`,
-                user,
-                {withCredentials: true}
-            );
-
-            // UseNavigate
-            if (response.status === 200) {
-                navigate("/dh-admin/dashboard");
-            }
-            
+            await login(username, password);
         } catch (error) {
             setError("Invalid username or password");
         }
@@ -57,9 +39,6 @@ const Login = () => {
             </div>
 
             <div className="flex h-screen flex-1 flex-col justify-center">
-                {/* <h2 className="text-center text-4xl font-semibold mb-10">
-                    Login
-                </h2> */}
                 <img
                     className="flex justify-center items-center mx-auto "
                     src={logoWhite}
@@ -91,8 +70,15 @@ const Login = () => {
                             className="w-full bg-transparent text-akpica-white outline-none "
                             placeholder="Password"
                         />
-                            <div className="p-2" onClick={() => setVisible(!visible)}>
-                            {visible ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+                        <div
+                            className="p-2"
+                            onClick={() => setVisible(!visible)}
+                        >
+                            {visible ? (
+                                <AiOutlineEye />
+                            ) : (
+                                <AiOutlineEyeInvisible />
+                            )}
                         </div>
                     </div>
                     <button className="mt-7 w-full py-4 text-2xl font-semibold text-akpica-white outline-none outline-white transition-all hover:bg-akpica-pastel hover:text-zinc-800 hover:outline-2">
@@ -110,4 +96,5 @@ const Login = () => {
         </div>
     );
 };
+
 export default Login;
