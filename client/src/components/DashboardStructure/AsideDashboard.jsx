@@ -122,7 +122,7 @@ const AsideDashboard = () => {
                 </span>
                 {isOpen && <span>Settings</span>}
             </NavLink>
-            <div className={`${isOpen ? "mt-auto pb-6 flex items-center justify-center gap-3" : "mt-auto pb-6 flex flex-col gap-4"}`}>
+            <div className={`${isOpen ? "mt-auto pb-6 flex md:items-center  gap-3" : "mt-auto pb-6 flex flex-col gap-4"}`}>
                 <Link to={`/dh-admin/dashboard/usersDashboard/${userId}`} className="flex gap-3 items-center">
                     <div className="w-12 h-12 border-1 flex items-center">
                         <img

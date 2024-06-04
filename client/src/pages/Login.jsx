@@ -29,8 +29,8 @@ const Login = () => {
     };
 
     return (
-        <div className="mx-auto flex h-screen bg-akpica-black">
-            <div className="h-screen flex-1">
+        <div className="mx-auto w-full flex flex-col md:flex-row h-screen bg-akpica-black">
+            <div className="md:h-screen flex-1 md:block hidden">
                 <img
                     className="h-screen object-cover object-center"
                     src="https://bit.ly/3xP8eom"

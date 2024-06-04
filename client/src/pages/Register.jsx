@@ -50,8 +50,8 @@ const Register = () => {
     };
 
     return (
-        <div className="mx-auto flex h-[calc(100vh-80px)] bg-akpica-black">
-            <div className="flex flex-1">
+        <div className="mx-auto flex h-[calc(100vh-80px)] bg-akpica-black flex-col md:flex-row">
+            <div className="md:flex flex-1 hidden">
                 <img
                     className="h-full object-cover object-center"
                     src="https://bit.ly/4aPzJfY"

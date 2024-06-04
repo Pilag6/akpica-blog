@@ -13,10 +13,10 @@ const DashboardLayout = ({ children }) => {
             <header className="fixed top-0 left-0 w-full h-20 bg-akpica-green py-4 pr-5 flex items-center z-10">
                 <NavbarDashboard />
             </header>
-            <aside className={`fixed top-[80px] left-0 ${isOpen ? "w-[200px]" : "w-[80px]"} bg-akpica-carlo h-[calc(100vh-80px)] py-4 flex px-5 z-50`}>
+            <aside className={`fixed top-[80px] left-0 transition-all ${isOpen ? "md:w-[200px] w-1/2" : "md:w-[80px] md:translate-x-0 -translate-x-24"} bg-akpica-carlo h-[calc(100vh-80px)] py-4 flex px-5 z-50`}>
                 <AsideDashboard />
             </aside>
-            <main className={`mt-[5rem] ${isOpen ? "md:pl-[200px]" : "pl-[80px]"} w-full`}>{children}</main>
+            <main className={`mt-[5rem] ${isOpen ? "md:pl-[200px]" : "md:pl-[80px] p-0"} w-full`}>{children}</main>
         </>
     );
 };
