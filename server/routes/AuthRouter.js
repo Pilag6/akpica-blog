@@ -10,7 +10,8 @@ import {
     editUserPicture,
     editUserInfo,
     deleteUser,
-    getMe
+    getMe,
+    verifyToken
 } from "../controllers/AuthController.js";
 
 import { upload } from "../utils/multerStorage.js";
@@ -46,5 +47,7 @@ authRouter.patch("/admin/editUserInfo/:id", isAuth, editUserInfo);
 // authRouter.patch("/admin/editUserInfo/:id", editUserInfo);
 
 authRouter.delete("/admin/delete/:id", isAuth, deleteUser);
+
+authRouter.get("/auth/token", isAuth, verifyToken);
 
 export default authRouter;

@@ -1,30 +1,28 @@
 import asyncHandler from "../config/asyncHandler.js";
-import colors from "colors";
 import jwt from "jsonwebtoken";
 
 const { JWT_SECRET } = process.env;
 const isAuth = asyncHandler(async (req, res, next) => {
+  const token = req.cookies.token || req.headers.authorization?.split(' ')[1];
 
-  const { token } = req.cookies;
+  console.log('Token:', token);  // Log the token for debugging
+  console.log(req.cookies);  // Log the cookies for debugging
 
   if (token) {
     try {
-      // verify the token
       const payload = jwt.verify(token, JWT_SECRET);
-      // console.log("payload", payload);
-      // how to send the userId in the payload into the next middleware?
-
       req.user = payload;
-
-      // if successful we go to the next middleware
       next();
     } catch (error) {
+      console.error("Token verification failed:", error);  // Log verification errors
       res.status(401);
       throw new Error("Not Authorized, invalid token");
     }
   } else {
+    console.error("No token provided");  // Log missing token errors
     res.status(401);
     throw new Error("Not Authorized, no token");
   }
 });
+
 export { isAuth };

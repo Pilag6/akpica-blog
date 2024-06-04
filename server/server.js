@@ -25,17 +25,21 @@ import { errorHandler } from "./middlewares/errorHandler.js";
 const app = express();
 const { PORT } = process.env;
 
+app.set("trust proxy", 1);
 // Middleware that allows browsers to accept data from this server
 app.use(
     cors({
-
-       //  origin: "http://localhost:5173", // The port where the frontend is running. Change this to the port where your frontend is running
-       // credentials: true
-
         // add many options here
-        origin: ["http://localhost:5173", "https://akpicablog.netlify.app", "https://akpica-blog.netlify.app"],
+        // origin: ["http://localhost:5173", "http://localhost:4173", "https://akpicablog.netlify.app", "https://akpica-blog.netlify.app", "https://akpica-blog-1.onrender.com"],
+        origin: true,
         credentials: true,
-       // exposedHeaders: ["set-cookie"],
+        methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+        allowedHeaders: [
+            "Access-Control-Allow-Origin",
+            "Content-Type",
+            "Authorization"
+        ],
+        exposedHeaders: 'Set-Cookie',
 
     })
 );
