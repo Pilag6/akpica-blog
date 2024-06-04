@@ -25,6 +25,7 @@ import { errorHandler } from "./middlewares/errorHandler.js";
 const app = express();
 const { PORT } = process.env;
 
+app.set("trust proxy", 1);
 // Middleware that allows browsers to accept data from this server
 app.use(
     cors({
