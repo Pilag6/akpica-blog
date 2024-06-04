@@ -76,6 +76,7 @@ const login = asyncHandler(async (req, res) => {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
             sameSite: "strict",
+            domain: "https://akpica-blog-1.onrender.com"
         });
 
         res.status(200).json({
