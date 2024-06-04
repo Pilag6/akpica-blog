@@ -13,6 +13,8 @@ const Footer = () => {
     const { posts } = useContext(PostContext);
     const currentYear = new Date().getFullYear();
 
+    const sortedPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+
     return (
         <>
             <footer className="w-full bg-akpica-black relative">
@@ -165,8 +167,8 @@ const Footer = () => {
                                 Latest Posts
                             </h5>
                             <div className="flex flex-col gap-4">
-                                {posts &&
-                                    posts
+                                {sortedPosts &&
+                                    sortedPosts
                                         .slice(0, 2)
                                         .map((post) => (
                                             <CardMoreFromUs
@@ -182,6 +184,7 @@ const Footer = () => {
                                                 }?${new Date().getTime()}`}
                                                 h2Color="text-akpica-white"
                                                 bottom="mt-auto"
+                                                date={new Date(post.date).toDateString()}
                                                 authorColors={
                                                     "text-akpica-white"
                                                 }
