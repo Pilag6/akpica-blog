@@ -1,30 +1,31 @@
 import { useContext } from "react";
-
-import { FaGithubSquare } from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
-import { FaFacebook } from "react-icons/fa";
-import { FaInstagram } from "react-icons/fa";
-import { PostContext } from "@contexts/PostContext";
-import CardMoreFromUs from "@components/banners/MoreFromUs/CardMoreFromUs";
-import BACKEND_URL from "@utils/backendUrl";
 import { Link } from "react-router-dom";
+
+// Icons
+import { FaGithubSquare, FaFacebook, FaInstagram } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
+
+// Components
+import CardMoreFromUs from "@components/banners/MoreFromUs/CardMoreFromUs";
+
+// Backend URL
+import BACKEND_URL from "@utils/backendUrl";
+
+// Context
+import { PostContext } from "@contexts/PostContext";
 
 const Footer = () => {
     const { posts } = useContext(PostContext);
     const currentYear = new Date().getFullYear();
 
-    const sortedPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+    const sortedPosts = posts.sort(
+        (a, b) => new Date(b.date) - new Date(a.date)
+    );
 
     return (
         <>
             <footer className="w-full bg-akpica-black relative">
                 <div className="font-akpica-heading flex-wrap px-4 max-w-[1200px] mx-auto flex flex-col justify-center h-full ">
-                    {/* <div>
-                        <div className="absolute flex justify-center opacity-20 start-16 bottom-64 mb-12 lg:absolute lg:block lg:start-16 lg:bottom-64 lg:mb-12 sm:mt-6 sm:h-24 ">
-                            <img src={akpicaLogo} className="h-48 opacity-45" />
-                        </div>
-                    </div> */}
-
                     <div className="flex flex-wrap gap-8 py-20">
                         <div className="flex-1 mb-8 md:mb-0">
                             <Link to={"/"} className="flex items-center mb-7">
@@ -184,7 +185,9 @@ const Footer = () => {
                                                 }?${new Date().getTime()}`}
                                                 h2Color="text-akpica-white"
                                                 bottom="mt-auto"
-                                                date={new Date(post.date).toDateString()}
+                                                date={new Date(
+                                                    post.date
+                                                ).toDateString()}
                                                 authorColors={
                                                     "text-akpica-white"
                                                 }

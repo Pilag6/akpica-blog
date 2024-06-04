@@ -1,12 +1,21 @@
+// Resct 
 import { useState, useEffect, useContext } from "react";
+
+// Link Router
 import { Link } from "react-router-dom";
-import CardTag from "@components/miniComponents/CardTag.jsx";
+
+// Components
 import AvatarDate from "@components/miniComponents/AuthorDate.jsx";
+import CardTag from "@components/miniComponents/CardTag.jsx";
+
+// Icons
 import { FaChevronRight, FaChevronLeft } from "react-icons/fa";
-import { PostContext } from "@contexts/PostContext.jsx";
 
 //BACKEND URL
 import BACKEND_URL from "@utils/backendUrl.js";
+
+// Context
+import { PostContext } from "@contexts/PostContext.jsx";
 
 const Hero = () => {
     const { posts } = useContext(PostContext);
@@ -45,7 +54,7 @@ const Hero = () => {
             {limitedPosts && limitedPosts.map((post, index) => (
                 <div
                     key={post._id}
-                    className={`absolute w-full h-full transition-all duration-[3000ms] ${
+                    className={`absolute w-full h-full transition-all duration-[1000ms] ${
                         index === currentIndex ? "opacity-100 z-50" : "opacity-0"
                     }`}
                     style={{
