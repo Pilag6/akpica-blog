@@ -12,8 +12,8 @@ const CategoryImgCard = ({ Bgimage, title, link }) => {
                     backgroundRepeat: "no-repeat"
                 }}
             >
-                <Link to={link} className="bg-gradient-to-t from-akpica-black/90 to-akpica-black/10 w-full h-full flex justify-center items-center">
-                    <h3 className="text-white text-xl font-[700] font-akpica-heading tracking-wide">
+                <Link to={link} className="bg-gradient-to-t from-akpica-black/80 to-akpica-black/10 w-full h-full flex justify-center items-center">
+                    <h3 className="text-white text-2xl font-[700] font-akpica-heading tracking-wide">
                         {title}
                     </h3>
                 </Link>

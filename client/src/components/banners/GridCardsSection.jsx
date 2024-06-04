@@ -1,11 +1,12 @@
-import CardHero from "@components/CardsHero/CardHero.jsx";
-
-
 import { useContext } from "react";
-import { PostContext } from "@contexts/PostContext.jsx";
+
+import CardHero from "@components/CardsHero/CardHero.jsx";
 
 //backend URL
 import BACKEND_URL from "@utils/backendUrl.js";
+
+// Context
+import { PostContext } from "@contexts/PostContext.jsx";
 
 const cardData = [
     {
@@ -29,10 +30,12 @@ const cardData = [
 const GridCardsSection = () => {
     let { posts } = useContext(PostContext);
 
-    posts = posts.slice(0, 4);
+    // Create a random number to shuffle the posts
+    const random = Math.floor(Math.random() * posts.length);
+    posts = posts.slice(random, random + 4);
 
     return (
-        <div className="grid grid-cols-4 md:grid-cols-4 gap-x-4 gap-y-2 my-11 h-auto md:h-[75vh] px-4">
+        <div className="grid grid-cols-4 md:grid-cols-4 gap-x-4 gap-y-2 my-20 h-auto md:h-[75vh] px-4">
             {posts && posts.map((card, index) => (
                 <div key={card._id} className={cardData[index].gridClasses}>
                     <CardHero

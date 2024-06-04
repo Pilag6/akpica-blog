@@ -29,7 +29,13 @@ a {
 }
 
 ul {
-    list-style: none;
+    list-style:circle;
+    padding-left: 30px ;
+}
+
+ol {
+    list-style:decimal;
+    padding-left: 30px ;
 }
 
 img {
@@ -41,7 +47,6 @@ img {
     background-color: #DEB853;
     color: #242424;
 }
-
 
 ::-webkit-scrollbar {
     width: 10px;
@@ -58,6 +63,22 @@ img {
 
 ::-webkit-scrollbar-thumb:hover {
     background: #DEB853;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+    background: #161B22;
+    padding: 0.4em 1rem;
+    line-height: 1.8;
+    color: white;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    display: block;
+    overflow: auto;
+
+    &::-webkit-scrollbar {
+        height: 10px;
+    }
 }
 
 

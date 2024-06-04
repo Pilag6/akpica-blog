@@ -3,6 +3,8 @@ import App from "./App.jsx";
 import "./index.css";
 // Start Router
 import { BrowserRouter } from "react-router-dom";
+
+// Contexts Providers
 import PostContextProvider from "@contexts/PostContext.jsx";
 import ToggleContextProvider from "@contexts/ToggleContext.jsx";
 import  AuthProvider  from "@contexts/AuthContext.jsx";

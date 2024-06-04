@@ -1,42 +1,53 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useState, createContext } from 'react';
-import axiosInstance from '@utils/axiosInstance';
+// AuthContext.js
+import { createContext, useEffect, useState } from 'react';
+import Axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-export const AuthContext = createContext();
+const AuthContext = createContext();
+import BACKEND_URL from "@utils/backendUrl.js";
 
-const AuthProvider = ({ children }) => {
-    const [authState, setAuthState] = useState({
-        user: null,
-        token: null,
-    });
+export const AuthProvider = ({ children }) => {
+    const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);  // Add a loading state
+    const navigate = useNavigate();
+
+    const checkAuth = async () => {
+        try {
+            const response = await Axios.get(`${BACKEND_URL}/me`, { withCredentials: true });
+            setUser(response.data.user);
+        } catch (error) {
+            setUser(null);
+        } finally {
+            setLoading(false);  // Set loading to false after the check
+        }
+    };
 
     useEffect(() => {
-        const fetchToken = async () => {
-            try {
-                const res = await axiosInstance.get('/auth/token');
-                const token = document.cookie.split('; ').find(row => row.startsWith('token='))
-                                ?.split('=')[1];
-
-                if (token) {
-                    setAuthState({
-                        user: res.data.user,
-                        token: token,
-                    });
-                } else {
-                    console.error("No token found in cookies");
-                }
-            } catch (error) {
-                console.error("Failed to fetch token:", error.response ? error.response.data : error.message);
-            }
-        };
-        fetchToken();
+        checkAuth();
     }, []);
 
+    const login = async (username, password) => {
+        try {
+            const response = await Axios.post(`${BACKEND_URL}/login`, { username, password }, { withCredentials: true });
+            setUser(response.data.user);
+            navigate('/dh-admin/dashboard');
+        } catch (error) {
+            throw new Error('Invalid username or password');
+        }
+    };
+
+    const logout = async () => {
+        await Axios.post(`${BACKEND_URL}/logout`, {}, { withCredentials: true });
+        setUser(null);
+        navigate('/login');
+    };
+
     return (
-        <AuthContext.Provider value={authState}>
+        <AuthContext.Provider value={{ user, login, logout, loading }}>
             {children}
         </AuthContext.Provider>
     );
 };
 
-export default AuthProvider;
+export default AuthContext;
