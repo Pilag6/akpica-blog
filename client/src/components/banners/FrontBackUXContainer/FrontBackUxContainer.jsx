@@ -1,11 +1,17 @@
+import { useContext, useState } from "react";
+
+// Components
 import TitleSections from "@components/miniComponents/TitleSections.jsx";
-import { PostContext } from "@contexts/PostContext.jsx";
-import { useContext } from "react";
 import CardMoreFromUs from "../MoreFromUs/CardMoreFromUs.jsx";
+
+// Icons
 import { ImSpinner9 } from "react-icons/im";
 
+// Backend URL
 import BACKEND_URL from "@utils/backendUrl.js";
-import { useState } from "react";
+
+// Context
+import { PostContext } from "@contexts/PostContext.jsx";
 
 const FrontBackUxContainer = () => {
     const { posts } = useContext(PostContext);
@@ -14,7 +20,6 @@ const FrontBackUxContainer = () => {
     const [loading, setLoading] = useState(false);
 
     // Filter by tags: Frontend, Backend, UX/UI Design
-    // Filter posts by tags
     const frontendPosts = posts.filter((post) =>
         post.tags.includes("frontend")
     );
@@ -35,6 +40,7 @@ const FrontBackUxContainer = () => {
     return (
         <section className="w-full my-11">
             <div className="flex flex-col justify-center gap-6">
+                
                 <div className="max-w-[1200px] mx-auto px-4 md:px-0">
                     <TitleSections titleSection={"Frontend"} />
                     <div className="flex flex-wrap gap-5 my-8">

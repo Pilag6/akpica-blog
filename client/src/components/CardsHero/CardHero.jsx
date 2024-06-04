@@ -32,7 +32,7 @@ const CardHero = ({
           <CardTag tag={tagName} color={colorTag} size={sizeTag} link={linkTag} />
 
           <div>
-            <Link to={link} className="pr-6">
+            <Link to={link}>
               <h2 className="text-2xl font-bold mt-auto mb-2 font-akpica-heading leading-6 [text-shadow:1px_1px_2px_var(--tw-shadow-color)] shadow-akpica-carlo">
                 {title}
               </h2>
