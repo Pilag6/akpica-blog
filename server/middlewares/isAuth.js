@@ -6,6 +6,7 @@ const isAuth = asyncHandler(async (req, res, next) => {
   const token = req.cookies.token || req.headers.authorization?.split(' ')[1];
 
   console.log('Token:', token);  // Log the token for debugging
+  console.log(req.cookies);  // Log the cookies for debugging
 
   if (token) {
     try {
