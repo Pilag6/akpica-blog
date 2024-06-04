@@ -7,16 +7,13 @@ import { BrowserRouter } from "react-router-dom";
 // Contexts Providers
 import PostContextProvider from "@contexts/PostContext.jsx";
 import ToggleContextProvider from "@contexts/ToggleContext.jsx";
-import  AuthProvider  from "@contexts/AuthContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <AuthProvider>
-    <ToggleContextProvider>
-      <PostContextProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </PostContextProvider>
-    </ToggleContextProvider>
-  </AuthProvider>
+  <ToggleContextProvider>
+    <PostContextProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </PostContextProvider>
+  </ToggleContextProvider>
 );
