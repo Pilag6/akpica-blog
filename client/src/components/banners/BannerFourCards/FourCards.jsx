@@ -19,7 +19,7 @@ const FourCards = ({
 }) => {
   return (
     <>
-      <article className="h-[500px] cursor-grab group relative w-full overflow-hidden">
+      <article className="h-[500px] cursor-pointer group relative w-full overflow-hidden">
         <Link to={link}>
           <img
             src={bgImage}
