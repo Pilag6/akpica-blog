@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Axios from "axios";
+
+// Backend URL
 import BACKEND_URL from "@utils/backendUrl.js";
 
 // icons
@@ -15,7 +17,6 @@ const NoteDashboard = () => {
     const [title, setTitle] = useState("");
     const [displayNotes, setDisplayNotes] = useState([]);
     const [error, setError] = useState(null);
-    // const [username, setUsername] = useState(null);
     // delete note
     const [showModal, setShowModal] = useState(false);
     const [noteToDelete, setNoteToDelete] = useState(null);
@@ -56,17 +57,14 @@ const NoteDashboard = () => {
             if (response.status === 201) {
                 const newNote = response.data;
     
-                // Fetch user data (author) for the new note
                 const userResponse = await Axios.get(`${BACKEND_URL}/me`, {
                     withCredentials: true,
                 });
     
                 const user = userResponse.data.user;
     
-                // Add author information to the new note
                 newNote.author = {
-                    username: user.username,
-                    // Add any other necessary fields from the user object
+                    username: user.username
                 };
     
                 setDisplayNotes([...displayNotes, newNote]);
@@ -191,7 +189,6 @@ const NoteDashboard = () => {
                     displayNotes.map((note) => (
                         <div
                             key={note._id}
-                            // p-2 mb-2 w-40 h-40 border border-gray-700  flex flex-col text-akpica-white
                             className="mb-2 w-80 h-60 border border-gray-700 flex flex-col text-akpica-white hover:bg-gray-700 group"
                         >
                             <div className="px-2 py-4 font-bold border-b border-gray-700 group-hover:border-gray-800 flex items-center justify-between h-20">
@@ -281,7 +278,7 @@ const NoteDashboard = () => {
                             <div className="mt-6 flex justify-end gap-4">
                                 <button
                                     onClick={editNote}
-                                    type="button" // Change this to button type="button" to prevent form submission
+                                    type="button"
                                     className="bg-akpica-green hover:bg-akpica-carlo text-white px-4 py-2"
                                 >
                                     Edit Note
