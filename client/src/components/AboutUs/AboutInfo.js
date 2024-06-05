@@ -19,7 +19,7 @@ export const AboutUsCards = [
     {
         profilepicture: profilepila,
         name: "Pila Gonzalez",
-        text: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptas, quaerat. Nostrum doloremque doloribus debitis dolores soluta, corrupti asperiores corporis quam? Ex repudiandae quasi nemo optio nihil pariatur quisquam atque officiis commodi animi, inventore doloribus delectus eos laudantium ipsa reprehenderit. Earum quasi porro excepturi vel unde quas saepe provident quidem totam?",
+        text: "I am a professional Full-Stack Web Developer based in Berlin, with +10 years of experience. With my expertise in responsive web design, UI/UX design, and front and back-end development, I have successfully delivered numerous web development projects and I'm always looking for new challenges to further develop my skills.",
         portfolioImg: pilaportfolio,
         portfolioUrl: "https://piladev.netlify.app/",
         github: "https://github.com/Pilag6",
