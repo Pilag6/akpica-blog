@@ -1,6 +1,6 @@
 // assets - note: import profile imgs from cloudinary
 
-import akpicaus from "@assets/akpicaDefault.jpg";
+import akpicaus from "@assets/aboutus.jpg";
 
 // Components
 import Header from "@components/Header/Header";
@@ -12,17 +12,17 @@ const AboutUs = () => {
     return (
         <>
             <Header />
-            <div className="flex flex-col items-center border border-gray-700 justify-center w-full min-h-screen  bg-gray-800  text-akpica-white font-akpica-heading">
+            <div className="flex flex-col items-center border border-gray-700 justify-center w-full min-h-screen  bg-gray-800  text-akpica-white ">
                 <header
-                    className="h-[40vh] w-full flex items-center justify-center text-akpica-white text-4xl font-bold uppercase"
+                    className="h-[70vh] w-full flex items-center justify-center text-akpica-white text-4xl font-bold uppercase"
                     style={{
                         backgroundImage: `url(${akpicaus})`,
                         backgroundSize: "cover",
-                        backgroundPosition: "center",
+                        backgroundPosition: "top",
                         backgroundRepeat: "no-repeat"
                     }}
                 >
-                    <span className="bg-akpica-marco/85 p-4">
+                    <span className="bg-akpica-marco/85 p-4 font-akpica-heading">
                         About Akpica Team
                     </span>
                 </header>
@@ -39,7 +39,7 @@ const AboutUs = () => {
                     </p>
                 </div>
 
-                <h2 className="text-center text-5xl font-[600]">The Team</h2>
+                <h2 className="text-center text-5xl font-[600] font-akpica-heading">The Team</h2>
 
                 <div className="flex flex-wrap justify-center my-11">
                     {AboutUsCards.map((card, index) => (

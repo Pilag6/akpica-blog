@@ -1,45 +1,35 @@
 import { useContext } from "react";
-
 import CardHero from "@components/CardsHero/CardHero.jsx";
-
-//backend URL
 import BACKEND_URL from "@utils/backendUrl.js";
-
-// Context
 import { PostContext } from "@contexts/PostContext.jsx";
 
 const cardData = [
-    {
-        
-        gridClasses: "col-span-4 md:col-span-2 row-span-2"
-    },
-    {
-        
-        gridClasses: "col-span-4 md:col-span-2 row-span-1"
-    },
-    {
-        
-        gridClasses: "col-span-4 md:col-span-1 row-span-1"
-    },
-    {
-        
-        gridClasses: "col-span-4 md:col-span-1 row-span-1"
-    }
+    { gridClasses: "col-span-4 md:col-span-2 row-span-2" },
+    { gridClasses: "col-span-4 md:col-span-2 row-span-1" },
+    { gridClasses: "col-span-4 md:col-span-1 row-span-1" },
+    { gridClasses: "col-span-4 md:col-span-1 row-span-1" }
 ];
+
+// Fisher-Yates shuffle algorithm
+const shuffleArray = (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+};
 
 const GridCardsSection = () => {
     let { posts } = useContext(PostContext);
 
-    // Create a random number to shuffle the posts
-    const random = Math.floor(Math.random() * posts.length);
-    posts = posts.slice(random, random + 4);
+    // Shuffle the posts array and take the first 4 elements
+    const shuffledPosts = shuffleArray([...posts]).slice(0, 4);
 
     return (
         <div className="grid grid-cols-4 md:grid-cols-4 gap-x-4 gap-y-2 my-20 h-auto md:h-[75vh] px-4">
-            {posts && posts.map((card, index) => (
+            {shuffledPosts && shuffledPosts.map((card, index) => (
                 <div key={card._id} className={cardData[index].gridClasses}>
                     <CardHero
-                    key={card._id}
                         bgImg={`${BACKEND_URL}/posts/photo/${encodeURIComponent(
                             card.title
                         )}?${new Date().getTime()}`}
@@ -54,7 +44,6 @@ const GridCardsSection = () => {
                         sizeTag="text-md"
                         link={`/${card._id}`}
                         linkTag={`/tags/${card.tags[0]}`}
-                        
                     />
                 </div>
             ))}
