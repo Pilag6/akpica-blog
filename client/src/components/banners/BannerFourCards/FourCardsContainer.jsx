@@ -66,6 +66,7 @@ const totalSlides = Math.max(0, reversedPosts.length - 3);
             }
             date={new Date(card.date).toDateString()}
             link={`/${card._id}`}
+            linkTag={`/tags/${card.tags[0]}`}
           />
         ))}
       </div>

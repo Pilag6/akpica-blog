@@ -30,8 +30,6 @@ const FourCards = ({
 
         {/* text banner */}
         <div className="flex flex-col h-full w-full absolute top-[70%] group-hover:top-[60%] gap-4 text-akpica-white p-4 bg-akpica-black/70 to-akpica-white/5 group-hover:bg-akpica-black/90 transition-all duration-300 ease-in-out px-5">
-          
-
           <CardTag
             tag={category}
             color="bg-akpica-pastel text-akpica-black"
