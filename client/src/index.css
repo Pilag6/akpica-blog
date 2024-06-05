@@ -81,4 +81,29 @@ code {
     }
 }
 
+@keyframes float {
+    0% {
+        transform: translate(0, 0);
+    }
+    25% {
+        transform: translate(10px, -10px);
+    }
+    50% {
+        transform: translate(-10px, 10px);
+    }
+    75% {
+        transform: translate(10px, 10px);
+    }
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+.floating-tag {
+    animation: float infinite;
+    position: absolute;
+    transition: top 0.5s, left 0.5s;
+}
+
+
 
