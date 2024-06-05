@@ -31,7 +31,14 @@ const SearchBar = ({ placeholder, data }) => {
   const clearInput = () => {
     setFilteredData([]);
     setWordEntered("");
+    // handleOpenSearch()
   };
+
+  const handleLinkClick = () => {
+    clearInput();
+    handleOpenSearch();
+  };
+
 
   return (
     <>
@@ -40,25 +47,25 @@ const SearchBar = ({ placeholder, data }) => {
       </div>
 
       {isSearch && (
-        <div className="absolute flex gap-4 text-lg z-10 top-[62px] right-0 lg:right-[275px] w-full md:w-[585px]">
+        <div className="absolute flex gap-4 text-lg z-10 top-[62px] right-0 md:right-auto w-full md:w-2/5">
           <div className="flex justify-between bg-akpica-black text-akpica-white w-full">
             <input
               type="text"
               placeholder={placeholder}
               value={wordEntered}
               onChange={handleFilter}
-              className="h-10 w-full p-2 bg-akpica-black outline-none"
+              className="h-10 w-full p-4 bg-akpica-black outline-none"
             />
-            <button className="flex items-center pr-1" onClick={clearInput}>
+            <button className="flex items-center pr-3" onClick={clearInput}>
               <IoIosCloseCircleOutline />
             </button>
           </div>
 
           {filteredData.length != 0 && (
-            <div className="absolute flex flex-col top-10 bg-akpica-black text-akpica-white p-2 leading-9 w-full">
+            <div className="absolute flex flex-col top-10 bg-akpica-black text-akpica-white p-4 leading-9 w-full h-52 overflow-hidden overflow-y-auto">
               {filteredData.slice(0, 15).map((value, key) => {
                 return (
-                  <Link key={key} to={`/${value._id}`} onClick={clearInput}>
+                  <Link key={key} to={`/${value._id}`} onClick={handleLinkClick}>
                     <p>{value.title} </p>
                   </Link>
                 );
