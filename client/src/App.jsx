@@ -27,6 +27,7 @@ import ProtectedRoute from '@components/DashboardStructure/ProtectedRoute.jsx';
 
 // Smooth Scroll Up
 import SmoothScroll from "@utils/SmootScroll.jsx";
+import CategoriesDasboard from "@components/DashboardStructure/CategoriesDasboard.jsx";
 
 
 function App() {
@@ -59,6 +60,7 @@ function App() {
             <Route path="postsDashboard/create" element={<CreatePosts />} />
             <Route path="postsDashboard/edit/:id" element={<EditPost />} />
             <Route path="mediaDashboard" element={<MediaDashboard />} />
+            <Route path="categoriesDashboard" element={<CategoriesDasboard />} />
             <Route path="register" element={<Register />} />
           </Route>
         </Routes>

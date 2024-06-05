@@ -104,7 +104,7 @@ const AsideDashboard = () => {
                 </NavLink>
                 <NavLink
                     className={linksStyles}
-                    to={"/dh-admin/dashboard/commentsDashboard"}
+                    to={"/dh-admin/dashboard/categoriesDashboard"}
                 >
                     <span>
                         <FaTags />
