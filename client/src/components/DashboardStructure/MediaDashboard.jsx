@@ -1,7 +1,14 @@
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import { PostContext } from "@contexts/PostContext.jsx";
+
+// Backend URL
 import BACKEND_URL from "@utils/backendUrl.js";
+
+// Context
+import { PostContext } from "@contexts/PostContext.jsx";
+
+// Components
+import AuthorDate from "@components/miniComponents/AuthorDate.jsx";
 
 // icons
 import {
@@ -10,13 +17,15 @@ import {
   MdOutlineKeyboardArrowDown,
 } from "react-icons/md";
 import { FaPlus } from "react-icons/fa";
-import AuthorDate from "@components/miniComponents/AuthorDate.jsx";
+import { TiDelete } from "react-icons/ti";
 
 const MediaDashboard = () => {
   const { posts } = useContext(PostContext);
   const [isGridView, setIsGridView] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedDateRange, setSelectedDateRange] = useState("All dates");
+  const [showPhotoModal, setShowPhotoModal] = useState(false);
+  const [selectedPost, setSelectedPost] = useState(null);
 
   const gridView = () => {
     setIsGridView(true);
@@ -31,7 +40,6 @@ const MediaDashboard = () => {
 
   const buttonStyles =
     "font-bold hover:text-akpica-white focus:text-akpica-white active:text-akpica-tomato/70";
-
 
   const handleDateRangeChange = (range) => {
     setSelectedDateRange(range);
@@ -50,7 +58,6 @@ const MediaDashboard = () => {
             postDate.getFullYear() === now.getFullYear()
           );
         case "Yesterday":
-          // eslint-disable-next-line no-case-declarations
           const yesterday = new Date(now);
           yesterday.setDate(yesterday.getDate() - 1);
           return (
@@ -59,7 +66,6 @@ const MediaDashboard = () => {
             postDate.getFullYear() === yesterday.getFullYear()
           );
         case "This week":
-          // eslint-disable-next-line no-case-declarations
           const startOfWeek = new Date(now);
           startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay());
           startOfWeek.setHours(0, 0, 0, 0);
@@ -79,6 +85,11 @@ const MediaDashboard = () => {
 
   const filteredPosts = filterPostsByDate(posts, selectedDateRange);
 
+  const handlePhotoModal = (e, post) => {
+    e.preventDefault();
+    setSelectedPost(post);
+    setShowPhotoModal(true);
+  };
 
   return (
     <>
@@ -87,14 +98,12 @@ const MediaDashboard = () => {
           <div className="flex items-center pb-3 gap-4">
             <button className="w-fit flex items-center gap-3 p-2 text-xl font-semibold text-akpica-white outline-none outline-akpica-white transition-all hover:bg-akpica-marco hover:text-zinc-800 hover:outline-2 focus:bg-akpica-pastel/95 active:bg-akpica-pastel/80">
               <FaPlus /> Add New Media
-
             </button>
           </div>
         </div>
 
         {/* Toggle buttons */}
         <div className="flex gap-4 text-2xl border border-akpica-white mb-3 mr-8 p-2 ml-4">
-
           <button onClick={gridView} title="Grid View" className={buttonStyles}>
             <MdGridView />
           </button>
@@ -104,13 +113,11 @@ const MediaDashboard = () => {
           <div className="relative">
             <button
               className="flex items-center gap-1 text-base border border-akpica-white p-1 px-2"
-              onClick={toggleDropdown}>
+              onClick={toggleDropdown}
+            >
               {selectedDateRange} <MdOutlineKeyboardArrowDown />
             </button>
-            {/* toggle dropdown */}
             {isOpen && (
-
-
               <div className="absolute bg-akpica-black border border-gray-700 p-2 text-base">
                 <ul className="list-none p-0 cursor-pointer w-40">
                   <li
@@ -149,7 +156,6 @@ const MediaDashboard = () => {
                   >
                     This year
                   </li>
-
                 </ul>
               </div>
             )}
@@ -157,63 +163,62 @@ const MediaDashboard = () => {
         </div>
 
         {/* views */}
-
         <div className="flex flex-wrap gap-2 md:mr-8 pl-4">
-          {filteredPosts.length > 0 ? (isGridView ? (
-            // Grid view
-            posts &&
-            posts.map((post) => (
-              <div
-                key={post._id}
-                style={{
-                  backgroundImage: `url(${BACKEND_URL}/posts/photo/${encodeURIComponent(
-                    post.title
-                  )}?${new Date().getTime()})`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                  backgroundRepeat: "no-repeat",
-                }}
-                className="object-cover w-80 h-44 flex items-end border border-gray-400">
+          {filteredPosts.length > 0 ? (
+            isGridView ? (
+              // Grid view
+              posts &&
+              posts.map((post) => (
+                <div
+                  onClick={(e) => handlePhotoModal(e, post)}
+                  key={post._id}
+                  style={{
+                    backgroundImage: `url(${BACKEND_URL}/posts/photo/${encodeURIComponent(
+                      post.title
+                    )}?${new Date().getTime()})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat",
+                  }}
+                  className="object-cover w-80 h-44 flex items-end border border-gray-400 cursor-pointer"
+                >
                   <div className="bg-akpica-black hover:bg-gray-700 p-2 w-full">
-
-                <AuthorDate
-                colors={"text-akpica-white"}
-                  avatar={`${BACKEND_URL}/photo/${
-                    post.author.username
-                  }?${new Date().getTime()}`}
-                  author={post.author.username}
-                  date={new Date(post.date).toDateString()}
-                  />
+                    <AuthorDate
+                      colors={"text-akpica-white"}
+                      avatar={`${BACKEND_URL}/photo/${
+                        post.author.username
+                      }?${new Date().getTime()}`}
+                      author={post.author.username}
+                      date={new Date(post.date).toDateString()}
+                    />
                   </div>
-              </div>
-            ))
-          ) : (
-            // List view
-            <table className="w-[1407px] text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-              <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                <tr>
-                  <th scope="col" className="px-6 py-3">
-                    File
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    Post Title
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    Author
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    Tags
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    Date
-                  </th>
-                  <th colSpan={2} className="px-6 py-3 ">
-                    Action
-                  </th>
-                </tr>
-              </thead>
-
-
+                </div>
+              ))
+            ) : (
+              // List view
+              <table className="w-[1407px] text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                  <tr>
+                    <th scope="col" className="px-6 py-3">
+                      File
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                      Post Title
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                      Author
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                      Tags
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                      Date
+                    </th>
+                    <th colSpan={2} className="px-6 py-3 ">
+                      Action
+                    </th>
+                  </tr>
+                </thead>
                 <tbody>
                   {filteredPosts.map((post, index) => (
                     <tr
@@ -222,9 +227,12 @@ const MediaDashboard = () => {
                     >
                       <td className="px-6">
                         <img
-                          src={`${BACKEND_URL}/posts/photo/${post.title}?${new Date().getTime()}`}
+                          src={`${BACKEND_URL}/posts/photo/${
+                            post.title
+                          }?${new Date().getTime()}`}
                           alt="post image"
-                          className="aspect-square w-32 object-cover m-2"
+                          className="aspect-square w-32 object-cover m-2 cursor-pointer"
+                          onClick={(e) => handlePhotoModal(e, post)}
                         />
                       </td>
                       <td
@@ -273,6 +281,27 @@ const MediaDashboard = () => {
           )}
         </div>
       </div>
+
+      {/* Photo modal */}
+      {showPhotoModal && selectedPost && (
+        <div className="fixed top-0 w-full h-full bg-akpica-black bg-opacity-80 flex items-center justify-center">
+          <div className="p-4 relative">
+            <button
+              className="absolute top-2 right-2 text-akpica-tomato text-3xl hover:text-red-400 active:text-red-800"
+              onClick={() => setShowPhotoModal(false)}
+            >
+              <TiDelete />
+            </button>
+            <img
+              src={`${BACKEND_URL}/posts/photo/${encodeURIComponent(
+                selectedPost.title
+              )}?${new Date().getTime()}`}
+              alt="post image"
+              className="object-cover md:w-[1000px] md:h-[600px]"
+            />
+          </div>
+        </div>
+      )}
     </>
   );
 };
