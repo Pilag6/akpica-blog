@@ -68,12 +68,12 @@ const Hero = () => {
                         <CardTag
                             tag={post.tags[0]}
                             color="bg-akpica-marco text-akpica-white"
-                            size="text-md"
+                            size="md:text-md text-sm"
                             link={`/tags/${post.tags}`}
                             linkTag={`/tags/${post.tags[0]}`}
                         />
                         <Link to={`${post._id}`} className="md:w-1/2 p-2">
-                            <h1 className="w-fit decoration-clone text-5xl bg-akpica-white px-5 leading-snug inline uppercase font-[700] font-akpica-heading text-akpica-black">
+                            <h1 className="w-fit decoration-clone md:text-5xl text-3xl bg-akpica-white px-5 leading-snug inline uppercase font-[700] font-akpica-heading text-akpica-black">
                                 {post.title}
                             </h1>
                         </Link>

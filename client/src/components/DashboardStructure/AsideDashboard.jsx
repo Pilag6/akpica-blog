@@ -25,8 +25,8 @@ const AsideDashboard = () => {
     const navigate = useNavigate();
 
     const linksStyles = `${
-        isOpen ? "pl-4" : "pl-0"
-    } text-akpica-white hover:underline-offset-8 hover:underline transition transform hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:transform-none flex items-center gap-2 text-xl font-semibold`;
+        isOpen ? "md:pl-4 pl-6" : "pl-0"
+    } text-akpica-white hover:underline-offset-8 hover:underline transition transform hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:transform-none flex items-center gap-2 text-md font-semibold`;
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -71,12 +71,12 @@ const AsideDashboard = () => {
         <>
             <div
             onClick={handleOpen}
-                className={`flex flex-col gap-4 w-full ${
+                className={`flex flex-col gap-3 w-full ${
                     isOpen ? "w-[200px]" : "w-[50px] items-center"
                 }`}
             >
                 <NavLink
-                    className="flex items-center gap-2 text-akpica-marco hover:text-opacity-90 font-semibold border-b-2 border-cyan-50/45 pb-4 text-2xl"
+                    className="flex items-center gap-2 text-akpica-marco hover:text-opacity-90 font-semibold border-b-2 border-cyan-50/45 pb-4 text-xl pl-2 md:pl-0"
                     to={"/dh-admin/dashboard"}
                 >
                     <span>
@@ -133,7 +133,7 @@ const AsideDashboard = () => {
                 <div
                     className={`${
                         isOpen
-                            ? "mt-auto pb-6 flex md:items-center  gap-3"
+                            ? "mt-auto pb-6 flex md:items-center pl-2 gap-3"
                             : "mt-auto pb-6 flex flex-col gap-4"
                     }`}
                 >

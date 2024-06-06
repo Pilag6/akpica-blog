@@ -31,7 +31,7 @@ const EditPost = () => {
                     setContent(post.content);
                     setTags(post.tags);
                     setDate(post.date.split('T')[0]);
-                    setAuthorId(post.author.fullname || post.author); // Store author ID
+                    setAuthorId(post.author.fullname); // Store author ID
                     setImage(post.image); // Assuming post.image is a URL
                 } else {
                     setError("Failed to load post data.");
@@ -49,7 +49,7 @@ const EditPost = () => {
                 });
                 if (response.status === 200) {
                     const user = response.data.user;
-                    setAuthorId(user._id); // Store user ID
+                    setAuthorId(user.author.fullname); // Store user ID
                 }
             } catch (error) {
                 console.error("Failed to fetch user data:", error);
@@ -142,7 +142,7 @@ const EditPost = () => {
             </h2>
             <form
                 onSubmit={handleSubmit}
-                className="w-full flex justify-center gap-5"
+                className="w-full flex md:flex-row flex-col justify-center gap-5"
             >
                 <section className="flex-1">
                     <div className="mb-4">
@@ -176,6 +176,14 @@ const EditPost = () => {
                                 selector: "textarea",
                                 height: 400,
                                 menubar: true,
+                                mobile: {
+                                    menubar: true,
+                                    plugins: 'autosave lists autolink',
+                                    toolbar: 'undo bold italic styles',
+                                    toolbar_sticky: true,
+                                    toolbar_sticky_offset: 70,
+                                    resize: true
+                                  },
                                 plugins:
                                     "anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate mentions tinycomments tableofcontents footnotes autocorrect typography inlinecss markdown",
                                 tinycomments_mode: "embedded",

@@ -10,6 +10,7 @@ import CardMoreFromUs from "@components/banners/MoreFromUs/CardMoreFromUs.jsx";
 
 //BACKEND URL
 import BACKEND_URL from "@utils/backendUrl.js";
+import Footer from "@components/Footer.jsx";
 
 const PostDetails = () => {
     const { id } = useParams();
@@ -50,15 +51,15 @@ const PostDetails = () => {
                 }}
             ></header>
 
-            <main className="bg-akpica-white max-w-[1200px] mx-auto z-30 -mt-40 min-h-96 pl-16 pr-9 py-12 flex flex-col relative">
-                <div className="flex flex-col w-3/4 gap-5 mb-12">
+            <main className="bg-akpica-white max-w-[1200px] mx-auto z-30 -mt-40 min-h-96 md:pl-16 px-6 md:pr-9 py-12 flex flex-col relative">
+                <div className="flex flex-col md:w-3/4 gap-5 mb-12">
                     <CardTag
                         tag={post.tags[0]}
                         size={"text-sm"}
                         color={"bg-akpica-green text-akpica-white"}
                         linkTag={`/tags/${post.tags[0]}`}
                     />
-                    <h1 className="text-5xl pr-12 bg-akpica-white font-[700] font-akpica-heading text-akpica-black">
+                    <h1 className="md:text-5xl text-3xl md:pr-12 bg-akpica-white font-[700] font-akpica-heading text-akpica-black">
                         {post.title}
                     </h1>
 
@@ -74,13 +75,13 @@ const PostDetails = () => {
                     </div>
                 </div>
 
-                <div className="flex">
+                <div className="flex md:flex-row flex-col md:gap-0 gap-8">
                     <div
-                        className="w-2/3 h-auto pr-12 border-r-4 border-akpica-green"
+                        className="md:w-2/3 h-auto md:pr-12 md:border-r-4 md:border-akpica-green"
                         dangerouslySetInnerHTML={{ __html: post.content }}
                     />
 
-                    <aside className="flex-1 pl-4 sticky top-24 h-[calc(100vh-32px)] overflow-hidden-4/12">
+                    <aside className="flex-1 md:pl-4 sticky top-24 h-[calc(100vh-32px)] overflow-hidden-4/12">
                         <h2 className="font-bold font-akpica-heading text-2xl mb-4">
                             RECENT POSTS
                         </h2>
@@ -113,6 +114,7 @@ const PostDetails = () => {
                     </aside>
                 </div>
             </main>
+            <Footer />
         </div>
     );
 };

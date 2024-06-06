@@ -160,10 +160,10 @@ const UserProfile = () => {
 
     return (
         <>
-            <div className="flex flex-col items-start pt-16 h-[calc(100vh-80px)]">
+            <div className="flex flex-col items-start md:pt-16 pt-8 h-[calc(100vh-80px)]">
                 {admin && (
-                    <div className="flex w-4/6">
-                        <div className="flex flex-col items-center w-2/5">
+                    <div className="flex md:flex-row flex-col md:items-start items-center gap-8 md:gap-0 md:w-4/6">
+                        <div className="flex flex-col items-center md:w-2/5">
                             <h1 className="text-3xl font-semibold mb-8 text-akpica-white">
                                 {admin && admin.fullname}
                             </h1>
@@ -220,7 +220,7 @@ const UserProfile = () => {
                             </form>
                         </div>
 
-                        <div className="flex flex-col gap-4 text-akpica-white">
+                        <div className="flex flex-col gap-4 text-akpica-white px-8 md:px-0">
                             <div className="flex items-center gap-4 ">
                                 <label className="w-1/4">Username:</label>
                                 <input
