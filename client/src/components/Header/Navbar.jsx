@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { NavLink } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect, useRef } from "react";
 
 // icons
 import { FaBars } from "react-icons/fa6";
@@ -11,15 +11,38 @@ import { PostContext } from "@contexts/PostContext.jsx";
 import useAuth from "@utils/useAuth.js";
 
 const Navbar = ({ scrolling }) => {
-  const { isToggle, handleToggle } = useContext(ToggleContext);
+  const { isToggle, handleToggle, setIsToggle } = useContext(ToggleContext);
   const { posts } = useContext(PostContext);
   const { user } = useAuth();
+  const navbarRef = useRef(null);
+
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (navbarRef.current && !navbarRef.current.contains(event.target)) {
+        // Click outside of navbar, close it
+        if (isToggle) {
+          setIsToggle(false);
+        }
+      }
+    };
+
+    if (isToggle) {
+      document.addEventListener("mousedown", handleOutsideClick);
+    } else {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    }
+
+    // Remove event listener when component unmounts
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, [isToggle, setIsToggle]);
 
   const linkStyles = `pl-4 hover:underline-offset-8 hover:underline transition transform active:text-akpica-pastel font-semibold text-akpica-white`;
   const mobileLinkStyles = `p-4 hover:underline-offset-8 hover:underline transition transform active:text-akpica-pastel font-semibold text-akpica-white`;
 
   return (
-    <div className="flex items-center justify-between px-5">
+    <div ref={navbarRef} className="flex items-center justify-between px-5">
       <nav className="md:flex items-center justify-center gap-5 text-lg hidden">
         <NavLink className={linkStyles} to={"/tags/frontend"}>
           Frontend
@@ -34,7 +57,7 @@ const Navbar = ({ scrolling }) => {
           About Us
         </NavLink>
         
-        {user && ( // Conditionally render the Login link if the user is authenticated
+        {user && (
           <NavLink
             className={`${mobileLinkStyles} md:bg-akpica-tomato`}
             to={"/dh-admin/dashboard"}
@@ -54,7 +77,7 @@ const Navbar = ({ scrolling }) => {
             scrolling ? "bg-akpica-black" : "bg-akpica-black"
           }`}
         >
-          <div onClick={isToggle} className="flex flex-col items-center ">
+          <div onClick={handleToggle} className="flex flex-col items-center">
             <NavLink className={mobileLinkStyles} to={"/tags/frontend"}>
               Frontend
             </NavLink>
@@ -67,8 +90,7 @@ const Navbar = ({ scrolling }) => {
             <NavLink className={mobileLinkStyles} to={"/about"}>
               About us
             </NavLink>
-            {/* LOGIN - to remove later */}
-            {user && ( // Conditionally render the Login link if the user is authenticated
+            {user && (
               <NavLink
                 className={`${mobileLinkStyles} bg-akpica-tomato`}
                 to={"/dh-admin/dashboard"}

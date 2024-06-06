@@ -1,10 +1,11 @@
 /* eslint-disable react/prop-types */
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 
 // icons
 import { FaMagnifyingGlass } from "react-icons/fa6";
-import { IoIosCloseCircleOutline } from "react-icons/io";
+// import { IoIosCloseCircleOutline } from "react-icons/io";
+import { HiOutlineBackspace } from "react-icons/hi2";
 
 import { ToggleContext } from "@contexts/ToggleContext.jsx";
 
@@ -14,9 +15,12 @@ const SearchBar = ({ placeholder, data }) => {
   const [filteredData, setFilteredData] = useState([]);
   const [wordEntered, setWordEntered] = useState("");
 
+  const searchRef = useRef(null);
+
   const handleFilter = (e) => {
     const searchWord = e.target.value;
     setWordEntered(searchWord);
+
     const newFilter = data.filter((value) => {
       return value.title.toLowerCase().includes(searchWord.toLowerCase());
     });
@@ -31,13 +35,35 @@ const SearchBar = ({ placeholder, data }) => {
   const clearInput = () => {
     setFilteredData([]);
     setWordEntered("");
-    // handleOpenSearch()
   };
 
   const handleLinkClick = () => {
     clearInput();
     handleOpenSearch();
   };
+
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (searchRef.current && !searchRef.current.contains(event.target)) {
+        // Click outside of search bar, close it
+        if (isSearch) {
+          handleOpenSearch();
+        }
+      }
+    };
+
+    if (isSearch) {
+      document.addEventListener("mousedown", handleOutsideClick);
+    } else {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    }
+
+    // Remove event listener when component unmounts
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }
+  , [isSearch, handleOpenSearch]);
 
 
   return (
@@ -47,7 +73,7 @@ const SearchBar = ({ placeholder, data }) => {
       </div>
 
       {isSearch && (
-        <div className="absolute flex gap-4 text-lg z-10 top-[62px] right-0 md:right-auto w-full md:w-2/5">
+        <div ref={searchRef} className="absolute flex gap-4 text-lg z-10 top-[62px] right-0 md:right-auto w-full md:w-2/5">
           <div className="flex justify-between bg-akpica-black text-akpica-white w-full">
             <input
               type="text"
@@ -57,7 +83,7 @@ const SearchBar = ({ placeholder, data }) => {
               className="h-10 w-full p-4 bg-akpica-black outline-none"
             />
             <button className="flex items-center pr-3" onClick={clearInput}>
-              <IoIosCloseCircleOutline />
+              <HiOutlineBackspace />
             </button>
           </div>
 
