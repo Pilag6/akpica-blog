@@ -103,7 +103,7 @@ const MediaDashboard = () => {
         </div>
 
         {/* Toggle buttons */}
-        <div className="flex gap-4 text-2xl border border-akpica-white mb-3 mr-8 p-2 ml-4">
+        <div className="flex gap-4 text-2xl border border-akpica-white mb-3 md:mr-8 mr-3 p-2 ml-4">
           <button onClick={gridView} title="Grid View" className={buttonStyles}>
             <MdGridView />
           </button>
@@ -163,7 +163,7 @@ const MediaDashboard = () => {
         </div>
 
         {/* views */}
-        <div className="flex flex-wrap gap-2 md:mr-8 pl-4">
+        <div className="flex md:justify-start justify-center flex-wrap gap-2 md:mr-8 pl-4">
           {filteredPosts.length > 0 ? (
             isGridView ? (
               // Grid view
@@ -284,10 +284,10 @@ const MediaDashboard = () => {
 
       {/* Photo modal */}
       {showPhotoModal && selectedPost && (
-        <div className="fixed top-0 w-full h-full bg-akpica-black bg-opacity-80 flex items-center justify-center">
+        <div className="fixed top-0 w-full md:-ml-24 h-full bg-akpica-black bg-opacity-80 flex items-center justify-center">
           <div className="p-4 relative">
             <button
-              className="absolute top-2 right-2 text-akpica-tomato text-3xl hover:text-red-400 active:text-red-800"
+              className="absolute top-4 right-4 text-akpica-tomato text-3xl hover:text-red-400 active:text-red-800"
               onClick={() => setShowPhotoModal(false)}
             >
               <TiDelete />

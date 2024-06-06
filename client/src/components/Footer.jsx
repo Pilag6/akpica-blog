@@ -33,9 +33,9 @@ const Footer = () => {
     ];
 
     const legalLinks = [
-        { href: "#", label: "Terms & Condition" },
-        { href: "#", label: "Cookie Policy" },
-        { href: "#", label: "Feedback" }
+        { href: "/about", label: "About Us" },
+        { href: "/about", label: "Contact Us" },
+        { href: "#", label: "Career" }
     ];
 
     return (
@@ -99,17 +99,17 @@ const Footer = () => {
 
                     <div className="w-full md:flex-1 flex flex-col gap-5">
                         <h5 className="text-3xl font-bold text-akpica-white">
-                            Legal
+                            Company
                         </h5>
                         <div className="pl-4">
                             {legalLinks.map((link, index) => (
                                 <div key={index}>
-                                    <a
-                                        href={link.href}
+                                    <Link
+                                        to={link.href}
                                         className="text-lg cursor-pointer hover:underline-offset-8 hover:underline transition transform active:text-akpica-pastel font-semibold text-akpica-white"
                                     >
                                         {link.label}
-                                    </a>
+                                    </Link>
                                 </div>
                             ))}
                         </div>
@@ -149,7 +149,7 @@ const Footer = () => {
                         {currentYear} © AKPICA. All rights reserved.
                     </p>
                     <p className="text-base font-semibold">
-                        Terms and conditions apply
+                        General conditions | Cookies | Privacy Policy
                     </p>
                 </div>
             </div>
