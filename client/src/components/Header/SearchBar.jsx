@@ -10,7 +10,7 @@ import { HiOutlineBackspace } from "react-icons/hi2";
 import { ToggleContext } from "@contexts/ToggleContext.jsx";
 
 const SearchBar = ({ placeholder, data }) => {
-  const { isSearch, handleOpenSearch } = useContext(ToggleContext);
+  const { isSearch, setIsSearch,  handleOpenSearch } = useContext(ToggleContext);
 
   const [filteredData, setFilteredData] = useState([]);
   const [wordEntered, setWordEntered] = useState("");
@@ -47,7 +47,7 @@ const SearchBar = ({ placeholder, data }) => {
       if (searchRef.current && !searchRef.current.contains(event.target)) {
         // Click outside of search bar, close it
         if (isSearch) {
-          handleOpenSearch();
+          setIsSearch(false);
         }
       }
     };
@@ -63,7 +63,7 @@ const SearchBar = ({ placeholder, data }) => {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
   }
-  , [isSearch, handleOpenSearch]);
+  , [isSearch, setIsSearch]);
 
 
   return (
@@ -73,7 +73,7 @@ const SearchBar = ({ placeholder, data }) => {
       </div>
 
       {isSearch && (
-        <div ref={searchRef} className="absolute flex gap-4 text-lg z-10 top-[62px] right-0 md:right-auto w-full md:w-2/5">
+        <div ref={searchRef} className="absolute flex justify-center items-center gap-4 text-lg z-10 top-[62px] border right-0 md:left-0 md:translate-x-1/2 w-full md:w-1/2">
           <div className="flex justify-between bg-akpica-black text-akpica-white w-full">
             <input
               type="text"
