@@ -4,11 +4,11 @@ export default {
     theme: {
         extend: {
             colors: {
-                "akpica-tomato": "#E06A4E",
-                "akpica-pastel": "#E2D9A2",
-                "akpica-green": "#789F8A",
-                "akpica-marco": "#DEB853",
-                "akpica-carlo": "#0A373A",
+                "akpica-tomato": "#CD6A72",
+                "akpica-pastel": "#F1F1E6",
+                "akpica-green": "#97AFB9",
+                "akpica-marco": "#FFF7D6",
+                "akpica-carlo": "#264462",
                 "akpica-black": "#242424",
                 "akpica-white": "#ebebeb"
             },
