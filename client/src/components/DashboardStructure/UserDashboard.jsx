@@ -222,7 +222,7 @@ const UserDashboard = () => {
                                         </div>
                                         <button
                                             onClick={() => toggleRow(index)}
-                                            className="ml-4 md:hidden"
+                                            className="md:hidden text-2xl text-akpica-marco dark:text-akpica-marco hover:text-akpica-whitedark:hover:text-akpica-white focus:outline-none transition-all ml-auto"
                                         >
                                             {expandedRows[index] ? (
                                                 <MdOutlineExpandMore />
@@ -238,7 +238,7 @@ const UserDashboard = () => {
                                                     EMAIL:{" "}
                                                     {user.email.toLowerCase()}
                                                 </td>
-                                                <td className="md:hidden block px-6 py-2">
+                                                <td className="md:hidden block py-2">
                                                     ROLE:{" "}
                                                     {user.role
                                                         .charAt(0)
@@ -246,7 +246,7 @@ const UserDashboard = () => {
                                                         user.role.slice(1)}
                                                 </td>
                                             </div>
-                                            <div className="flex gap-5 items-center pb-4">
+                                            <div className="flex gap-5 items-center pb-4 justify-between">
                                                 <td className="md:hidden block px-6 pr-8 py-2">
                                                     POSTS:{" "}
                                                     <Link
@@ -259,26 +259,28 @@ const UserDashboard = () => {
                                                     </Link>
                                                 </td>
 
-                                                <td className="md:hidden block px-2 py-2">
-                                                    <Link
-                                                        to={`/dh-admin/dashboard/usersDashboard/${user._id}`}
-                                                        className="font-medium text-akpica-marco dark:text-akpica-marco hover:underline hover:underline-offset-4"
-                                                    >
-                                                        Edit user
-                                                    </Link>
-                                                </td>
-                                                <td className="md:hidden block px-2 py-2">
-                                                    <button
-                                                        onClick={() =>
-                                                            confirmDeleteUser(
-                                                                user._id
-                                                            )
-                                                        }
-                                                        className="font-medium text-akpica-tomato dark:text-akpica-tomato hover:underline"
-                                                    >
-                                                        Delete
-                                                    </button>
-                                                </td>
+                                                <div className="flex items-center pr-4">
+                                                    <td className="md:hidden block px-2 py-2">
+                                                        <Link
+                                                            to={`/dh-admin/dashboard/usersDashboard/${user._id}`}
+                                                            className="font-medium text-akpica-marco dark:text-akpica-marco hover:underline hover:underline-offset-4"
+                                                        >
+                                                            Edit user
+                                                        </Link>
+                                                    </td>
+                                                    <td className="md:hidden block px-2 py-2">
+                                                        <button
+                                                            onClick={() =>
+                                                                confirmDeleteUser(
+                                                                    user._id
+                                                                )
+                                                            }
+                                                            className="font-medium text-akpica-tomato dark:text-akpica-tomato hover:underline"
+                                                        >
+                                                            Delete
+                                                        </button>
+                                                    </td>
+                                                </div>
                                             </div>
                                             
                                         </>

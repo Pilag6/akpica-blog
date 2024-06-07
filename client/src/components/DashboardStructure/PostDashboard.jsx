@@ -203,25 +203,35 @@ const PostDashboard = () => {
                                             />
                                         </td>
                                         <td className="px-2 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-akpica-white">
-                                            <Link to={`/${post._id}`}>
-                                                {post.title.length > 30
-                                                    ? `${post.title.substring(
-                                                          0,
-                                                          30
-                                                      )}...`
-                                                    : post.title}
-                                            </Link>
-
-                                            <button
-                                                onClick={() => toggleRow(index)}
-                                                className="ml-2 md:hidden"
-                                            >
-                                                {expandedRows[index] ? (
-                                                    <MdOutlineExpandMore />
-                                                ) : (
-                                                    <MdOutlineChevronRight />
-                                                )}
-                                            </button>
+                                            <div className="flex items-center justify-between">
+                                                <Link to={`/${post._id}`}>
+                                                    {/* Mobile title - truncated */}
+                                                    <span className="inline-block sm:hidden">
+                                                        {post.title.length > 32
+                                                            ? `${post.title.substring(
+                                                                  0,
+                                                                  32
+                                                              )}...`
+                                                            : post.title}
+                                                    </span>
+    
+                                                    {/* Desktop title - full */}
+                                                    <span className="hidden sm:block">
+                                                        {post.title}
+                                                    </span>
+                                                </Link>
+    
+                                                <button
+                                                    onClick={() => toggleRow(index)}
+                                                    className="md:hidden text-2xl text-akpica-marco dark:text-akpica-marco hover:text-akpica-whitedark:hover:text-akpica-white focus:outline-none transition-all"
+                                                >
+                                                    {expandedRows[index] ? (
+                                                        <MdOutlineExpandMore />
+                                                    ) : (
+                                                        <MdOutlineChevronRight />
+                                                    )}
+                                                </button>
+                                            </div>
                                         </td>
 
                                         <td
