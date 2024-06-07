@@ -7,7 +7,7 @@ import { PostContext } from "@contexts/PostContext.jsx";
 
 // Icons
 import { FaPlus } from "react-icons/fa";
-import { MdOutlineChevronRight } from "react-icons/md";
+import { MdOutlineChevronRight, MdOutlineExpandMore } from "react-icons/md";
 
 // Backend URL
 import BACKEND_URL from "@utils/backendUrl.js";
@@ -19,7 +19,11 @@ const PostDashboard = () => {
 
     const [showModal, setShowModal] = useState(false);
     const [postToDelete, setPostToDelete] = useState(null);
-    const [sortCriteria, setSortCriteria] = useState({ field: "date", order: "desc" });
+    const [sortCriteria, setSortCriteria] = useState({
+        field: "date",
+        order: "desc"
+    });
+    const [expandedRows, setExpandedRows] = useState({});
 
     const queryParams = new URLSearchParams(location.search);
     const authorId = queryParams.get("authorId");
@@ -28,7 +32,6 @@ const PostDashboard = () => {
         ? posts.filter((post) => post.author._id === authorId)
         : posts;
 
-    // Function to sort posts based on the selected criteria
     const sortPosts = (posts) => {
         return posts.sort((a, b) => {
             if (sortCriteria.field === "date") {
@@ -89,6 +92,13 @@ const PostDashboard = () => {
         }
     };
 
+    const toggleRow = (index) => {
+        setExpandedRows((prevExpandedRows) => ({
+            ...prevExpandedRows,
+            [index]: !prevExpandedRows[index]
+        }));
+    };
+
     return (
         <div>
             <div className="flex items-center pt-6 pb-3 pl-8">
@@ -113,7 +123,7 @@ const PostDashboard = () => {
                 )}
             </div>
 
-            <section className="flex justify-center gap-6 w-full p-4">
+            <section className="flex flex-col md:flex-row justify-center gap-6 w-full p-4">
                 <div className="relative overflow-x-auto shadow-md w-full">
                     <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -121,22 +131,56 @@ const PostDashboard = () => {
                                 <th scope="col" className="px-6 py-3">
                                     Image
                                 </th>
-                                <th scope="col" className="px-6 py-3 cursor-pointer rota" onClick={() => handleSortChange("title")}>
+                                <th
+                                    scope="col"
+                                    className="px-6 py-3 cursor-pointer"
+                                    onClick={() => handleSortChange("title")}
+                                >
                                     Post Title
-                                    <MdOutlineChevronRight className={`rotate-90 ml-1 inline-block transform ${sortCriteria.field === "title" && sortCriteria.order === "asc" ? "-rotate-90" : "rotate-90"}`} />
+                                    <MdOutlineChevronRight
+                                        className={`ml-1 inline-block transform ${
+                                            sortCriteria.field === "title" &&
+                                            sortCriteria.order === "asc"
+                                                ? "rotate-90"
+                                                : "-rotate-90"
+                                        }`}
+                                    />
                                 </th>
-                                <th scope="col" className="px-6 py-3 cursor-pointer" onClick={() => handleSortChange("author")}>
+                                <th
+                                    className="hidden md:table-cell px-6 py-3 cursor-pointer"
+                                    onClick={() => handleSortChange("author")}
+                                >
                                     Author
-                                    <MdOutlineChevronRight className={`rotate-90 ml-1 inline-block transform ${sortCriteria.field === "author" && sortCriteria.order === "asc" ? "-rotate-90" : "rotate-90"}`} />
+                                    <MdOutlineChevronRight
+                                        className={`ml-1 inline-block transform ${
+                                            sortCriteria.field === "author" &&
+                                            sortCriteria.order === "asc"
+                                                ? "rotate-90"
+                                                : "-rotate-90"
+                                        }`}
+                                    />
                                 </th>
-                                <th scope="col" className="px-6 py-3">
+                                <th className="hidden md:table-cell py-3">
                                     Tags
                                 </th>
-                                <th scope="col" className="px-6 py-3 cursor-pointer" onClick={() => handleSortChange("date")}>
+                                <th
+                                    className="hidden md:table-cell py-3 cursor-pointer"
+                                    onClick={() => handleSortChange("date")}
+                                >
                                     Date
-                                    <MdOutlineChevronRight className={`rotate-90 ml-1 inline-block transform ${sortCriteria.field === "date" && sortCriteria.order === "asc" ? "-rotate-90" : "rotate-90"}`} />
+                                    <MdOutlineChevronRight
+                                        className={`ml-1 inline-block transform ${
+                                            sortCriteria.field === "date" &&
+                                            sortCriteria.order === "asc"
+                                                ? "rotate-90"
+                                                : "-rotate-90"
+                                        }`}
+                                    />
                                 </th>
-                                <th colSpan={2} className="px-6 py-3">
+                                <th
+                                    className="hidden md:table-cell px-6 py-3"
+                                    colSpan={2}
+                                >
                                     Action
                                 </th>
                             </tr>
@@ -144,59 +188,148 @@ const PostDashboard = () => {
 
                         <tbody>
                             {sortedPosts.map((post, index) => (
-                                <tr
-                                    key={index}
-                                    className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-                                >
-                                    <td className="px-6">
-                                        <img
-                                            src={`${BACKEND_URL}/posts/photo/${post.title}?${new Date().getTime()}`}
-                                            alt="post image"
-                                            className="w-10 h-10 object-cover"
-                                        />
-                                    </td>
-                                    <td
-                                        scope="row"
-                                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-akpica-white"
+                                <>
+                                    <tr
+                                        key={index}
+                                        className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 "
                                     >
-                                        <Link to={`http://localhost:5173/${post._id}`}>{post.title}</Link>
-                                    </td>
-                                    <td
-                                        className="px-6 py-4 cursor-pointer"
-                                        onClick={() => handleFilterByAuthor(post.author._id)}
-                                    >
-                                        @{post.author.username}
-                                    </td>
-                                    <td className="px-6 py-4 flex gap-3">
-                                        {post.tags.slice(0, 4).map((tag, index) => (
-                                            <span
-                                                key={index}
-                                                className="bg-gray-200 dark:bg-gray-700 dark:text-gray-400 px-2 py-1 rounded text-xs"
+                                        <td className="flex items-center pl-4 py-4 w-20 h-20 ">
+                                            <img
+                                                src={`${BACKEND_URL}/posts/photo/${
+                                                    post.title
+                                                }?${new Date().getTime()}`}
+                                                alt="post image"
+                                                className="w-full h-full object-cover"
+                                            />
+                                        </td>
+                                        <td className="px-2 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-akpica-white">
+                                            <Link to={`/${post._id}`}>
+                                                {post.title.length > 30
+                                                    ? `${post.title.substring(
+                                                          0,
+                                                          30
+                                                      )}...`
+                                                    : post.title}
+                                            </Link>
+
+                                            <button
+                                                onClick={() => toggleRow(index)}
+                                                className="ml-2 md:hidden"
                                             >
-                                                {tag}
-                                            </span>
-                                        ))}
-                                    </td>
-                                    <td className="px-6 py-4">
-                                        {new Date(post.date).toDateString()}
-                                    </td>
-                                    <td className="px-6 py-4">
-                                        <button
-                                            onClick={() => navigate(`edit/${post._id}`)}
-                                            className="font-medium text-akpica-marco dark:text-akpica-marco hover:underline"
+                                                {expandedRows[index] ? (
+                                                    <MdOutlineExpandMore />
+                                                ) : (
+                                                    <MdOutlineChevronRight />
+                                                )}
+                                            </button>
+                                        </td>
+
+                                        <td
+                                            className="hidden md:table-cell px-6 py-4 cursor-pointer"
+                                            onClick={() =>
+                                                handleFilterByAuthor(
+                                                    post.author._id
+                                                )
+                                            }
                                         >
-                                            Edit
-                                        </button>
-                                    </td>
-                                    <td className="px-6 py-4">
-                                        <button
-                                            onClick={() => confirmDeletePost(post._id)}
-                                            className="font-medium text-akpica-tomato dark:text-akpica-tomato hover:underline"
-                                        >
-                                            Delete
-                                        </button>
-                                    </td>
-                                </tr>
+                                            @{post.author.username}
+                                        </td>
+                                        <td className="hidden md:table-cell py-4">
+                                            {post.tags
+                                                .slice(0, 4)
+                                                .map((tag, index) => (
+                                                    <span
+                                                        key={index}
+                                                        className="bg-gray-200 dark:bg-gray-700 dark:text-gray-400 px-2 py-1 rounded text-xs mr-2"
+                                                    >
+                                                        {tag}
+                                                    </span>
+                                                ))}
+                                        </td>
+                                        <td className="hidden md:table-cell py-4">
+                                            {new Date(post.date).toDateString()}
+                                        </td>
+                                        <td className="hidden md:table-cell px-6 py-4">
+                                            <button
+                                                onClick={() =>
+                                                    navigate(`edit/${post._id}`)
+                                                }
+                                                className="font-medium text-akpica-marco dark:text-akpica-marco hover:underline"
+                                            >
+                                                Edit
+                                            </button>
+                                        </td>
+                                        <td className="hidden md:table-cell px-6 py-4">
+                                            <button
+                                                onClick={() =>
+                                                    confirmDeletePost(post._id)
+                                                }
+                                                className="font-medium text-akpica-tomato dark:text-akpica-tomato hover:underline"
+                                            >
+                                                Delete
+                                            </button>
+                                        </td>
+                                    </tr>
+
+                                    {expandedRows[index] && (
+                                        <tr className="md:hidden bg-gray-800 border-b border-gray-700 ">
+                                            <td
+                                                colSpan={6}
+                                                className="px-6 py-2"
+                                            >
+                                                <div className="flex items-center justify-between gap-4 py-2">
+                                                    <div>
+                                                        AUTHOR: @
+                                                        {post.author.username}
+                                                    </div>
+                                                </div>
+                                                <div className="py-2">
+                                                    TAGS:{" "}
+                                                    {post.tags
+                                                        .slice(0, 4)
+                                                        .map((tag, index) => (
+                                                            <span
+                                                                key={index}
+                                                                className="bg-gray-200  dark:bg-gray-700 dark:text-gray-400 px-2 py-1 mr-2 rounded text-xs"
+                                                            >
+                                                                {tag}
+                                                            </span>
+                                                        ))}
+                                                </div>
+                                                <div className="py-2 flex items-center justify-between">
+                                                    <div>
+                                                        DATE:{" "}
+                                                        {new Date(
+                                                            post.date
+                                                        ).toDateString()}
+                                                    </div>
+                                                    <div>
+                                                        <button
+                                                            onClick={() =>
+                                                                navigate(
+                                                                    `edit/${post._id}`
+                                                                )
+                                                            }
+                                                            className="font-medium text-akpica-marco dark:text-akpica-marco hover:underline"
+                                                        >
+                                                            Edit
+                                                        </button>
+                                                        <button
+                                                            onClick={() =>
+                                                                confirmDeletePost(
+                                                                    post._id
+                                                                )
+                                                            }
+                                                            className="font-medium text-akpica-tomato dark:text-akpica-tomato hover:underline ml-4"
+                                                        >
+                                                            Delete
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    )}
+                                </>
                             ))}
                         </tbody>
                     </table>
@@ -206,9 +339,13 @@ const PostDashboard = () => {
             {showModal && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
                     <div className="bg-white p-6 shadow-lg">
-                        <h2 className="text-lg font-semibold mb-4">Confirm Deletion</h2>
+                        <h2 className="text-lg font-semibold mb-4">
+                            Confirm Deletion
+                        </h2>
                         <p>Are you sure you want to delete this post?</p>
-                        <p className="text-xs mt-2 text-red-600">This action is irreversible.</p>
+                        <p className="text-xs mt-2 text-red-600">
+                            This action is irreversible.
+                        </p>
                         <div className="mt-6 flex justify-end gap-4">
                             <button
                                 onClick={() => setShowModal(false)}
