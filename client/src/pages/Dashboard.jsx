@@ -6,8 +6,6 @@ import Axios from "axios";
 import BACKEND_URL from "@utils/backendUrl.js";
 import { PostContext } from "@contexts/PostContext.jsx";
 
-import Logo from "@assets/logo-white.png";
-
 // Icons
 import { IoNewspaperSharp } from "react-icons/io5";
 import { FaHashtag } from "react-icons/fa6";
@@ -22,7 +20,8 @@ const Dashboard = () => {
     const [currentDate, setCurrentDate] = useState(new Date());
     const [userId, setUserId] = useState(null);
     const [totalUsers, setTotalUsers] = useState(0);
-    const [location, setLocation] = useState({ city: '', country: '' });
+    const [location, setLocation] = useState({ city: "", country: "" });
+    const [userRanking, setUserRanking] = useState([]);
 
     // Extract unique tags from posts and count their occurrences
     const uniqueTags = new Set();
@@ -38,11 +37,14 @@ const Dashboard = () => {
     const getGreeting = () => {
         const hour = new Date().getHours();
         if (hour < 12) {
-            return "Good morning";
+            return { message: "Good morning", bgClass: "bg-akpica-pastel" };
         } else if (hour < 19) {
-            return "Good afternoon";
+            return { message: "Good afternoon", bgClass: "bg-akpica-green" };
         } else {
-            return "Good evening";
+            return {
+                message: "Good evening",
+                bgClass: "bg-gray-700 text-akpica-white border"
+            };
         }
     };
 
@@ -74,7 +76,7 @@ const Dashboard = () => {
 
         const fetchLocation = async () => {
             try {
-                const res = await Axios.get('https://ipinfo.io');
+                const res = await Axios.get("https://ipinfo.io");
                 const { city, country } = res.data;
                 setLocation({ city, country });
             } catch (error) {
@@ -82,164 +84,296 @@ const Dashboard = () => {
             }
         };
 
+        const calculateUserRanking = () => {
+            const userPostCounts = {};
+
+            posts.forEach((post) => {
+                const userId = post.author._id;
+                if (userPostCounts[userId]) {
+                    userPostCounts[userId].postCount += 1;
+                } else {
+                    userPostCounts[userId] = {
+                        postCount: 1,
+                        username: post.author.username,
+                        fullname: post.author.fullname,
+                        photo: `${BACKEND_URL}/photo/${post.author.username}`
+                    };
+                }
+            });
+
+            const ranking = Object.values(userPostCounts).sort(
+                (a, b) => b.postCount - a.postCount
+            );
+
+            setUserRanking(ranking);
+        };
+
         fetchUserData();
         fetchTotalUsers();
         fetchLocation();
+        calculateUserRanking();
 
         const intervalId = setInterval(() => {
             setCurrentDate(new Date());
         }, 1000);
 
         return () => clearInterval(intervalId);
-    }, []);
+    }, [posts]);
 
     const getUserPostCount = (userId) => {
         return posts.filter((post) => post.author._id === userId).length;
     };
 
-    const formattedDate = currentDate.toDateString();
+    const formattedDate = currentDate.toLocaleDateString("en-US", {
+        month: "short",
+        day: "2-digit",
+        year: "numeric"
+    });
     const formattedTime = currentDate.toLocaleTimeString();
 
+    const greeting = getGreeting();
+
+    // Filter posts by logged-in user and sort by newest first
+    const userPosts = posts
+        .filter((post) => post.author._id === userId)
+        .sort((a, b) => new Date(b.date) - new Date(a.date));
+
     return (
-        <div className="flex justify-start items-start gap-6 w-full h-[calc(100vh-80px)] p-8">
-            <div className="flex flex-col gap-6">
-                <section className="flex gap-6">
-                    <article className="flex items-center gap-5 bg-akpica-green w-fit p-5 rounded-sm">
-                        <div>
-                            <p className="text-2xl font-akpica-heading">
-                                {getGreeting()},
-                            </p>
-                            <h2 className="font-[700] text-4xl font-akpica-heading">
-                                {fullName}
-                            </h2>
+        <div className="flex justify-start flex-col items-start gap-6 w-full h-[calc(100vh-80px)] p-8">
+            <section className="flex gap-6 flex-wrap justify-between w-full ">
+                <div className="flex flex-col gap-6 flex-wrap ">
+                    {/* GREETING */}
+                    <div className="flex gap-6 h-48">
+                        <article
+                            className={`flex w-full h-full  justify-between gap-5 ${greeting.bgClass} p-6 rounded-sm`}
+                        >
+                            <div className="flex flex-col">
+                                <p className="text-2xl font-akpica-heading">
+                                    {greeting.message},
+                                </p>
+                                <h2 className="font-[700] text-4xl font-akpica-heading">
+                                    {fullName}
+                                </h2>
 
-                            <p className="leading-8">
-                                Post written by you:{" "}
-                                <span className="italic">
-                                    <Link
-                                        className="underline underline-offset-4 font-[700] text-akpica-carlo"
-                                        to={`/dh-admin/dashboard/postsDashboard?authorId=${userId}`}
-                                    >
-                                        {getUserPostCount(userId)}
-                                    </Link>{" "}
-                                </span>
-                            </p>
-                        </div>
-                        {profilePicture && (
-                            <img
-                                src={profilePicture}
-                                alt="Profile"
-                                className="w-28 h-28 border-2 border-akpica-carlo rounded-full p-1 object-cover"
-                            />
-                        )}
-                    </article>
+                                <p className="leading-10 mt-auto">
+                                    Post written by you:{" "}
+                                    <span className="italic">
+                                        <Link
+                                            className="underline underline-offset-4 font-[700]"
+                                            to={`/dh-admin/dashboard/postsDashboard?authorId=${userId}`}
+                                        >
+                                            {getUserPostCount(userId)}
+                                        </Link>{" "}
+                                    </span>
+                                </p>
+                            </div>
+                            {profilePicture && (
+                                <img
+                                    src={profilePicture}
+                                    alt="Profile"
+                                    className="w-32 h-32 border-2 border-akpica-carlo rounded-full p-1 object-cover"
+                                />
+                            )}
+                        </article>
 
-                    <article className="flex flex-col items-center gap-5 bg-akpica-green w-fit p-5 rounded-sm">
-                        <div className="aspect-square p-2 px-4 flex flex-col">
-                            <IoNewspaperSharp className="text-akpica-carlo text-6xl" />
-                            <h2 className="font-[700] text-2xl font-akpica-heading pt-4">
-                                Total Posts
-                            </h2>
+                        {/* ADD NEW POST */}
+                        <div className="w-96">
                             <Link
-                                to={"postsDashboard"}
-                                className="font-akpica-base italic text-3xl underline underline-offset-4 hover:text-akpica-carlo/70"
+                                to={"/dh-admin/dashboard/postsDashboard/create"}
+                                className="w-full h-full flex flex-col items-center justify-center gap-3 p-4 text-xl font-semibold text-akpica-white border transition-all hover:bg-akpica-pastel hover:text-zinc-800 hover:outline-2 uppercase"
                             >
-                                {postQuantity}
+                                <FaPlus /> Add New Post
                             </Link>
                         </div>
-                    </article>
+                    </div>
 
-                    <article className="flex flex-col items-center gap-5 bg-akpica-green w-fit p-5 rounded-sm">
-                        <div className="aspect-square p-2 px-4 flex flex-col">
-                            <FaHashtag className="text-akpica-carlo text-6xl" />
-                            <h2 className="font-[700] text-2xl font-akpica-heading pt-4">
-                                Total Tags
-                            </h2>
-                            <Link
-                                to={"categoriesDashboard"}
-                                className="font-akpica-base italic text-3xl underline underline-offset-4 hover:text-akpica-carlo/70"
-                            >
-                                {uniqueTags.size}
-                            </Link>
-                        </div>
-                    </article>
+                    {/* TOTAL POSTS, TAGS, USERS */}
+                    <div className="flex gap-6 flex-wrap justify-between">
+                        {/* TOTAL POSTS */}
+                        <article className="aspect-square flex flex-col items-center gap-5 bg-akpica-green  p-5 rounded-sm w-[190px]">
+                            <div className="p-2 px-4 flex flex-col">
+                                <IoNewspaperSharp className="text-akpica-carlo text-6xl" />
+                                <h2 className="font-[700] text-2xl font-akpica-heading pt-4">
+                                    Total Posts
+                                </h2>
+                                <Link
+                                    to={"postsDashboard"}
+                                    className="font-akpica-base italic text-3xl underline underline-offset-4 hover:text-akpica-carlo/70"
+                                >
+                                    {postQuantity}
+                                </Link>
+                            </div>
+                        </article>
 
-                    <article className="flex flex-col items-center gap-5 bg-akpica-green w-fit p-5 rounded-sm">
-                        <div className="aspect-square p-2 px-4 flex flex-col">
-                            <FaRobot className="text-akpica-carlo text-6xl" />
-                            <h2 className="font-[700] text-2xl font-akpica-heading pt-4">
-                                Total Users
-                            </h2>
-                            <Link
-                                to={"usersDashboard"}
-                                className="font-akpica-base italic text-3xl underline underline-offset-4 hover:text-akpica-carlo/70"
-                            >
-                                {totalUsers}
-                            </Link>
-                        </div>
-                    </article>
-                </section>
-            </div>
+                        {/* TOTAL TAGS */}
+                        <article className="aspect-square flex flex-col items-center gap-5 bg-akpica-green p-5 rounded-sm w-[190px]">
+                            <div className="p-2 px-4 flex flex-col">
+                                <FaHashtag className="text-akpica-carlo text-6xl" />
+                                <h2 className="font-[700] text-2xl font-akpica-heading pt-4">
+                                    Total Tags
+                                </h2>
+                                <Link
+                                    to={"categoriesDashboard"}
+                                    className="font-akpica-base italic text-3xl underline underline-offset-4 hover:text-akpica-carlo/70"
+                                >
+                                    {uniqueTags.size}
+                                </Link>
+                            </div>
+                        </article>
 
-            <section className="flex flex-col gap-4 flex-1 h-[calc(100vh-120px)]">
-                <section className="flex flex-col gap-4">
-                    <article className="bg-akpica-green p-5 rounded-sm">
-                        <h2 className="font-[700] text-2xl font-akpica-heading">
-                            Recent Posts
+                        {/* TOTAL USERS */}
+                        <article className="aspect-square flex flex-col items-center gap-5 bg-akpica-green p-5 rounded-sm w-[190px]">
+                            <div className="p-2 px-4 flex flex-col">
+                                <FaRobot className="text-akpica-carlo text-6xl" />
+                                <h2 className="font-[700] text-2xl font-akpica-heading pt-4">
+                                    Total Users
+                                </h2>
+                                <Link
+                                    to={"usersDashboard"}
+                                    className="font-akpica-base italic text-3xl underline underline-offset-4 hover:text-akpica-carlo/70"
+                                >
+                                    {totalUsers}
+                                </Link>
+                            </div>
+                        </article>
+
+                        {/* TOTAL USERS */}
+                        <article className="aspect-square flex flex-col items-center gap-5 border p-5 rounded-sm w-[190px]">
+                            
+                        </article>
+                    </div>
+
+                    {/* Posts written by the logged-in user */}
+                    <article className="bg-akpica-green p-5 rounded-sm  md:h-[50vh] 2xl:h-[62vh] overflow-y-scroll">
+                        <h2 className="font-[700] text-2xl font-akpica-heading mb-4">
+                            Your Posts
                         </h2>
-                        <ul className="flex flex-col gap-2 mt-4 pl-1">
-                            {sortedPosts.slice(0, 5).map((post, index) => (
+                        <div className="">
+                            <table className="min-w-full overflow-y-scroll">
+                                <thead></thead>
+                                <tbody>
+                                    {userPosts.map((post) => (
+                                        <tr key={post._id} className="border">
+                                            <td className="whitespace-no-wrap md:block hidden">
+                                                <img
+                                                    src={`${BACKEND_URL}/posts/photo/${post.title}`}
+                                                    alt={post.title}
+                                                    className="w-full h-16 object-cover rounded-sm"
+                                                />
+                                            </td>
+                                            <td className="pl-6 md:py-4 py-1 whitespace-no-wrap border-l border-r">
+                                                <Link
+                                                    to={`/${post._id}`}
+                                                    className="text-akpica-carlo hover:text-akpica-marco hover:underline underline-offset-8 font-[700] "
+                                                >
+                                                    {post.title.length > 60
+                                                        ? `${post.title.substring(
+                                                              0,
+                                                              60
+                                                          )}...`
+                                                        : post.title}
+                                                </Link>
+                                            </td>
+
+                                            <td className="pl-6 py-4 whitespace-no-wrap ">
+                                                <p className="text-akpica-carlo font-[700] md:block hidden">
+                                                    {new Date(post.date)
+                                                        .toDateString()
+                                                        .slice(4)}
+                                                </p>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    </article>
+                </div>
+
+                <div className="flex-1 flex flex-col gap-6">
+                    {/* DATE, TIME, LOCATION */}
+                    <section className="flex flex-col items-end gap-4 h-48">
+                        <div className="flex flex-col gap-1 pl-1">
+                            <p className="text-akpica-white text-2xl  font-akpica-heading text-right w-48">
+                                {formattedDate}
+                            </p>
+                            <p className="text-akpica-white text-5xl font-[700] font-akpica-heading tracking-wider w-48 text-right leading-9">
+                                {formattedTime}
+                            </p>
+                            {/* City, Country */}
+                            <p className="text-akpica-white text-2xl font-akpica-heading text-right w-48">
+                                {location.city}, {location.country}
+                            </p>
+                        </div>
+                    </section>
+
+                    {/* RECENT POSTS */}
+                    <section className="flex flex-col gap-4">
+                        <article className="bg-akpica-green p-5 rounded-sm">
+                            <h2 className="font-[700] text-2xl font-akpica-heading">
+                                Recent Posts
+                            </h2>
+                            <ul className="flex flex-col gap-2 mt-4 pl-1">
+                                {sortedPosts.slice(0, 6).map((post, index) => (
+                                    <li
+                                        key={index}
+                                        className="flex items-center gap-2"
+                                    >
+                                        <span className="text-akpica-carlo text-lg">
+                                            {index + 1}.
+                                        </span>
+                                        <Link
+                                            to={`/${post._id}`}
+                                            className="text-akpica-carlo hover:text-akpica-carlo/70 underline underline-offset-4 font-[700]"
+                                        >
+                                            {post.title.length > 35
+                                                ? `${post.title.substring(
+                                                      0,
+                                                      35
+                                                  )}...`
+                                                : post.title}{" "}
+                                            <span className="font-[500]">
+                                                | by @{post.author.username} |{" "}
+                                                {new Date(post.date)
+                                                    .toDateString()
+                                                    .slice(4)}{" "}
+                                            </span>
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                        </article>
+                    </section>
+
+                    {/* Ranking with users with the most posts */}
+                    <section className="bg-akpica-green p-5 rounded-sm w-1/2">
+                        <h2 className="font-[700] text-2xl font-akpica-heading">
+                            User Ranking
+                        </h2>
+                        <ul className="flex flex-col gap-4 mt-4">
+                            {userRanking.slice(0, 3).map((user, index) => (
                                 <li
                                     key={index}
-                                    className="flex items-center gap-2"
+                                    className="flex items-center gap-4"
                                 >
-                                    <span className="text-akpica-carlo text-lg">
-                                        {index + 1}.
-                                    </span>
-                                    <Link
-                                        to={`/${post._id}`}
-                                        className="text-akpica-carlo hover:text-akpica-carlo/70 underline underline-offset-4 font-[700]"
-                                    >
-                                        {post.title.length > 35
-                                            ? `${post.title.substring(
-                                                  0,
-                                                  35
-                                              )}...`
-                                            : post.title}{" "}
-                                        <span className="font-[500]">
-                                            | by @{post.author.username} |{" "}
-                                            {new Date(post.date).toDateString()}{" "}
-                                        </span>
-                                    </Link>
+                                    <img
+                                        src={user.photo}
+                                        alt={user.fullname}
+                                        className="w-16 h-16 object-cover rounded-full border-2 border-akpica-carlo"
+                                    />
+                                    <div>
+                                        <p className="text-lg font-[700]">
+                                            {user.fullname} (@{user.username})
+                                        </p>
+                                        <p className="text-sm">
+                                            {user.postCount} posts
+                                        </p>
+                                    </div>
                                 </li>
                             ))}
                         </ul>
-                    </article>
-                </section>
-
-                <div className="flex items-center pb-3 pl-1">
-                    <Link
-                        to={"/dh-admin/dashboard/postsDashboard/create"}
-                        className=" w-full flex items-center justify-center gap-3 p-4 text-xl font-semibold text-akpica-white outline-none outline-white transition-all hover:bg-akpica-pastel hover:text-zinc-800 hover:outline-2 uppercase"
-                    >
-                        <FaPlus /> Add New Post
-                    </Link>
+                    </section>
                 </div>
-
-                <section className="mt-auto flex flex-col items-end mb-3 gap-4">
-                    <div className="flex flex-col gap-1 pl-1">
-                        <p className="text-akpica-white text-2xl  font-akpica-heading text-right w-48">
-                            {formattedDate}
-                        </p>
-                        <p className="text-akpica-white text-5xl font-[700] font-akpica-heading tracking-wider w-48 text-right leading-9">
-                            {formattedTime}
-                        </p>
-                        {/* City, Country */}
-                        <p className="text-akpica-white text-2xl font-akpica-heading text-right w-48">
-                            {location.city}, {location.country}
-                        </p>
-                    </div>
-                </section>
             </section>
         </div>
     );
