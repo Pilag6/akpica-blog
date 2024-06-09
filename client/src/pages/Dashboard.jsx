@@ -96,6 +96,7 @@ const Dashboard = () => {
                         postCount: 1,
                         username: post.author.username,
                         fullname: post.author.fullname,
+                        id: post.author._id,
                         photo: `${BACKEND_URL}/photo/${post.author.username}`
                     };
                 }
@@ -139,11 +140,11 @@ const Dashboard = () => {
         .sort((a, b) => new Date(b.date) - new Date(a.date));
 
     return (
-        <div className="flex justify-start flex-col items-start gap-6 w-full h-[calc(100vh-80px)] p-8">
-            <section className="flex gap-6 flex-wrap justify-between w-full ">
-                <div className="flex flex-col gap-6 flex-wrap ">
+        <div className="flex justify-start flex-col items-start gap-5 w-full h-[calc(100vh-80px)] p-8">
+            <section className="flex gap-5 flex-wrap justify-between w-full ">
+                <div className="flex flex-col gap-5 flex-wrap w-1/2">
                     {/* GREETING */}
-                    <div className="flex gap-6 h-48">
+                    <div className="flex gap-5 h-48">
                         <article
                             className={`flex w-full h-full  justify-between gap-5 ${greeting.bgClass} p-6 rounded-sm`}
                         >
@@ -180,25 +181,25 @@ const Dashboard = () => {
                         <div className="w-96">
                             <Link
                                 to={"/dh-admin/dashboard/postsDashboard/create"}
-                                className="w-full h-full flex flex-col items-center justify-center gap-3 p-4 text-xl font-semibold text-akpica-white border transition-all hover:bg-akpica-pastel hover:text-zinc-800 hover:outline-2 uppercase"
+                                className="w-full h-full flex flex-col items-center justify-center gap-3 p-4 text-2xl font-[700] text-akpica-white border transition-all hover:bg-akpica-pastel hover:text-zinc-800 hover:outline-2 uppercase"
                             >
-                                <FaPlus /> Add New Post
+                                <FaPlus /> Write a Post
                             </Link>
                         </div>
                     </div>
 
                     {/* TOTAL POSTS, TAGS, USERS */}
-                    <div className="flex gap-6 flex-wrap justify-between">
+                    <div className="flex flex-wrap justify-between">
                         {/* TOTAL POSTS */}
-                        <article className="aspect-square flex flex-col items-center gap-5 bg-akpica-green  p-5 rounded-sm w-[190px]">
+                        <article className="aspect-square flex flex-col items-center gap-5 bg-gray-800 dark:hover:bg-gray-600 text-akpica-white  p-5 rounded-sm w-[190px]">
                             <div className="p-2 px-4 flex flex-col">
-                                <IoNewspaperSharp className="text-akpica-carlo text-6xl" />
+                                <IoNewspaperSharp className="text-akpica-white text-6xl" />
                                 <h2 className="font-[700] text-2xl font-akpica-heading pt-4">
                                     Total Posts
                                 </h2>
                                 <Link
                                     to={"postsDashboard"}
-                                    className="font-akpica-base italic text-3xl underline underline-offset-4 hover:text-akpica-carlo/70"
+                                    className="font-akpica-base italic text-3xl underline underline-offset-4 hover:text-akpica-marco"
                                 >
                                     {postQuantity}
                                 </Link>
@@ -206,15 +207,15 @@ const Dashboard = () => {
                         </article>
 
                         {/* TOTAL TAGS */}
-                        <article className="aspect-square flex flex-col items-center gap-5 bg-akpica-green p-5 rounded-sm w-[190px]">
+                        <article className="aspect-square flex flex-col items-center gap-5 bg-gray-800 dark:hover:bg-gray-600 text-akpica-white p-5 rounded-sm w-[190px]">
                             <div className="p-2 px-4 flex flex-col">
-                                <FaHashtag className="text-akpica-carlo text-6xl" />
+                                <FaHashtag className="text-akpica-white text-6xl" />
                                 <h2 className="font-[700] text-2xl font-akpica-heading pt-4">
                                     Total Tags
                                 </h2>
                                 <Link
                                     to={"categoriesDashboard"}
-                                    className="font-akpica-base italic text-3xl underline underline-offset-4 hover:text-akpica-carlo/70"
+                                    className="font-akpica-base italic text-3xl underline underline-offset-4 hover:text-akpica-marco"
                                 >
                                     {uniqueTags.size}
                                 </Link>
@@ -222,15 +223,15 @@ const Dashboard = () => {
                         </article>
 
                         {/* TOTAL USERS */}
-                        <article className="aspect-square flex flex-col items-center gap-5 bg-akpica-green p-5 rounded-sm w-[190px]">
+                        <article className="aspect-square flex flex-col items-center gap-5 bg-gray-800 dark:hover:bg-gray-600 text-akpica-white p-5 rounded-sm w-[190px]">
                             <div className="p-2 px-4 flex flex-col">
-                                <FaRobot className="text-akpica-carlo text-6xl" />
+                                <FaRobot className="text-akpica-white text-6xl" />
                                 <h2 className="font-[700] text-2xl font-akpica-heading pt-4">
                                     Total Users
                                 </h2>
                                 <Link
                                     to={"usersDashboard"}
-                                    className="font-akpica-base italic text-3xl underline underline-offset-4 hover:text-akpica-carlo/70"
+                                    className="font-akpica-base italic text-3xl underline underline-offset-4 hover:text-akpica-marco"
                                 >
                                     {totalUsers}
                                 </Link>
@@ -244,39 +245,41 @@ const Dashboard = () => {
                     </div>
 
                     {/* Posts written by the logged-in user */}
-                    <article className="bg-akpica-green p-5 rounded-sm  md:h-[50vh] 2xl:h-[62vh] overflow-y-scroll">
-                        <h2 className="font-[700] text-2xl font-akpica-heading mb-4">
+                    <article className="bg-gray-800 p-5 rounded-sm md:h-[42vh] overflow-y-scroll ">
+                        <h2 className="font-[700] text-2xl font-akpica-heading mb-4 text-akpica-white">
                             Your Posts
                         </h2>
                         <div className="">
-                            <table className="min-w-full overflow-y-scroll">
+                            <table className="min-w-full overflow-y-scroll ">
                                 <thead></thead>
                                 <tbody>
                                     {userPosts.map((post) => (
-                                        <tr key={post._id} className="border">
-                                            <td className="whitespace-no-wrap md:block hidden">
+                                        <tr key={post._id} className="border dark:border-gray-700 dark:hover:bg-gray-600">
+                                            <td className="md:block hidden w-44">
                                                 <img
-                                                    src={`${BACKEND_URL}/posts/photo/${post.title}`}
+                                                    src={`${BACKEND_URL}/posts/photo/${
+                                                        post.title
+                                                    }?${new Date().getTime()}`}
                                                     alt={post.title}
-                                                    className="w-full h-16 object-cover rounded-sm"
+                                                    className="w-full h-full object-cover"
                                                 />
                                             </td>
-                                            <td className="pl-6 md:py-4 py-1 whitespace-no-wrap border-l border-r">
+                                            <td className="pl-2 md:py-4 py-1 whitespace-no-wrap border-r dark:border-gray-700">
                                                 <Link
                                                     to={`/${post._id}`}
-                                                    className="text-akpica-carlo hover:text-akpica-marco hover:underline underline-offset-8 font-[700] "
+                                                    className="text-akpica-white hover:text-akpica-marco hover:underline underline-offset-8 font-[700] "
                                                 >
-                                                    {post.title.length > 60
+                                                    {post.title.length > 55
                                                         ? `${post.title.substring(
                                                               0,
-                                                              60
+                                                              55
                                                           )}...`
                                                         : post.title}
                                                 </Link>
                                             </td>
 
-                                            <td className="pl-6 py-4 whitespace-no-wrap ">
-                                                <p className="text-akpica-carlo font-[700] md:block hidden">
+                                            <td className="pr-3 pl-4 py-4 whitespace-no-wrap">
+                                                <p className="text-akpica-white font-[700] md:block hidden">
                                                     {new Date(post.date)
                                                         .toDateString()
                                                         .slice(4)}
@@ -290,7 +293,7 @@ const Dashboard = () => {
                     </article>
                 </div>
 
-                <div className="flex-1 flex flex-col gap-6">
+                <div className="flex-1 flex flex-col gap-5">
                     {/* DATE, TIME, LOCATION */}
                     <section className="flex flex-col items-end gap-4 h-48">
                         <div className="flex flex-col gap-1 pl-1">
@@ -309,8 +312,8 @@ const Dashboard = () => {
 
                     {/* RECENT POSTS */}
                     <section className="flex flex-col gap-4">
-                        <article className="bg-akpica-green p-5 rounded-sm">
-                            <h2 className="font-[700] text-2xl font-akpica-heading">
+                        <article className="bg-gray-800 p-5 rounded-sm">
+                            <h2 className="font-[700] text-2xl font-akpica-heading text-akpica-white">
                                 Recent Posts
                             </h2>
                             <ul className="flex flex-col gap-2 mt-4 pl-1">
@@ -319,12 +322,12 @@ const Dashboard = () => {
                                         key={index}
                                         className="flex items-center gap-2"
                                     >
-                                        <span className="text-akpica-carlo text-lg">
+                                        <span className="text-akpica-white text-lg">
                                             {index + 1}.
                                         </span>
                                         <Link
                                             to={`/${post._id}`}
-                                            className="text-akpica-carlo hover:text-akpica-carlo/70 underline underline-offset-4 font-[700]"
+                                            className="text-akpica-white hover:text-akpica-marco underline underline-offset-4 font-[700]"
                                         >
                                             {post.title.length > 35
                                                 ? `${post.title.substring(
@@ -345,34 +348,44 @@ const Dashboard = () => {
                         </article>
                     </section>
 
-                    {/* Ranking with users with the most posts */}
-                    <section className="bg-akpica-green p-5 rounded-sm w-1/2">
-                        <h2 className="font-[700] text-2xl font-akpica-heading">
-                            User Ranking
-                        </h2>
-                        <ul className="flex flex-col gap-4 mt-4">
-                            {userRanking.slice(0, 3).map((user, index) => (
-                                <li
-                                    key={index}
-                                    className="flex items-center gap-4"
-                                >
-                                    <img
-                                        src={user.photo}
-                                        alt={user.fullname}
-                                        className="w-16 h-16 object-cover rounded-full border-2 border-akpica-carlo"
-                                    />
-                                    <div>
-                                        <p className="text-lg font-[700]">
-                                            {user.fullname} (@{user.username})
-                                        </p>
-                                        <p className="text-sm">
-                                            {user.postCount} posts
-                                        </p>
-                                    </div>
-                                </li>
-                            ))}
-                        </ul>
-                    </section>
+                    <div className="flex gap-5">
+                        {/* Ranking with users with the most posts */}
+                        <section className="bg-gray-800 p-5 rounded-sm w-1/2">
+                            <h2 className="font-[700] text-2xl font-akpica-heading text-akpica-white">
+                                User Ranking
+                            </h2>
+                            <ul className="flex flex-col gap-4 mt-4 pl-2">
+                                {userRanking.slice(0, 3).map((user, index) => (
+                                    <Link
+                                        to={`/dh-admin/dashboard/usersDashboard/${user.id}`}
+                                        key={index}
+                                        className="flex items-center gap-4"
+                                    >
+                                        <span className="text-akpica-carlo text-lg bg-akpica-white p-2 w-6 h-6 flex justify-center items-center rounded-full">
+                                            {index + 1}
+                                        </span>
+                                        <img
+                                            src={user.photo}
+                                            alt={user.fullname}
+                                            className="w-16 h-16 object-cover rounded-full border-2 border-akpica-carlo"
+                                        />
+                                        <div className="text-akpica-white ">
+                                            <p className="text-lg font-[700] hover:text-akpica-marco">
+                                                {user.fullname} (@{user.username})
+                                            </p>
+                                            <p className="text-sm">
+                                                {user.postCount} posts
+                                            </p>
+                                        </div>
+                                    </Link>
+                                ))}
+                            </ul>
+                        </section>
+                        {/* Ranking with users with the most posts */}
+                        <section className="border p-5 rounded-sm w-1/2">
+                            
+                        </section>
+                    </div>
                 </div>
             </section>
         </div>
