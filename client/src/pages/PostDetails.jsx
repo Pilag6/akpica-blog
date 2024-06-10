@@ -1,6 +1,7 @@
 // PostDetails.jsx
 import { useParams } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
+import DOMPurify from "dompurify";
 import Axios from "axios";
 import AuthorDate from "@components/miniComponents/AuthorDate.jsx";
 import CardTag from "@components/miniComponents/CardTag.jsx";
@@ -24,7 +25,6 @@ const PostDetails = () => {
                 const response = await Axios.get(`${BACKEND_URL}/posts/${id}`);
 
                 setPost(response.data);
-                console.log("Fetched post:", response.data);
             } catch (error) {
                 console.log(error);
             }
@@ -78,7 +78,7 @@ const PostDetails = () => {
                 <div className="flex md:flex-row flex-col md:gap-0 gap-8">
                     <div
                         className="md:w-2/3 h-auto md:pr-12 md:border-r-4 md:border-akpica-green"
-                        dangerouslySetInnerHTML={{ __html: post.content }}
+                        dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}
                     />
 
                     <aside className="flex-1 md:pl-4 sticky top-24 h-[calc(100vh-32px)] overflow-hidden-4/12">

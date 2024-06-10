@@ -14,7 +14,7 @@ const AboutUs = () => {
             <Header />
             <div className="flex flex-col items-center border border-gray-700 justify-center w-full min-h-screen  bg-gray-800  text-akpica-white ">
                 <header
-                    className="h-[70vh] w-full flex items-center justify-center text-akpica-white text-4xl font-bold uppercase"
+                    className="h-[70vh] w-full flex items-center justify-center text-akpica-black text-4xl font-bold uppercase"
                     style={{
                         backgroundImage: `url(${akpicaus})`,
                         backgroundSize: "cover",
