@@ -34,7 +34,7 @@ const createPost = asyncHandler(async (req, res) => {
         content,
         date,
         author: req.user.id,
-        image: req.file.filename,
+        image: imageFilename,
         tags: tags.split(",")
     });
     res.status(201).json(post);

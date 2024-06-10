@@ -126,7 +126,7 @@ const Dashboard = () => {
     };
 
     const formattedDate = currentDate.toLocaleDateString("en-US", {
-        month: "short",
+        month: "long",
         day: "2-digit",
         year: "numeric"
     });
