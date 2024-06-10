@@ -76,7 +76,7 @@ const AsideDashboard = () => {
                 }`}
             >
                 <NavLink
-                    className="flex items-center gap-2 text-akpica-marco hover:text-opacity-90 font-semibold border-b-2 border-cyan-50/45 pb-4 text-xl pl-2 md:pl-0"
+                    className="flex items-center gap-2 text-akpica-pastel hover:text-opacity-90 font-semibold border-b-2 border-cyan-50/45 pb-4 text-xl pl-2 md:pl-0"
                     to={"/dh-admin/dashboard"}
                 >
                     <span>
