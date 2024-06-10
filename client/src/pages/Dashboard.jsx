@@ -259,7 +259,7 @@ const Dashboard = () => {
                                                 <img
                                                     src={`${BACKEND_URL}/posts/photo/${
                                                         post.title
-                                                    }?${new Date().getTime()}`}
+                                                    }`}
                                                     alt={post.title}
                                                     className="w-full h-full object-cover"
                                                 />

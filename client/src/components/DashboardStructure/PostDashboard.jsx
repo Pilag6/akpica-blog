@@ -197,7 +197,7 @@ const PostDashboard = () => {
                                             <img
                                                 src={`${BACKEND_URL}/posts/photo/${
                                                     post.title
-                                                }?${new Date().getTime()}`}
+                                                }`}
                                                 alt="post image"
                                                 className="w-full h-full object-cover"
                                             />

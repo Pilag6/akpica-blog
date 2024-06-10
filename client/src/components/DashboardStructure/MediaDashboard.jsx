@@ -175,7 +175,7 @@ const MediaDashboard = () => {
                   style={{
                     backgroundImage: `url(${BACKEND_URL}/posts/photo/${encodeURIComponent(
                       post.title
-                    )}?${new Date().getTime()})`,
+                    )})`,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                     backgroundRepeat: "no-repeat",
@@ -187,7 +187,7 @@ const MediaDashboard = () => {
                       colors={"text-akpica-white"}
                       avatar={`${BACKEND_URL}/photo/${
                         post.author.username
-                      }?${new Date().getTime()}`}
+                      }`}
                       author={post.author.username}
                       date={new Date(post.date).toDateString()}
                     />
@@ -229,7 +229,7 @@ const MediaDashboard = () => {
                         <img
                           src={`${BACKEND_URL}/posts/photo/${
                             post.title
-                          }?${new Date().getTime()}`}
+                          }`}
                           alt="post image"
                           className="aspect-square w-32 object-cover m-2 cursor-pointer"
                           onClick={(e) => handlePhotoModal(e, post)}
@@ -295,7 +295,7 @@ const MediaDashboard = () => {
             <img
               src={`${BACKEND_URL}/posts/photo/${encodeURIComponent(
                 selectedPost.title
-              )}?${new Date().getTime()}`}
+              )}`}
               alt="post image"
               className="object-cover md:w-[1000px] md:h-[600px]"
             />

@@ -126,12 +126,12 @@ const Footer = () => {
                                     title={post.title}
                                     img={`${BACKEND_URL}/posts/photo/${encodeURIComponent(
                                         post.title
-                                    )}?${new Date().getTime()}`}
+                                    )}`}
                                     tag={post.tags[0]}
                                     author={post.author.username}
                                     avatar={`${BACKEND_URL}/photo/${
                                         post.author.username
-                                    }?${new Date().getTime()}`}
+                                    }`}
                                     h2Color="text-akpica-white"
                                     bottom="mt-auto"
                                     date={new Date(post.date).toDateString()}

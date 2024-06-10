@@ -82,7 +82,7 @@ const Hero = () => {
                     <div className="flex flex-col justify-center h-full max-w-[1200px] mx-auto p-6 gap-2">
                         <CardTag
                             tag={post.tags[0]}
-                            color="bg-akpica-marco text-akpica-white"
+                            color="bg-akpica-marco text-akpica-black"
                             size="md:text-md text-sm"
                             link={`/tags/${post.tags}`}
                             linkTag={`/tags/${post.tags[0]}`}

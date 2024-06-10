@@ -27,26 +27,27 @@ const GridCardsSection = () => {
 
     return (
         <div className="grid grid-cols-4 md:grid-cols-4 gap-x-4 gap-y-2 my-20 h-auto md:h-[75vh] px-4">
-            {shuffledPosts && shuffledPosts.map((card, index) => (
-                <div key={card._id} className={cardData[index].gridClasses}>
-                    <CardHero
-                        bgImg={`${BACKEND_URL}/posts/photo/${encodeURIComponent(
-                            card.title
-                        )}?${new Date().getTime()}`}
-                        tagName={card.tags[0]}
-                        title={card.title}
-                        author={card.author.username}
-                        avatar={`${BACKEND_URL}/photo/${
-                            card.author.username
-                        }?${new Date().getTime()}`}
-                        date={new Date(card.date).toDateString()}
-                        colorTag="bg-akpica-marco text-akpica-black"
-                        sizeTag="text-md"
-                        link={`/${card._id}`}
-                        linkTag={`/tags/${card.tags[0]}`}
-                    />
-                </div>
-            ))}
+            {shuffledPosts &&
+                shuffledPosts.map((card, index) => (
+                    <div key={card._id} className={cardData[index].gridClasses}>
+                        <CardHero
+                            bgImg={`${BACKEND_URL}/posts/photo/${encodeURIComponent(
+                                card.title
+                            )}`}
+                            tagName={card.tags[0]}
+                            title={card.title}
+                            author={card.author.username}
+                            avatar={`${BACKEND_URL}/photo/${
+                                card.author.username
+                            }`}
+                            date={new Date(card.date).toDateString()}
+                            colorTag="bg-akpica-marco text-akpica-black"
+                            sizeTag="text-md"
+                            link={`/${card._id}`}
+                            linkTag={`/tags/${card.tags[0]}`}
+                        />
+                    </div>
+                ))}
         </div>
     );
 };

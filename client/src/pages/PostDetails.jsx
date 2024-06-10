@@ -44,7 +44,7 @@ const PostDetails = () => {
                 style={{
                     backgroundImage: `url(${BACKEND_URL}/posts/photo/${encodeURIComponent(
                         post.title
-                    )}?${new Date().getTime()})`,
+                    )})`,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                     backgroundRepeat: "no-repeat"
@@ -67,7 +67,7 @@ const PostDetails = () => {
                         <AuthorDate
                             avatar={`${BACKEND_URL}/photo/${
                                 post.author.username
-                            }?${new Date().getTime()}`}
+                            }`}
                             author={post.author.fullname}
                             date={new Date(post.date).toDateString()}
                             colors="text-akpica-black"
@@ -94,12 +94,12 @@ const PostDetails = () => {
                                             key={article._id}
                                             img={`${BACKEND_URL}/posts/photo/${encodeURIComponent(
                                                 article.title
-                                            )}?${new Date().getTime()}`}
+                                            )}`}
                                             title={article.title}
                                             tag={article.tags[0]}
                                             avatar={`${BACKEND_URL}/photo/${
                                                 article.author.username
-                                            }?${new Date().getTime()}`}
+                                            }`}
                                             author={article.author.username}
                                             date={new Date(
                                                 article.date

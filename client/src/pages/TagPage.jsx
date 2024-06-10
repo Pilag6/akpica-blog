@@ -47,7 +47,7 @@ const TagPage = () => {
             <Header darkBackground={true} />
 
             <header
-                className="h-[40vh] flex items-center justify-center text-akpica-white text-4xl font-bold uppercase"
+                className="h-[40vh] flex items-center justify-center text-akpica-black text-4xl font-bold uppercase"
                 style={{
                     backgroundImage: `url(${technology})`,
                     backgroundSize: "cover",
@@ -95,7 +95,7 @@ const TagPage = () => {
                                             author={post.author.username}
                                             avatar={`${BACKEND_URL}/photo/${
                                                 post.author.username
-                                            }?${new Date().getTime()}`}
+                                            }`}
                                             date={new Date(
                                                 post.date
                                             ).toDateString()}

@@ -40,10 +40,10 @@ const MoreFromUsContainer = () => {
                     {shuffledPosts && shuffledPosts.slice(0, visiblePosts).map((article) => (
                         <CardMoreFromUs
                             key={article._id}
-                            img={`${BACKEND_URL}/posts/photo/${encodeURIComponent(article.title)}?${new Date().getTime()}`}
+                            img={`${BACKEND_URL}/posts/photo/${encodeURIComponent(article.title)}`}
                             title={article.title}
                             tag={article.tags[0]}
-                            avatar={`${BACKEND_URL}/photo/${article.author.username}?${new Date().getTime()}`}
+                            avatar={`${BACKEND_URL}/photo/${article.author.username}`}
                             author={article.author.username}
                             date={new Date(article.date).toDateString()}
                             authorColors="text-akpica-black"
