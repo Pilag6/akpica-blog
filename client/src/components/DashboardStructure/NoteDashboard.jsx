@@ -34,7 +34,6 @@ const NoteDashboard = () => {
                 });
                 if (response.status === 200) {
                     setDisplayNotes(response.data);
-                    console.log("display:", displayNotes);
                 }
             } catch (error) {
                 setError(
