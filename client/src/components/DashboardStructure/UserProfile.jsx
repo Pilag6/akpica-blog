@@ -8,12 +8,14 @@ import BACKEND_URL from "@utils/backendUrl.js";
 
 // Icons
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import useAuth from "@utils/useAuth.js";
 const UserProfile = () => {
     const { id } = useParams();
 
     const navigate = useNavigate();
 
     const [admin, setAdmin] = useState(null);
+    const { user: currentUser } = useAuth();
 
     // MESSAGES
     const [updateMessage, setUpdateMessage] = useState("");
@@ -262,7 +264,7 @@ const UserProfile = () => {
                                     maxLength={30}
                                 />
                             </div>
-                            <div className="flex items-center gap-4">
+                            <div className={`flex items-center gap-4 ${currentUser?.role === 'guest' ? 'pointer-events-none opacity-50' : ''}`}>
                                 <label className="w-1/4">Role:</label>
                                 <div className="flex flex-1 justify-around bg-transparent text-akpica-white outline-none border-[1px] px-2 py-1">
                                     <label className="rounded-none outline-none cursor-pointer">
