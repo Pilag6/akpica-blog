@@ -2,7 +2,7 @@ import { useContext, useState, useEffect } from "react";
 import { PostContext } from "@contexts/PostContext.jsx";
 import Axios from "axios";
 import { FaPlus } from "react-icons/fa";
-import { MdOutlineChevronRight } from "react-icons/md";
+import { MdOutlineChevronRight, MdOutlineExpandMore } from "react-icons/md";
 import { Link } from "react-router-dom";
 import BACKEND_URL from "@utils/backendUrl.js";
 import NoteDashboard from "./NoteDashboard.jsx";
@@ -12,7 +12,11 @@ const UserDashboard = () => {
     const [userQuantity, setUserQuantity] = useState(0);
     const [showModal, setShowModal] = useState(false);
     const [userToDelete, setUserToDelete] = useState(null);
-    const [sortCriteria, setSortCriteria] = useState({ field: "name", order: "asc" });
+    const [sortCriteria, setSortCriteria] = useState({
+        field: "name",
+        order: "asc"
+    });
+    const [expandedRows, setExpandedRows] = useState({});
 
     const { posts } = useContext(PostContext);
 
@@ -48,7 +52,7 @@ const UserDashboard = () => {
             await Axios.delete(`${BACKEND_URL}/admin/delete/${userToDelete}`, {
                 withCredentials: true
             });
-            setAdmin(admin.filter(user => user._id !== userToDelete));
+            setAdmin(admin.filter((user) => user._id !== userToDelete));
             setShowModal(false);
             setUserToDelete(null);
         } catch (error) {
@@ -57,33 +61,36 @@ const UserDashboard = () => {
     };
 
     const getUserPostCount = (userId) => {
-        return posts.filter(post => post.author._id === userId).length;
+        return posts.filter((post) => post.author._id === userId).length;
     };
 
     const handleSortChange = (field) => {
         setSortCriteria((prevCriteria) => ({
             field,
-            order: prevCriteria.field === field && prevCriteria.order === "asc" ? "desc" : "asc"
+            order:
+                prevCriteria.field === field && prevCriteria.order === "asc"
+                    ? "desc"
+                    : "asc"
         }));
     };
 
     const sortUsers = (users) => {
         return users.sort((a, b) => {
             if (sortCriteria.field === "name") {
-                const nameA = a.fullname || '';
-                const nameB = b.fullname || '';
+                const nameA = a.fullname || "";
+                const nameB = b.fullname || "";
                 return sortCriteria.order === "asc"
                     ? nameA.localeCompare(nameB)
                     : nameB.localeCompare(nameA);
             } else if (sortCriteria.field === "email") {
-                const emailA = a.email || '';
-                const emailB = b.email || '';
+                const emailA = a.email || "";
+                const emailB = b.email || "";
                 return sortCriteria.order === "asc"
                     ? emailA.localeCompare(emailB)
                     : emailB.localeCompare(emailA);
             } else if (sortCriteria.field === "role") {
-                const roleA = a.role || '';
-                const roleB = b.role || '';
+                const roleA = a.role || "";
+                const roleB = b.role || "";
                 return sortCriteria.order === "asc"
                     ? roleA.localeCompare(roleB)
                     : roleB.localeCompare(roleA);
@@ -95,9 +102,15 @@ const UserDashboard = () => {
             return 0;
         });
     };
-    
 
     const sortedAdmin = admin ? sortUsers([...admin]) : [];
+
+    const toggleRow = (index) => {
+        setExpandedRows((prevExpandedRows) => ({
+            ...prevExpandedRows,
+            [index]: !prevExpandedRows[index]
+        }));
+    };
 
     return (
         <div>
@@ -109,29 +122,77 @@ const UserDashboard = () => {
                     <FaPlus /> Add New User
                 </Link>
             </div>
-            <div className="m-2 pl-8 text-akpica-white">({userQuantity}) Users</div>
+            <div className="m-2 pl-8 text-akpica-white">
+                ({userQuantity}) Users
+            </div>
             <section className="flex flex-col md:flex-row gap-6 w-full p-4">
                 <div className="relative overflow-x-auto shadow-md">
                     <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
-                                <th scope="col" className="px-6 py-3 cursor-pointer" onClick={() => handleSortChange("name")}>
-                                    Name
-                                    <MdOutlineChevronRight className={`rotate-90 ml-1 inline-block transform ${sortCriteria.field === "name" && sortCriteria.order === "asc" ? "-rotate-90" : "rotate-90"}`} />
+                                <th
+                                    scope="col"
+                                    className="px-6 py-3 cursor-pointer"
+                                    onClick={() => handleSortChange("name")}
+                                >
+                                    User
+                                    <MdOutlineChevronRight
+                                        className={`ml-1 inline-block transform ${
+                                            sortCriteria.field === "name" &&
+                                            sortCriteria.order === "asc"
+                                                ? "rotate-90"
+                                                : "-rotate-90"
+                                        }`}
+                                    />
                                 </th>
-                                <th scope="col" className="px-6 py-3 cursor-pointer" onClick={() => handleSortChange("email")}>
+                                <th
+                                    className="hidden md:table-cell px-6 py-3 cursor-pointer"
+                                    onClick={() => handleSortChange("email")}
+                                >
                                     Email Address
-                                    <MdOutlineChevronRight className={`rotate-90 ml-1 inline-block transform ${sortCriteria.field === "email" && sortCriteria.order === "asc" ? "-rotate-90" : "rotate-90"}`} />
+                                    <MdOutlineChevronRight
+                                        className={`ml-1 inline-block transform ${
+                                            sortCriteria.field === "email" &&
+                                            sortCriteria.order === "asc"
+                                                ? "rotate-90"
+                                                : "-rotate-90"
+                                        }`}
+                                    />
                                 </th>
-                                <th scope="col" className="px-6 py-3 cursor-pointer" onClick={() => handleSortChange("role")}>
+                                <th
+                                    className="hidden md:table-cell px-6 py-3 cursor-pointer"
+                                    onClick={() => handleSortChange("role")}
+                                >
                                     Role
-                                    <MdOutlineChevronRight className={`rotate-90 ml-1 inline-block transform ${sortCriteria.field === "role" && sortCriteria.order === "asc" ? "-rotate-90" : "rotate-90"}`} />
+                                    <MdOutlineChevronRight
+                                        className={`ml-1 inline-block transform ${
+                                            sortCriteria.field === "role" &&
+                                            sortCriteria.order === "asc"
+                                                ? "rotate-90"
+                                                : "-rotate-90"
+                                        }`}
+                                    />
                                 </th>
-                                <th scope="col" className="px-6 py-3 cursor-pointer" onClick={() => handleSortChange("posts")}>
+                                <th
+                                    className="hidden md:table-cell px-6 py-3 cursor-pointer"
+                                    onClick={() => handleSortChange("posts")}
+                                >
                                     Posts
-                                    <MdOutlineChevronRight className={`rotate-90 ml-1 inline-block transform ${sortCriteria.field === "posts" && sortCriteria.order === "asc" ? "-rotate-90" : "rotate-90"}`} />
+                                    <MdOutlineChevronRight
+                                        className={`ml-1 inline-block transform ${
+                                            sortCriteria.field === "posts" &&
+                                            sortCriteria.order === "asc"
+                                                ? "rotate-90"
+                                                : "-rotate-90"
+                                        }`}
+                                    />
                                 </th>
-                                <th colSpan={2} className="px-6 py-3">Action</th>
+                                <th
+                                    className="hidden md:table-cell  px-6 py-3"
+                                    colSpan={2}
+                                >
+                                    Action
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -146,19 +207,92 @@ const UserDashboard = () => {
                                     >
                                         <img
                                             className="w-10 h-10 rounded-full object-cover object-center"
-                                            src={`${BACKEND_URL}/photo/${user.username}?${new Date().getTime()}`}
+                                            src={`${BACKEND_URL}/photo/${
+                                                user.username
+                                            }?${new Date().getTime()}`}
                                             alt=""
                                         />
                                         <div className="ps-3">
-                                            <div className="text-base font-semibold">{user.fullname}</div>
-                                            <div className="font-normal text-gray-500">@{user.username}</div>
+                                            <Link to={`/dh-admin/dashboard/usersDashboard/${user._id}`} className="text-base font-semibold">
+                                                {user.fullname}
+                                            </Link>
+                                            <div className="font-normal text-gray-500">
+                                                @{user.username}
+                                            </div>
                                         </div>
+                                        <button
+                                            onClick={() => toggleRow(index)}
+                                            className="md:hidden text-2xl text-akpica-marco dark:text-akpica-marco hover:text-akpica-whitedark:hover:text-akpica-white focus:outline-none transition-all ml-auto"
+                                        >
+                                            {expandedRows[index] ? (
+                                                <MdOutlineExpandMore />
+                                            ) : (
+                                                <MdOutlineChevronRight />
+                                            )}
+                                        </button>
                                     </th>
-                                    <td className="px-6 py-4">{user.email.toLowerCase()}</td>
-                                    <td className="px-6 py-4">
-                                        {user.role.charAt(0).toUpperCase() + user.role.slice(1)}
+                                    {expandedRows[index] && (
+                                        <>
+                                            <div className="flex items-center">
+                                                <td className="md:hidden block px-6 py-2">
+                                                    EMAIL:{" "}
+                                                    {user.email.toLowerCase()}
+                                                </td>
+                                                <td className="md:hidden block py-2">
+                                                    ROLE:{" "}
+                                                    {user.role
+                                                        .charAt(0)
+                                                        .toUpperCase() +
+                                                        user.role.slice(1)}
+                                                </td>
+                                            </div>
+                                            <div className="flex gap-5 items-center pb-4 justify-between">
+                                                <td className="md:hidden block px-6 pr-8 py-2">
+                                                    POSTS:{" "}
+                                                    <Link
+                                                        className="underline-offset-4 underline"
+                                                        to={`/dh-admin/dashboard/postsDashboard?authorId=${user._id}`}
+                                                    >
+                                                        {getUserPostCount(
+                                                            user._id
+                                                        )}
+                                                    </Link>
+                                                </td>
+
+                                                <div className="flex items-center pr-4">
+                                                    <td className="md:hidden block px-2 py-2">
+                                                        <Link
+                                                            to={`/dh-admin/dashboard/usersDashboard/${user._id}`}
+                                                            className="font-medium text-akpica-marco dark:text-akpica-marco hover:underline hover:underline-offset-4"
+                                                        >
+                                                            Edit user
+                                                        </Link>
+                                                    </td>
+                                                    <td className="md:hidden block px-2 py-2">
+                                                        <button
+                                                            onClick={() =>
+                                                                confirmDeleteUser(
+                                                                    user._id
+                                                                )
+                                                            }
+                                                            className="font-medium text-akpica-tomato dark:text-akpica-tomato hover:underline"
+                                                        >
+                                                            Delete
+                                                        </button>
+                                                    </td>
+                                                </div>
+                                            </div>
+                                            
+                                        </>
+                                    )}
+                                    <td className="hidden md:table-cell px-6 py-4">
+                                        {user.email.toLowerCase()}
                                     </td>
-                                    <td className="px-6 py-4 text-center">
+                                    <td className="hidden md:table-cell px-6 py-4">
+                                        {user.role.charAt(0).toUpperCase() +
+                                            user.role.slice(1)}
+                                    </td>
+                                    <td className="hidden md:table-cell px-6 py-4 text-center">
                                         <Link
                                             className="underline-offset-4 underline"
                                             to={`/dh-admin/dashboard/postsDashboard?authorId=${user._id}`}
@@ -166,7 +300,7 @@ const UserDashboard = () => {
                                             {getUserPostCount(user._id)}
                                         </Link>
                                     </td>
-                                    <td className="px-6 py-4">
+                                    <td className="hidden md:table-cell px-6 py-4">
                                         <Link
                                             to={`/dh-admin/dashboard/usersDashboard/${user._id}`}
                                             className="font-medium text-akpica-marco dark:text-akpica-marco hover:underline hover:underline-offset-4"
@@ -174,9 +308,11 @@ const UserDashboard = () => {
                                             Edit user
                                         </Link>
                                     </td>
-                                    <td className="px-6 py-4">
+                                    <td className="hidden md:table-cell px-6 py-4">
                                         <button
-                                            onClick={() => confirmDeleteUser(user._id)}
+                                            onClick={() =>
+                                                confirmDeleteUser(user._id)
+                                            }
                                             className="font-medium text-akpica-tomato dark:text-akpica-tomato hover:underline"
                                         >
                                             Delete
@@ -195,9 +331,13 @@ const UserDashboard = () => {
             {showModal && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
                     <div className="bg-white p-6 shadow-lg">
-                        <h2 className="text-lg font-semibold mb-4">Confirm Deletion</h2>
+                        <h2 className="text-lg font-semibold mb-4">
+                            Confirm Deletion
+                        </h2>
                         <p>Are you sure you want to delete this user?</p>
-                        <p className="text-xs mt-2 text-red-600">This action is irreversible.</p>
+                        <p className="text-xs mt-2 text-red-600">
+                            This action is irreversible.
+                        </p>
                         <div className="mt-6 flex justify-end gap-4">
                             <button
                                 onClick={() => setShowModal(false)}

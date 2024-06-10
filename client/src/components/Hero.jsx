@@ -56,6 +56,7 @@ const Hero = () => {
     });
   }, [limitedPosts]);
 
+
   return (
     <div className="relative w-full h-[65vh] z-10 group">
       {limitedPosts.map((post, index) => (
@@ -93,6 +94,22 @@ const Hero = () => {
               colors="text-akpica-white"
             />
           </div>
+
+                </div>
+            ))}
+            <button
+                className="absolute top-1/2 left-0 md:m-5 transform -translate-y-1/2 bg-akpica-marco text-akpica-carlo px-2 py-4 opacity-0 group-hover:opacity-100 group-hover:z-50 transition-opacity duration-300"
+                onClick={prevSlide}
+            >
+                <FaChevronLeft />
+            </button>
+            <button
+                className="absolute top-1/2 right-0 md:m-5 transform -translate-y-1/2 bg-akpica-marco text-akpica-carlo px-2 py-4 opacity-0 group-hover:opacity-100 group-hover:z-50 transition-opacity duration-300"
+                onClick={nextSlide}
+            >
+                <FaChevronRight />
+            </button>
+
         </div>
       ))}
       <button
