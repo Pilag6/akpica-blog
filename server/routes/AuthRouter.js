@@ -43,10 +43,10 @@ authRouter.get("/photo/:username", userPhoto);
 
 authRouter.patch("/admin/editPicture/:id", upload.single("userpicture"), editUserPicture);
 
-authRouter.patch("/admin/editUserInfo/:id", isAuth, editUserInfo);
+authRouter.patch("/admin/editUserInfo/:id", isAuth, isAdmin, editUserInfo);
 // authRouter.patch("/admin/editUserInfo/:id", editUserInfo);
 
-authRouter.delete("/admin/delete/:id", isAuth, deleteUser);
+authRouter.delete("/admin/delete/:id", isAuth, isAdmin, deleteUser);
 
 authRouter.get("/auth/token", isAuth, verifyToken);
 

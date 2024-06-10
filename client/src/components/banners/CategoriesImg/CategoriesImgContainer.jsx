@@ -34,9 +34,9 @@ const CategoriesImgContainer = () => {
         { image: category2, tag: getTag(1) },
         { image: category3, tag: getTag(2) },
         { image: category6, tag: getTag(3) },
-        { image: category5, tag: getTag(4) },
+        { image: category5, tag: getTag(9) },
         { image: category4, tag: getTag(5) },
-        { image: category7, tag: getTag(7) },
+        { image: category7, tag: getTag(6) },
         { image: category8, tag: getTag(10) }
     ].filter(category => {
         if (category.tag && !uniqueTags.has(category.tag)) {

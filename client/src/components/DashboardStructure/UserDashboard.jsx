@@ -6,6 +6,7 @@ import { MdOutlineChevronRight, MdOutlineExpandMore } from "react-icons/md";
 import { Link } from "react-router-dom";
 import BACKEND_URL from "@utils/backendUrl.js";
 import NoteDashboard from "./NoteDashboard.jsx";
+import useAuth from "@utils/useAuth.js";
 
 const UserDashboard = () => {
     const [admin, setAdmin] = useState(null);
@@ -17,8 +18,8 @@ const UserDashboard = () => {
         order: "asc"
     });
     const [expandedRows, setExpandedRows] = useState({});
-
     const { posts } = useContext(PostContext);
+    const { user: currentUser } = useAuth();
 
     useEffect(() => {
         const fetchAdmin = async () => {
@@ -117,7 +118,7 @@ const UserDashboard = () => {
             <div className="flex items-center pt-6 pb-3 pl-8 gap-4">
                 <Link
                     to="/dh-admin/dashboard/register"
-                    className="w-fit flex items-center gap-3 p-2 text-xl font-semibold text-akpica-white outline-none outline-white transition-all hover:bg-akpica-pastel hover:text-zinc-800 hover:outline-2"
+                    className={`w-fit flex items-center gap-3 p-2 text-xl font-semibold text-akpica-white outline-none outline-white transition-all hover:bg-akpica-pastel hover:text-zinc-800 hover:outline-2 ${currentUser?.role === 'guest' ? 'pointer-events-none opacity-50' : ''}`}
                 >
                     <FaPlus /> Add New User
                 </Link>
@@ -263,7 +264,7 @@ const UserDashboard = () => {
                                                     <td className="md:hidden block px-2 py-2">
                                                         <Link
                                                             to={`/dh-admin/dashboard/usersDashboard/${user._id}`}
-                                                            className="font-medium text-akpica-marco dark:text-akpica-marco hover:underline hover:underline-offset-4"
+                                                            className={`font-medium text-akpica-marco dark:text-akpica-marco hover:underline hover:underline-offset-4 ${currentUser?.role === 'guest' && currentUser?._id !== user._id ? 'pointer-events-none opacity-50' : ''}`}
                                                         >
                                                             Edit user
                                                         </Link>
@@ -275,7 +276,7 @@ const UserDashboard = () => {
                                                                     user._id
                                                                 )
                                                             }
-                                                            className="font-medium text-akpica-tomato dark:text-akpica-tomato hover:underline"
+                                                            className={`font-medium text-akpica-tomato dark:text-akpica-tomato hover:underline ${currentUser?.role === 'guest' && currentUser?._id !== user._id ? 'pointer-events-none opacity-50' : ''}`}
                                                         >
                                                             Delete
                                                         </button>
@@ -303,7 +304,7 @@ const UserDashboard = () => {
                                     <td className="hidden md:table-cell px-6 py-4">
                                         <Link
                                             to={`/dh-admin/dashboard/usersDashboard/${user._id}`}
-                                            className="font-medium text-akpica-marco dark:text-akpica-marco hover:underline hover:underline-offset-4"
+                                            className={`font-medium text-akpica-marco dark:text-akpica-marco hover:underline hover:underline-offset-4 ${currentUser?.role === 'guest' && currentUser?._id !== user._id ? 'pointer-events-none opacity-50' : ''}`}
                                         >
                                             Edit user
                                         </Link>
@@ -313,7 +314,7 @@ const UserDashboard = () => {
                                             onClick={() =>
                                                 confirmDeleteUser(user._id)
                                             }
-                                            className="font-medium text-akpica-tomato dark:text-akpica-tomato hover:underline"
+                                            className={`font-medium text-akpica-tomato dark:text-akpica-tomato hover:underline ${currentUser?.role === 'guest' && currentUser?._id !== user._id ? 'pointer-events-none opacity-50' : ''}`}
                                         >
                                             Delete
                                         </button>
