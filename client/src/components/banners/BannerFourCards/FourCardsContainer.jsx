@@ -61,8 +61,7 @@ const totalSlides = Math.max(0, reversedPosts.length - 3);
               card.author.username
             }?${new Date().getTime()}`}
             author={
-              card.author.username[0].toUpperCase() +
-              card.author.username.slice(1)
+              card.author.username
             }
             date={new Date(card.date).toDateString()}
             link={`/${card._id}`}
