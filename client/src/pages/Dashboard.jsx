@@ -140,11 +140,11 @@ const Dashboard = () => {
         .sort((a, b) => new Date(b.date) - new Date(a.date));
 
     return (
-        <div className="flex justify-start flex-col items-start gap-5 w-full h-[calc(100vh-80px)] p-8">
+        <div className="flex justify-start flex-col items-start gap-5 w-full md:h-[calc(100vh-80px)] md:p-8 p-3">
             <section className="flex gap-5 flex-wrap justify-between w-full ">
-                <div className="flex flex-col gap-5 flex-wrap w-1/2">
+                <div className="flex flex-col gap-5 flex-wrap md:w-1/2">
                     {/* GREETING */}
-                    <div className="flex gap-5 h-48">
+                    <div className="flex md:flex-row flex-col gap-5 md:h-48">
                         <article
                             className={`flex w-full h-full  justify-between gap-5 ${greeting.bgClass} p-6 rounded-sm`}
                         >
@@ -178,7 +178,7 @@ const Dashboard = () => {
                         </article>
 
                         {/* ADD NEW POST */}
-                        <div className="w-96">
+                        <div className="md:w-96">
                             <Link
                                 to={"/dh-admin/dashboard/postsDashboard/create"}
                                 className="w-full h-full flex flex-col items-center justify-center gap-3 p-4 text-2xl font-[700] text-akpica-white border transition-all hover:bg-akpica-pastel hover:text-zinc-800 hover:outline-2 uppercase"
@@ -189,9 +189,9 @@ const Dashboard = () => {
                     </div>
 
                     {/* TOTAL POSTS, TAGS, USERS */}
-                    <div className="flex flex-wrap justify-between">
+                    <div className="flex md:flex-row flex-col gap-4 flex-wrap justify-between">
                         {/* TOTAL POSTS */}
-                        <article className="aspect-square flex flex-col items-center gap-5 bg-gray-800 dark:hover:bg-gray-600 text-akpica-white  p-5 rounded-sm w-[190px]">
+                        <article className="aspect-square flex flex-col items-center gap-5 bg-gray-800 dark:hover:bg-gray-600 text-akpica-white  p-5 rounded-sm md:w-[190px]">
                             <div className="p-2 px-4 flex flex-col">
                                 <IoNewspaperSharp className="text-akpica-white text-6xl" />
                                 <h2 className="font-[700] text-2xl font-akpica-heading pt-4">
@@ -207,7 +207,7 @@ const Dashboard = () => {
                         </article>
 
                         {/* TOTAL TAGS */}
-                        <article className="aspect-square flex flex-col items-center gap-5 bg-gray-800 dark:hover:bg-gray-600 text-akpica-white p-5 rounded-sm w-[190px]">
+                        <article className="aspect-square flex flex-col items-center gap-5 bg-gray-800 dark:hover:bg-gray-600 text-akpica-white p-5 rounded-sm md:w-[190px]">
                             <div className="p-2 px-4 flex flex-col">
                                 <FaHashtag className="text-akpica-white text-6xl" />
                                 <h2 className="font-[700] text-2xl font-akpica-heading pt-4">
@@ -223,7 +223,7 @@ const Dashboard = () => {
                         </article>
 
                         {/* TOTAL USERS */}
-                        <article className="aspect-square flex flex-col items-center gap-5 bg-gray-800 dark:hover:bg-gray-600 text-akpica-white p-5 rounded-sm w-[190px]">
+                        <article className="aspect-square flex flex-col items-center gap-5 bg-gray-800 dark:hover:bg-gray-600 text-akpica-white p-5 rounded-sm md:w-[190px]">
                             <div className="p-2 px-4 flex flex-col">
                                 <FaRobot className="text-akpica-white text-6xl" />
                                 <h2 className="font-[700] text-2xl font-akpica-heading pt-4">
@@ -239,13 +239,13 @@ const Dashboard = () => {
                         </article>
 
                         {/* TOTAL USERS */}
-                        <article className="aspect-square flex flex-col items-center gap-5 border p-5 rounded-sm w-[190px]">
+                        <article className="aspect-square hidden md:flex flex-col items-center gap-5 border p-5 rounded-sm w-[190px]">
                             
                         </article>
                     </div>
 
                     {/* Posts written by the logged-in user */}
-                    <article className="bg-gray-800 p-5 rounded-sm md:h-[42vh] overflow-y-scroll ">
+                    <article className="bg-gray-800 p-5 rounded-sm md:h-[42vh] md:overflow-y-scroll ">
                         <h2 className="font-[700] text-2xl font-akpica-heading mb-4 text-akpica-white">
                             Your Posts
                         </h2>
@@ -257,17 +257,15 @@ const Dashboard = () => {
                                         <tr key={post._id} className="border dark:border-gray-700 dark:hover:bg-gray-600">
                                             <td className="md:block hidden w-44">
                                                 <img
-                                                    src={`${BACKEND_URL}/posts/photo/${
-                                                        post.title
-                                                    }`}
+                                                    src={`${BACKEND_URL}/posts/photo/${encodeURIComponent(post.title)}`}
                                                     alt={post.title}
                                                     className="w-full h-full object-cover"
                                                 />
                                             </td>
-                                            <td className="pl-2 md:py-4 py-1 whitespace-no-wrap border-r dark:border-gray-700">
+                                            <td className="pl-2 md:py-4 py-1 whitespace-no-wrap md:border-r dark:border-gray-700">
                                                 <Link
                                                     to={`/${post._id}`}
-                                                    className="text-akpica-white hover:text-akpica-marco hover:underline underline-offset-8 font-[700] "
+                                                    className="text-akpica-white hover:text-akpica-marco hover:underline underline-offset-8 font-[700] text-sm md:text-base "
                                                 >
                                                     {post.title.length > 55
                                                         ? `${post.title.substring(
@@ -295,7 +293,7 @@ const Dashboard = () => {
 
                 <div className="flex-1 flex flex-col gap-5">
                     {/* DATE, TIME, LOCATION */}
-                    <section className="flex flex-col items-end gap-4 h-48">
+                    <section className="hidden md:flex flex-col items-end gap-4 h-48">
                         <div className="flex flex-col gap-1 pl-1">
                             <p className="text-akpica-white text-2xl  font-akpica-heading text-right w-48">
                                 {formattedDate}
@@ -348,9 +346,9 @@ const Dashboard = () => {
                         </article>
                     </section>
 
-                    <div className="flex gap-5">
+                    <div className="flex md:flex-row flex-col gap-5">
                         {/* Ranking with users with the most posts */}
-                        <section className="bg-gray-800 p-5 rounded-sm w-1/2">
+                        <section className="bg-gray-800 p-5 rounded-sm md:w-1/2">
                             <h2 className="font-[700] text-2xl font-akpica-heading text-akpica-white">
                                 User Ranking
                             </h2>
@@ -382,7 +380,7 @@ const Dashboard = () => {
                             </ul>
                         </section>
                         {/* Ranking with users with the most posts */}
-                        <section className="border p-5 rounded-sm w-1/2">
+                        <section className="hidden md:block border p-5 rounded-sm md:w-1/2">
                             
                         </section>
                     </div>
