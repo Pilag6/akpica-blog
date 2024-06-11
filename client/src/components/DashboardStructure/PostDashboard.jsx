@@ -195,9 +195,7 @@ const PostDashboard = () => {
                                     >
                                         <td className="flex items-center pl-4 py-4 w-20 h-20 ">
                                             <img
-                                                src={`${BACKEND_URL}/posts/photo/${
-                                                    post.title
-                                                }`}
+                                                src={`${BACKEND_URL}/posts/photo/${post.title}`}
                                                 alt="post image"
                                                 className="w-full h-full object-cover"
                                             />
@@ -214,15 +212,17 @@ const PostDashboard = () => {
                                                               )}...`
                                                             : post.title}
                                                     </span>
-    
+
                                                     {/* Desktop title - full */}
                                                     <span className="hidden sm:block">
                                                         {post.title}
                                                     </span>
                                                 </Link>
-    
+
                                                 <button
-                                                    onClick={() => toggleRow(index)}
+                                                    onClick={() =>
+                                                        toggleRow(index)
+                                                    }
                                                     className="md:hidden text-2xl text-akpica-marco dark:text-akpica-marco hover:text-akpica-whitedark:hover:text-akpica-white focus:outline-none transition-all"
                                                 >
                                                     {expandedRows[index] ? (
