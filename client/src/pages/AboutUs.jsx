@@ -29,13 +29,7 @@ const AboutUs = () => {
 
                 <div className="w-1/2 my-11">
                     <p className="text-xl text-center">
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                        Voluptas, quaerat. Nostrum doloremque doloribus debitis
-                        dolores soluta, corrupti asperiores corporis quam? Ex
-                        repudiandae quasi nemo optio nihil pariatur quisquam
-                        atque officiis commodi animi, inventore doloribus delectus
-                        eos laudantium ipsa reprehenderit. Earum quasi porro
-                        excepturi vel unde quas saepe provident quidem totam?
+                    The Web Developer's Handbook: Your ultimate guide to mastering web development. Explore the latest trends, tools, and techniques in web design and development. From beginner tutorials to advanced tips, discover how to create stunning, responsive websites and applications. Join our community of developers and stay ahead in the ever-evolving world of web development.
                     </p>
                 </div>
 

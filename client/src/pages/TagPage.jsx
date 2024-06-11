@@ -71,7 +71,7 @@ const TagPage = () => {
                                 className="w-full md:w-[280px] bg-white shadow-md flex flex-col gap-1"
                             >
                                 <img
-                                    src={`${BACKEND_URL}/posts/photo/${post.title}`}
+                                    src={`${BACKEND_URL}/posts/photo/${encodeURIComponent(post.title)}`}
                                     alt={post.title}
                                     className="w-full h-40 object-cover"
                                 />
