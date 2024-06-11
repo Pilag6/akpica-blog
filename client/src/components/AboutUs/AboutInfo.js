@@ -28,7 +28,7 @@ export const AboutUsCards = [
   {
     profilepicture: profilecarlos,
     name: "Carlos Sousa",
-    text: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptas, quaerat. Nostrum doloremque doloribus debitis dolores soluta, corrupti asperiores corporis quam? Ex repudiandae quasi nemo optio nihil pariatur quisquam atque officiis commodi animi, inventore doloribus delectus eos laudantium ipsa reprehenderit. Earum quasi porro excepturi vel unde quas saepe provident quidem totam?",
+    text: "I am a Junior Full Stack Web Developer skilled in the MERN stack. With 8 years of culinary experience, I've honed my attention to detail and creativity. I'm passionate about developing efficient, user-friendly web applications. I thrive in collaborative environments and am eager to contribute to innovative projects in this dynamic industry.",
     portfolioImg: carlosportfolio,
     portfolioUrl: "https://carlos-sousa.netlify.app/",
     github: "https://github.com/Cmbs86",
