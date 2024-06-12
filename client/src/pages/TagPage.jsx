@@ -102,7 +102,7 @@ const TagPage = () => {
                                         />
                                     </div>
                                     <Link
-                                        to={`/${post._id}`}
+                                        to={`/${post.slug}`}
                                         className="bg-akpica-green hover:bg-akpica-carlo transition-all duration-300 text-white p-4 font-[700] text-center font-akpica-heading text-xl"
                                     >
                                         READ MORE
