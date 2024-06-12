@@ -239,7 +239,7 @@ const MediaDashboard = () => {
                         scope="row"
                         className="px-1 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-akpica-white"
                       >
-                        <Link to={`${post.slug}`}>{post.title}</Link>
+                        <Link to={`/${post.slug}`}>{post.title}</Link>
                       </td>
                       <td className="px-6 py-4">@{post.author.username}</td>
                       <td className="px-6 py-4 flex gap-3">
