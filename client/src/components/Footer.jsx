@@ -132,7 +132,7 @@ const Footer = () => {
                                     bottom="mt-auto"
                                     date={new Date(post.date).toDateString()}
                                     authorColors="text-akpica-white"
-                                    link={`/${post._id}`}
+                                    link={`/${post.slug}`}
                                     linkTag={`/tags/${post.tags[0]}`}
                                 />
                             ))}

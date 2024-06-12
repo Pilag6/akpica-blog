@@ -199,7 +199,7 @@ const PostDashboard = () => {
                       </td>
                       <td className="px-2 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-akpica-white">
                         <div className="flex items-center justify-between">
-                          <Link to={`/${post._id}`}>
+                          <Link to={`/${post.slug}`}>
                             {/* Mobile title - truncated */}
                             <span className="inline-block sm:hidden">
                               {post.title.length > 32

@@ -64,7 +64,7 @@ const FrontBackUxContainer = () => {
                                         ).toDateString()}
                                         authorColors="text-akpica-black"
                                         bottom="mt-auto"
-                                        link={`/${article._id}`}
+                                        link={`/${article.slug}`}
                                         linkTag={`/tags/${article.tags[0]}`}
                                     />
                                 ))}
@@ -108,7 +108,7 @@ const FrontBackUxContainer = () => {
                                             ).toDateString()}
                                             authorColors="text-akpica-black"
                                             bottom="mt-auto"
-                                            link={`/${article._id}`}
+                                            link={`/${article.slug}`}
                                             linkTag={`/tags/${article.tags[0]}`}
                                         />
                                     ))}
@@ -153,7 +153,7 @@ const FrontBackUxContainer = () => {
                                             ).toDateString()}
                                             authorColors="text-akpica-black"
                                             bottom="mt-auto"
-                                            link={`/${article._id}`}
+                                            link={`/${article.slug}`}
                                             linkTag={`/tags/${article.tags[0]}`}
                                         />
                                     ))}

@@ -62,7 +62,7 @@ const FourCardsContainer = () => {
                         }`}
                         author={card.author.username}
                         date={new Date(card.date).toDateString()}
-                        link={`/${card._id}`}
+                        link={`/${card.slug}`}
                         linkTag={`/tags/${card.tags[0]}`}
                     />
                 ))}

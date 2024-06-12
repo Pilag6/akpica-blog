@@ -324,7 +324,7 @@ const Dashboard = () => {
                                             {index + 1}.
                                         </span>
                                         <Link
-                                            to={`/${post._id}`}
+                                            to={`/${post.slug}`}
                                             className="text-akpica-white hover:text-akpica-marco underline underline-offset-4 font-[700]"
                                         >
                                             {post.title.length > 35

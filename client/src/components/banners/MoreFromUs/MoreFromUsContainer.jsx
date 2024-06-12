@@ -48,7 +48,7 @@ const MoreFromUsContainer = () => {
                             date={new Date(article.date).toDateString()}
                             authorColors="text-akpica-black"
                             bottom="mt-auto"
-                            link={`/${article._id}`}
+                            link={`/${article.slug}`}
                             linkTag={`/tags/${article.tags[0]}`}
                         />
                     ))}
