@@ -4,11 +4,14 @@ import { useContext, useEffect, useRef } from "react";
 
 // icons
 import { FaBars } from "react-icons/fa6";
+import { RiDashboardFill } from "react-icons/ri";
+import { PiPlusSquareBold } from "react-icons/pi";
 
 import SearchBar from "@components/Header/SearchBar.jsx";
 import { ToggleContext } from "@contexts/ToggleContext.jsx";
 import { PostContext } from "@contexts/PostContext.jsx";
 import useAuth from "@utils/useAuth.js";
+import { Link } from "react-router-dom";
 
 const Navbar = ({ scrolling }) => {
   const { isToggle, handleToggle, setIsToggle } = useContext(ToggleContext);
@@ -58,12 +61,22 @@ const Navbar = ({ scrolling }) => {
         </NavLink>
         
         {user && (
-          <NavLink
-            className={`${mobileLinkStyles} md:bg-akpica-tomato`}
-            to={"/dh-admin/dashboard"}
-          >
-            Dashboard
-          </NavLink>
+          <>
+            <Link
+              className={`${mobileLinkStyles} group flex items-center md:bg-akpica-marco absolute left-0 top-[100px] w-11 h-11 px-3 hover:no-underline `}
+              to={"/dh-admin/dashboard"}
+            >
+              <div><RiDashboardFill className="text-akpica-black"/></div>
+              <h3 className="text-akpica-black md:bg-akpica-marco h-11 -translate-x-[200%] group-hover:translate-x-0 transition-all ease-in-out pt-2 px-2 pl-5 w-fit ">Dashboard</h3>
+            </Link>
+            <Link
+              className={`${mobileLinkStyles} group flex items-center md:bg-akpica-marco absolute left-0 top-[146px] w-11 hover:w-fit h-11 px-3 hover:no-underline `}
+              to={"/dh-admin/dashboard/postsDashboard/create"}
+            >
+              <div><PiPlusSquareBold className="text-akpica-black"/></div>
+              <h3 className="text-akpica-black md:bg-akpica-marco h-11 -translate-x-[200%] group-hover:translate-x-0 transition-all ease-in-out pt-2 px-2 pl-5">Write</h3>
+            </Link>
+          </>
         )}
       </nav>
 
