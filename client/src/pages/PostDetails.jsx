@@ -10,6 +10,9 @@ import CardTag from "@components/miniComponents/CardTag.jsx";
 import AuthorDate from "@components/miniComponents/AuthorDate.jsx";
 import CardMoreFromUs from "@components/banners/MoreFromUs/CardMoreFromUs.jsx";
 
+// React Disqus Comments
+import { DiscussionEmbed } from "disqus-react";
+
 const PostDetails = () => {
     const { slug } = useParams();
     const [post, setPost] = useState(null);
@@ -18,7 +21,9 @@ const PostDetails = () => {
     useEffect(() => {
         const fetchPost = async () => {
             try {
-                const response = await axios.get(`${BACKEND_URL}/posts/slug/${slug}`);
+                const response = await axios.get(
+                    `${BACKEND_URL}/posts/slug/${slug}`
+                );
                 setPost(response.data);
             } catch (error) {
                 console.error(error);
@@ -70,7 +75,9 @@ const PostDetails = () => {
                 <div className="flex md:flex-row flex-col md:gap-0 gap-8">
                     <div
                         className="md:w-2/3 h-auto md:pr-12 md:border-r-4 md:border-akpica-green"
-                        dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}
+                        dangerouslySetInnerHTML={{
+                            __html: DOMPurify.sanitize(post.content)
+                        }}
                     />
 
                     <aside className="flex-1 md:pl-4 sticky top-24 h-[calc(100vh-32px)] overflow-hidden-4/12">
@@ -91,7 +98,9 @@ const PostDetails = () => {
                                             tag={article.tags[0]}
                                             avatar={`${BACKEND_URL}/photo/${article.author.username}`}
                                             author={article.author.username}
-                                            date={new Date(article.date).toDateString()}
+                                            date={new Date(
+                                                article.date
+                                            ).toDateString()}
                                             authorColors="text-akpica-black"
                                             bottom="mt-auto"
                                             link={`/${article.slug}`}
@@ -101,6 +110,15 @@ const PostDetails = () => {
                         </div>
                     </aside>
                 </div>
+                <DiscussionEmbed
+                className="mt-12"
+                    shortname="akpica"
+                    config={{
+                        url: window.location.href,
+                        identifier: post._id,
+                        title: post.title
+                    }}
+                />
             </main>
             <Footer />
         </div>
