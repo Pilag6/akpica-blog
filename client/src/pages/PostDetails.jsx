@@ -1,44 +1,38 @@
-// PostDetails.jsx
 import { useParams } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
+import axios from "axios";
 import DOMPurify from "dompurify";
-import Axios from "axios";
-import AuthorDate from "@components/miniComponents/AuthorDate.jsx";
-import CardTag from "@components/miniComponents/CardTag.jsx";
+import BACKEND_URL from "@utils/backendUrl";
 import Header from "@components/Header/Header.jsx";
+import Footer from "@components/Footer.jsx";
 import { PostContext } from "@contexts/PostContext.jsx";
+import CardTag from "@components/miniComponents/CardTag.jsx";
+import AuthorDate from "@components/miniComponents/AuthorDate.jsx";
 import CardMoreFromUs from "@components/banners/MoreFromUs/CardMoreFromUs.jsx";
 
-//BACKEND URL
-import BACKEND_URL from "@utils/backendUrl.js";
-import Footer from "@components/Footer.jsx";
-
 const PostDetails = () => {
-    const { id } = useParams();
+    const { slug } = useParams();
     const [post, setPost] = useState(null);
-
     const { posts } = useContext(PostContext);
 
     useEffect(() => {
         const fetchPost = async () => {
             try {
-                const response = await Axios.get(`${BACKEND_URL}/posts/${id}`);
-
+                const response = await axios.get(`${BACKEND_URL}/posts/slug/${slug}`);
                 setPost(response.data);
             } catch (error) {
-                console.log(error);
+                console.error(error);
             }
         };
 
         fetchPost();
-    }, [id]);
+    }, [slug]);
 
     if (!post) return <div>Loading...</div>;
 
     return (
         <div className="min-h-screen">
             <Header darkBackground={true} />
-
             <header
                 className="h-[60vh]"
                 style={{
@@ -65,9 +59,7 @@ const PostDetails = () => {
 
                     <div className="flex items-center gap-5">
                         <AuthorDate
-                            avatar={`${BACKEND_URL}/photo/${
-                                post.author.username
-                            }`}
+                            avatar={`${BACKEND_URL}/photo/${post.author.username}`}
                             author={post.author.fullname}
                             date={new Date(post.date).toDateString()}
                             colors="text-akpica-black"
@@ -97,16 +89,12 @@ const PostDetails = () => {
                                             )}`}
                                             title={article.title}
                                             tag={article.tags[0]}
-                                            avatar={`${BACKEND_URL}/photo/${
-                                                article.author.username
-                                            }`}
+                                            avatar={`${BACKEND_URL}/photo/${article.author.username}`}
                                             author={article.author.username}
-                                            date={new Date(
-                                                article.date
-                                            ).toDateString()}
+                                            date={new Date(article.date).toDateString()}
                                             authorColors="text-akpica-black"
                                             bottom="mt-auto"
-                                            link={`/${article._id}`}
+                                            link={`/${article.slug}`}
                                             linkTag={`/tags/${article.tags[0]}`}
                                         />
                                     ))}

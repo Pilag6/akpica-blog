@@ -37,7 +37,7 @@ function App() {
         <Routes>
           {/* No Protected Paths */}
           <Route path="/" element={<Home />} />
-          <Route path="/:id" element={<PostDetails />} />
+          <Route path="/:slug" element={<PostDetails />} />
           <Route path="/about" element={<AboutUs/>} />
           <Route path="/tags/:tags" element={<TagPage />} />
           <Route path="*" element={<h1>Not Found</h1>} />
