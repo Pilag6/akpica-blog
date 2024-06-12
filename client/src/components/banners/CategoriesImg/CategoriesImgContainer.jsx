@@ -34,7 +34,7 @@ const CategoriesImgContainer = () => {
         { image: category2, tag: "react" },
         { image: category3, tag: "javascript" },
         { image: category6, tag: "express" },
-        { image: category5, tag: "mondodb" },
+        { image: category5, tag: "mongodb" },
         { image: category4, tag: "uxui design" },
         { image: category7, tag: "frontend" },
         { image: category8, tag: "backend" }

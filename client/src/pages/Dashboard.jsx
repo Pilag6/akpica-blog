@@ -239,9 +239,7 @@ const Dashboard = () => {
                         </article>
 
                         {/* TOTAL USERS */}
-                        <article className="aspect-square hidden md:flex flex-col items-center gap-5 border p-5 rounded-sm w-[190px]">
-                            
-                        </article>
+                        <article className="aspect-square hidden md:flex flex-col items-center gap-5 border p-5 rounded-sm w-[190px]"></article>
                     </div>
 
                     {/* Posts written by the logged-in user */}
@@ -254,10 +252,15 @@ const Dashboard = () => {
                                 <thead></thead>
                                 <tbody>
                                     {userPosts.map((post) => (
-                                        <tr key={post._id} className="border dark:border-gray-700 dark:hover:bg-gray-600">
+                                        <tr
+                                            key={post._id}
+                                            className="border dark:border-gray-700 dark:hover:bg-gray-600"
+                                        >
                                             <td className="md:block hidden w-44">
                                                 <img
-                                                    src={`${BACKEND_URL}/posts/photo/${encodeURIComponent(post.title)}`}
+                                                    src={`${BACKEND_URL}/posts/photo/${encodeURIComponent(
+                                                        post.title
+                                                    )}`}
                                                     alt={post.title}
                                                     className="w-full h-full object-cover"
                                                 />
@@ -369,7 +372,8 @@ const Dashboard = () => {
                                         />
                                         <div className="text-akpica-white ">
                                             <p className="text-lg font-[700] hover:text-akpica-marco">
-                                                {user.fullname} (@{user.username})
+                                                {user.fullname} (@
+                                                {user.username})
                                             </p>
                                             <p className="text-sm">
                                                 {user.postCount} posts
@@ -380,9 +384,7 @@ const Dashboard = () => {
                             </ul>
                         </section>
                         {/* Ranking with users with the most posts */}
-                        <section className="hidden md:block border p-5 rounded-sm md:w-1/2">
-                            
-                        </section>
+                        <section className="hidden md:block border p-5 rounded-sm md:w-1/2"></section>
                     </div>
                 </div>
             </section>
