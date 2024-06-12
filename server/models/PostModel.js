@@ -1,7 +1,7 @@
 import { Schema, model } from "mongoose";
+import slugify from 'slugify';
 
 // Create Schema
-
 const postSchema = new Schema(
     {
         title: {
@@ -25,6 +25,11 @@ const postSchema = new Schema(
         date: {
             type: Date,
             default: Date.now
+        },
+        slug: {
+            type: String,
+            unique: true,
+            required: true
         }
     },
     {
@@ -32,8 +37,16 @@ const postSchema = new Schema(
     }
 );
 
-// Create Model
+// Middleware to create slug from title
+postSchema.pre('validate', function(next) {
+    if (this.isModified('title') || this.isNew) {
+        this.slug = slugify(this.title, { lower: true, strict: true });
+        console.log(`Slug generated: ${this.slug}`); // Debug log
+    }
+    next();
+});
 
+// Create Model
 const PostModel = model("posts", postSchema);
 
 export default PostModel;

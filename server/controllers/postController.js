@@ -16,18 +16,18 @@ const __dirname = path.dirname(__filename);
 const createPost = asyncHandler(async (req, res) => {
     const { title, content, date, tags } = req.body;
 
-    if (!title || !content ) {
+    if (!title || !content) {
         res.status(400);
         throw new Error("Title and Content are required");
     }
 
     let imageFilename;
 
-        if (req.file) {
-            imageFilename = req.file.filename;
-        } else {
-            imageFilename = 'default-image.jpg';
-        }
+    if (req.file) {
+        imageFilename = req.file.filename;
+    } else {
+        imageFilename = 'default-image.jpg';
+    }
 
     const post = await PostModel.create({
         title,
@@ -37,7 +37,18 @@ const createPost = asyncHandler(async (req, res) => {
         image: imageFilename,
         tags: tags.split(",")
     });
+
+    console.log(post); // Debug log to check the post object and slug
     res.status(201).json(post);
+});
+
+const getPostBySlug = asyncHandler(async (req, res) => {
+    const post = await PostModel.findOne({ slug: req.params.slug }).populate("author");
+    if (!post) {
+        res.status(404);
+        throw new Error(`Post not found.`);
+    }
+    res.status(200).json(post);
 });
 
 /*
@@ -159,5 +170,6 @@ export {
     getPostById,
     updateOnePost,
     deleteOnePost,
-    getPostsByTags
+    getPostsByTags,
+    getPostBySlug
 };

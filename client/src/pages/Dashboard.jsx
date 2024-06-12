@@ -264,7 +264,7 @@ const Dashboard = () => {
                                             </td>
                                             <td className="pl-2 md:py-4 py-1 whitespace-no-wrap md:border-r dark:border-gray-700">
                                                 <Link
-                                                    to={`/${post._id}`}
+                                                    to={`/${post.slug}`}
                                                     className="text-akpica-white hover:text-akpica-marco hover:underline underline-offset-8 font-[700] text-sm md:text-base "
                                                 >
                                                     {post.title.length > 55
