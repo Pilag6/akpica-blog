@@ -91,7 +91,7 @@ const SearchBar = ({ placeholder, data }) => {
             <div className="absolute flex flex-col top-10 bg-akpica-black text-akpica-white p-4 leading-9 w-full h-52 overflow-hidden overflow-y-auto">
               {filteredData.slice(0, 15).map((value, key) => {
                 return (
-                  <Link key={key} to={`/${value._id}`} onClick={handleLinkClick}>
+                  <Link key={key} to={`/${value.slug}`} onClick={handleLinkClick}>
                     <p>{value.title} </p>
                   </Link>
                 );
