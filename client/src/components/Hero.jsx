@@ -81,6 +81,7 @@ const Hero = () => {
                             date={new Date(post.date).toDateString()}
                             colors="text-akpica-white"
                             bgColor="bg-akpica-black/60 w-fit p-2"
+                            authorLink={`/author/${post.author.username}`}
                         />
                     </div>
                 </div>

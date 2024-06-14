@@ -15,7 +15,8 @@ const CardHero = ({
   sizeTag,
   width,
   link,
-  linkTag
+  linkTag,
+  authorLink,
 }) => {
   return (
     <>
@@ -37,7 +38,7 @@ const CardHero = ({
                 {title}
               </h2>
             </Link>
-            <AuthorDate avatar={avatar} author={author} date={date} />
+            <AuthorDate avatar={avatar} author={author} date={date} authorLink={authorLink} />
           </div>
         </div>
       </article>

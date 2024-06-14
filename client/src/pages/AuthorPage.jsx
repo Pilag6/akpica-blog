@@ -3,20 +3,20 @@ import { useParams, Link } from "react-router-dom";
 import Axios from "axios";
 import BACKEND_URL from "@utils/backendUrl.js";
 import Header from "@components/Header/Header.jsx";
-import technology from "@assets/hero.avif";
+import technology from "@assets/authorPage.webp";
 import AuthorDate from "@components/miniComponents/AuthorDate.jsx";
 import Footer from "@components/Footer.jsx";
 
 import { ImSpinner9 } from "react-icons/im";
 
-// Utility function to strip HTML tags
-const stripHtmlTags = (str) => {
+// Utility function to strip HTML authors
+const stripHtmlAuthors = (str) => {
     return str.replace(/<[^>]*>?/gm, "");
 };
 
-const TagPage = () => {
-    const { tags } = useParams();
-    const [postsTags, setPostsTags] = useState([]);
+const AuthorPage = () => {
+    const { author } = useParams();
+    const [postsAuthors, setPostsAuthors] = useState([]);
     const [visiblePosts, setVisiblePosts] = useState(8);
     const [loading, setLoading] = useState(false);
 
@@ -29,18 +29,18 @@ const TagPage = () => {
     };
 
     useEffect(() => {
-        const fetchPostsByTag = async () => {
+        const fetchPostsByAuthor = async () => {
             try {
                 const response = await Axios.get(
-                    `${BACKEND_URL}/posts/tags/${tags}`
+                    `${BACKEND_URL}/posts/author/${author}`
                 );
-                setPostsTags(response.data);
+                setPostsAuthors(response.data);
             } catch (error) {
                 console.log(error);
             }
         };
-        fetchPostsByTag();
-    }, [tags]);
+        fetchPostsByAuthor();
+    }, [author]);
 
     return (
         <div className="min-h-screen">
@@ -55,17 +55,16 @@ const TagPage = () => {
                     backgroundRepeat: "no-repeat"
                 }}
             >
-                <span className="bg-akpica-marco p-4">{tags}</span>
+                <span className="bg-akpica-marco p-4">{author}</span>
             </header>
 
             <div className="w-full flex items-center p-4 my-5">
                 <div className="w-[1200px] mx-auto flex flex-wrap gap-6 flex-col">
                     <h1 className="text-3xl font-bold text-akpica-white font-akpica-heading">
-                        Posts tagged with{" "}
-                        <span className="uppercase">{tags}</span>
+                        Posts by <span className="uppercase">{author}</span>
                     </h1>
                     <div className="flex flex-wrap md:gap-5 gap-1 gap-y-5">
-                        {postsTags.slice(0, visiblePosts).map((post) => (
+                        {Array.isArray(postsAuthors) && postsAuthors.slice(0, visiblePosts).map((post) => (
                             <div
                                 key={post._id}
                                 className="w-full md:w-[280px] bg-white shadow-md flex flex-col gap-1"
@@ -81,7 +80,7 @@ const TagPage = () => {
                                         {post.title}
                                     </h2>
                                     <p className="my-3">
-                                        {stripHtmlTags(post.content).substring(
+                                        {stripHtmlAuthors(post.content).substring(
                                             0,
                                             100
                                         )}
@@ -93,13 +92,10 @@ const TagPage = () => {
                                     <div className="pr-2 pl-4">
                                         <AuthorDate
                                             author={post.author.username}
-                                            avatar={`${BACKEND_URL}/photo/${
-                                                post.author.username
-                                            }`}
+                                            avatar={`${BACKEND_URL}/photo/${post.author.username}`}
                                             date={new Date(
                                                 post.date
                                             ).toDateString()}
-                                            authorLink={`/author/${post.author.username}`}
                                         />
                                     </div>
                                     <Link
@@ -112,7 +108,7 @@ const TagPage = () => {
                             </div>
                         ))}
                     </div>
-                    {visiblePosts < postsTags.length && (
+                    {visiblePosts < postsAuthors.length && (
                         <button
                             onClick={loadMorePosts}
                             className="mt-4 px-4 py-2 w-56 h-16 bg-akpica-green text-white font-[600] mx-auto flex items-center justify-center"
@@ -133,4 +129,4 @@ const TagPage = () => {
     );
 };
 
-export default TagPage;
+export default AuthorPage;

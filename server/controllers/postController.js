@@ -1,5 +1,6 @@
 import asyncHandler from "../config/asyncHandler.js";
 import PostModel from "../models/PostModel.js";
+import UserModel from "../models/UserModel.js";
 
 import path from "path";
 import { fileURLToPath } from "url";
@@ -112,6 +113,33 @@ const getPostsByTags = asyncHandler(async (req, res) => {
     res.status(200).json(posts);
 });
 
+/*
+@desc    Get posts by author
+@route   GET /posts/author/:author
+@access  Public
+*/
+
+const getPostsByAuthor = asyncHandler(async (req, res) => {
+    const authorUsername = req.params.author;
+
+    // Find the user by their username (case-insensitive using collation)
+    const user = await UserModel.findOne({ username: authorUsername }).collation({ locale: 'en', strength: 2 });
+    if (!user) {
+        res.status(404);
+        throw new Error("Author not found.");
+    }
+
+    // Find posts by the user's ObjectId
+    const posts = await PostModel.find({ author: user._id }).populate("author");
+    if (!posts || posts.length === 0) {
+        res.status(404);
+        throw new Error("No posts found for the specified author.");
+    }
+
+    res.status(200).json(posts);
+});
+
+
 /* 
 @desc    Update an post
 @route   PATCH /posts/:id
@@ -171,5 +199,6 @@ export {
     updateOnePost,
     deleteOnePost,
     getPostsByTags,
-    getPostBySlug
+    getPostBySlug,
+    getPostsByAuthor
 };

@@ -15,7 +15,8 @@ const FourCards = ({
   date,
   bottom,
   link,
-  linkTag
+  linkTag,
+  authorLink,
 }) => {
   return (
     <>
@@ -42,7 +43,7 @@ const FourCards = ({
                 {title}
               </h1>
             </Link>
-            <AuthorDate avatar={avatar} author={author} date={date} bottom={bottom} />
+            <AuthorDate avatar={avatar} author={author} date={date} bottom={bottom} authorLink={authorLink} />
           <div className="flex flex-col mt-auto">
 
             <button className="text-white border w-fit px-3 py-1 bg-akpica-carlo hover:bg-akpica-green md:translate-y-14 md:group-hover:-translate-y-5 transition-all delay-100 duration-200 ease-in-out">
