@@ -35,6 +35,7 @@ const CardsHero = () => {
                                 width="w-96"
                                 link={`/${card.slug}`}
                                 linkTag={`/tags/${card.tags[0]}`}
+                                authorLink={`/author/${card.author.username}`}
                             />
                         ))}
             </div>

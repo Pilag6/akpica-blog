@@ -56,7 +56,7 @@ const Footer = () => {
                             </h2>
                         </Link>
                         <p className="text-lg font-semibold text-akpica-white">
-                            The Web Developer's Handbook: Your ultimate guide to mastering web development. Explore the latest trends, tools, and techniques in web design and development. From beginner tutorials to advanced tips, discover how to create stunning, responsive websites and applications.
+                            The Web Developer&apos;s Handbook: Your ultimate guide to mastering web development. Explore the latest trends, tools, and techniques in web design and development. From beginner tutorials to advanced tips, discover how to create stunning, responsive websites and applications.
                         </p>
                         <h3 className="text-3xl font-bold text-akpica-white mt-5">
                             Follow Us:
@@ -134,6 +134,7 @@ const Footer = () => {
                                     authorColors="text-akpica-white"
                                     link={`/${post.slug}`}
                                     linkTag={`/tags/${post.tags[0]}`}
+                                    authorLink={`/author/${post.author.username}`}
                                 />
                             ))}
                         </div>

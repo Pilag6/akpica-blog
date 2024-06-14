@@ -99,6 +99,7 @@ const TagPage = () => {
                                             date={new Date(
                                                 post.date
                                             ).toDateString()}
+                                            authorLink={`/author/${post.author.username}`}
                                         />
                                     </div>
                                     <Link

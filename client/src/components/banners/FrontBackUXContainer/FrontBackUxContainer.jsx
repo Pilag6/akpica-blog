@@ -66,6 +66,7 @@ const FrontBackUxContainer = () => {
                                         bottom="mt-auto"
                                         link={`/${article.slug}`}
                                         linkTag={`/tags/${article.tags[0]}`}
+                                        authorLink={`/author/${article.author.username}`}
                                     />
                                 ))}
                     </div>
@@ -110,6 +111,7 @@ const FrontBackUxContainer = () => {
                                             bottom="mt-auto"
                                             link={`/${article.slug}`}
                                             linkTag={`/tags/${article.tags[0]}`}
+                                            authorLink={`/author/${article.author.username}`}
                                         />
                                     ))}
                         </div>
@@ -155,6 +157,7 @@ const FrontBackUxContainer = () => {
                                             bottom="mt-auto"
                                             link={`/${article.slug}`}
                                             linkTag={`/tags/${article.tags[0]}`}
+                                            authorLink={`/author/${article.author.username}`}
                                         />
                                     ))}
                         </div>

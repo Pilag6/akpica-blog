@@ -64,6 +64,7 @@ const FourCardsContainer = () => {
                         date={new Date(card.date).toDateString()}
                         link={`/${card.slug}`}
                         linkTag={`/tags/${card.tags[0]}`}
+                        authorLink={`/author/${card.author.username}`}
                     />
                 ))}
             </div>

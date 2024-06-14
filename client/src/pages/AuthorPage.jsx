@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import Axios from "axios";
 import BACKEND_URL from "@utils/backendUrl.js";
 import Header from "@components/Header/Header.jsx";
-import technology from "@assets/hero.avif";
+import technology from "@assets/authorPage.webp";
 import AuthorDate from "@components/miniComponents/AuthorDate.jsx";
 import Footer from "@components/Footer.jsx";
 
@@ -61,7 +61,7 @@ const AuthorPage = () => {
             <div className="w-full flex items-center p-4 my-5">
                 <div className="w-[1200px] mx-auto flex flex-wrap gap-6 flex-col">
                     <h1 className="text-3xl font-bold text-akpica-white font-akpica-heading">
-                        Posts authored by <span className="uppercase">{author}</span>
+                        Posts by <span className="uppercase">{author}</span>
                     </h1>
                     <div className="flex flex-wrap md:gap-5 gap-1 gap-y-5">
                         {Array.isArray(postsAuthors) && postsAuthors.slice(0, visiblePosts).map((post) => (
