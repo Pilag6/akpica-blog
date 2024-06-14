@@ -116,7 +116,7 @@ const Navbar = ({ scrolling }) => {
       )}
 
       {/* search bar */}
-      <SearchBar placeholder="Search . . ." data={posts} />
+      <SearchBar placeholder="Search Posts by Title, Content or Author..." data={posts} />
     </div>
   );
 };
