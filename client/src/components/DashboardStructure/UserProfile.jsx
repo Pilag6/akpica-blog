@@ -162,7 +162,7 @@ const UserProfile = () => {
 
     return (
         <>
-            <div className="flex flex-col items-start md:pt-16 pt-8 h-[calc(100vh-80px)]">
+            <div className="flex flex-col items-start md:pt-16 pt-8 min-h-[calc(100vh-80px)]">
                 {admin && (
                     <div className="flex md:flex-row flex-col md:items-start items-center gap-8 md:gap-0 md:w-4/6">
                         <div className="flex flex-col items-center md:w-2/5">
@@ -281,7 +281,7 @@ const UserProfile = () => {
                                                     role: e.target.value
                                                 })
                                             }
-                                            className="accent-akpica-pastel"
+                                            className="accent-akpica-marco"
                                         />{" "}
                                         Admin
                                     </label>
