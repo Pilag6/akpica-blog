@@ -27,8 +27,8 @@ const AboutUs = () => {
                     </span>
                 </header>
 
-                <div className="w-1/2 my-11">
-                    <p className="text-xl text-center">
+                <div className="md:w-1/2 px-10 my-11">
+                    <p className="md:text-xl text-center">
                     The Web Developer&apos;s Handbook: Your ultimate guide to mastering web development. Explore the latest trends, tools, and techniques in web design and development. From beginner tutorials to advanced tips, discover how to create stunning, responsive websites and applications. Join our community of developers and stay ahead in the ever-evolving world of web development.
                     </p>
                 </div>
