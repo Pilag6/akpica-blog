@@ -191,7 +191,7 @@ const Dashboard = () => {
                     {/* TOTAL POSTS, TAGS, USERS */}
                     <div className="flex md:flex-row flex-col gap-4 flex-wrap justify-between">
                         {/* TOTAL POSTS */}
-                        <article className="aspect-square flex flex-col items-center gap-5 bg-gray-800 dark:hover:bg-gray-600 text-akpica-white  p-5 rounded-sm md:w-[190px]">
+                        <article className="aspect-square flex flex-col items-center gap-5 hover:bg-gray-600 text-akpica-white border  p-5 rounded-sm md:w-[190px]">
                             <div className="p-2 px-4 flex flex-col">
                                 <IoNewspaperSharp className="text-akpica-white text-6xl" />
                                 <h2 className="font-[700] text-2xl font-akpica-heading pt-4">
@@ -207,7 +207,7 @@ const Dashboard = () => {
                         </article>
 
                         {/* TOTAL TAGS */}
-                        <article className="aspect-square flex flex-col items-center gap-5 bg-gray-800 dark:hover:bg-gray-600 text-akpica-white p-5 rounded-sm md:w-[190px]">
+                        <article className="aspect-square flex flex-col items-center gap-5 hover:bg-gray-600 text-akpica-white border p-5 rounded-sm md:w-[190px]">
                             <div className="p-2 px-4 flex flex-col">
                                 <FaHashtag className="text-akpica-white text-6xl" />
                                 <h2 className="font-[700] text-2xl font-akpica-heading pt-4">
@@ -223,7 +223,7 @@ const Dashboard = () => {
                         </article>
 
                         {/* TOTAL USERS */}
-                        <article className="aspect-square flex flex-col items-center gap-5 bg-gray-800 dark:hover:bg-gray-600 text-akpica-white p-5 rounded-sm md:w-[190px]">
+                        <article className="aspect-square flex flex-col items-center gap-5 hover:bg-gray-600 text-akpica-white border p-5 rounded-sm md:w-[190px]">
                             <div className="p-2 px-4 flex flex-col">
                                 <FaRobot className="text-akpica-white text-6xl" />
                                 <h2 className="font-[700] text-2xl font-akpica-heading pt-4">
@@ -254,7 +254,7 @@ const Dashboard = () => {
                                     {userPosts.map((post) => (
                                         <tr
                                             key={post._id}
-                                            className="border dark:border-gray-700 dark:hover:bg-gray-600"
+                                            className="border border-gray-700 hover:bg-gray-600"
                                         >
                                             <td className="md:block hidden w-44">
                                                 <img
@@ -265,7 +265,7 @@ const Dashboard = () => {
                                                     className="w-full h-full object-cover"
                                                 />
                                             </td>
-                                            <td className="pl-2 md:py-4 py-1 whitespace-no-wrap md:border-r dark:border-gray-700">
+                                            <td className="pl-2 md:py-4 py-1 whitespace-no-wrap md:border-r border-gray-700">
                                                 <Link
                                                     to={`/${post.slug}`}
                                                     className="text-akpica-white hover:text-akpica-marco hover:underline underline-offset-8 font-[700] text-sm md:text-base "
