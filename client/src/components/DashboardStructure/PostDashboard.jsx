@@ -125,8 +125,8 @@ const PostDashboard = () => {
 
         <section className="flex flex-col md:flex-row justify-center gap-6 w-full p-4">
           <div className="relative overflow-x-auto shadow-md w-full">
-            <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-              <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <table className="w-full text-sm text-left rtl:text-right text-gray-400">
+              <thead className="text-xs uppercase bg-gray-700 text-gray-400">
                 <tr>
                   <th scope="col" className="px-6 py-3">
                     Image
@@ -186,7 +186,7 @@ const PostDashboard = () => {
                   <>
                     <tr
                       key={index}
-                      className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 "
+                      className="border-b bg-gray-800 dark:border-gray-700 hover:bg-gray-600 "
                     >
                       <td className="flex items-center pl-4 py-4 w-20 h-20 ">
                         <img
@@ -197,7 +197,7 @@ const PostDashboard = () => {
                           className="w-full h-full object-cover"
                         />
                       </td>
-                      <td className="px-2 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-akpica-white">
+                      <td className="px-2 py-4 font-medium whitespace-nowrap text-akpica-white">
                         <div className="flex items-center justify-between">
                           <Link to={`/${post.slug}`}>
                             {/* Mobile title - truncated */}
@@ -215,7 +215,7 @@ const PostDashboard = () => {
 
                           <button
                             onClick={() => toggleRow(index)}
-                            className="md:hidden text-2xl text-akpica-marco dark:text-akpica-marco hover:text-akpica-whitedark:hover:text-akpica-white focus:outline-none transition-all"
+                            className="md:hidden text-2xl text-akpica-marco hover:text-akpica-white focus:outline-none transition-all"
                           >
                             {expandedRows[index] ? (
                               <MdOutlineExpandMore />
@@ -236,7 +236,7 @@ const PostDashboard = () => {
                         {post.tags.slice(0, 4).map((tag, index) => (
                           <span
                             key={index}
-                            className="bg-gray-200 dark:bg-gray-700 dark:text-gray-400 px-2 py-1 rounded text-xs mr-2"
+                            className="bg-gray-700 text-gray-400 px-2 py-1 rounded text-xs mr-2"
                           >
                             {tag}
                           </span>
@@ -248,7 +248,7 @@ const PostDashboard = () => {
                       <td className="hidden md:table-cell px-6 py-4">
                         <button
                           onClick={() => navigate(`edit/${post._id}`)}
-                          className="font-medium text-akpica-marco dark:text-akpica-marco hover:underline"
+                          className="font-mediumtext-akpica-marco hover:underline"
                         >
                           Edit
                         </button>
@@ -256,7 +256,7 @@ const PostDashboard = () => {
                       <td className="hidden md:table-cell px-6 py-4">
                         <button
                           onClick={() => confirmDeletePost(post._id)}
-                          className="font-medium text-akpica-tomato dark:text-akpica-tomato hover:underline"
+                          className="font-medium text-akpica-tomato hover:underline"
                         >
                           Delete
                         </button>
@@ -274,7 +274,7 @@ const PostDashboard = () => {
                             {post.tags.slice(0, 4).map((tag, index) => (
                               <span
                                 key={index}
-                                className="bg-gray-200  dark:bg-gray-700 dark:text-gray-400 px-2 py-1 mr-2 rounded text-xs"
+                                className="bg-gray-700 text-gray-400 px-2 py-1 mr-2 rounded text-xs"
                               >
                                 {tag}
                               </span>
@@ -287,13 +287,13 @@ const PostDashboard = () => {
                             <div>
                               <button
                                 onClick={() => navigate(`edit/${post._id}`)}
-                                className="font-medium text-akpica-marco dark:text-akpica-marco hover:underline"
+                                className="font-medium text-akpica-marco hover:underline"
                               >
                                 Edit
                               </button>
                               <button
                                 onClick={() => confirmDeletePost(post._id)}
-                                className="font-medium text-akpica-tomato dark:text-akpica-tomato hover:underline ml-4"
+                                className="font-medium text-akpica-tomato hover:underline ml-4"
                               >
                                 Delete
                               </button>

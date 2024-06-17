@@ -16,7 +16,7 @@ const NoteDashboard = () => {
     const [content, setContent] = useState("");
     const [title, setTitle] = useState("");
     const [displayNotes, setDisplayNotes] = useState([]);
-    const [error, setError] = useState(null);
+
     // delete note
     const [showModal, setShowModal] = useState(false);
     const [noteToDelete, setNoteToDelete] = useState(null);
@@ -36,7 +36,7 @@ const NoteDashboard = () => {
                     setDisplayNotes(response.data);
                 }
             } catch (error) {
-                setError(
+                console.log(
                     error.response
                         ? error.response.data.errors
                         : "An error occurred while fetching notes"
@@ -55,27 +55,26 @@ const NoteDashboard = () => {
             });
             if (response.status === 201) {
                 const newNote = response.data;
-    
+
                 const userResponse = await Axios.get(`${BACKEND_URL}/me`, {
-                    withCredentials: true,
+                    withCredentials: true
                 });
-    
+
                 const user = userResponse.data.user;
-    
+
                 newNote.author = {
                     username: user.username
                 };
-    
+
                 setDisplayNotes([...displayNotes, newNote]);
                 setContent("");
                 setTitle("");
                 navigate("/dh-admin/dashboard/usersDashboard");
             }
         } catch (error) {
-            setError(error.response.data.errors);
+            console.log(error.response.data.errors);
         }
     };
-    
 
     // delete note
     const confirmDeleteNote = (noteId) => {
@@ -94,7 +93,7 @@ const NoteDashboard = () => {
             setShowModal(false);
             setNoteToDelete(null);
         } catch (error) {
-            setError(error.response.data.errors);
+            console.log(error.response.data.errors);
         }
     };
 
@@ -136,7 +135,7 @@ const NoteDashboard = () => {
                 setNoteToEdit(null);
             }
         } catch (error) {
-            setError(error.response.data.errors);
+            console.log(error.response.data.errors);
         }
     };
 
@@ -183,7 +182,7 @@ const NoteDashboard = () => {
                 </form>
             </div>
             {/* each note */}
-            <div className="my-4 w-full h-[405px] flex flex-row flex-wrap gap-4 overflow-y-auto px-6">
+            <div className="my-4 w-full h-full flex flex-row flex-wrap gap-4 overflow-y-auto px-6">
                 {displayNotes &&
                     displayNotes.map((note) => (
                         <div
@@ -191,7 +190,12 @@ const NoteDashboard = () => {
                             className="mb-2 w-80 h-60 border border-gray-700 flex flex-col text-akpica-white hover:bg-gray-700 group"
                         >
                             <div className="px-2 py-4 font-bold border-b border-gray-700 group-hover:border-gray-800 flex items-center justify-between h-20">
-                                <h2 className="pl-1 text-gray-400" onClick={() => confirmEditNote(note._id)}>{note.title}</h2>
+                                <h2
+                                    className="pl-1 text-gray-400"
+                                    onClick={() => confirmEditNote(note._id)}
+                                >
+                                    {note.title}
+                                </h2>
                                 <button
                                     onClick={() => confirmDeleteNote(note._id)}
                                     title="Delete"
@@ -202,7 +206,10 @@ const NoteDashboard = () => {
                             </div>
 
                             <div className="flex flex-col justify-between h-full w-full overflow-y-auto">
-                                <p className="p-3 text-gray-400" onClick={() => confirmEditNote(note._id)}>
+                                <p
+                                    className="p-3 text-gray-400"
+                                    onClick={() => confirmEditNote(note._id)}
+                                >
                                     {note.content}
                                 </p>
                             </div>
@@ -219,7 +226,6 @@ const NoteDashboard = () => {
                                     <TiEdit />
                                 </button>
                             </div>
-
                         </div>
                     ))}
             </div>
