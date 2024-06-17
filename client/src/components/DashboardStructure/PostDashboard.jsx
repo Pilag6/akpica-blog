@@ -11,6 +11,7 @@ import { MdOutlineChevronRight, MdOutlineExpandMore } from "react-icons/md";
 
 // Backend URL
 import BACKEND_URL from "@utils/backendUrl.js";
+import useAuth from "@utils/useAuth.js";
 
 const PostDashboard = () => {
     const { posts, postQuantity, setPosts } = useContext(PostContext);
@@ -23,6 +24,8 @@ const PostDashboard = () => {
         field: "date",
         order: "desc"
     });
+
+    const { user: currentUser } = useAuth();
     const [expandedRows, setExpandedRows] = useState({});
 
     const queryParams = new URLSearchParams(location.search);
@@ -100,7 +103,7 @@ const PostDashboard = () => {
     };
 
     return (
-      <div>
+      <div className="md:h-[calc(100vh-80px)]">
         <div className="flex items-center pt-6 pb-3 pl-8">
           <button
             onClick={() => navigate("create")}
@@ -111,13 +114,13 @@ const PostDashboard = () => {
         </div>
         <div className="flex m-2 items-center gap-4 pl-8">
           <div
-            className="text-akpica-white cursor-pointer underline underline-offset-4"
+            className={`text-akpica-white cursor-pointer underline underline-offset-4 ${currentUser?.role === 'guest' ? 'hidden' : ''}`}
             onClick={handleShowAllPosts}
           >
             All Posts ({postQuantity})
           </div>
           {currentAuthor && (
-            <div className="pl-4 text-akpica-white">
+            <div className={`pl-4 text-akpica-white ${currentUser?.role === 'guest' ? 'hidden' : ''}`}>
               {currentAuthor} ({sortedPosts.length})
             </div>
           )}
@@ -186,7 +189,7 @@ const PostDashboard = () => {
                   <>
                     <tr
                       key={index}
-                      className="border-b bg-gray-800 dark:border-gray-700 hover:bg-gray-600 "
+                      className={`border-b bg-gray-800 dark:border-gray-700 hover:bg-gray-600 ${currentUser?.role === 'guest' && currentUser?._id !== post.author._id ? 'hidden' : ''}`}
                     >
                       <td className="flex items-center pl-4 py-4 w-20 h-20 ">
                         <img
@@ -248,7 +251,7 @@ const PostDashboard = () => {
                       <td className="hidden md:table-cell px-6 py-4">
                         <button
                           onClick={() => navigate(`edit/${post._id}`)}
-                          className="font-mediumtext-akpica-marco hover:underline"
+                          className="font-medium text-akpica-marco hover:underline"
                         >
                           Edit
                         </button>

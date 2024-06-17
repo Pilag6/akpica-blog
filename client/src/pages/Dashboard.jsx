@@ -358,7 +358,7 @@ const Dashboard = () => {
                             <ul className="flex flex-col gap-4 mt-4 pl-2">
                                 {userRanking.slice(0, 3).map((user, index) => (
                                     <Link
-                                        to={`/dh-admin/dashboard/usersDashboard/${user.id}`}
+                                        to={`/author/${user.username}`}
                                         key={index}
                                         className="flex items-center gap-4"
                                     >
