@@ -196,8 +196,8 @@ const MediaDashboard = () => {
               ))
             ) : (
               // List view
-              <table className="w-[1407px] text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+              <table className="w-[1407px] text-sm text-left rtl:text-right text-gray-400">
+                <thead className="text-xs  uppercase bg-gray-700 text-gray-400">
                   <tr>
                     <th scope="col" className="px-6 py-3">
                       File
@@ -223,7 +223,7 @@ const MediaDashboard = () => {
                   {filteredPosts.map((post, index) => (
                     <tr
                       key={index}
-                      className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                      className=" border-b bg-gray-800 dark:border-gray-700 hover:bg-gray-600"
                     >
                       <td className="px-6">
                         <img
@@ -237,7 +237,7 @@ const MediaDashboard = () => {
                       </td>
                       <td
                         scope="row"
-                        className="px-1 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-akpica-white"
+                        className="px-1 py-4 font-medium  whitespace-nowrap text-akpica-white"
                       >
                         <Link to={`/${post.slug}`}>{post.title}</Link>
                       </td>
@@ -246,7 +246,7 @@ const MediaDashboard = () => {
                         {post.tags.slice(0, 4).map((tag, index) => (
                           <span
                             key={index}
-                            className="bg-gray-200 dark:bg-gray-700 dark:text-gray-400 px-2 py-1 rounded text-xs gap-1 my-12"
+                            className="bg-gray-700 text-gray-400 px-2 py-1 rounded text-xs gap-1 my-12"
                           >
                             {tag}
                           </span>
@@ -258,7 +258,7 @@ const MediaDashboard = () => {
                       <td className="px-6 py-4">
                         <a
                           href="#"
-                          className="font-medium text-akpica-marco dark:text-akpica-marco hover:underline"
+                          className="font-medium text-akpica-marco hover:underline"
                         >
                           Edit
                         </a>
@@ -266,7 +266,7 @@ const MediaDashboard = () => {
                       <td className="px-6 py-4">
                         <a
                           href="#"
-                          className="font-medium text-akpica-tomato dark:text-akpica-tomato hover:underline"
+                          className="font-medium text-akpica-tomato hover:underline"
                         >
                           Delete
                         </a>

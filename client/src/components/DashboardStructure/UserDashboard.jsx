@@ -114,7 +114,7 @@ const UserDashboard = () => {
     };
 
     return (
-        <div>
+        <div className="md:h-[calc(100vh-80px)]">
             <div className={`flex items-center pt-6 pb-3 pl-8 gap-4 ${currentUser?.role === 'guest'  ? 'hidden' : ''}`}>
                 <Link
                     to="/dh-admin/dashboard/register"
@@ -127,9 +127,9 @@ const UserDashboard = () => {
                 ({userQuantity}) Users
             </div>
             <section className="flex flex-col md:flex-row gap-6 w-full p-4">
-                <div className="relative overflow-x-auto shadow-md">
-                    <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <div className="relative overflow-x-auto">
+                    <table className="w-full text-sm text-left rtl:text-right text-gray-400">
+                        <thead className="text-xs uppercase bg-gray-700 text-gray-400">
                             <tr>
                                 <th
                                     scope="col"
@@ -200,11 +200,11 @@ const UserDashboard = () => {
                             {sortedAdmin.map((user, index) => (
                                 <tr
                                     key={index}
-                                    className={`border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 ${currentUser?.role === 'guest' && currentUser?._id !== user._id ? 'hidden' : ''}`}
+                                    className={`border-b bg-gray-800 dark:border-gray-700 hover:bg-gray-600 ${currentUser?.role === 'guest' && currentUser?._id !== user._id ? 'hidden' : ''}`}
                                 >
                                     <th
                                         scope="row"
-                                        className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white"
+                                        className="flex items-center px-6 py-4 whitespace-nowrap text-white"
                                     >
                                         <img
                                             className="w-10 h-10 rounded-full object-cover object-center"
@@ -223,7 +223,7 @@ const UserDashboard = () => {
                                         </div>
                                         <button
                                             onClick={() => toggleRow(index)}
-                                            className="md:hidden text-2xl text-akpica-marco dark:text-akpica-marco hover:text-akpica-whitedark:hover:text-akpica-white focus:outline-none transition-all ml-auto"
+                                            className="md:hidden text-2xl text-akpica-marco hover:text-akpica-white focus:outline-none transition-all ml-auto"
                                         >
                                             {expandedRows[index] ? (
                                                 <MdOutlineExpandMore />
@@ -264,7 +264,7 @@ const UserDashboard = () => {
                                                     <td className="md:hidden block px-2 py-2">
                                                         <Link
                                                             to={`/dh-admin/dashboard/usersDashboard/${user._id}`}
-                                                            className={`font-medium text-akpica-marco dark:text-akpica-marco hover:underline hover:underline-offset-4 ${currentUser?.role === 'guest' && currentUser?._id !== user._id ? 'pointer-events-none opacity-50' : ''}`}
+                                                            className={`font-medium text-akpica-marco hover:underline hover:underline-offset-4 ${currentUser?.role === 'guest' && currentUser?._id !== user._id ? 'pointer-events-none opacity-50' : ''}`}
                                                         >
                                                             Edit user
                                                         </Link>
@@ -276,7 +276,7 @@ const UserDashboard = () => {
                                                                     user._id
                                                                 )
                                                             }
-                                                            className={`font-medium text-akpica-tomato dark:text-akpica-tomato hover:underline ${currentUser?.role === 'guest' && currentUser?._id !== user._id ? 'pointer-events-none opacity-50' : ''}`}
+                                                            className={`font-medium text-akpica-tomato hover:underline ${currentUser?.role === 'guest' && currentUser?._id !== user._id ? 'pointer-events-none opacity-50' : ''}`}
                                                         >
                                                             Delete
                                                         </button>
@@ -304,7 +304,7 @@ const UserDashboard = () => {
                                     <td className="hidden md:table-cell px-6 py-4">
                                         <Link
                                             to={`/dh-admin/dashboard/usersDashboard/${user._id}`}
-                                            className={`font-medium text-akpica-marco dark:text-akpica-marco hover:underline hover:underline-offset-4 ${currentUser?.role === 'guest' && currentUser?._id !== user._id ? 'pointer-events-none opacity-50' : ''}`}
+                                            className={`font-medium text-akpica-marco hover:underline hover:underline-offset-4 ${currentUser?.role === 'guest' && currentUser?._id !== user._id ? 'pointer-events-none opacity-50' : ''}`}
                                         >
                                             Edit user
                                         </Link>
@@ -314,7 +314,7 @@ const UserDashboard = () => {
                                             onClick={() =>
                                                 confirmDeleteUser(user._id)
                                             }
-                                            className={`font-medium text-akpica-tomato dark:text-akpica-tomato hover:underline ${currentUser?.role === 'guest' && currentUser?._id !== user._id ? 'pointer-events-none opacity-50' : ''}`}
+                                            className={`font-medium text-akpica-tomato hover:underline ${currentUser?.role === 'guest' && currentUser?._id !== user._id ? 'pointer-events-none opacity-50' : ''}`}
                                         >
                                             Delete
                                         </button>

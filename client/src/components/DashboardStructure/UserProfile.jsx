@@ -190,7 +190,7 @@ const UserProfile = () => {
                                     name="userpicture"
                                     onChange={handleFileChange}
                                     placeholder="Update Picture"
-                                    className="block text-xs text-gray-900 border border-gray-300 cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                                    className="block text-xs border border-gray-300 cursor-pointer  text-gray-400 focus:outline-none bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                                 />
                                 <div className="flex items-center justify-between gap-4">
                                     {userPicture && (

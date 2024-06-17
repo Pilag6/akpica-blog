@@ -16,7 +16,7 @@ const DashboardLayout = ({ children }) => {
             <aside className={`fixed top-[80px] left-0 transition-all ${isOpen ? "md:w-[200px] w-1/2" : "md:w-[80px] md:translate-x-0 -translate-x-24"} bg-akpica-carlo h-[calc(100vh-80px)] py-4 flex px-5 z-50`}>
                 <AsideDashboard />
             </aside>
-            <main className={`mt-[5rem] ${isOpen ? "md:pl-[200px]" : "md:pl-[80px] p-0"} w-full`}>{children}</main>
+            <main className={`mt-[5rem] ${isOpen ? "md:pl-[200px]" : "md:pl-[80px] p-0"} w-full bg-black`}>{children}</main>
         </>
     );
 };
