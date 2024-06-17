@@ -80,7 +80,7 @@ const PostDetails = () => {
               }}
             />
 
-            <aside className="flex-1 md:pl-4 sticky top-24 h-[calc(100vh-32px)] overflow-hidden-4/12">
+            <aside className="flex-1 md:pl-4 sticky top-24 h-full overflow-hidden-4/12">
               <h2 className="font-bold font-akpica-heading text-2xl mb-4">
                 RECENT POSTS
               </h2>
@@ -109,7 +109,7 @@ const PostDetails = () => {
             </aside>
           </div>
           <DiscussionEmbed
-            className="mt-12 p-8 bg-[#FFFFFF]"
+            className="mt-24 p-8 bg-[#FFFFFF]"
             shortname="akpica"
             config={{
               url: window.location.href,
