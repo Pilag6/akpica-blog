@@ -58,7 +58,7 @@ const TagPage = () => {
                 <span className="bg-akpica-marco p-4">{tags}</span>
             </header>
 
-            <div className="w-full flex items-center p-4 my-5">
+            <div className="w-full flex items-center p-10 bg-black/10">
                 <div className="w-[1200px] mx-auto flex flex-wrap gap-6 flex-col">
                     <h1 className="text-3xl font-bold text-akpica-white font-akpica-heading">
                         Posts tagged with{" "}
