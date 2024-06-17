@@ -140,7 +140,7 @@ const Dashboard = () => {
         .sort((a, b) => new Date(b.date) - new Date(a.date));
 
     return (
-        <div className="flex justify-start flex-col items-start gap-5 w-full md:h-[calc(100vh-80px)] md:p-8 p-3">
+        <div className="flex justify-start flex-col items-start gap-5 w-full md:min-h-[calc(100vh-80px)] md:p-8 p-3">
             <section className="flex gap-5 flex-wrap justify-between w-full ">
                 <div className="flex flex-col gap-5 flex-wrap md:w-1/2">
                     {/* GREETING */}
