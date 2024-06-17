@@ -115,7 +115,7 @@ const UserDashboard = () => {
 
     return (
         <div>
-            <div className="flex items-center pt-6 pb-3 pl-8 gap-4">
+            <div className={`flex items-center pt-6 pb-3 pl-8 gap-4 ${currentUser?.role === 'guest'  ? 'hidden' : ''}`}>
                 <Link
                     to="/dh-admin/dashboard/register"
                     className={`w-fit flex items-center gap-3 p-2 text-xl font-semibold text-akpica-white outline-none outline-white transition-all hover:bg-akpica-pastel hover:text-zinc-800 hover:outline-2 ${currentUser?.role === 'guest' ? 'pointer-events-none opacity-50' : ''}`}
@@ -123,7 +123,7 @@ const UserDashboard = () => {
                     <FaPlus /> Add New User
                 </Link>
             </div>
-            <div className="m-2 pl-8 text-akpica-white">
+            <div className={`m-2 pl-8 text-akpica-white ${currentUser?.role === 'guest'  ? 'hidden' : ''}`}>
                 ({userQuantity}) Users
             </div>
             <section className="flex flex-col md:flex-row gap-6 w-full p-4">
@@ -200,7 +200,7 @@ const UserDashboard = () => {
                             {sortedAdmin.map((user, index) => (
                                 <tr
                                     key={index}
-                                    className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                                    className={`border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 ${currentUser?.role === 'guest' && currentUser?._id !== user._id ? 'hidden' : ''}`}
                                 >
                                     <th
                                         scope="row"
