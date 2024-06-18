@@ -1,6 +1,8 @@
 # AkPiCa - Blog
 
-![akpica-blog-ss]()
+![akpica-blog-ss](./client/src/assets/Macbook-Air-akpicablog.netlify.app.png)
+
+![akpica-blog-ss](./client//src/assets/iPhone-11-PRO-MAX-akpicablog.netlify.app.png)
 
 **[⏩ Link to our Page]()**
 ---
@@ -71,6 +73,7 @@ Explore the latest trends, tools, and techniques in web design and development. 
 11. Multer
 12. Slugify
 
+---
 
 ## Getting Started
 
