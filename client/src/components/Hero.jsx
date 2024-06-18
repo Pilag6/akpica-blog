@@ -60,6 +60,7 @@ const Hero = () => {
                         backgroundSize: "cover",
                         backgroundPosition: "center",
                         backgroundRepeat: "no-repeat",
+                        backgroundAttachment: "fixed",
                     }}
                 >
                     <div className="flex flex-col justify-center h-full max-w-[1200px] mx-auto p-6 gap-2">
