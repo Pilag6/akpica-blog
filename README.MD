@@ -52,26 +52,26 @@ Explore the latest trends, tools, and techniques in web design and development. 
 3. React Router
 4. TinyMCE
 5. React Icons
-6. Render
-7. Netlify
-8. Axios
-9. Disqus-React
-10. Dompurify
-11. IPInfo.io
+6. Netlify
+7. Axios
+8. Disqus-React
+9.  Dompurify
+10. IPInfo.io
 
 ### Backend
 1. Express
 2. Express-Validator
 3. Mongoose
-4. Bcrypt
-5. Colors
-6. Cookie-Parser
-7. Cors
-8. Dotenv
-9. Jsonwebtoken
-10. Morgan
-11. Multer
-12. Slugify
+4. Render
+5. Bcrypt
+6. Colors
+7. Cookie-Parser
+8. Cors
+9. Dotenv
+10. Jsonwebtoken
+11. Morgan
+12. Multer
+13. Slugify
 
 ---
 
