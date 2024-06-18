@@ -17,7 +17,7 @@ const AuthorDate = ({ avatar, author, date, colors, bottom, bgColor, authorLink,
           <div className={`flex items-center gap-1 ${colors}`}>
             <CiCalendarDate />
 
-            <p className={`font-akpica-heading font-[500] ${colors}`}>
+            <p className={`font-akpica-heading font-[500] pt-[5px] ${colors}`}>
               {date || new Date().toLocaleDateString()}
             </p>
           </div>

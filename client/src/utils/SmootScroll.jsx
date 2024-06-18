@@ -5,15 +5,25 @@ import { useLocation, useNavigationType } from "react-router-dom";
 function SmoothScroll({ children }) {
     const location = useLocation();
     const navType = useNavigationType();
+
     useEffect(() => {
         if (navType !== "POP") {
             window.scrollTo({
                 top: 0,
                 behavior: "smooth",
-                // instant is another option. It does direct to the top without the scroll
             });
         }
+
+        const hash = location.hash;
+        if (hash) {
+            const element = document.querySelector(hash);
+            if (element) {
+                element.scrollIntoView({ behavior: "smooth" });
+            }
+        }
     }, [location, navType]);
+
     return <>{children}</>;
 }
+
 export default SmoothScroll;

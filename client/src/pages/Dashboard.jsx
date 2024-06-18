@@ -2,6 +2,8 @@ import { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import Axios from "axios";
 
+
+
 // Backend URL
 import BACKEND_URL from "@utils/backendUrl.js";
 import { PostContext } from "@contexts/PostContext.jsx";
@@ -22,6 +24,7 @@ const Dashboard = () => {
     const [totalUsers, setTotalUsers] = useState(0);
     const [location, setLocation] = useState({ city: "", country: "" });
     const [userRanking, setUserRanking] = useState([]);
+
 
     // Extract unique tags from posts and count their occurrences
     const uniqueTags = new Set();
@@ -238,8 +241,10 @@ const Dashboard = () => {
                             </div>
                         </article>
 
-                        {/* TOTAL USERS */}
-                        <article className="aspect-square hidden md:flex flex-col items-center gap-5 border p-5 rounded-sm w-[190px]"></article>
+                        {/* TOTAL Empty */}
+                        <article className="aspect-square hidden md:flex flex-col items-center gap-5 border p-5 rounded-sm w-[190px]">
+                        
+                        </article>
                     </div>
 
                     {/* Posts written by the logged-in user */}
