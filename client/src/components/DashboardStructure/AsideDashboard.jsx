@@ -153,7 +153,7 @@ const AsideDashboard = () => {
                                 <p className="uppercase font-bold">
                                     {username}
                                 </p>
-                                <p className="text-xs">{role}</p>
+                                <p className="text-xs capitalize">{role}</p>
                             </div>
                         )}
                     </Link>

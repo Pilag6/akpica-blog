@@ -2,15 +2,15 @@
 import { CiCalendarDate } from "react-icons/ci";
 import { Link } from "react-router-dom";
 
-const AuthorDate = ({ avatar, author, date, colors, bottom, bgColor, authorLink }) => {
+const AuthorDate = ({ avatar, author, date, colors, bottom, bgColor, authorLink, hidden }) => {
     return (
       <>
         <div className={`flex items-center gap-2 ${bottom} ${bgColor}`}>
-          <Link to={authorLink}>
+          <Link to={authorLink} className={`${hidden}`}>
             <img
               src={avatar}
               alt={author}
-              className="w-5 h-5 rounded-full object-cover"
+              className={`w-5 h-5 rounded-full object-cover `}
             />
           </Link>
           <Link to={authorLink}><p className={`${colors}`}>{author}</p></Link>

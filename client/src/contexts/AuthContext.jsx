@@ -40,7 +40,7 @@ export const AuthProvider = ({ children }) => {
     const logout = async () => {
         await Axios.post(`${BACKEND_URL}/logout`, {}, { withCredentials: true });
         setUser(null);
-        navigate('/login');
+        navigate('/dh-admin/login');
     };
 
     return (
