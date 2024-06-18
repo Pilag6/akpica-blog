@@ -87,11 +87,12 @@ const AuthorPage = () => {
                     </div>
 
                     <div className="mt-auto flex flex-col gap-3">
-                      <div className="pr-2 pl-4">
+                      <div className="px-2">
                         <AuthorDate
-                          author={post.author.username}
-                          avatar={`${BACKEND_URL}/photo/${post.author.username}`}
+                          // author={post.author.username}
+                          // avatar={`${BACKEND_URL}/photo/${post.author.username}`}
                           date={new Date(post.date).toDateString()}
+                          hidden={"hidden"}
                         />
                       </div>
                       <Link
