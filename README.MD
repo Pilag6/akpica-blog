@@ -1,12 +1,13 @@
 # AkPiCa - Blog
 
-![akpica-blog-ss](./client/src/assets/Macbook-Air-akpicablog.netlify.app.png)
+<div style="display: flex; flex-direction: column; gap: 3rem;">
+<img src="./client/src/assets/Macbook-Air-akpicablog.netlify.app.png" alt="" width="85%">
+<img src="./client//src/assets/iPhone-11-PRO-MAX-akpicablog.netlify.app.png" alt="" width="30%">
+</div>
 
-![akpica-blog-ss](./client//src/assets/iPhone-11-PRO-MAX-akpicablog.netlify.app.png)
 
-<img src="https://github.com/Pilag6/pila-portfolio-dci/assets/79191808/bea358dc-56fe-4a40-89cf-716702181ce3" alt="" width="30%">
 
-**[⏩ Link to our Page]()**
+**[⏩ Link to our Page](https://akpicablog.netlify.app/)**
 ---
 
 **The Web Developer's Handbook:**
@@ -56,7 +57,7 @@ Explore the latest trends, tools, and techniques in web design and development. 
 7. Axios
 8. Disqus-React
 9.  Dompurify
-10. IPInfo.io
+10. IPinfo.io
 11. Leonardo.ai
 
 ### Backend

@@ -30,7 +30,7 @@ const NotFound = () => {
         </p>
         <Link
           to={"/"}
-          className="text-center w-fit m-auto p-4 bg-[#3F7BFF] text-akpica-white font-semibold hover:bg-[#2F5BFF] hover:text-akpica-white"
+          className="text-center w-fit m-auto p-4 bg-[#3F7BFF] text-akpica-white font-semibold hover:bg-[#2F5BFF] active:bg-[#3F7BFF]"
         >
           Return to Home page
         </Link>
