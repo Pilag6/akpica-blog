@@ -6,7 +6,9 @@ import Header from "@components/Header/Header.jsx";
 import technology from "@assets/authorPage.webp";
 import AuthorDate from "@components/miniComponents/AuthorDate.jsx";
 import Footer from "@components/Footer.jsx";
+import NotFound from "./NotFound";
 
+// icons
 import { ImSpinner9 } from "react-icons/im";
 
 // Utility function to strip HTML authors
@@ -41,6 +43,14 @@ const AuthorPage = () => {
         };
         fetchPostsByAuthor();
     }, [author]);
+
+    if (!postsAuthors || postsAuthors.length === 0) {
+        return (
+            <div>
+                <NotFound />
+            </div>
+        );
+    }
 
     return (
       <div className="min-h-screen">
