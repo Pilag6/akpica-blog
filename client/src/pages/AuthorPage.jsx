@@ -18,9 +18,10 @@ const stripHtmlAuthors = (str) => {
 
 const AuthorPage = () => {
     const { author } = useParams();
-    const [postsAuthors, setPostsAuthors] = useState([]);
+    const [postsAuthors, setPostsAuthors] = useState(null);
     const [visiblePosts, setVisiblePosts] = useState(8);
     const [loading, setLoading] = useState(false);
+    const [loadingPage, setLoadingPage] = useState(true);
 
     const loadMorePosts = () => {
         setLoading(true);
@@ -39,100 +40,112 @@ const AuthorPage = () => {
                 setPostsAuthors(response.data);
             } catch (error) {
                 console.log(error);
+            } finally {
+                setLoadingPage(false);
             }
         };
         fetchPostsByAuthor();
     }, [author]);
 
-    if (!postsAuthors || postsAuthors.length === 0) {
+    if (loadingPage) {
         return (
-            <div>
-                <NotFound />
+            <div className="min-h-screen flex items-center justify-center">
+                <ImSpinner9 className="animate-spin text-akpica-green text-2xl" />
             </div>
         );
     }
 
+    if (!postsAuthors) {
+        return <NotFound />;
+    }
+
     return (
-      <div className="min-h-screen">
-        <Header darkBackground={true} />
+        <div className="min-h-screen">
+            <Header darkBackground={true} />
 
-        <header
-          className="h-[40vh] flex items-center justify-center text-akpica-black text-4xl font-bold uppercase"
-          style={{
-            backgroundImage: `url(${technology})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-          }}
-        >
-          <span className="bg-akpica-marco p-4">{author}</span>
-        </header>
+            <header
+                className="h-[40vh] flex items-center justify-center text-akpica-black text-4xl font-bold uppercase"
+                style={{
+                    backgroundImage: `url(${technology})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat"
+                }}
+            >
+                <span className="bg-akpica-marco p-4">{author}</span>
+            </header>
 
-        <div className="w-full flex items-center p-10 bg-black/10">
-          <div className="w-[1200px] mx-auto flex flex-wrap gap-6 flex-col">
-            <h1 className="text-3xl font-bold text-akpica-white font-akpica-heading">
-              Posts by <span className="uppercase">{author}</span>
-            </h1>
-            <div className="flex flex-wrap md:gap-5 gap-1 gap-y-5">
-              {Array.isArray(postsAuthors) &&
-                postsAuthors.slice(0, visiblePosts).map((post) => (
-                  <div
-                    key={post._id}
-                    className="w-full md:w-[280px] bg-white shadow-md flex flex-col gap-1"
-                  >
-                    <img
-                      src={`${BACKEND_URL}/posts/photo/${encodeURIComponent(
-                        post.title
-                      )}`}
-                      alt={post.title}
-                      className="w-full h-40 object-cover"
-                    />
+            <div className="w-full flex items-center p-10 bg-black/10">
+                <div className="w-[1200px] mx-auto flex flex-wrap gap-6 flex-col">
+                    <h1 className="text-3xl font-bold text-akpica-white font-akpica-heading">
+                        Posts by <span className="uppercase">{author}</span>
+                    </h1>
+                    <div className="flex flex-wrap md:gap-5 gap-1 gap-y-5">
+                        {Array.isArray(postsAuthors) &&
+                            postsAuthors.slice(0, visiblePosts).map((post) => (
+                                <div
+                                    key={post._id}
+                                    className="w-full md:w-[280px] bg-white shadow-md flex flex-col gap-1"
+                                >
+                                    <img
+                                        src={`${BACKEND_URL}/posts/photo/${encodeURIComponent(
+                                            post.title
+                                        )}`}
+                                        alt={post.title}
+                                        className="w-full h-40 object-cover"
+                                    />
 
-                    <div className="p-4">
-                      <h2 className="text-xl font-semibold">{post.title}</h2>
-                      <p className="my-3">
-                        {stripHtmlAuthors(post.content).substring(0, 100)}
-                        ...
-                      </p>
+                                    <div className="p-4">
+                                        <h2 className="text-xl font-semibold">
+                                            {post.title}
+                                        </h2>
+                                        <p className="my-3">
+                                            {stripHtmlAuthors(
+                                                post.content
+                                            ).substring(0, 100)}
+                                            ...
+                                        </p>
+                                    </div>
+
+                                    <div className="mt-auto flex flex-col gap-3">
+                                        <div className="px-2">
+                                            <AuthorDate
+                                                // author={post.author.username}
+                                                // avatar={`${BACKEND_URL}/photo/${post.author.username}`}
+                                                date={new Date(
+                                                    post.date
+                                                ).toDateString()}
+                                                hidden={"hidden"}
+                                            />
+                                        </div>
+                                        <Link
+                                            to={`/${post.slug}`}
+                                            className="bg-akpica-green hover:bg-akpica-carlo transition-all duration-300 text-white p-4 font-[700] text-center font-akpica-heading text-xl"
+                                        >
+                                            READ MORE
+                                        </Link>
+                                    </div>
+                                </div>
+                            ))}
                     </div>
-
-                    <div className="mt-auto flex flex-col gap-3">
-                      <div className="px-2">
-                        <AuthorDate
-                          // author={post.author.username}
-                          // avatar={`${BACKEND_URL}/photo/${post.author.username}`}
-                          date={new Date(post.date).toDateString()}
-                          hidden={"hidden"}
-                        />
-                      </div>
-                      <Link
-                        to={`/${post.slug}`}
-                        className="bg-akpica-green hover:bg-akpica-carlo transition-all duration-300 text-white p-4 font-[700] text-center font-akpica-heading text-xl"
-                      >
-                        READ MORE
-                      </Link>
-                    </div>
-                  </div>
-                ))}
+                    {visiblePosts < postsAuthors.length && (
+                        <button
+                            onClick={loadMorePosts}
+                            className="mt-4 px-4 py-2 w-56 h-16 bg-akpica-green text-white font-[600] mx-auto flex items-center justify-center"
+                            disabled={loading}
+                        >
+                            {loading ? (
+                                <ImSpinner9 className="animate-spin h-5 w-5" />
+                            ) : (
+                                "LOAD MORE"
+                            )}
+                        </button>
+                    )}
+                </div>
             </div>
-            {visiblePosts < postsAuthors.length && (
-              <button
-                onClick={loadMorePosts}
-                className="mt-4 px-4 py-2 w-56 h-16 bg-akpica-green text-white font-[600] mx-auto flex items-center justify-center"
-                disabled={loading}
-              >
-                {loading ? (
-                  <ImSpinner9 className="animate-spin h-5 w-5" />
-                ) : (
-                  "LOAD MORE"
-                )}
-              </button>
-            )}
-          </div>
-        </div>
 
-        <Footer />
-      </div>
+            <Footer />
+        </div>
     );
 };
 

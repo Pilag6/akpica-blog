@@ -20,6 +20,7 @@ const TagPage = () => {
     const [postsTags, setPostsTags] = useState(null);
     const [visiblePosts, setVisiblePosts] = useState(8);
     const [loading, setLoading] = useState(false);
+    const [loadingPage, setLoadingPage] = useState(true);
 
     const loadMorePosts = () => {
         setLoading(true);
@@ -38,17 +39,23 @@ const TagPage = () => {
                 setPostsTags(response.data);
             } catch (error) {
                 console.log(error);
+            } finally {
+                setLoadingPage(false);
             }
         };
         fetchPostsByTag();
     }, [tags]);
 
-    if (!postsTags || postsTags.length === 0) {
-      return (
-        <div>
-          <NotFound />
-        </div>
-      );
+    if (loadingPage) {
+        return (
+            <div className="min-h-screen flex items-center justify-center">
+                <ImSpinner9 className="animate-spin text-akpica-green text-2xl" />
+            </div>
+        );
+    }
+
+    if (!postsTags) {
+        return <NotFound />;
     }
 
     return (
@@ -80,7 +87,9 @@ const TagPage = () => {
                                 className="w-full md:w-[280px] bg-white shadow-md flex flex-col gap-1"
                             >
                                 <img
-                                    src={`${BACKEND_URL}/posts/photo/${encodeURIComponent(post.title)}`}
+                                    src={`${BACKEND_URL}/posts/photo/${encodeURIComponent(
+                                        post.title
+                                    )}`}
                                     alt={post.title}
                                     className="w-full h-40 object-cover"
                                 />
@@ -102,9 +111,7 @@ const TagPage = () => {
                                     <div className="pr-2 pl-4">
                                         <AuthorDate
                                             author={post.author.username}
-                                            avatar={`${BACKEND_URL}/photo/${
-                                                post.author.username
-                                            }`}
+                                            avatar={`${BACKEND_URL}/photo/${post.author.username}`}
                                             date={new Date(
                                                 post.date
                                             ).toDateString()}

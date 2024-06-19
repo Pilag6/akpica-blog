@@ -13,12 +13,15 @@ import CardMoreFromUs from "@components/banners/MoreFromUs/CardMoreFromUs.jsx";
 // React Disqus Comments
 import { DiscussionEmbed, CommentCount } from "disqus-react";
 import NotFound from "./NotFound";
+import { ImSpinner9 } from "react-icons/im";
 
 const PostDetails = () => {
     const { slug } = useParams();
-    const [post, setPost] = useState(null);
     const { posts } = useContext(PostContext);
     const commentsRef = useRef(null);
+
+    const [post, setPost] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchPost = async () => {
@@ -29,6 +32,8 @@ const PostDetails = () => {
                 setPost(response.data);
             } catch (error) {
                 console.error(error);
+            } finally {
+                setLoading(false);
             }
         };
 
@@ -41,7 +46,17 @@ const PostDetails = () => {
         }
     }, [post]);
 
-    if (!post) return <div><NotFound /></div>;
+    if (loading) {
+        return (
+            <div className="min-h-screen flex items-center justify-center">
+                <ImSpinner9 className="animate-spin text-akpica-green text-2xl" />
+            </div>
+        );
+    }
+
+    if (!post) {
+        return <NotFound />;
+    }
 
     return (
         <div className="min-h-screen">
@@ -77,7 +92,10 @@ const PostDetails = () => {
                             date={new Date(post.date).toDateString()}
                             colors="text-akpica-black"
                         />
-                        <Link to={`#disqus_thread`} className="text-akpica-carlo font-semibold hover:underline">
+                        <Link
+                            to={`#disqus_thread`}
+                            className="text-akpica-carlo font-semibold hover:underline"
+                        >
                             <CommentCount
                                 shortname="akpica"
                                 config={{
