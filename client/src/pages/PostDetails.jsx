@@ -12,6 +12,7 @@ import CardMoreFromUs from "@components/banners/MoreFromUs/CardMoreFromUs.jsx";
 
 // React Disqus Comments
 import { DiscussionEmbed, CommentCount } from "disqus-react";
+import NotFound from "./NotFound";
 
 const PostDetails = () => {
     const { slug } = useParams();
@@ -40,7 +41,7 @@ const PostDetails = () => {
         }
     }, [post]);
 
-    if (!post) return <div>Loading...</div>;
+    if (!post) return <div><NotFound /></div>;
 
     return (
         <div className="min-h-screen">

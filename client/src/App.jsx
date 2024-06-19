@@ -21,6 +21,7 @@ import PostDetails from "@pages/PostDetails.jsx";
 import Register from "@pages/Register.jsx";
 import TagPage from "@pages/TagPage.jsx";
 import AuthorPage from "@pages/AuthorPage.jsx";
+import NotFound from "@pages/NotFound";
 
 // Contexts Provider & Protected Route
 import { AuthProvider } from '@contexts/AuthContext.jsx';
@@ -42,7 +43,7 @@ function App() {
           <Route path="/about" element={<AboutUs/>} />
           <Route path="/tags/:tags" element={<TagPage />} />
           <Route path="/author/:author" element={<AuthorPage />} />
-          <Route path="*" element={<h1>Not Found</h1>} />
+          <Route path="/*" element={<NotFound />} />
   
           <Route path="/dh-admin" element={<DHAdmin />} />
           

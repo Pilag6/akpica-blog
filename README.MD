@@ -4,6 +4,8 @@
 
 ![akpica-blog-ss](./client//src/assets/iPhone-11-PRO-MAX-akpicablog.netlify.app.png)
 
+<img src="https://github.com/Pilag6/pila-portfolio-dci/assets/79191808/bea358dc-56fe-4a40-89cf-716702181ce3" alt="" width="30%">
+
 **[⏩ Link to our Page]()**
 ---
 
@@ -42,8 +44,6 @@ Explore the latest trends, tools, and techniques in web design and development. 
   </tbody>
 </table>
 
-## Features
-
 
 ## Tools
 ### Frontend
@@ -57,6 +57,7 @@ Explore the latest trends, tools, and techniques in web design and development. 
 8. Disqus-React
 9.  Dompurify
 10. IPInfo.io
+11. Leonardo.ai
 
 ### Backend
 1. Express
@@ -72,6 +73,9 @@ Explore the latest trends, tools, and techniques in web design and development. 
 11. Morgan
 12. Multer
 13. Slugify
+
+
+## Feature
 
 ---
 

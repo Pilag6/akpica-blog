@@ -6,6 +6,7 @@ import Header from "@components/Header/Header.jsx";
 import technology from "@assets/hero.avif";
 import AuthorDate from "@components/miniComponents/AuthorDate.jsx";
 import Footer from "@components/Footer.jsx";
+import NotFound from "./NotFound";
 
 import { ImSpinner9 } from "react-icons/im";
 
@@ -16,7 +17,7 @@ const stripHtmlTags = (str) => {
 
 const TagPage = () => {
     const { tags } = useParams();
-    const [postsTags, setPostsTags] = useState([]);
+    const [postsTags, setPostsTags] = useState(null);
     const [visiblePosts, setVisiblePosts] = useState(8);
     const [loading, setLoading] = useState(false);
 
@@ -41,6 +42,14 @@ const TagPage = () => {
         };
         fetchPostsByTag();
     }, [tags]);
+
+    if (!postsTags || postsTags.length === 0) {
+      return (
+        <div>
+          <NotFound />
+        </div>
+      );
+    }
 
     return (
         <div className="min-h-screen">

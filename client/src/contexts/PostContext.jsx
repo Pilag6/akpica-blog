@@ -37,8 +37,10 @@ const PostContextProvider = ({ children }) => {
         setPostQuantity((prevQuantity) => prevQuantity + 1);
     };
 
+    const allPosts = posts;
+
     return (
-        <PostContext.Provider value={{ posts, setPosts, postQuantity, addPost }}>
+        <PostContext.Provider value={{ posts, setPosts, postQuantity, addPost, allPosts }}>
             {children}
         </PostContext.Provider>
     );
