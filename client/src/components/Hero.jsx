@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import AvatarDate from "@components/miniComponents/AuthorDate.jsx";
 import CardTag from "@components/miniComponents/CardTag.jsx";
 import BACKEND_URL from "@utils/backendUrl";
@@ -9,6 +9,7 @@ import { FaChevronRight, FaChevronLeft } from "react-icons/fa";
 const Hero = () => {
     const { posts } = useContext(PostContext);
     const [currentIndex, setCurrentIndex] = useState(0);
+    const navigate = useNavigate();
 
     const sortedPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
     const limitedPosts = sortedPosts.slice(0, 5);
@@ -45,6 +46,16 @@ const Hero = () => {
         });
     }, [limitedPosts]);
 
+    const handleNavigation = (slug) => {
+        if (document.startViewTransition) {
+            document.startViewTransition(() => {
+                navigate(`/${slug}`);
+            });
+        } else {
+            navigate(`/${slug}`);
+        }
+    };
+
     return (
         <div className="relative w-full h-[65vh] z-10 group">
             {limitedPosts.map((post, index) => (
@@ -68,14 +79,17 @@ const Hero = () => {
                             tag={post.tags[0]}
                             color="bg-akpica-marco text-akpica-black"
                             size="md:text-md text-sm"
-                            link={`/tags/${post.tags}`}
-                            linkTag={`/tags/${post.tags[0]}`}
+                            link={`/tags/${post.tags[0]}`}
+                            // linkTag={`/tags/${post.tags[0]}`}
                         />
-                        <Link to={`/${post.slug}`} className="md:w-1/2 p-2">
+                        <button
+                            onClick={() => handleNavigation(post.slug)}
+                            className="md:w-1/2 p-2 text-left"
+                        >
                             <h1 className="w-fit decoration-clone md:text-5xl text-3xl bg-akpica-white px-5 md:leading-snug leading-snug inline uppercase font-[700] font-akpica-heading text-akpica-black">
                                 {post.title}
                             </h1>
-                        </Link>
+                        </button>
                         <AvatarDate
                             avatar={`${BACKEND_URL}/photo/${post.author.username}`}
                             author={post.author.username}

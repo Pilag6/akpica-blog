@@ -1,12 +1,27 @@
-import { Link } from "react-router-dom";
+/* eslint-disable react/prop-types */
+import { useNavigate } from "react-router-dom";
 
-const cardTag = ({ tag, color, size, link }) => {
+const CardTag = ({ tag, color, size, link }) => {
+    const navigate = useNavigate();
+
+    const handleNavigation = () => {
+        if (document.startViewTransition) {
+            document.startViewTransition(() => {
+                navigate(link);
+            });
+        } else {
+            navigate(link);
+        }
+    };
+
     return (
-        <>
-            <Link to={link} className={`${color} ${size} w-fit px-2 py-[2px] font-semibold tracking-wider uppercase`}>
-                {tag}
-            </Link>
-        </>
+        <button
+            onClick={handleNavigation}
+            className={`${color} ${size} w-fit px-2 py-[2px] font-semibold tracking-wider uppercase`}
+        >
+            {tag}
+        </button>
     );
 };
-export default cardTag;
+
+export default CardTag;
