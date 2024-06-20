@@ -2,16 +2,13 @@ import { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import Axios from "axios";
 
-
-
 // Backend URL
 import BACKEND_URL from "@utils/backendUrl.js";
 import { PostContext } from "@contexts/PostContext.jsx";
 
 // Icons
 import { IoNewspaperSharp } from "react-icons/io5";
-import { FaHashtag } from "react-icons/fa6";
-import { FaRobot } from "react-icons/fa6";
+import { FaHashtag, FaRobot } from "react-icons/fa6";
 import { FaPlus } from "react-icons/fa";
 
 const Dashboard = () => {

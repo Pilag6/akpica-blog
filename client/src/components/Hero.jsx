@@ -1,9 +1,17 @@
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+
+// Components
 import AvatarDate from "@components/miniComponents/AuthorDate.jsx";
 import CardTag from "@components/miniComponents/CardTag.jsx";
+
+// Backend URL
 import BACKEND_URL from "@utils/backendUrl";
+
+// Contexts
 import { PostContext } from "@contexts/PostContext.jsx";
+
+// Icons
 import { FaChevronRight, FaChevronLeft } from "react-icons/fa";
 
 const Hero = () => {

@@ -1,6 +1,12 @@
 import { useContext } from "react";
+
+// Components
 import CardHero from "@components/CardsHero/CardHero.jsx";
+
+// Backend URL
 import BACKEND_URL from "@utils/backendUrl.js";
+
+// Context
 import { PostContext } from "@contexts/PostContext.jsx";
 
 const cardData = [

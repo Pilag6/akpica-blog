@@ -27,6 +27,7 @@ const Header = ({ darkBackground }) => {
         };
     }, []);
     
+    // Styles
     const logoStyle = `w-[130px] cursor-pointer transition-colors duration-300 filter invert saturate-0 hue-rotate-0 brightness-0 contrast-75`
 
     const backgroundColor = darkBackground ? "#242424d1" : (scrolling ? "#242424" : "#242424b1");

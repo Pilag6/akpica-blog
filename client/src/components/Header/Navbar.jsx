@@ -1,20 +1,26 @@
 /* eslint-disable react/prop-types */
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useContext, useEffect, useState, useRef } from "react";
 import Axios from "axios";
+
 // Backend URL
 import BACKEND_URL from "@utils/backendUrl.js";
-// icons
+
+// Icons
 import { FaBars } from "react-icons/fa6";
 import { RiDashboardFill } from "react-icons/ri";
 import { PiPlusSquareBold } from "react-icons/pi";
 import { GiExitDoor } from "react-icons/gi";
 
+// Components
 import SearchBar from "@components/Header/SearchBar.jsx";
+
+// Contexts
 import { ToggleContext } from "@contexts/ToggleContext.jsx";
 import { PostContext } from "@contexts/PostContext.jsx";
+
+// Utils
 import useAuth from "@utils/useAuth.js";
-import { Link } from "react-router-dom";
 
 const Navbar = ({ scrolling }) => {
     const [profilePicture, setProfilePicture] = useState(null);
@@ -41,7 +47,6 @@ const Navbar = ({ scrolling }) => {
         } else {
             document.removeEventListener("mousedown", handleOutsideClick);
         }
-
         // Remove event listener when component unmounts
         return () => {
             document.removeEventListener("mousedown", handleOutsideClick);
@@ -66,6 +71,7 @@ const Navbar = ({ scrolling }) => {
         }
     }, [user]);
 
+    // Styles
     const linkStyles = `pl-4 hover:underline-offset-8 hover:underline transition transform active:text-akpica-pastel font-semibold text-akpica-white`;
     const mobileLinkStyles = `p-4 hover:underline-offset-8 hover:underline transition transform active:text-akpica-pastel font-semibold text-akpica-white`;
 

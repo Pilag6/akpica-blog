@@ -9,8 +9,7 @@ import logoWhite from "../assets/logo-white.png";
 import { PiLockKey } from "react-icons/pi";
 import { FaUserAstronaut } from "react-icons/fa6";
 import { MdError } from "react-icons/md";
-import { AiOutlineEye } from "react-icons/ai";
-import { AiOutlineEyeInvisible } from "react-icons/ai";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 const Login = () => {
     const [username, setUsername] = useState("");
