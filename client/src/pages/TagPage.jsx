@@ -1,13 +1,22 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import Axios from "axios";
+
+// Backend URL
 import BACKEND_URL from "@utils/backendUrl.js";
+
+// Components
 import Header from "@components/Header/Header.jsx";
-import technology from "@assets/hero.avif";
 import AuthorDate from "@components/miniComponents/AuthorDate.jsx";
 import Footer from "@components/Footer.jsx";
+
+// Pages
 import NotFound from "./NotFound";
 
+// Page banner
+import technology from "@assets/page-banner/hero.avif";
+
+// Icons
 import { ImSpinner9 } from "react-icons/im";
 
 // Utility function to strip HTML tags

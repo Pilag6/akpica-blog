@@ -1,6 +1,7 @@
 // assets - note: import profile imgs from cloudinary
 
-import akpicaus from "@assets/aboutus.jpg";
+// Page banner
+import akpicaus from "@assets/page-banner/aboutus.jpg";
 
 // Components
 import Header from "@components/Header/Header";
