@@ -2,7 +2,7 @@ import CardHero from "./CardHero.jsx";
 
 import { useContext } from "react";
 
-//backend URL
+// Backend URL
 import BACKEND_URL from "@utils/backendUrl";
 
 // Context

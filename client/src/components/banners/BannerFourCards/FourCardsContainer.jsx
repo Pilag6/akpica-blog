@@ -10,11 +10,13 @@ import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 // Context
 import { PostContext } from "@contexts/PostContext.jsx";
 
+// Styles
+const btnStyle = "bg-akpica-black/70 to-akpica-white/5 text-akpica-white hover:bg-akpica-black";
+
 const FourCardsContainer = () => {
     const { posts } = useContext(PostContext);
     const [slide, setSlide] = useState(0);
 
-    //   const totalSlides = Math.max(0, posts.length - 3);
     const reversedPosts = [...posts].reverse();
     const totalSlides = Math.max(0, reversedPosts.length - 3);
 
@@ -35,13 +37,13 @@ const FourCardsContainer = () => {
         <div className="mx-auto flex my-11 relative overflow-hidden w-full">
             <div className="absolute p-5 top-1/2 -translate-y-1/2 z-10 text-5xl w-full flex justify-between opacity-0 hover:opacity-100 transition-opacity duration-300">
                 <button
-                    className="bg-akpica-black/70 to-akpica-white/5 text-akpica-white hover:bg-akpica-black"
+                    className={btnStyle}
                     onClick={handlePrevSlide}
                 >
                     <IoIosArrowBack />
                 </button>
                 <button
-                    className="bg-akpica-black/70 to-akpica-white/5 text-akpica-white hover:bg-akpica-black"
+                    className={btnStyle}
                     onClick={handleNextSlide}
                 >
                     <IoIosArrowForward />

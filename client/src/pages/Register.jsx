@@ -7,13 +7,11 @@ import { useNavigate } from "react-router-dom";
 import logoWhite from "../assets/logo-white.png";
 
 // Icons
-import { FaUserAstronaut } from "react-icons/fa6";
-import { MdAlternateEmail } from "react-icons/md";
-import { PiLockKey } from "react-icons/pi";
-import { MdError } from "react-icons/md";
-import { AiOutlineEye } from "react-icons/ai";
-import { AiOutlineEyeInvisible } from "react-icons/ai";
 import { FaUserCog } from "react-icons/fa";
+import { FaUserAstronaut } from "react-icons/fa6";
+import { MdAlternateEmail, MdError } from "react-icons/md";
+import { PiLockKey } from "react-icons/pi";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 //Backend URL
 import BACKEND_URL from "@utils/backendUrl.js";

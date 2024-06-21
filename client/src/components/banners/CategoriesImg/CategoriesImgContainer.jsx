@@ -1,14 +1,14 @@
 import { useContext } from "react";
 
 // Images
-import category1 from "@assets/category-1.webp"; // Node
-import category2 from "@assets/category-2.webp"; // css
-import category3 from "@assets/category-3.webp";
-import category4 from "@assets/category-4.webp";
-import category5 from "@assets/category-5.webp";
-import category6 from "@assets/category-6.webp";
-import category7 from "@assets/category-7.webp";
-import category8 from "@assets/category-8.webp";
+import category1 from "@assets/categories/category-1.webp"; // Node
+import category2 from "@assets/categories/category-2.webp"; // css
+import category3 from "@assets/categories/category-3.webp";
+import category4 from "@assets/categories/category-4.webp";
+import category5 from "@assets/categories/category-5.webp";
+import category6 from "@assets/categories/category-6.webp";
+import category7 from "@assets/categories/category-7.webp";
+import category8 from "@assets/categories/category-8.webp";
 
 import TitleSections from "@components/miniComponents/TitleSections.jsx";
 import CategoryImgCard from "./CategoryImgCard.jsx";

@@ -1,10 +1,10 @@
 // Images
-import profileakiko from "@assets/akiko.jpg";
-import profilepila from "@assets/Pila.jpg";
-import profilecarlos from "@assets/carlos.jpg";
-import akikoportfolio from "@assets/akikoportfolio.png";
-import pilaportfolio from "@assets/pilaportfolio.png";
-import carlosportfolio from "@assets/carlosportfolio.png";
+import profileakiko from "@assets/about-us/akiko.jpg";
+import profilepila from "@assets/about-us/Pila.jpg";
+import profilecarlos from "@assets/about-us/carlos.jpg";
+import akikoportfolio from "@assets/about-us/akikoportfolio.png";
+import pilaportfolio from "@assets/about-us/pilaportfolio.png";
+import carlosportfolio from "@assets/about-us/carlosportfolio.png";
 
 export const AboutUsCards = [
   {
