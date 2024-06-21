@@ -1,10 +1,9 @@
 # AkPiCa - Blog
 
 <div style="display: flex; flex-direction: column; gap: 3rem;">
-<img src="./client/src/assets/Macbook-Air-akpicablog.netlify.app.png" alt="" width="85%">
-<img src="./client//src/assets/iPhone-11-PRO-MAX-akpicablog.netlify.app.png" alt="" width="30%">
+  <img src="./client/src/assets/Macbook-Air-akpicablog.netlify.app.png" alt="" width="85%">
+  <img src="./client//src/assets/iPhone-11-PRO-MAX-akpicablog.netlify.app.png" alt="" width="30%">
 </div>
-
 
 
 **[⏩ Link to our Page](https://akpicablog.netlify.app/)**
@@ -22,7 +21,7 @@ Explore the latest trends, tools, and techniques in web design and development. 
     <tr>
       <td align="center" valign="top">
         <a href="https://github.com/akiko-luka" target="_blank">
-          <img width="108" src="https://avatars.githubusercontent.com/u/138122651?v=4" alt="Akiko Luka" />
+          <img width="108" src="https://bit.ly/3z5A6VI" alt="Akiko Luka" />
         </a><br />
         <div><strong>Ak</strong>iko Luka</div>
         <sub>:white_check_mark:</sub>
@@ -36,7 +35,7 @@ Explore the latest trends, tools, and techniques in web design and development. 
       </td>
       <td align="center" valign="top">
         <a href="https://github.com/Cmbs86" target="_blank">
-          <img width="108" src="https://avatars.githubusercontent.com/u/138121655?v=44" alt="Carlos " />
+          <img width="108" src="https://bit.ly/4cdL8Hd" alt="Carlos " />
         </a><br />
         <div><strong>Ca</strong>rlos Sousa</div>
         <sub>:white_check_mark:</sub>
@@ -45,20 +44,20 @@ Explore the latest trends, tools, and techniques in web design and development. 
   </tbody>
 </table>
 
-
 ## Tools
 ### Frontend
 1. Vite
 2. React
-3. React Router
-4. TinyMCE
-5. React Icons
-6. Netlify
-7. Axios
-8. Disqus-React
-9.  Dompurify
-10. IPinfo.io
-11. Leonardo.ai
+3. React Dom
+4. React Router Dom
+5. TinyMCE
+6. React Icons
+7. Netlify
+8. Axios
+9. Disqus-React
+10. Dompurify
+11. IPinfo.io
+12. Leonardo.ai for images
 
 ### Backend
 1. Express
@@ -75,13 +74,17 @@ Explore the latest trends, tools, and techniques in web design and development. 
 12. Multer
 13. Slugify
 
-
-## Feature
-
----
+## Features
+1. **Browse Posts** - Explore blog posts by browsing the home page, categories, or author.
+2. **Post Details** - View detailed information for each post to gain in-depth insights.
+3. **Leave a Comment** - Love a post? Show your appreciation by leaving a thoughtful comment.
+4. **Login** - Similar to WordPress, you'll need a specific link and account info to log in.
+5. **Dashboard** - In the Dashboard, you can view all posts, check out individual post photos, create new posts, and use the Notepad for random notes.
+6. **Admin** - As an admin, you have the power to create, edit, view, and delete users and posts, giving you full control.
+7. **Guest** - As a guest, you can create, edit, view, and delete your own posts and access notes shared by all blog users.
 
 ## Getting Started
-
+Visit **[AkPiCa - Blog](https://akpicablog.netlify.app/)** to explore "The Web Developer's Handbook:" Your ultimate guide to mastering web development. Find the latest trends, tools, and tutorials for creating stunning, responsive websites. Join our community and stay ahead in the world of web development.
 
 # Contributing to AKPICA - blog.
 We love your input! We want to make contributing to this project as easy and transparent as possible, whether it's:

@@ -185,9 +185,7 @@ const MediaDashboard = () => {
                   <div className="bg-akpica-black hover:bg-gray-700 p-2 w-full">
                     <AuthorDate
                       colors={"text-akpica-white"}
-                      avatar={`${BACKEND_URL}/photo/${
-                        post.author.username
-                      }`}
+                      avatar={`${BACKEND_URL}/photo/${post.author.username}`}
                       author={post.author.username}
                       date={new Date(post.date).toDateString()}
                     />
@@ -196,7 +194,7 @@ const MediaDashboard = () => {
               ))
             ) : (
               // List view
-              <table className="w-[1407px] text-sm text-left rtl:text-right text-gray-400">
+              <table className="w-full text-sm text-left rtl:text-right text-gray-400">
                 <thead className="text-xs  uppercase bg-gray-700 text-gray-400">
                   <tr>
                     <th scope="col" className="px-6 py-3">
@@ -227,9 +225,7 @@ const MediaDashboard = () => {
                     >
                       <td className="px-6">
                         <img
-                          src={`${BACKEND_URL}/posts/photo/${
-                            post.title
-                          }`}
+                          src={`${BACKEND_URL}/posts/photo/${post.title}`}
                           alt="post image"
                           className="aspect-square w-32 object-cover m-2 cursor-pointer"
                           onClick={(e) => handlePhotoModal(e, post)}
@@ -256,20 +252,18 @@ const MediaDashboard = () => {
                         {new Date(post.date).toDateString()}
                       </td>
                       <td className="px-6 py-4">
-                        <a
+                        {/* <a
                           href="#"
                           className="font-medium text-akpica-marco hover:underline"
                         >
-                          Edit
-                        </a>
-                      </td>
-                      <td className="px-6 py-4">
-                        <a
-                          href="#"
-                          className="font-medium text-akpica-tomato hover:underline"
+                          View Post
+                        </a> */}
+                        <Link
+                          to={`/${post.slug}`}
+                          className="font-medium text-akpica-marco hover:underline"
                         >
-                          Delete
-                        </a>
+                          View Post
+                        </Link>
                       </td>
                     </tr>
                   ))}
