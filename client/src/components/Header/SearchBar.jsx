@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 
 // icons
 import { FaMagnifyingGlass } from "react-icons/fa6";
-// import { IoIosCloseCircleOutline } from "react-icons/io";
 import { HiOutlineBackspace } from "react-icons/hi2";
 
+// Contexts
 import { ToggleContext } from "@contexts/ToggleContext.jsx";
 
 // Backend URL
@@ -72,7 +72,6 @@ const SearchBar = ({ placeholder, data }) => {
         } else {
             document.removeEventListener("mousedown", handleOutsideClick);
         }
-
         // Remove event listener when component unmounts
         return () => {
             document.removeEventListener("mousedown", handleOutsideClick);

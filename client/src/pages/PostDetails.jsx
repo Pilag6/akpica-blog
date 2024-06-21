@@ -2,17 +2,26 @@ import { useParams, Link } from "react-router-dom";
 import { useEffect, useState, useContext, useRef } from "react";
 import axios from "axios";
 import DOMPurify from "dompurify";
+
+// Backend URL
 import BACKEND_URL from "@utils/backendUrl";
+
+// Components
 import Header from "@components/Header/Header.jsx";
 import Footer from "@components/Footer.jsx";
-import { PostContext } from "@contexts/PostContext.jsx";
 import CardTag from "@components/miniComponents/CardTag.jsx";
 import AuthorDate from "@components/miniComponents/AuthorDate.jsx";
 import CardMoreFromUs from "@components/banners/MoreFromUs/CardMoreFromUs.jsx";
 
+// Contexts
+import { PostContext } from "@contexts/PostContext.jsx";
+
+// Pages
+import NotFound from "./NotFound";
 // React Disqus Comments
 import { DiscussionEmbed, CommentCount } from "disqus-react";
-import NotFound from "./NotFound";
+
+// Icons
 import { ImSpinner9 } from "react-icons/im";
 
 const PostDetails = () => {

@@ -8,6 +8,9 @@ import { FaGithubSquare, FaLinkedin } from "react-icons/fa";
 // Components
 import PortfolioCard from "@components/AboutUs/PortfolioCard.jsx";
 
+// Styles
+const linkStyle = "border rounded-full text-2xl flex items-center justify-center transition-all duration-500 text-akpica-white border-gray-500/30 bg-transparent hover:border-akpica-white hover:bg-white hover:text-gray-950 focus:text-white h-11 w-11";
+
 const AboutUsCard = ({
     profilepicture,
     name,
@@ -45,14 +48,14 @@ const AboutUsCard = ({
                         <Link
                             to={github}
                             target="_blank"
-                            className="border rounded-full text-2xl flex items-center justify-center transition-all duration-500 text-akpica-white border-gray-500/30 bg-transparent hover:border-akpica-white hover:bg-white hover:text-gray-950 focus:text-white h-11 w-11"
+                            className={linkStyle}
                         >
                             <FaGithubSquare />
                         </Link>
                         <Link
                             to={linkedin}
                             target="_blank"
-                            className="border rounded-full text-2xl flex items-center justify-center transition-all duration-500 text-akpica-white border-gray-500/30 bg-transparent hover:border-white hover:bg-white hover:text-gray-950 focus:text-white h-11 w-11"
+                            className={linkStyle}
                         >
                             <FaLinkedin />
                         </Link>

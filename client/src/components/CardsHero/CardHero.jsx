@@ -1,8 +1,9 @@
 /* eslint-disable react/prop-types */
-
 import { Link } from "react-router-dom";
-import CardTag from "../miniComponents/CardTag.jsx";
+
+// Components
 import AuthorDate from "@components/miniComponents/AuthorDate.jsx";
+import CardTag from "../miniComponents/CardTag.jsx";
 
 const CardHero = ({
   bgImg,

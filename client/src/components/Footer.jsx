@@ -1,10 +1,18 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
+
+// Backend URL
+import BACKEND_URL from "@utils/backendUrl";
+
+// Components
+import CardMoreFromUs from "@components/banners/MoreFromUs/CardMoreFromUs";
+
+// Contexts
+import { PostContext } from "@contexts/PostContext";
+
+// Icons
 import { FaGithubSquare, FaFacebook, FaInstagram } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
-import CardMoreFromUs from "@components/banners/MoreFromUs/CardMoreFromUs";
-import BACKEND_URL from "@utils/backendUrl";
-import { PostContext } from "@contexts/PostContext";
 
 const Footer = () => {
     const { posts } = useContext(PostContext);

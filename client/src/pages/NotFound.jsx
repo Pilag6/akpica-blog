@@ -1,15 +1,13 @@
-//Context
-// import { useContext } from "react";
-// import { PostContext } from "@contexts/PostContext";
-
-// Images
-import notFound from "../assets/404.png";
-import Header from "@components/Header/Header";
-import Footer from "@components/Footer";
 import { Link } from "react-router-dom";
 
+// Components
+import Header from "@components/Header/Header";
+import Footer from "@components/Footer";
+
+// Images
+import notFound from "@assets/page-banner/404.png";
+
 const NotFound = () => {
-//   const { allPosts } = useContext(PostContext);
 
   return (
     <div className=" bg-akpica-white">
@@ -18,7 +16,7 @@ const NotFound = () => {
         <hr />
         <div className="flex justify-center items-center gap-4 mb-4">
           <img src={notFound} alt="" className=" w-96" />
-          <h2 className=" text-4xl">Houston, We Have a Problem</h2>
+          <h2 className=" text-4xl font-bold">Houston, We Have a Problem</h2>
         </div>
 
         <p className=" text-center text-lg w-2/3 mx-auto my-8">
@@ -30,8 +28,7 @@ const NotFound = () => {
         </p>
         <Link
           to={"/"}
-          className="text-center w-fit m-auto p-4 bg-[#3F7BFF] text-akpica-white font-semibold hover:bg-[#2F5BFF] active:bg-[#3F7BFF]"
-        >
+          className="text-center w-fit m-auto p-4 bg-[#3F7BFF] text-akpica-white font-semibold hover:bg-[#2F5BFF] active:bg-[#3F7BFF]">
           Return to Home page
         </Link>
       </div>
