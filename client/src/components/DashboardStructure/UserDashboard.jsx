@@ -58,6 +58,7 @@ const UserDashboard = () => {
             setUserToDelete(null);
         } catch (error) {
             console.log(error);
+            setShowModal(false);
         }
     };
 
@@ -314,7 +315,7 @@ const UserDashboard = () => {
                                             onClick={() =>
                                                 confirmDeleteUser(user._id)
                                             }
-                                            className={`font-medium text-akpica-tomato hover:underline ${currentUser?.role === 'guest' && currentUser?._id !== user._id ? 'pointer-events-none opacity-50' : ''}`}
+                                            className={`font-medium text-akpica-tomato hover:underline ${currentUser?.role === 'guest'  ? 'hidden' : ''}`}
                                         >
                                             Delete
                                         </button>
