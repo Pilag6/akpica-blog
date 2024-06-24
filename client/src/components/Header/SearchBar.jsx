@@ -109,22 +109,24 @@ const SearchBar = ({ placeholder, data }) => {
                         <div className="absolute flex flex-col top-10 bg-akpica-black text-akpica-white p-4 leading-9 w-full h-52 overflow-hidden overflow-y-auto">
                             {filteredData.slice(0, 15).map((value, key) => {
                                 return (
-                                    <Link
-                                        key={key}
-                                        to={`/${value.slug}`}
-                                        onClick={handleLinkClick}
-                                    >
-                                        <div className="flex items-center gap-2">
-                                            <img
-                                                src={`${BACKEND_URL}/posts/photo/${encodeURIComponent(
-                                                    value.title
-                                                )}`}
-                                                alt="post image"
-                                                className="w-12 h-full object-cover"
-                                            />
-                                            <p>{value.title} </p>
-                                        </div>
-                                    </Link>
+                                  <Link
+                                    key={key}
+                                    to={`/${value.slug}`}
+                                    onClick={handleLinkClick}
+                                  >
+                                    <div className="flex items-center gap-2 hover:bg-akpica-green/20">
+                                      <img
+                                        src={`${BACKEND_URL}/posts/photo/${encodeURIComponent(
+                                          value.title
+                                        )}`}
+                                        alt="post image"
+                                        className="w-12 h-full object-cover ml-2"
+                                      />
+                                      <p>
+                                        {value.title}{" "}
+                                      </p>
+                                    </div>
+                                  </Link>
                                 );
                             })}
                         </div>
